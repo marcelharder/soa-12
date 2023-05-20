@@ -1,0 +1,259 @@
+<form #hospitalForm="ngForm">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-header">
+            <h3><span class="badge badge-secondary">Configuring {{pd.hospitalName}}</span></h3>
+          </div>
+          <div class="card-body">
+            <div class="tab-panel">
+              <tabset class="member-tabset">
+                <tab heading="Address ">
+                  <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h4><span class="badge badge-secondary">Name:</span></h4>
+                        </div>
+                        <div class="col-sm-8">
+                          <input type="text" [(ngModel)]="pd.hospitalName" name="naam" class="form-control" disabled />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h4><span class="badge badge-secondary">Address:</span></h4>
+                        </div>
+                        <div class="col-sm-8">
+                          <input type="text" [(ngModel)]="pd.address" name="adres" class="form-control" disabled />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h4><span class="badge badge-secondary">Country:</span></h4>
+                        </div>
+                        <div class="col-sm-8">
+                          <input type="text" [(ngModel)]="pd.country" name="country" class="form-control" disabled />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h4><span class="badge badge-secondary">Telephone:</span></h4>
+                        </div>
+                        <div class="col-sm-8">
+                          <input type="text" [(ngModel)]="pd.telephone" name="tel" class="form-control" disabled />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </tab>
+                <tab heading="ValvesInOVI" *ngIf="showOVITab">
+                 <div class="card">
+                  <div class="card-header">
+                    <h6><span class="badge badge-success">Valves in the online valve inventory</span></h6>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex flex-row">
+                      <div class="p-2"><h6><span class="badge badge-info">Valve Type</span></h6></div>
+                      <div class="p-2"><select [(ngModel)]="searchType" name="hv235" class="form-control"><option *ngFor="let an of valveOVITypes" [value]=an.value>{{ an.description }}</option></select></div>
+                      <div class="p-2"><h6><span class="badge badge-info">Implant Position</span></h6></div>
+                      <div class="p-2"><select [(ngModel)]="searchPosition" name="hv2353" class="form-control"><option *ngFor="let an of valveOVIPositions" [value]=an.value>{{ an.description }}</option></select></div>
+                      <div class="p-2"><button class="btn btn-info" (click)="findValveInOVI()">Go</button></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <!--list of valves from the server-->
+                        <table class="table table-striped">
+                          <tr>
+                            <th>Id</th>
+                            <th>Description</th>
+                            <th>Serial</th>
+                            <th>Size</th>
+                          </tr>
+                          <tr *ngFor="let ovi of OVIValves">
+                            <td>{{ovi.valveId}}</td>
+                            <td>{{ovi.description}}</td>
+                            <td>{{ovi.serial_no}}</td>
+                            <td>{{ovi.size}}</td>
+                          </tr>
+                        </table>
+
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <button class="btn btn-info"(click)="doneWithOvi()">Done</button>
+                      </div>
+                    </div>
+                  </div>
+                 </div>
+                </tab>
+                <tab heading="Valves" *ngIf="!showOVITab">
+                  <div class="card">
+                    <div class="card-header">
+                      <h6><span class="badge badge-success">Valves in {{currentHospital}}</span></h6>
+                    </div>
+                    <div class="card-body">
+                      <div *ngIf="showList()">
+                        <div class="row">
+                          <div class="col-sm-5">
+                            <div class="row">
+                              <div class="col-sm-4">Type:</div>
+                              <div class="col-sm-8"><select [(ngModel)]="hv.type" name="hv23" class="form-control">
+                                  <option *ngFor="let an of valveTypes" [value]=an.description>{{ an.description }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-5">
+                            <div class="row">
+                              <div class="col-sm-4">Position:</div>
+                              <div class="col-sm-8"><select [(ngModel)]="hv.implant_Position" name="pos" class="form-control">
+                                  <option *ngFor="let an of valvePositions" [value]=an.description>{{ an.description }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+  
+                          </div>
+                          <div class="col-sm-2">
+                            <button class="badge badge-warning" (click)="SearchValve()">Search</button>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <!--list of valves from the server-->
+                            <table class="table table-striped">
+                              <tr>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                              <tr *ngFor="let hv of hospitalValves">
+                                <td>{{hv.code}}</td>
+                                <td>{{hv.description}}</td>
+  
+                                <td><a (click)="deleteDetails(hv.codeId)" style='color:crimson'>Delete</a></td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="showAddButton()">
+                          <div class="col-sm-12"><button class="badge badge-success" (click)="AddValve()">Add</button></div>
+                        </div>
+  
+                      </div>
+                      <div *ngIf="!showList()">
+                        <div class="row"  *ngIf="displayOnlineValves()">
+                          <div class="col-sm-12">
+                            <div class="d-flex">
+                              <div class="mr-auto p-2">
+                                <h5><span class="badge badge-secondary">These products are online available</span></h5>
+                              </div>
+                              <div  class="p-2 flex-fill">
+                                <select [(ngModel)]="selectedOnlineValve"  name="hvpos1" class="form-control">
+                                  <option *ngFor="let an of onlineValves" [value]=an.value>{{ an.description }}
+                                  </option>
+                                </select>
+                              </div>
+                              <div class="p-2"><button class="badge badge-success" (click)="changeToHospitalValve()">Select</button></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <button *ngIf="showSaveButton() && !displayOnlineValves()" class="badge badge-success" (click)="SearchHospitalValve()">Search</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </tab>
+                <tab heading="Reporting ">
+                  <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h4><span class="badge badge-secondary">Report line 1</span></h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <input type="text" [(ngModel)]="pd.OpReportDetails1" name="report1" class="form-control" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h4><span class="badge badge-secondary">Report line 2</span></h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <input type="text" [(ngModel)]="pd.OpReportDetails2" name="report2" class="form-control" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h4><span class="badge badge-secondary">Report line 3</span></h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <input type="text" [(ngModel)]="pd.OpReportDetails3" name="report3" class="form-control" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h4><span class="badge badge-secondary">Report line 4</span></h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <input type="text" [(ngModel)]="pd.OpReportDetails4" name="report4" class="form-control" />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h4><span class="badge badge-secondary">Report line 5</span></h4>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <input type="text" [(ngModel)]="pd.OpReportDetails5" name="report5" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </tab>
+              </tabset>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="btn-group" role="group">
+              <button class="btn btn-danger" (click)="cancel()"> Cancel </button>
+              <button class="btn btn-warning" (click)="saveHospital()"> Save Changes </button>
+            </div>
+          </div>
+        </div>
+  
+  
+  
+      </div>
+      <div class="col-sm-6">
+        <div class="card mt-5">
+          <img class="card-img-top img-thumbnail" src="{{ pd.imageUrl }}" alt="test" width="250" height="350" />
+        </div>
+        <div class="footer mt-2">
+          <app-photo-editor [hospitalId]="pd.hospitalNo" [userId]="0" [refId]="0" (getMemberPhotoChange)="updatePhoto($event)">
+          </app-photo-editor>
+        </div>
+  
+      </div>
+    </div>
+  
+  
+  </form>
+  

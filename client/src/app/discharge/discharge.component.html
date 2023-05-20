@@ -1,0 +1,132 @@
+<div class="card">
+    <div class="card-header"></div>
+    <div class="card-body"><div class="row ml-2">
+      <div class="col-sm-6">
+  
+        <form #dischargeForm="ngForm" id="editForm">
+          <div class="row mt-2">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Died after this procedure:</span></h4></div>
+            <div class="col-sm-6">
+              <select [(ngModel)]="pd.dead" name="lifeStatus" class="form-control" (change)="deadChanged()">
+                <option *ngFor="let an of optionsDead" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2" *ngIf="isDead()">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Location:</span></h4></div>
+            <div class="col-sm-6">
+              <select [(ngModel)]="pd.dead_location" name="dis12" class="form-control">
+                <option *ngFor="let an of optionsDeadLocation" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2" *ngIf="isDead()">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Cause:</span></h4></div>
+            <div class="col-sm-6">
+              <select [(ngModel)]="pd.dead_cause" name="dis13" class="form-control">
+                <option *ngFor="let an of optionsDeadCause" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2" *ngIf="isDead()">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Mortality date:</span></h4></div>
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-6">
+                  <input type="text" 
+                  class="form-control" 
+                  #dp="bsDatepicker" 
+                  bsDatepicker
+                  [(ngModel)]="pd.dead_date" 
+                  [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" 
+                  name="datum" />
+                </div>
+                <div class="col-sm-6"> <button class="badge badge-warning" (click)="setCurrentDateToMotality()">Current</button></div>
+              </div>
+  
+            </div>
+          </div>
+  
+          <div class="row mt-2" *ngIf="!isDead()">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Discharged to:</span></h4></div>
+            <div class="col-sm-6">
+              <select [(ngModel)]="pd.discharged_to" name="dis01" class="form-control">
+                <option *ngFor="let an of optionsSentTo" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2" *ngIf="!isDead()">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Discharge activities:</span></h4></div>
+            <div class="col-sm-6">
+              <select [(ngModel)]="pd.discharge_activities" name="dis02" class="form-control">
+                <option *ngFor="let an of optionsActivitiesDischarge" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-2" *ngIf="!isDead()">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Discharge diagnosis:</span></h4></div>
+            <div class="col-sm-6" *ngIf="!showFullText()">
+              <select [(ngModel)]="pd.discharge_diagnosis" name="dis03" class="form-control" (change)="discharge_diagnosis_changed()">
+                <option *ngFor="let an of optionsDischargeDiagnosis" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-6" *ngIf="showFullText()">
+              <div class="row">
+                <div class="col-sm-12">Full description</div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <textarea id="w3review" name="w3review" rows="4" cols="50" [(ngModel)]="pd.full_description">
+                   
+                  </textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12"><button (click)="hideButtonAction()">Hide</button></div>
+              </div>
+            </div>
+  
+  
+  
+  
+  
+          </div>
+          <div class="row mt-2" *ngIf="!isDead()">
+            <div class="col-sm-6"><h4><span class="badge badge-secondary">Discharge date:</span></h4></div>
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-6">
+                  <input type="text" 
+                                class="form-control" 
+                                #dp="bsDatepicker" 
+                                bsDatepicker 
+                                [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" 
+                                [(ngModel)]="pd.discharge_date"
+                                name="extdatum2" />
+                 
+                </div>
+             <div class="col-sm-6"><button class="badge badge-warning" (click)="setCurrentDateToDischarge()">Current</button></div> 
+              </div>
+  
+            </div>
+          </div>
+  
+        </form>
+        <div class="row">
+          <div class="col-sm-12">
+            <button class="badge badge-warning" (click)="saveDis()">Save</button>
+          </div>
+        </div>
+  
+  
+      </div>
+      <div class="col-sm-6"><img 
+        src="https://res.cloudinary.com/marcelcloud/image/upload/v1573222848/home-479629_1280-2.jpg"
+        width="375px"
+        height="500px" /></div>
+    </div></div>
+    <div class="card-footer"></div>
+  
+    
+  
+  

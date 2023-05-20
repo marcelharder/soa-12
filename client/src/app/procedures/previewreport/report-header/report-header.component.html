@@ -1,0 +1,64 @@
+<div class="row mt-2 mb-2">
+    <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="SaveSuggestion()">Save as suggestion</button></div>
+    <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="Clear()">Reset</button></div>
+    <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="Email()">Email/SMS</button></div>
+    <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="SaveAndPrint()">Save and Print</button></div>
+    <div class="col-sm-2"></div>
+  </div>
+  <div class="row" style="background-color: yellow">
+    <div class="col-sm-4 mt-1" style="float: left"><img src={{rh.surgeon_picture}} width="125" height="125"></div>
+    <div class="col-sm-2 mt-1">
+      <div class="text-center"><h2><span class="badge badge-default">{{rh.hospital_name}}</span></h2></div>
+      <div class="text-center"><h3><span class="badge badge-default">{{rh.hospital_unit}}</span></h3></div>
+      <div class="text-center"><span class="badge badge-default">{{rh.hospital_dept}}</span></div>
+      <div class="text-center"><span class="badge badge-default">{{rh.hospital_city}}</span></div>
+    </div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-6"> <div style="float: right"><span class="badge badge-default">{{header31}}</span></div></div>
+        <div class="col-sm-6"><input class="form-control" [(ngModel)]="rh.hospital_number" /></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6"> <div style="float: right"><span class="badge badge-default">{{header32}}</span></div></div>
+        <div class="col-sm-6"><input class="form-control" [(ngModel)]="rh.patient_name" /></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6"> <div style="float: right"><span class="badge badge-default">{{header33}}</span></div></div>
+        <div class="col-sm-6"><input class="form-control" [(ngModel)]="rh.diagnosis"/></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12"> <div style="float: right"><span class="badge badge-default">{{header34}}</span></div></div>
+      </div>
+  
+     </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 text-center"><h1><span class="badge badge-default" style="align-content: center">{{rh.title}}</span></h1></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-3"><span class="badge badge-default">Operation:</span></div>
+    <div class="col-sm-3"><span class="badge badge-info">{{rh.operation}}</span></div>
+    <div class="col-sm-3"><span class="badge badge-default">Surgeon:</span></div>
+    <div class="col-sm-3"><span class="badge badge-info">{{rh.surgeon}}</span></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3"><span class="badge badge-default">Operation date:</span></div>
+    <div class="col-sm-3"><span class="badge badge-info">{{rh.operation_date | date: 'short'}}</span></div>
+    <div class="col-sm-3"><span class="badge badge-default">Assistant:</span></div>
+    <div class="col-sm-3"><span class="badge badge-info">{{rh.assistant}}</span></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3"><span class="badge badge-default">Anaesthesiologist:</span></div>
+    <div class="col-sm-3"><span class="badge badge-info">{{rh.anaesthesiologist}}</span></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-3"><span class="badge badge-default">Perfusionist:</span></div>
+    <div class="col-sm-3"><span class="badge badge-info">{{rh.perfusionist}}</span></div>
+  </div>
+  <hr />
+  

@@ -1,0 +1,70 @@
+<div class="card" [@cardFlip]="data.state">
+    <div class="face back">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header"><h6><span >Select conduit types from {{currentHospitalName}}</span></h6></div>
+            <div class="card-body">
+              <table class="table table-striped">
+                <tr>
+                  <th>Valved Counduit</th>
+                  <th>Description</th>
+                  <th></th>
+                </tr>
+                <tr *ngFor="let x of OAC">
+                  <td>{{x.code}}</td>
+                  <td>{{x.description}}</td>
+                  <td><button type="button" class="badge badge-info btn-xxs"
+                      (click)="getThisConduit(x.valveTypeId)">select</button></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="face front">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header"><h6><span >Enter details of {{conduitDescription}}</span></h6></div>
+          <div class="card-body">
+  
+            <div class="row">
+              <div class="col-sm-6"><span class="badge badge-secondary">Valve annulur size:</span></div>
+              <div class="col-sm-6">
+                <select [(ngModel)]="pd.SIZE" name="vsize" class="form-control">
+                <option *ngFor="let item of optionConduitSizes" [value]=item.size>{{ item.size }}</option>
+              </select></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><span class="badge badge-secondary">Serial number:</span></div>
+              <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="pd.SERIAL_IMP" name="sn"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><span class="badge badge-secondary">Type:</span></div>
+              <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="hv.type" name="model" disabled></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><span class="badge badge-secondary">Position:</span></div>
+              <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="hv.implant_Position" name="model" disabled></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><span class="badge badge-secondary">Code:</span></div>
+              <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="hv.code" name="model" disabled></div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="row">
+              <div class="col-sm-3"> </div>
+              <div class="col-sm-3"><button class="badge badge-warning" (click)="CancelConduitDetails()">Cancel</button></div>
+              <div class="col-sm-3"><button class="badge badge-success" (click)="saveConduitDetails()">Save conduit details</button></div>
+              <div class="col-sm-3"> </div>
+            </div>
+            <div class="row mt-2" ></div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

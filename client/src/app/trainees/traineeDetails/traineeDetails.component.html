@@ -1,0 +1,92 @@
+<div class="card m-5">
+  <div class="card-header">
+    <h5><span>{{user.UserName | titlecase}} - phone: {{user.mobile}}</span></h5>
+  </div>
+  <div class="card-body">
+
+
+    <div class="row">
+      <div class="col-sm-8">
+          <tabset>
+            <tab heading="Procedures">
+              <div class="card">
+                <div class="card-header">Procedures done as primary surgeon</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="EPA">
+              <div class="card">
+                <div class="card-header">Entrusted professional activities</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Courses">
+              <div class="card">
+                <div class="card-header">Attended Courses</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Publications">
+              <div class="card">
+                <div class="card-header">Publications</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Presentations">
+              <div class="card">
+                <div class="card-header">Presentations</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Registration">
+              <div class="card">
+                <div class="card-header">Registration</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+      </div>
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <img class="card-img-top img-thumbnail"
+                src="{{user.PhotoUrl || '../../../../../assets/images/else-03.jpg' }}" alt="test" width="250"
+                height="350" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

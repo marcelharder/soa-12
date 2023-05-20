@@ -1,0 +1,65 @@
+<div class="card">
+    <div class="card-header">
+      <h3>Procedure Reports</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="row">
+            <div class="col-sm-8"><h5><span class="badge badge-secondary">Choose your personalized report: </span></h5></div>
+            <div class="col-sm-4">
+              <h6><button 
+                (click)="openModal(CustomReportTemplate)" 
+                *ngIf="!showEditDetails()"
+                class="badge badge-success btn-xs">How does this work</button></h6></div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <select [(ngModel)]="selectedSoort" name="cab" class="form-control" *ngIf="!showEditDetails()">
+            <option *ngFor="let an of procedures" [value]=an.value>{{ an.description }}</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <div class="btn-group" role="group">
+            <button class="btn btn-secondary" (click)="editReport()" *ngIf="!showEditDetails()"> Edit </button>
+            <button class="btn btn-danger"    (click)="cancelChanges()" *ngIf="showEditDetails()"> Cancel </button>
+            <button class="btn btn-warning"   (click)="saveChanges()" *ngIf="showEditDetails()"> Save Changes </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper" *ngIf="showEditDetails()">
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <app-blok1 [pre]="pre"></app-blok1>
+
+          <div class="row" *ngIf="showCabg()">
+            <div class="col-sm-12">cabg data</div>
+          </div>
+          <div class="row" *ngIf="showValveBlok1()">
+            <div class="col-sm-12">valve data</div>
+          </div>
+
+          <app-blok2 [pre]="pre"></app-blok2>
+
+          <div class="row" *ngIf="showValveBlok2()">
+            <div class="col-sm-12">valve data blok 2</div>
+          </div>
+
+
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </div>
+ </div>
+
+  <ng-template #CustomReportTemplate>
+    Here you can review and eventually edit your personalized procedure report templates.
+    Select the report you want to change,
+    Press the Edit button and you can do your changes,
+    Do not forget to save your changes by clicking on the Save Changes button
+  </ng-template>
+
+
+

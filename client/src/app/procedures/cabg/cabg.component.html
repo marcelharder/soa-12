@@ -1,0 +1,247 @@
+<div>
+     <form #cabgForm="ngForm" id="cabgDetailsForm">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-4">
+              <h5><span class="badge badge-secondary">CABG associated with another cardiac surgery procedure</span></h5>
+            </div>
+            <div class="col-sm-2">
+              <select [(ngModel)]="pd.cab" name="cab" class="form-control">
+                <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <h5><span class="badge badge-secondary">Unplanned CAG</span></h5>
+            </div>
+            <div class="col-sm-2">
+              <select [(ngModel)]="pd.unplanned_cab" name="unplanned_cab" class="form-control">
+                <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th><h6><button (click)="openModal(Template_01)" class="badge badge-success btn-xs">Site of DA</button></h6></th>
+                    <th><h6><button (click)="openModal(Template_02)" class="badge badge-success btn-xs">Type of DA</button></h6></th>
+                    <th><h6><button (click)="openModal(Template_03)" class="badge badge-success btn-xs">Loc proc DA</button></h6></th>
+                    <th><h6><button (click)="openModal(Template_04)" class="badge badge-success btn-xs">Conduit</button></h6></th>
+                    <th><h6><button (click)="openModal(Template_05)" class="badge badge-success btn-xs">Site of PA</button></h6></th>
+                    <th><h6><button (click)="openModal(Template_06)" class="badge badge-success btn-xs">Angle</button></h6></th>
+                    <th><h6><button (click)="openModal(Template_07)" class="badge badge-success btn-xs">Diameter</button></h6></th>
+                    <th><h6><button (click)="openModal(Template_08)" class="badge badge-success btn-xs">Quality</button></h6></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td><select [(ngModel)]="pd.b1_site" name="B1_site" class="form-control"><option *ngFor="let an of optionsDA" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b1_type_da" name="B1_type_da" class="form-control"><option *ngFor="let an of optionsTypeDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b1_locproc" name="B1_locproc" class="form-control"><option *ngFor="let an of optionsLocProcDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.art01" name="art01" class="form-control"><option *ngFor="let an of optionsConduit" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b1_donor" name="B1_donor" class="form-control"><option *ngFor="let an of optionsSitePa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.angle01" name="ANGLE01" class="form-control"><option *ngFor="let an of optionsAngle" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.diam01" name="DIAM01" class="form-control"><option *ngFor="let an of optionsDiameter" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.q01" name="Q01" class="form-control"><option *ngFor="let an of optionsQuality" [value]=an.value>{{ an.description }}</option></select></td>
+                  </tr>
+  
+  
+                  <tr *ngIf="showRow2()">
+                    <td>2</td>
+                    <td><select [(ngModel)]="pd.b2_site" name="B2_site" class="form-control"><option *ngFor="let an of optionsDA" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b2_type_da" name="B2_type_da" class="form-control"><option *ngFor="let an of optionsTypeDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b2_locproc" name="B2_locproc" class="form-control"><option *ngFor="let an of optionsLocProcDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.art02" name="art02" class="form-control"><option *ngFor="let an of optionsConduit" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b2_donor" name="B2_donor" class="form-control"><option *ngFor="let an of optionsSitePa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.angle02" name="ANGLE02" class="form-control"><option *ngFor="let an of optionsAngle" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.diam02" name="DIAM02" class="form-control"><option *ngFor="let an of optionsDiameter" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.q02" name="Q02" class="form-control"><option *ngFor="let an of optionsQuality" [value]=an.value>{{ an.description }}</option></select></td>
+                  </tr>
+                  <tr *ngIf="showRow3()">
+                    <td>3</td>
+                    <td><select [(ngModel)]="pd.b3_site" name="B3_site" class="form-control"><option *ngFor="let an of optionsDA" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b3_type_da" name="B3_type_da" class="form-control"><option *ngFor="let an of optionsTypeDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b3_locproc" name="B3_locproc" class="form-control"><option *ngFor="let an of optionsLocProcDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.art03" name="art03" class="form-control"><option *ngFor="let an of optionsConduit" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b3_donor" name="B3_donor" class="form-control"><option *ngFor="let an of optionsSitePa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.angle03" name="ANGLE03" class="form-control"><option *ngFor="let an of optionsAngle" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.diam03" name="DIAM03" class="form-control"><option *ngFor="let an of optionsDiameter" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.q03" name="Q03" class="form-control"><option *ngFor="let an of optionsQuality" [value]=an.value>{{ an.description }}</option></select></td>
+                  </tr>
+                  <tr *ngIf="showRow4()">
+                    <td>4</td>
+                    <td><select [(ngModel)]="pd.b4__site" name="B4_site" class="form-control"><option *ngFor="let an of optionsDA" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b4__type_da" name="B4_type_da" class="form-control"><option *ngFor="let an of optionsTypeDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b4__locproc" name="B4_locproc" class="form-control"><option *ngFor="let an of optionsLocProcDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.art04" name="art04" class="form-control"><option *ngFor="let an of optionsConduit" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b4__donor" name="B4_donor" class="form-control"><option *ngFor="let an of optionsSitePa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.angle04" name="ANGLE04" class="form-control"><option *ngFor="let an of optionsAngle" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.diam04" name="DIAM04" class="form-control"><option *ngFor="let an of optionsDiameter" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.q04" name="Q04" class="form-control"><option *ngFor="let an of optionsQuality" [value]=an.value>{{ an.description }}</option></select></td>
+                  </tr>
+                  <tr *ngIf="showRow5()">
+                    <td>5</td>
+                    <td><select [(ngModel)]="pd.b5__site" name="B5_site" class="form-control"><option *ngFor="let an of optionsDA" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b5__type_da" name="B5_type_da" class="form-control"><option *ngFor="let an of optionsTypeDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b5__locproc" name="B5_locproc" class="form-control"><option *ngFor="let an of optionsLocProcDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.art05" name="art05" class="form-control"><option *ngFor="let an of optionsConduit" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b5__donor" name="B5_donor" class="form-control"><option *ngFor="let an of optionsSitePa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.angle05" name="ANGLE05" class="form-control"><option *ngFor="let an of optionsAngle" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.diam05" name="DIAM05" class="form-control"><option *ngFor="let an of optionsDiameter" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.q05" name="Q05" class="form-control"><option *ngFor="let an of optionsQuality" [value]=an.value>{{ an.description }}</option></select></td>
+                  </tr>
+                  <tr *ngIf="showRow6()">
+                    <td>6</td>
+                    <td><select [(ngModel)]="pd.b6__site" name="B6_site" class="form-control"><option *ngFor="let an of optionsDA" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b6__type_da" name="B6_type_da" class="form-control"><option *ngFor="let an of optionsTypeDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b6__locproc" name="B6_locproc" class="form-control"><option *ngFor="let an of optionsLocProcDa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.art06" name="art06" class="form-control"><option *ngFor="let an of optionsConduit" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.b6__donor" name="B6_donor" class="form-control"><option *ngFor="let an of optionsSitePa" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.angle06" name="ANGLE06" class="form-control"><option *ngFor="let an of optionsAngle" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.diam06" name="DIAM06" class="form-control"><option *ngFor="let an of optionsDiameter" [value]=an.value>{{ an.description }}</option></select></td>
+                    <td><select [(ngModel)]="pd.q06" name="Q06" class="form-control"><option *ngFor="let an of optionsQuality" [value]=an.value>{{ an.description }}</option></select></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3"><h5><span class="badge badge-secondary">The course of the graft is:</span></h5></div>
+            <div class="col-sm-9"><input type="text" [(ngModel)]="pd.course" class="form-control" name="graft_course" /></div>
+          </div>
+          <div class="row" *ngIf="showTachtigStuff()">
+            <div class="col-sm-3"><h5><span class="badge badge-secondary">The selected conduit was:</span></h5></div>
+            <div class="col-sm-3">
+              <select [(ngModel)]="pd.tachtig_switch" name="tachtig" class="form-control">
+                <option *ngFor="let an of optionsDropList1" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-6"></div>
+          </div>
+          <div class="row" *ngIf="showVSMHarvesting()">
+            <div class="col-sm-3"><h5><span class="badge badge-secondary">The VSM harvested from:</span></h5></div>
+            <div class="col-sm-3">
+              <select [(ngModel)]="pd.leg_harvest_location" name="leg" class="form-control">
+                <option *ngFor="let an of optionsLeg" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-3"><h5><span class="badge badge-secondary">Technique harvesting:</span></h5></div>
+            <div class="col-sm-3">
+              <select [(ngModel)]="pd.leg_harvest_technique" name="radial" class="form-control">
+                <option *ngFor="let an of optionsVSMTechnique" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row" *ngIf="showRadialHarvesting()">
+            <div class="col-sm-3"><h5><span class="badge badge-secondary">The Radial artery harvested from:</span></h5></div>
+            <div class="col-sm-3">
+              <select [(ngModel)]="pd.radial_harvest_location" name="radial" class="form-control">
+                <option *ngFor="let an of optionsRadial" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-3"><h5><span class="badge badge-secondary">Technique harvesting:</span></h5></div>
+            <div class="col-sm-3">
+              <select [(ngModel)]="pd.radial_harvest_technique" name="radial" class="form-control">
+                <option *ngFor="let an of optionsRadialTechnique" [value]=an.value>{{ an.description }}</option>
+              </select>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </form>
+  
+  </div>
+  
+  
+  
+  <ng-template #Template_01>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">site of DA = site of distal anastomosis</div>
+  </ng-template>
+  
+  <ng-template #Template_02>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">type of DA = type of distal anastomosis</div>
+  </ng-template>
+  
+  <ng-template #Template_03>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">loc proc DA = local procedure distal anastomosis</div>
+  </ng-template>
+  
+  <ng-template #Template_04>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">conduit = conduit used for grafting</div>
+  </ng-template>
+  
+  <ng-template #Template_05>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">site of PA = site of proximal anastomosis</div>
+  </ng-template>
+  
+  <ng-template #Template_06>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">angle = angle of the graft with the coronary vessel</div>
+  </ng-template>
+  
+  
+  <ng-template #Template_07>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">diameter = diameter of the coronary vessel</div>
+  </ng-template>
+  
+  <ng-template #Template_08>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Legend</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">quality = quality of the coronary vessel</div>
+  </ng-template>
+  

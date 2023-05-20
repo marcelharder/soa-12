@@ -1,0 +1,175 @@
+<div class="row"  [hidden]="showDetailsPanel()">
+    <div class="d-flex p-2 bd-highlight">
+      <div class="p-2 bd-highlight"> <h5>Identification</h5></div>
+      <div class="p-2 bd-highlight"><input type=text class=form-control name=mrn [(ngModel)]="mrn" /></div>
+      <div class="p-2 bd-highlight"><button (click)=openModal(template) class="btn btn-xxs btn-secondary">?</button></div>
+      <div class="p-2 bd-highlight"><button class="btn btn-warning" (click)=showDetails(patienttemplate)><h6>Find patient details</h6>
+      </button>
+
+        <ng-template #patienttemplate>
+          <div class="modal-body text-center">
+            <p>This patient is not in the database, you want to add the details now ?</p>
+            <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+  
+  <div [hidden]="!showDetailsPanel()">
+  
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="alert alert-info">
+              <strong>
+                Information:
+              </strong>Required to send operative report to.
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4><span class="badge badge-secondary">Select referring cardiologist</span></h4>
+              </div>
+              <div class="col-sm-6">
+                <select [(ngModel)]="selectedRef" name="item01" class="form-control">
+                  <option *ngFor="let p of refphysicians" [value]=p.value>{{ p.description }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12" *ngIf="refphysicians.length === 0">
+                <h6><span style="color:brown">Please define the ref physicians in the configuration of this hospital</span></h6>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="alert alert-info">
+              <strong>
+                Information:
+              </strong>These are essential data, needed to caclulate the Euroscore.
+            </div>
+          </div>
+          <div class="card-body">
+            <form ngForm #addFormDetails="ngForm" id="addFormDetails">
+              <div class="row">
+                <div class="col-sm-6"><span class="badge badge-secondary">Age:</span></div>
+                <div class="col-sm-6">
+                  <select [(ngModel)]="patient.age" name="age" class="form-control">
+                    <option *ngFor="let y of yearsOptions">{{ y }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><span class="badge badge-secondary">Gender:</span></div>
+                <div class="col-sm-6"><select [(ngModel)]="patient.gender" name="gender" class="form-control">
+                    <option *ngFor="let an of genderOptions" [value]=an.value>{{ an.description }}</option>
+                  </select></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><span class="badge badge-secondary">Creatinin:</span></div>
+                <div class="col-sm-6"><select [(ngModel)]="patient.creat_number" name="creat" class="form-control">
+                    <option *ngFor="let an of creatOptions">{{ an }}</option>
+                  </select></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-4"><span class="badge badge-secondary">Height:</span></div>
+                    <div class="col-sm-8"><select [(ngModel)]="patient.height" name="cabheight" class="form-control">
+                        <option *ngFor="let h of heightOptions">{{ h }}</option>
+                      </select></div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-4"><span class="badge badge-secondary">Weight:</span></div>
+                    <div class="col-sm-8"><select [(ngModel)]="patient.weight" name="cabweight" class="form-control">
+                        <option *ngFor="let w of weightOptions">{{ w }}</option>
+                      </select></div>
+                  </div>
+                </div>
+  
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+              <button type="button" class="btn btn-secondary" (click)="addNewPatient()"
+                [disabled]="!addFormDetails.dirty">Add new patient</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  <div [hidden]="!showPreviousProcedures()">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="alert alert-info">
+          <strong>
+            Information:
+          </strong>There are previous procedures for this patient ...
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Procedure</th>
+        <th>Date</th>
+       </tr>
+      <tr *ngFor="let pro of procedures">
+        <td>{{pro.procedureId}}</td>
+        <td>{{pro.description}}</td>
+        <td>{{pro.dateOfSurgery | date : 'shortDate'}}</td>
+        </tr>
+    </table>
+    <div class="row">
+      <div class="col-sm-8"><h5><span class="badge badge-warning">You want to add a procedure to this list?</span></h5></div>
+      <div class="col-sm-4">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-danger"(click)="cancel()">cancel</button>
+          <button type="button" class="btn btn-success"(click)="addProcedure()">Add</button>
+        </div>
+        
+       
+      
+      </div>
+  
+  
+  
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Explanation of identification number</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>The identification number is a number that you choose. </div>
+    </div>
+  </ng-template>

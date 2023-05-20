@@ -1,0 +1,44 @@
+<div class="card m-5">
+  <div class="card-header">
+      <h5><span class="badge badge-info">Tutorials</span></h5>
+  </div>
+  <div class="class-body">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <accordion [closeOthers] = "oneAtATime">
+              <accordion-group heading="Getting started"  [isOpen]="isFirstOpen" >
+                This chapter will get you going with the application ... <a (click)="linkToGettingStarted()" style="color:green">read more</a>
+              </accordion-group>
+              <accordion-group heading="Configuration">
+                How to configure the application  ... <a (click)="linkToConfiguration()" style="color:green">read more</a>
+              </accordion-group>
+              <accordion-group heading="Adding procedures">
+                This will be your daily interaction with the application ... <a (click)="linkToAddingProcedures()" style="color:green">read more</a>
+              </accordion-group>
+              <accordion-group heading="Reporting">
+                Explains and walks you through the many features of the reporting system ... <a (click)="linkToReporting()" style="color:green">read more</a>
+              </accordion-group>
+              <accordion-group heading="Statistics">
+                The outcomes, the meat of the application let's say ... <a (click)="linkToStatistics()" style="color:green">read more</a>
+              </accordion-group>
+            </accordion>
+          </div>
+          <div class="card-footer">
+        </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <img src="../../assets/images/helios_450.jpg" alt="test" width="375" height="500" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <p>&copy; 2022 - CardiacSoftwareDevelopers(<a (click)="linkToCSD()" style="color:blue">CSD</a>)</p>
+</div>
+</div>
+

@@ -1,0 +1,41 @@
+export interface previewReport {
+    Id: number;
+    procedure_id: number;
+    regel_1: string;
+    regel_2: string;
+    regel_3: string;
+    regel_4: string;
+    regel_5: string;
+    regel_6: string;
+    regel_7: string;
+    regel_8: string;
+    regel_9: string;
+    regel_10: string;
+    regel_11: string;
+    regel_12: string;
+    regel_13: string;
+    regel_14: string;
+    regel_15: string;
+    regel_16: string;
+    regel_17: string;
+    regel_18: string;
+    regel_19: string;
+    regel_20: string;
+    regel_21: string;
+    regel_22: string;
+    regel_23: string;
+    regel_24: string;
+    regel_25: string;
+    regel_26: string;
+    regel_27: string;
+    regel_28: string;
+    regel_29: string;
+    regel_30: string;
+    regel_31: string;
+    regel_32: string;
+    regel_33: string;
+
+    patientName: string;
+    MedicalRecordNumber: string;
+    Diagnosis: string;
+}

@@ -1,0 +1,51 @@
+
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex">
+      <div class="p-2">Implanted {{pd.Implant_Position}} valve</div>
+      <div class="ml-auto p-2">
+        <button class="badge badge-danger" (click)="deleteValve()">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div>
+      <div class="row">
+        <div class="col-md-4"><span class="badge badge-secondary">Type of prosthesis</span></div>
+        <div class="col-md-6">
+          <h4><span class="badge badge-default">{{pd.TYPE}}</span></h4>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span class="badge badge-secondary">Size (mm)</span></div>
+        <div class="col-md-6">
+          <h4><span class="badge badge-default">{{pd.SIZE}}</span></h4>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span class="badge badge-secondary">Model</span></div>
+        <div class="col-md-6">
+          <h4><span class="badge badge-default">{{pd.MODEL}}</span></h4>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><span class="badge badge-secondary">Description</span></div>
+        <div class="col-md-6">
+          <h4><span class="badge badge-default">{{pd.valveDescription}}</span></h4>
+        </div>
+        <div class="col-md-2"></div>
+      </div> 
+      
+      <div class="row">
+        <div class="col-md-4"><span class="badge badge-secondary">Serial number</span></div>
+        <div class="col-md-6">
+          <h4><span class="badge badge-default">{{pd.SERIAL_IMP}}</span></h4>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </div>
+</div>

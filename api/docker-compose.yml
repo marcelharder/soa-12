@@ -1,0 +1,62 @@
+version: '3'
+services: 
+  #sqlserver:
+   # image: mcr.microsoft.com/mssql/server:2019-latest
+   # restart: always
+   # ports:
+   #   - 1433:1433
+   # environment:
+   #  MSSQL_SA_PASSWORD: example@123
+   #  MSSQL_PID: EXPRESS
+   #  ACCEPT_EULA: Y
+   # networks: 
+   #   - internal-container-network
+   # volumes:
+   #   - sqlserver-data:/var/opt/mssql
+  db:
+    image: mariadb:latest
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+     MYSQL_ROOT_PASSWORD: example
+    networks: 
+      - internal-container-network
+    volumes:
+      - mariadb-data:/var/lib/mysql
+  comservice:
+    image: comservice:v9
+    restart: always
+    networks: 
+     - internal-container-network 
+     
+  onlinevalve_md:
+    image: inventory_md:v26
+    networks:
+     - internal-container-network
+    volumes:
+     - sqldata:/root/.aspnet/DataProtection-Keys
+    ports:
+     - 8045:80
+    depends_on: 
+     - db
+
+  tracPersonal:
+    image: sql_app:v8
+    ports:
+     - 8086:80
+    networks: 
+     - internal-container-network
+    volumes:
+     - sqldata:/root/.aspnet/DataProtection-Keys
+    depends_on: 
+     - db
+     - comservice
+     - onlinevalve_md
+
+volumes:
+ mariadb-data:
+ sqldata:
+networks:
+ internal-container-network:
+  driver: bridge

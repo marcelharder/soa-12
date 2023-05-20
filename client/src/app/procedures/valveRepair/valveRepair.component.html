@@ -1,0 +1,18 @@
+<form #valveRepairForm="ngForm" id="valveRepairForm" name="valveRepairForm">
+
+  <span *ngIf="displayExistingRepair()">
+    <app-repairExists 
+    [procedureValve]="procedureValve" 
+    [procedureId]="this.currentProcedureId"
+    (sendNewProcedureValveUp)="receiveCompletedValve($event)"></app-repairExists>
+  </span>
+  <span *ngIf="!displayExistingRepair()">
+    <app-addValveRepair 
+    [Implant_Location]="h" 
+    [procedureValve]="procedureValve"
+    (sendNewProcedureValveUp)="receiveCompletedValve($event)"></app-addValveRepair>
+
+
+  </span>
+
+</form>

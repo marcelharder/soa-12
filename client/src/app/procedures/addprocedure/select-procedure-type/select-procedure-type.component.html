@@ -1,0 +1,130 @@
+<div class="tab-panel">
+    <tabset class="member-tabset">
+      <tab heading="CABG">
+        <div class="row">
+          <div class="col-sm-6">
+  
+            <table>
+              <thead class="badge badge-info">CABG</thead>
+              
+              <tbody>
+                <tr *ngFor="let entry of oneEntries">
+                  <td>{{ entry.description }}</td>
+                  <td>
+                    <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+  
+          </div>
+          <div class="col-sm-6">
+            <table>
+              <thead class="badge badge-info">CABG Off-Pump</thead>
+              <tbody>
+                <tr *ngFor="let entry of twoEntries">
+                  <td>{{ entry.description }}</td>
+                  <td>
+                    <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+      <tab heading="Valve">
+        <div class="row">
+          <div class="col-sm-4">
+            <table>
+              <thead class="badge badge-info">Single valve procedures</thead>
+               <tbody>
+                <tr *ngFor="let entry of threeEntries">
+                  <td>{{ entry.description }}</td>
+                  <td>
+                    <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-4">
+            <table>
+              <thead class="badge badge-info">Multiple valve procedures</thead>
+              <tbody>
+                <tr *ngFor="let entry of fourEntries">
+                  <td>{{ entry.description }}</td>
+                  <td>
+                    <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-4">
+            <table>
+              <thead class="badge badge-info">Minimally Invasive Valve Procedures</thead>
+              <tbody>
+                <tr *ngFor="let entry of fiveEntries">
+                  <td>{{ entry.description }}</td>
+                  <td>
+                    <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </tab>
+      <tab heading="CABG & Valve">
+        <table>
+          <tbody>
+            <tr *ngFor="let entry of sixEntries">
+              <td>{{ entry.description }}</td>
+              <td>
+                <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+      <tab heading="Congenital">
+        <table>
+          <tbody>
+            <tr *ngFor="let entry of nineEntries">
+              <td>{{ entry.description }}</td>
+              <td>
+                <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+      <tab heading="Other Cardiac">
+        <table>
+          <tbody>
+            <tr *ngFor="let entry of sevenEntries">
+              <td>{{ entry.description }}</td>
+              <td>
+                <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+      <tab heading="Other NON Cardiac">
+        <table>
+          <tbody>
+            <tr *ngFor="let entry of eightEntries">
+              <td>{{ entry.description }}</td>
+              <td>
+                <input type="radio" name="radiogroup" [value]="entry.value" (change)="onSelectionChange(entry)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+    </tabset>
+    
+  </div>
+  

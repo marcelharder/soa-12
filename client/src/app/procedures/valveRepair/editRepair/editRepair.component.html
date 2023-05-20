@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4><span class="badge badge-default">Edit selected repair and/or ring</span></h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-8">
+
+            <div class="row" *ngIf="displayMVP()">
+              <div class="col-sm-6"><span class="badge badge-secondary">Type of Repair: </span></div>
+              <div class="col-sm-6">
+                <select [(ngModel)]="procedureValve.REPAIR_TYPE" name="repTypeM2" class="form-control">
+                  <option *ngFor="let item of optionsMitralRepairType" [value]=item.value>{{ item.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row" *ngIf="displayTVP()">
+              <div class="col-sm-6"><span class="badge badge-secondary">Type of Repair: </span></div>
+              <div class="col-sm-6">
+                <select [(ngModel)]="procedureValve.REPAIR_TYPE" name="repTypeM2" class="form-control">
+                  <option *ngFor="let item of optionsTricuspidRepairType" [value]=item.value>{{ item.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6"><span class="badge badge-secondary">Additional details: </span></div>
+              <div class="col-sm-6">
+                <textarea rows="5" class="form-control" [(ngModel)]="procedureValve.Memo" name="modelmemo"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <span class="badge badge-secondary">You used a annuloplasty ring in this repair</span>
+              </div>
+              <div class="col-sm-6">
+                <select [(ngModel)]="procedureValve.RING_USED" (change)="ringChanged()" name="repTypeR23" id="select"
+                  class="form-control">
+                  <option [value]="false">No</option>
+                  <option [value]="true">Yes</option>
+                </select>
+
+              </div>
+            </div>
+
+            <div class="row" *ngIf="showExistingRing()">
+
+              <div *ngIf="displayMVP()">
+                <div class="col-sm-12" *ngIf="displayOVIStatus()">
+                  <app-valvesFromOVI 
+                    [procedureValve]="procedureValve"
+                    [optionsAvailableRingsFromOVI]="optionsAvailableMitralRingsFromOVI"
+                    (sendIdUp)="getThisOne($event)"></app-valvesFromOVI>
+                </div>
+                <div class="col-sm-12" *ngIf="!displayOVIStatus()">
+                  <app-valveTypeFromHospital 
+                    [procedureValve]="procedureValve" [title]="'Available mitral rings'"
+                    [optionsAvailableRings]="optionsAvailableMitralRings"
+                    (sendNewProcedureValveUp)="receiveCompletedValve($event)"></app-valveTypeFromHospital>
+
+                </div>
+              </div>
+
+              <div *ngIf="displayTVP()">
+                <div class="col-sm-12" *ngIf="displayOVIStatus()">
+                  <app-valvesFromOVI 
+                    [procedureValve]="procedureValve"
+                    [optionsAvailableRingsFromOVI]="optionsAvailableTricuspidRingsFromOVI"
+                    (sendIdUp)="getThisOne($event)"></app-valvesFromOVI>
+                </div>
+                <div class="col-sm-12" *ngIf="!displayOVIStatus()">
+                  <app-valveTypeFromHospital 
+                    [procedureValve]="procedureValve" [title]="'Available tricuspid rings'"
+                    [optionsAvailableRings]="optionsAvailableTricuspidRings"
+                    (sendNewProcedureValveUp)="receiveCompletedValve($event)"></app-valveTypeFromHospital>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+          </div>
+          <div class="col-sm-4">
+            <img src="../../assets/images/else-03.jpg" alt="" width="375" height="500" />
+          </div>
+        </div>
+      </div>
+      <div class="card footer">
+        <div class="row">
+          <div class="col-sm-6 mt-2">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-warning" (click)="cancelEditRepair()">Cancel</button>
+              <button type="button" class="btn btn-success" (click)="saveRepair()">Save</button>
+            </div>
+          </div>
+          <div class="col-sm-6"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

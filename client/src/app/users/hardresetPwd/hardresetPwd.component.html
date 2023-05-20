@@ -1,0 +1,39 @@
+
+<div class="card mt-5">
+  <div class="card-header"><h5><span>Change password for user {{user_email}}</span></h5></div>
+  <div class="card-body">
+    <div class="card">
+      <div class="card-body">
+         <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-6"><h6><span>Name</span></h6></div>
+              <div class="col-sm-6"><input type=text class="form-control" 
+                [(ngModel)]="user_email" name="username" id="1" readonly></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6"><h6><span>New password</span></h6></div>
+              <div class="col-sm-6"><input type=text class="form-control" 
+                [(ngModel)]="user_password" name="password" id="2" ></div>
+            </div>
+          </div>
+          <div class="col-sm-6"></div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="row">
+          <div class="col-sm-6">
+              <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                  <button type="button" class="btn btn-danger" (click)='cancel()'>Cancel</button>
+                  <button type="submit" class="btn btn-success" (click)='reset()'>Reset Now</button>
+              </div>
+          </div>
+          <div class="col-sm-6"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

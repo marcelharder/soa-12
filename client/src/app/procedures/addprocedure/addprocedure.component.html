@@ -1,0 +1,45 @@
+<div class="card m-5">
+    <div class="card-header"><h5><span class="badge badge-info">Adding a procedure is a 2 step procedure</span></h5></div>
+    <div class="class-body">
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="card">
+              <div class="card-header">Step 1, check if the patient is already in the database:</div>
+              <div class="card-body">
+                
+                <div class="row">
+                  <div class="col-sm-12">
+                    <app-addEuroScoreDetails 
+                    (sendRef)="setSelectedRefPhys($event)" 
+                    (sendPatientId)="setPatientNo($event)"></app-addEuroScoreDetails>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-1"></div>
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">Step 2, select the type of operation you are planning to do:</div>
+              <div class="card-body">
+                <div *ngIf="showProcedure()">
+                  <app-select-procedure-type (sendProcedureId)="setProcedureNo($event)"></app-select-procedure-type>
+                </div>
+              </div>
+              <div class="row"  *ngIf="showProcedure()">
+                <div class="col-sm-12">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+                    <button type="button" class="btn btn-secondary" (click)="routeToProcedureDetails()">Add new procedure</button>
+                  </div>
+                </div>
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="card-footer"></div>
+</div>
+

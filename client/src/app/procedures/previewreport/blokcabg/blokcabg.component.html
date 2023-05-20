@@ -1,0 +1,51 @@
+<div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center"><b>Artery</b></div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center"><b>Quality</b></div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center"><b>Angle</b></div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center"><b>Diameter</b></div>
+  </div>
+  <div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getArtery(ca?.b1_site)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getQuality(ca?.q01)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getAngle(ca?.angle01)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getDiameter(ca?.diam01)}}</div>
+  </div>
+  <div *ngIf="showRegel_2()">
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getArtery(ca?.b2_site)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getQuality(ca?.q02)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getAngle(ca?.angle02)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getDiameter(ca?.diam02)}}</div>
+  </div>
+  <div *ngIf="showRegel_3()">
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getArtery(ca?.b3_site)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getQuality(ca?.q03)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getAngle(ca?.angle03)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getDiameter(ca?.diam03)}}</div>
+  </div>
+  <div *ngIf="showRegel_4()">
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getArtery(ca?.b4_site)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getQuality(ca?.q04)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getAngle(ca?.angle04)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getDiameter(ca?.diam04)}}</div>
+  </div>
+  <div *ngIf="showRegel_5()">
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getArtery(ca.b5_site)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getQuality(ca.q05)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getAngle(ca.angle05)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getDiameter(ca.diam05)}}</div>
+  </div>
+  <div *ngIf="showRegel_6()">
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getArtery(ca.b6_site)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getQuality(ca.q06)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getAngle(ca.angle06)}}</div>
+    <div style="display:inline-block; vertical-align: top; width: 15%; text-align: center">{{getDiameter(ca.diam06)}}</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-12">
+    <span class="badge badge-default">The course of the graft(s) is:</span>{{ca.course}}
+  </div>
+  
+    
+  </div>
+  

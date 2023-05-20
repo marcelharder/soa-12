@@ -1,0 +1,132 @@
+<form [formGroup]="addForm" id="addForm" (ngSubmit)="registerNewUser()">
+    <div class="card mt-5">
+        <div class="card-header">
+            <h5><span>Add the user</span></h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6"><h5><span class="lbl lbl-info">Selected hospital no:</span></h5></div>
+                                <div class="col-sm-6">
+                                    
+                                    <input type="text" formControlName="currentHospital" class="form-control" />
+                                
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="col-sm-6"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mb-1">
+                            <h5><span class="badge badge-secondary">Username: </span></h5>
+                        </div>
+                        <div class="col-sm-6 mb-1">
+                            <app-text-input [formControl]='addForm.controls["UserName"]' [label]='"username"'>
+                                [type]='"email"'</app-text-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mb-1">
+                            <h5><span class="badge badge-secondary">Password: </span></h5>
+                        </div>
+                        <div class="col-sm-6 mb-1">
+                            <app-text-input [formControl]='addForm.controls["password"]' [label]='"password"'
+                                [type]='"password"'></app-text-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mb-1">
+                            <h5><span class="badge badge-secondary">Confirm Password: </span></h5>
+                        </div>
+                        <div class="col-sm-6 mb-1">
+                            <app-text-input [formControl]='addForm.controls["confirmPassword"]'
+                                [label]='"Confirm Password"' [type]='"password"'></app-text-input>
+                        </div>
+                    </div>
+            
+ 
+                
+               
+                <div class="row">
+                    <div class="col-sm-6 mb-1">
+                        <h5><span class="badge badge-secondary">City: </span></h5>
+                    </div>
+                    <div class="col-sm-6 mb-1">
+                        <app-text-input [formControl]='addForm.controls["city"]'
+                            [label]='"city name"' [type]='"text"'></app-text-input>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6 mb-1">
+                        <h5><span class="badge badge-secondary">Mobile: </span></h5>
+                    </div>
+                    <div class="col-sm-6 mb-1">
+                        <app-text-input [formControl]='addForm.controls["mobile"]'
+                            [label]='"mobile number"' [type]='"text"'></app-text-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-1">
+                        <h5><span class="badge badge-secondary">Alias used in reports: </span></h5>
+                    </div>
+                    <div class="col-sm-6 mb-1">
+                        <app-text-input [formControl]='addForm.controls["knownAs"]'
+                            [label]='"alias"' [type]='"text"'></app-text-input>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-sm-6 mb-1">
+                        <h5><span class="badge badge-secondary">Active:</span></h5>
+                    </div>
+                    <div class="col-sm-6 mb-1">
+                        <ui-switch formControlName='active'></ui-switch>
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-sm-6 mb-1">
+                        <h5><span class="badge badge-secondary">Ltk:</span></h5>
+                    </div>
+                    <div class="col-sm-6 mb-1">
+                        <ui-switch  formControlName='ltk'></ui-switch>
+                    </div>
+                </div> 
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <img class="card-img-top img-thumbnail"
+                                    src="{{ '../../../../../assets/images/else-03.jpg' }}"
+                                    alt="test" width="250" height="350" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button type="button" class="btn btn-danger" (click)='cancel()'>Cancel</button>
+                        <button type="submit" class="btn btn-success" form="addForm">Register now</button>
+                    </div>
+                </div>
+                <div class="col-sm-6"></div>
+            </div>
+           <!--   <p>Form value: {{addForm.value |json}}</p>
+            <p>Form status: {{addForm.status |json}}</p>  -->
+        </div>
+    </div>
+</form>

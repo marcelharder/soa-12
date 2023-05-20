@@ -1,0 +1,17 @@
+<div class="card m-5">
+    <div class="card-header">
+        <h5><span class="badge badge-info">Add hospital</span></h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-3"><h4><span>Available Hospitals</span></h4></div>
+        <div class="col-sm-3"><select [(ngModel)]="selectedHospital" name="test1" class="form-control">
+          <option *ngFor="let an of listOfHospitals" [value]=an.value>{{ an.description }}</option>
+        </select>
+      </div>
+        <div class="col-sm-6"><button class="btn btn-info btn-xs" (click)="Select()">Select</button></div>
+      </div>
+        
+    </div>
+    
+</div>

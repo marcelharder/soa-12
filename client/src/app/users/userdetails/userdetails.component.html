@@ -1,0 +1,117 @@
+<div class="card m-5">
+    <div class="card-header">
+        <h5><span class="badge badge-info">Userdetails</span></h5>
+    </div>
+    <div class="card-body">
+        <form #userdetailsForm="ngForm" id="edituserdetailsForm" (ngSubmit)="updateUserDetails()">
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Select your country</span></h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="selectedCountry" (change)="changeCountry()" name="selectCountry"
+                                class="form-control" id="sh">
+                                <option *ngFor="let item of optionCountries" [value]=item.value>{{ item.description }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="selectedCountry !== ''">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Select your current hospital</span></h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="user.hospital_id" name="selectHospital" class="form-control" id="sh">
+                                <option *ngFor="let item of hospitals" [value]=item.value>{{ item.description }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Gender:</span></h5>
+                        </div>
+                        <div class="col-sm-6"> <select [(ngModel)]="user.gender" name="name" class="form-control">
+                                <option *ngFor="let an of optionsGender" [value]=an.description>{{ an.description }}
+                                </option>
+                            </select></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Email:</span></h5>
+                        </div>
+                        <div class="col-sm-6"><input type="text" [(ngModel)]="user.email" name="email"
+                                class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Mobile:</span></h5>
+                        </div>
+                        <div class="col-sm-6"><input type="text" [(ngModel)]="user.mobile" name="mobile"
+                                class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Alias:</span></h5>
+                        </div>
+                        <div class="col-sm-6"><input type="text" [(ngModel)]="user.knownAs" name="knownAs"
+                                class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Active:</span></h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <ui-switch [(ngModel)]="user.active" name="activesurgeon"></ui-switch>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Ltk:</span></h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <ui-switch [(ngModel)]="user.ltk" name="licenseToKill"></ui-switch>
+                        </div>
+                    </div>
+                    <div class="row" *appHasRole='["Admin"]'>
+                        <div class="col-sm-6">
+                            <h5><span class="badge badge-secondary">Change paidTill date:</span></h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                [(ngModel)]="user.paidTill" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                                name="datum" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <img class="card-img-top img-thumbnail"
+                                    src="{{ user.PhotoUrl || '../../../../../assets/images/user.jpg' }}" alt="test"
+                                    width="250" height="350" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger" (click)='Cancel()'>Cancel</button>
+                    <button type="submit" class="btn btn-success" form="edituserdetailsForm">Update</button>
+                </div>
+            </div>
+            <div class="col-sm-6"></div>
+        </div>
+    </div>
+</div>

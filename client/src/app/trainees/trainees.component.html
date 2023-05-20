@@ -1,0 +1,25 @@
+
+<div class="row mt-5 mb-5"><h1><span>Trainee Management in {{currentHospital}}</span></h1></div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header"><h2><span class="badge badge-info">Select a trainee</span></h2></div>
+      <div class="card-body">
+       <div *ngFor="let u of listOfTrainees">
+         <app-traineeCard [u]="u" (eId)="toEmployeeDetails($event)" ></app-traineeCard>
+      </div>
+
+
+     
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <img  src="../../assets/images/else-07.jpeg" alt="test" width="375" height="500" />
+      </div>
+    </div>
+  </div>
+</div>

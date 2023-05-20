@@ -1,0 +1,35 @@
+<div class="card m-5">
+  <div class="card-header">
+      <h5><span class="badge badge-info">Documentation</span></h5>
+  </div>
+  <div class="class-body">
+    <div class="row">
+      <div class="col-sm-8">
+        <accordion [closeOthers]="oneAtATime">
+          <accordion-group heading="Introduction" [isOpen]="isFirstOpen">
+            This application was created in Saudi Arabia when we started the cardiac surgery 
+            service in the King Fahd Armed Forces Hospital in Jeddah ... <a (click)="linkToIntroduction()" style="color:green">read more</a>
+          </accordion-group>  
+          <accordion-group heading="History">
+            Initially the application was developed in Delphi with a DBaseIV database backend ... <a (click)="linkToHistory()" style="color:green">read more</a>
+          </accordion-group>
+          <accordion-group heading="Features">
+            Over the years we implemented a host of new features and improvements ... <a (click)="linkToFeatures()" style="color:green">read more</a>
+          </accordion-group>
+          <accordion-group heading="Deployment">
+            The application is designed as an Angular 12 Single Page Application with  ... <a (click)="linkToDeployment()" style="color:green">read more</a>
+          </accordion-group>
+        </accordion>
+      </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <img  src="../../assets/images/else-07.jpeg" alt="test" width="375" height="500" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <p>&copy; 2022 - CardiacSoftwareDevelopers(<a (click)="linkToCSD()" style="color:blue">CSD</a>)</p>
+</div>
+</div>
+

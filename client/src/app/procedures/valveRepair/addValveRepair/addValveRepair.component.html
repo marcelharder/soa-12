@@ -1,0 +1,171 @@
+<div *ngIf="displayTVP()">
+  <div class="card">
+
+    <div *ngIf="displayTVP()">
+    <div class="card-header">
+      <h4><span class="badge badge-info">Adding Tricuspid Valve Repair details</span></h4>
+    </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-4">
+              <h4><span class="badge badge-default">Type of repair</span></h4>
+            </div>
+            <div class="col-sm-4">
+              <select [(ngModel)]="procedureValve.REPAIR_TYPE" name="repTypeM" class="form-control">
+                <option *ngFor="let item of optionsTricuspidRepairType" [value]=item.value>{{ item.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" (change)="onCheckBoxChange($event)"
+                  id="customCheckDetails" [(ngModel)]="additionalDetails" name="addet" />
+                <label class="custom-control-label" for="customCheckDetails">Additional Details</label>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div *ngIf="additionalDetails">
+                <textarea rows="5" class="form-control" [(ngModel)]="procedureValve.Memo" name="modelmemo"></textarea>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck" (change)="onCheckBoxChange($event)"
+                  [(ngModel)]="ringCheck" name="mrused" />
+                <label class="custom-control-label" for="customCheck">Ring used</label>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div *ngIf="displayRingUsed()">
+                <div class="card" *ngIf="!displayOVIStatus()">
+                  <app-valveTypeFromHospital 
+                    [procedureValve]="procedureValve"
+                    [title]="'Available tricuspid rings in your hospital'"
+                    [optionsAvailableRings]="optionsAvailableTricuspidRings"
+                    (sendValveUp)="receiveFullProcedure($event)"></app-valveTypeFromHospital>
+                </div>
+                <div class="card" *ngIf="displayOVIStatus()">
+                  <app-valvesFromOVI [procedureValve]="procedureValve"
+                    [optionsAvailableRingsFromOVI]="optionsAvailableTricuspidRingsFromOVI"
+                    (sendIdUp)="getThisOne($event)"></app-valvesFromOVI>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6 mt-2">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-warning" (click)="cancelEditRepair()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="saveRepairNoRing()">Save</button>
+              </div>
+            </div>
+            <div class="col-sm-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="displayMVP()">
+  <div class="card">
+
+    <div *ngIf="displayMVP()">
+    <div class="card-header">
+      <h4><span class="badge badge-info">Adding Mitral Valve Repair details</span></h4>
+    </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-4">
+              <h4><span class="badge badge-default">Type of repair</span></h4>
+            </div>
+            <div class="col-sm-4">
+              <select [(ngModel)]="procedureValve.REPAIR_TYPE" name="repTypeM" class="form-control">
+                <option *ngFor="let item of optionsMitralRepairType" [value]=item.value>{{ item.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" (change)="onCheckBoxChange($event)"
+                  id="customCheckDetails" [(ngModel)]="additionalDetails" name="addet" />
+                <label class="custom-control-label" for="customCheckDetails">Additional Details</label>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div *ngIf="additionalDetails">
+                <textarea rows="5" class="form-control" [(ngModel)]="procedureValve.Memo" name="modelmemo"></textarea>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="customCheck" (change)="onCheckBoxChange($event)"
+                  [(ngModel)]="ringCheck" name="mrused" />
+                <label class="custom-control-label" for="customCheck">Ring used</label>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div *ngIf="displayRingUsed()">
+                <div class="card" *ngIf="!displayOVIStatus()">
+                  <app-valveTypeFromHospital 
+                    [procedureValve]="procedureValve"
+                    [title]="'Available mitral rings in your hospital'"
+                    [optionsAvailableRings]="optionsAvailableMitralRings"
+                    (sendValveUp)="receiveFullProcedure($event)"></app-valveTypeFromHospital>
+                </div>
+                <div class="card" *ngIf="displayOVIStatus()">
+                  <app-valvesFromOVI 
+                    [procedureValve]="procedureValve"
+                    [optionsAvailableRingsFromOVI]="optionsAvailableMitralRingsFromOVI"
+                    (sendIdUp)="getThisOne($event)"></app-valvesFromOVI>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6 mt-2">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-warning" (click)="cancelEditRepair()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="saveRepairNoRing()">Save</button>
+              </div>
+            </div>
+            <div class="col-sm-6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,502 @@
+<div>
+    <form #cpbForm="ngForm" id="cpbForm">
+  
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="tab-panel">
+            <tabset class="member-tabset">
+              <tab heading="Bypass details">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <div class="row">
+                          <div class="col-sm-6"><h5><span class="badge badge-warning">OPCAB procedure attempted ?</span></h5></div>
+                          <div class="col-sm-6">
+                            <select [(ngModel)]="pd.opcab_attempt" name="test1" class="form-control">
+                              <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-sm-6"><h5><span class="badge badge-warning">CPB used ?</span></h5></div>
+                          <div class="col-sm-6">
+                            <select [(ngModel)]="pd.cpb_used" name="test2" class="form-control">
+                              <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                            </select>
+                          </div>
+                        </div>
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+  
+                  </div>
+                </div>
+                <div class="row" *ngIf="showCPB()">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3>CPB</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-4"></div>
+                          <div class="col-sm-4"><h5><span class="badge badge-secondary">Site 1</span></h5></div>
+                          <div class="col-sm-4"><h5><span class="badge badge-secondary">Site 2</span></h5></div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4"><h5><span class="badge badge-secondary">Arterial acces:</span></h5></div>
+                          <div class="col-sm-4">
+                            <select [(ngModel)]="pd.a1" name="art01" class="form-control">
+                              <option *ngFor="let an of ArterialChoices" [value]=an.value>{{ an.description }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-4">
+                            <select [(ngModel)]="pd.a2" name="art02" class="form-control">
+                              <option *ngFor="let an of ArterialChoices" [value]=an.value>{{ an.description }}</option>
+                            </select>
+                          </div>
+  
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4"><h5><span class="badge badge-secondary">Venous acces:</span></h5></div>
+                          <div class="col-sm-4">
+                            <select [(ngModel)]="pd.v1" name="ven01" class="form-control">
+                              <option *ngFor="let an of VenousChoices" [value]=an.value>{{ an.description }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-4">
+                            <select [(ngModel)]="pd.v2" name="ven02" class="form-control">
+                              <option *ngFor="let an of VenousChoices" [value]=an.value>{{ an.description }}</option>
+                            </select>
+                          </div>
+  
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-sm-4"><h5><span class="badge badge-secondary">AoX method:</span></h5></div>
+                          <div class="col-sm-8">
+                            <select [(ngModel)]="pd.aooccl" name="aox" class="form-control">
+                              <option *ngFor="let an of OcclusionMethod" [value]=an.value>{{ an.description }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4"><h5><span class="badge badge-info">Bypass start:</span></h5></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.cpb_start_hr" name="cpbstarthr" class="form-control">
+                              <option *ngFor="let an of hours">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-2"><h6><button (click)="prefillcpbstart()" class="badge badge-warning btn-xxs ml-4">now</button></h6></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.cpb_start_min" name="cpbstartmin" class="form-control">
+                              <option *ngFor="let an of mins">{{ an }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row bg.danger">
+                          <div class="col-sm-4"><h5><span class="badge badge-danger ml-5">Clamp On:</span></h5></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.clamp_start_hr" name="clampstarthr" class="form-control">
+                              <option *ngFor="let an of hours">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-2"><h6><button (click)="prefillclampOn()" class="badge badge-warning btn-xxs ml-4">now</button></h6></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.clamp_start_min" name="clampstartmin" class="form-control">
+                              <option *ngFor="let an of mins">{{ an }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row bg.danger">
+                          <div class="col-sm-4"><h5><span class="badge badge-danger ml-5">Clamp Off:</span></h5></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.clamp_stop_hr" name="clampstophr" class="form-control">
+                              <option *ngFor="let an of hours">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-2"><h6><button (click)="prefillclampOff()" class="badge badge-warning btn-xxs ml-4">now</button></h6></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.clamp_stop_min" name="clampstopmin" class="form-control">
+                              <option *ngFor="let an of mins">{{ an }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4"><h5><span class="badge badge-info">Bypass stop:</span></h5></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.cpb_stop_hr" name="cpbstophr" class="form-control">
+                              <option *ngFor="let an of hours">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-2"><h6><button (click)="prefillcpbstop()" class="badge badge-warning btn-xxs ml-4">now</button></h6></div>
+                          <div class="col-sm-3">
+                            <select [(ngModel)]="pd.cpb_stop_min" name="cpbstopmin" class="form-control">
+                              <option *ngFor="let an of mins">{{ an }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4"><h5><span class="badge badge-secondary">Lowest temperature during CPB:</span></h5></div>
+                          <div class="col-sm-4">
+                            <select [(ngModel)]="pd.lowest_core_temp" name="lowcore" class="form-control">
+                              <option *ngFor="let an of Temperature">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-4"><span class="badge badge-secondary">degrees Centigrade.</span></div>
+                        </div>
+  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3>Myocard protection</h3>
+                      </div>
+                      <div class="card-body">
+                        <div>
+                          <select class="form-control" [(ngModel)]="pd.noncmprotect" name="np">
+                            <option *ngFor="let item of optionsMPT" [value]=item.value>{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                        <div>
+                          <div class="card mt-2 ml-2" *ngIf="pd.noncmprotect == 1">
+                            <div class="card-header">Details of cardioplegia</div>
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-sm-4"><h5><span class="badge badge-secondary">Cardioplegia type</span></h5></div>
+                                <div class="col-sm-8">
+                                  <select class="form-control" [(ngModel)]="pd.cardioplegia_type" name="type">
+                                    <option *ngFor="let item of optionsCardioplegia" [value]=item.value>
+                                      {{ item.description }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-4"><h5><span class="badge badge-secondary">Delivery</span></h5></div>
+                                <div class="col-sm-8">
+                                  <select class="form-control" [(ngModel)]="pd.infusion_mode_ante" name="delivery">
+                                    <option *ngFor="let item of optionsDelivery" [value]=item.value>
+                                      {{ item.description }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-4"><h5><span class="badge badge-secondary">Timing</span></h5></div>
+                                <div class="col-sm-8">
+                                  <select class="form-control" [(ngModel)]="pd.cardiopl_timing" name="ctime">
+                                    <option *ngFor="let item of optionsCardioplegiaTiming" [value]=item.value>{{ item.description }}</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-4"><h5><span class="badge badge-secondary">Temperature</span></h5></div>
+                                <div class="col-sm-8">
+                                  <select class="form-control" [(ngModel)]="pd.cardiopl_temp" name="ctemp">
+                                    <option *ngFor="let item of optionsCardioplegiaTemperature" [value]=item.value>
+                                      {{ item.description }}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-4"><h5><span class="badge badge-secondary">Initial dose</span></h5></div>
+                                <div class="col-sm-8">
+                                  <input type="text" class=form-control [(ngModel)]="pd.infusion_dose_int" name="cpint" />
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-4"><span class="badge badge-secondary">Continued dose</span></div>
+                                <div class="col-sm-8">
+                                  <input type="text" class=form-control [(ngModel)]="pd.infusion_dose_cont" name="cpcont" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card mt-2 ml-2" *ngIf="pd.noncmprotect == 2">
+                            <div class="card-header">Non cardioplegic myocardial protection</div>
+                            <div class="card-body">
+                              <div class="row">
+                                <div class="col-sm-4"><h5><span class="badge badge-secondary"> Type of myocardial protection </span></h5></div>
+                                <div class="col-sm-8">
+                                  <select class="form-control" [(ngModel)]="pd.noncmprotect_type" name="nonCMProtect">
+                                    <option *ngFor="let item of optionsNonCardiopleg" [value]=item.value>{{ item.description }}</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-sm-4"><h5><span class="badge badge-secondary">Longest ischemic period</span></h5></div>
+                                <div class="col-sm-2">
+                                  <select class="form-control" [(ngModel)]="pd.long_isch" name="long_isch">
+                                    <option *ngFor="let min of mins">{{min}}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-6">
+                                  <span class="badge badge-secondary">
+                                    min. (when intermittent clamping is used)
+                                  </span>
+                                </div>
+                              </div>
+  
+  
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </tab>
+              <tab heading="Cardiac assist">
+                <div class="wrapper">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h5><span class="badge badge-secondary">IABP</span></h5>
+                        </div>
+                        <div class="col-sm-8">
+                          <select [(ngModel)]="pd.iabp" name="iabp" class="form-control">
+                            <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="row" *ngIf="showIabpTiming()">
+                        <div class="col-sm-6"><h6><span class="badge badge-secondary">when inserted:</span></h6></div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.iabp_options" name="iabp-options" class="form-control">
+                            <option *ngFor="let an of optionsIabpTiming" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                      <div class="row" *ngIf="showIabpTiming()">
+                        <div class="col-sm-6"><h6><span class="badge badge-secondary">indication:</span></h6></div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.iabp_ind" name="iabp-indication" class="form-control">
+                            <option *ngFor="let an of optionsIabpIndication" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h5><span class="badge badge-secondary">VAD</span></h5>
+                        </div>
+                        <div class="col-sm-8">
+                          <select [(ngModel)]="pd.vad" name="vad" class="form-control">
+                            <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h5><span class="badge badge-secondary">BVAD</span></h5>
+                        </div>
+                        <div class="col-sm-8">
+                          <select [(ngModel)]="pd.bvad" name="bvad" class="form-control">
+                            <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h5><span class="badge badge-secondary">Myoplasty</span></h5>
+                        </div>
+                        <div class="col-sm-8">
+                          <select [(ngModel)]="pd.myoplasty" name="myo" class="form-control">
+                            <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <h5><span class="badge badge-secondary">Total Artificial Heart</span></h5>
+                        </div>
+                        <div class="col-sm-8">
+                          <select [(ngModel)]="pd.tah" name="tah" class="form-control">
+                            <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                </div>
+  
+              </tab>
+              <tab heading="CNS protection">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <h5><span class="badge badge-secondary">Deep hypothermic circulatory arrest</span></h5>
+                      </div>
+                      <div class="col-sm-4">
+                        <select [(ngModel)]="pd.deep_hypo" name="hypo" class="form-control">
+                          <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="row" *ngIf="pd.deep_hypo == '2'">
+                      <div class="col-sm-8">
+                        <h5><span class="badge badge-secondary">Circulatory arrest time</span></h5>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <select [(ngModel)]="pd.cns_time_1" name="arrest-time" class="form-control">
+                              <option *ngFor="let an of mins">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-6">
+                            <h6><span class="badge badge-secondary">mins.</span></h6>
+                          </div>
+                        </div>
+  
+  
+                      </div>
+  
+  
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <h5><span class="badge badge-secondary">Deep hypothermic circulatory arrest with retrograde cerebral perfusion</span></h5>
+                      </div>
+                      <div class="col-sm-4">
+                        <select [(ngModel)]="pd.deep_hypo_rcp" name="retro" class="form-control">
+                          <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="row"  *ngIf="pd.deep_hypo_rcp == '2'">
+                      <div class="col-sm-8">
+                        <h5><span class="badge badge-secondary">Circulatory arrest time</span></h5>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <select [(ngModel)]="pd.cns_time_2" name="retro-arrest" class="form-control">
+                              <option *ngFor="let an of mins">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-6">
+                            <h6><span class="badge badge-secondary">mins.</span></h6>
+                          </div>
+                        </div>
+  
+  
+                      </div>
+  
+  
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <h5><span class="badge badge-secondary">Antegrade Cerebral Perfusion w/o circulatory arrest</span></h5>
+                      </div>
+                      <div class="col-sm-4">
+                        <select [(ngModel)]="pd.acp_circ" name="ante" class="form-control">
+                          <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="row" *ngIf="pd.acp_circ == '2'">
+                      <div class="col-sm-8">
+                        <h5><span class="badge badge-secondary">Antegrade cerebral perfusion time</span></h5>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <select [(ngModel)]="pd.cns_time_3" name="ante-arrest" class="form-control">
+                              <option *ngFor="let an of mins">{{ an }}</option>
+                            </select>
+                          </div>
+                          <div class="col-sm-6">
+                            <h6><span class="badge badge-secondary">mins.</span></h6>
+                          </div>
+                        </div>
+  
+  
+                      </div>
+  
+  
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <h5><span class="badge badge-secondary">Other</span></h5>
+                      </div>
+                      <div class="col-sm-4">
+                        <select [(ngModel)]="pd.other_cns_protect" name="other-protect" class="form-control">
+                          <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6"></div>
+                </div>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+      </div>
+  
+    </form>
+  </div>
+  

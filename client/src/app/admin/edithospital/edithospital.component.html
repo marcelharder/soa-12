@@ -1,0 +1,154 @@
+<div class="card m-5">
+    <div class="card-header">
+        <h5><span class="badge badge-info">Edit hospital</span></h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">General details</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4><span class="badge badge-secondary">Name:</span></h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="pd.hospitalName" name="naam" class="form-control"
+                                     />
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4">
+                              <h4><span class="badge badge-secondary">Short Name:</span></h4>
+                          </div>
+                          <div class="col-sm-8">
+                              <input type="text" [(ngModel)]="pd.selected_hospital_name" name="naam" class="form-control"
+                                   />
+                          </div>
+                      </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4><span class="badge badge-secondary">Address:</span></h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="pd.address" name="adres" class="form-control"
+                                     />
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-4">
+                              <h4><span class="badge badge-secondary">Country:</span></h4>
+                          </div>
+                          <div class="col-sm-8">
+                              <input type="text" [(ngModel)]="pd.country" name="country" class="form-control"
+                                   />
+                          </div>
+                      </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4><span class="badge badge-secondary">Telephone:</span></h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" [(ngModel)]="pd.telephone" name="tel" class="form-control"
+                                     />
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                          <div class="col-sm-4">
+                              <h4><span class="badge badge-secondary">Employees:</span></h4>
+                          </div>
+                          <div class="col-sm-8">
+                              <button class="btn btn-info" (click)="manageUsers()">Manage</button>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-4">
+                            <h4><span class="badge badge-secondary">Uses OVI:</span></h4>
+                        </div>
+                        <div class="col-sm-8">
+                            <ui-switch [(ngModel)]="pd.usesOnlineValveInventory" name="testactive2"></ui-switch>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">Reporting details</div>
+                     <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                              <h4><span class="badge badge-secondary">Report line 1</span></h4>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="text" [(ngModel)]="pd.OpReportDetails1" name="report1" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h4><span class="badge badge-secondary">Report line 2</span></h4>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="text" [(ngModel)]="pd.OpReportDetails2" name="report2" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h4><span class="badge badge-secondary">Report line 3</span></h4>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="text" [(ngModel)]="pd.OpReportDetails3" name="report3" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h4><span class="badge badge-secondary">Report line 4</span></h4>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="text" [(ngModel)]="pd.OpReportDetails4" name="report4" class="form-control" />
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <h4><span class="badge badge-secondary">Report line 5</span></h4>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <input type="text" [(ngModel)]="pd.OpReportDetails5" name="report5" class="form-control" />
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card">
+                <img class="card-img-top img-thumbnail" src="{{ pd.imageUrl }}" alt="test"  />
+              </div>
+              <div class="footer mt-2">
+                <app-photo-editor [hospitalId]="pd.hospitalNo" [userId]="0" [refId]="0" (getMemberPhotoChange)="updatePhoto($event)">
+                </app-photo-editor>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger" (click)='Cancel()'>Cancel</button>
+                    <button type="submit" class="btn btn-success" (click)="Save()">Update</button>
+                </div>
+            </div>
+            <div class="col-sm-6"></div>
+        </div> 
+    </div>

@@ -1,0 +1,81 @@
+<div class="card">
+    <div class="card-header"></div>
+    <div class="card-body">
+  
+      <div *ngIf="showEmailRefPhys()">
+        <app-email-ref-phys [email]="email" (sendCancel)="cancelEmailRef($event)" ></app-email-ref-phys>
+      </div>
+   
+  
+      <div *ngIf="!showEmailRefPhys()">
+        <form #preViewForm="ngForm" id="preViewForm">
+  
+  
+          <app-report-header [rh]="reportHeader" (sendMessage)="acceptMessage($event)" (sendHeader)="saveAndPrint($event)"> </app-report-header>
+    
+    
+          <div *ngIf="reportCode === 6">
+            <!--This is the general code-->
+            <app-blok6 [pre]="prev"></app-blok6>
+          </div>
+    
+          <div *ngIf="reportCode === 1">
+            <!--This is the cabg code-->
+            <app-blok1 [pre]="prev"></app-blok1>
+            <app-blokcabg [ca]="cabgDetails"></app-blokcabg> 
+            <app-blok2 [pre]="prev"></app-blok2>
+          </div>
+    
+          <div *ngIf="reportCode === 2">
+            <!--This is the cabg off pump code-->
+            <app-blok1 [pre]="prev"></app-blok1>
+            <app-blokcabg [ca]="cabgDetails"></app-blokcabg>
+            <app-blok2 [pre]="prev"></app-blok2>
+          </div>
+    
+          <div *ngIf="reportCode === 3">
+            <!--This is the avr code-->
+            <app-blok1 [pre]="prev"></app-blok1>
+            <app-blokvalve [vd]="AorticValveDetails"></app-blokvalve>
+            <app-blok2 [pre]="prev"></app-blok2>
+          </div>
+    
+          <div *ngIf="reportCode === 4">
+            <!--This is the mvr code-->
+            <app-blok1 [pre]="prev"></app-blok1>
+            <app-blokvalve [vd]="MitralValveDetails"></app-blokvalve>
+            <app-blok2 [pre]="prev"></app-blok2>
+          </div>
+    
+          <div *ngIf="reportCode === 5">
+            <!--This is the avr/mvr code-->
+            <app-blok1 [pre]="prev"></app-blok1>
+            <app-blokvalve [vd]="MitralValveDetails"></app-blokvalve>
+            <app-blok3 [pre]="prev"></app-blok3>
+            <app-blokvalve [vd]="AorticValveDetails"></app-blokvalve>
+            <app-blok2 [pre]="prev"></app-blok2>
+          </div>
+    
+    
+          <div>
+            <h4><span class="badge badge-default">Comments:</span></h4>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">{{reportHeader.Comment_1}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">{{reportHeader.Comment_2}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">{{reportHeader.Comment_3}}</div>
+          </div>
+    
+    
+        </form>
+      </div>
+      
+  
+  
+  
+    </div>
+  </div>

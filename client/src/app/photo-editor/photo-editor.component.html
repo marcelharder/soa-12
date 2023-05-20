@@ -1,0 +1,16 @@
+
+
+<div class="row">
+ 
+    <div class="col-md-6">
+  
+        <button type="button" class="btn btn-secondary" (click)="fileInput.click()"> Upload </button>
+        <span style="visibility: hidden; position: absolute; overflow: hidden; width: 0px; height:0px;border:none;margin:0; padding:0">
+              <input type="file" #fileInput ng2FileSelect [uploader]="uploader" />
+         </span>
+        
+    </div>
+  
+   
+  
+  </div>

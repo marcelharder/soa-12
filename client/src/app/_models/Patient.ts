@@ -1,0 +1,44 @@
+export interface Patient {
+    patientId: number;
+    mrn: string;
+    sequence: number;
+    age: number;
+    gender: string;
+    creat_number: number;
+    weight: number;
+    height: number;
+    euroScoreNo: number;
+    soort_procedure: number;
+    id: number;
+    dead: number;
+    lvef: string;
+    systolic_pa_pressure: string;
+    extra_cardiac_arteriopathy: string;
+    poor_mobility: string;
+    previous_cardiac_surgery: string;
+    isPreviousIntervention: string;
+    copd: string;
+    active_endocarditis: string;
+    diabetes_on_insulin: string;
+    nyha: string;
+    ccs: string;
+    log_score: string;
+    recent_mi: string;
+    nopm: string;
+    timing: string;
+    reason_urgent: number;
+    reason_emergent: number;
+    weight_of_intervention: string;
+    surgery_on_thoracic_aorta: string;
+    critical_preoperative_state: boolean;
+    dialysis: boolean;
+    crit_shock: boolean;
+    crit_inotropes: boolean;
+    crit_arrythmia: boolean;
+    crit_resuscitation: boolean;
+    crit_iabp: boolean;
+    crit_ventilated: boolean;
+    crit_renal_failure: boolean;
+    crit_pacemaker: boolean;
+
+}

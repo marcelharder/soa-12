@@ -1,0 +1,276 @@
+<div>
+    <form #editForm="ngForm" id="editForm">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-header">
+                  <h2><span class="badge badge-info badge-bg">The EUROSCORE II is:
+                      <span>{{calculate_euroscore()}}</span></span></h2>
+                </div>
+                <div class="card-body">
+                  <div class="row mt-1">
+                    <div class="col-sm-4"><button type="button" class="btn btn-info" [(ngModel)]="showRenalStuff"
+                        name="toc" btnCheckbox btnCheckboxTrue="1" btnCheckboxFalse="0"> Renal impairment </button></div>
+                    <div class="col-sm-2"><span class="badge badge-warning"
+                        style="float:right">{{influence_renal_impairment()}}</span></div>
+                    <div class="col-sm-4"><button type="button" class="btn btn-info" [(ngModel)]="showCriticalState"
+                        name="crit" btnCheckbox btnCheckboxTrue="1" btnCheckboxFalse="0"> Critical pre-operative state
+                      </button></div>
+                    <div class="col-sm-2"><span class="badge badge-warning"
+                        style="float:right">{{influence_crit_state()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"><span class="badge badge-secondary">Age</span></div>
+                    <div class="col-md-2"><select class="form-control" [(ngModel)]="wl.age" name="age">
+                        <option *ngFor="let p of optionsAge" [value]="p.value">{{ p.description }}</option>
+                      </select></div>
+                    <div class="col-md-2"><span class="badge badge-warning" style="float:right">{{influence_age()}}</span>
+                    </div>
+                    <div class="col-md-4"><button type="button" class="btn btn-default" id="toggle_9" (click)="test9()"
+                        [(ngModel)]="wl.ccs" name="t9" btnCheckbox btnCheckboxTrue="1" btnCheckboxFalse="0" #toggle9> CCS
+                        class 4 angina</button></div>
+                    <div class="col-md-2"><span class="badge badge-warning" style="float:right">{{influence_ccs()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"><span class="badge badge-secondary">Gender</span></div>
+                    <div class="col-md-2"><select [(ngModel)]="wl.gender" name="gender" class="form-control">
+                        <option *ngFor="let p of optionsGender" [value]="p.value">{{ p.description }}</option>
+                      </select></div>
+                    <div class="col-md-2"><span class="badge badge-warning"
+                        style="float:right">{{influence_gender()}}</span></div>
+                    <div class="col-md-4"><button type="button" class="btn btn-default" id="toggle_1" (click)="test1()"
+                        [(ngModel)]="wl.recent_mi" name="t1" btnCheckbox btnCheckboxTrue="1" btnCheckboxFalse="0"
+                        #toggle1> Recent Myocardial Infarction </button> </div>
+                    <div class="col-md-2"><span class="badge badge-warning" style="float:right">{{influence_mi()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"><span class="badge badge-secondary">NYHA, dyspnea score</span></div>
+                    <div class="col-md-2"><select [(ngModel)]="wl.nyha" name="nyha" class="form-control">
+                        <option *ngFor="let p of optionsNyha" [value]="p.value">{{ p.description }}</option>
+                      </select></div>
+                    <div class="col-md-2"><span class="badge badge-warning" style="float:right">{{influence_nyha()}}</span></div>
+                    <div class="col-md-4"><button type="button" class="btn btn-default" id="toggle_2" (click)="test2()"
+                        [(ngModel)]="wl.extra_cardiac_arteriopathy" name="t2" btnCheckbox btnCheckboxTrue="1"
+                        btnCheckboxFalse="0" #toggle2> Extra cardiac artheropathy </button></div>
+                    <div class="col-md-2"><span class="badge badge-warning"
+                        style="float:right">{{influenceArteriopathy()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"><span class="badge badge-secondary">Pulmonary hypertension</span></div>
+                    <div class="col-md-2"><select [(ngModel)]="wl.systolic_pa_pressure" name="pht" class="form-control">
+                        <option *ngFor="let p of optionsPht" [value]=p.value>{{ p.description }}</option>
+                      </select></div>
+                    <div class="col-md-2"><span class="badge badge-warning" style="float:right">{{influence_pht()}}</span>
+                    </div>
+                    <div class="col-md-4"><button type="button" class="btn btn-default" id="toggle_3" (click)="test3()"
+                        [(ngModel)]="wl.poor_mobility" name="t3" btnCheckbox btnCheckboxTrue="1" btnCheckboxFalse="0"
+                        #toggle3>Poor mobility</button></div>
+                    <div class="col-md-2"><span class="badge badge-warning"
+                        style="float:right">{{influence_poor_mobility()}}</span></div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"><span class="badge badge-secondary">Urgency</span></div>
+                    <div class="col-md-2">
+                      <select [(ngModel)]="wl.timing" name="timing" class="form-control">
+                        <option *ngFor="let p of optionsTiming" [value]="p.value">{{ p.description }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-2"><span class="badge badge-warning"
+                        style="float:right">{{influence_urgency()}}</span></div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-default" id="toggle_4" (click)="test4()"
+                        [(ngModel)]="wl.previous_cardiac_surgery" name="t4" btnCheckbox btnCheckboxTrue="1"
+                        btnCheckboxFalse="0" #toggle4> Previous cardiac surgery </button>
+                    </div>
+                    <div class="col-md-2"><span class="badge badge-warning"
+                        style="float:right">{{influence_previous_cardiac_surgery()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"><span class="badge badge-secondary">Weight intervention</span></div>
+                    <div class="col-md-2">
+                      <select [(ngModel)]="wl.weight_of_intervention" name="timing" class="form-control">
+                        <option *ngFor="let p of optionsWoint" [value]="p.value">{{ p.description }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <span class="badge badge-warning" style="float:right">{{influence_weight_intervention()}}</span>
+                    </div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-default" id="toggle_5" (click)="test5()" [(ngModel)]="wl.copd"
+                        name="t5" btnCheckbox btnCheckboxTrue="1" btnCheckboxFalse="0" #toggle5> COPD </button>
+                    </div>
+                    <div class="col-md-2">
+                      <span class="badge badge-warning" style="float:right">{{influence_chronic_lung_disease()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-default" id="toggle_6" (click)="test6()"
+                        [(ngModel)]="wl.active_endocarditis" name="t6" btnCheckbox btnCheckboxTrue="1"
+                        btnCheckboxFalse="0" #toggle6> Active endocarditis </button>
+                    </div>
+                    <div class="col-md-2">
+                      <span class="badge badge-warning" style="float:right">{{influence_endocarditis()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-default" id="toggle_7" (click)="test7()"
+                        [(ngModel)]="wl.diabetes_on_insulin" name="t7" btnCheckbox btnCheckboxTrue="1"
+                        btnCheckboxFalse="0" #toggle7> Diabetes on insulin </button>
+                    </div>
+                    <div class="col-md-2">
+                      <span class="badge badge-warning" style="float:right">{{influence_diabetes()}}</span>
+                    </div>
+                  </div>
+                  <div class="row mt-1">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-default" id="toggle_8" (click)="test8()"
+                        [(ngModel)]="wl.surgery_on_thoracic_aorta" name="t8" btnCheckbox btnCheckboxTrue="1"
+                        btnCheckboxFalse="0" #toggle8> Surgery on thoracic aorta </button>
+                    </div>
+                    <div class="col-md-2"><span class="badge badge-warning"
+                        style="float:right">{{influence_thor()}}</span></div>
+                  </div>
+  
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card" *ngIf="displayRenalStuff()">
+                <div class="card-header">
+                  <h4><span class="badge badge-info">Cockroft-Gault creatinine clearance calculator</span></h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="btn-group-toggle ml-3 mb-2" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                          <input type="checkbox" [(ngModel)]="wl.dialysis" name="dialysis"
+                            autocomplete="off" />{{getDialysisState()}}
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-4"></div>
+                  </div>
+                  <div class="row" *ngIf="!wl.dialysis">
+                    <div class="col-sm-3">Plasma creatinine (umol/l): </div>
+                    <div class="col-sm-3">
+                      <select [(ngModel)]="wl.creat_number" name="creat" class="form-control">
+                        <option *ngFor="let p of optionsCreat" [value]="p.value">{{ p.description }}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-2">Weight (kg):</div>
+                    <div class="col-sm-4">
+                      <select [(ngModel)]="wl.weight" name="weight" class="form-control">
+                        <option *ngFor="let p of optionsWeight" [value]="p.value">{{ p.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="!wl.dialysis">
+                    <div class="col-sm-3">Age (years):</div>
+                    <div class="col-sm-3">
+                      <div class="row">
+                        <div class="col-sm-10"><input type="text" [(ngModel)]="wl.age" name="age" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">Gender:</div>
+                    <div class="col-sm-4">
+                      <select [(ngModel)]="wl.gender" name="gender" class="form-control">
+                        <option *ngFor="let p of optionsGender" [value]="p.value">{{ p.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="!wl.dialysis">
+                    <div class="col-sm-3">Creatinine clearance (ml):</div>
+                    <div class="col-sm-3"><b><span>{{creatinine_clearance()}}</span></b></div>
+                    <div class="col-sm-6"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="card" *ngIf="displayCritState()">
+                <div class="card-header">
+                  <h4><span class="badge badge-info">Factors that determine critical pre-operative state</span></h4>
+                </div>
+                <div class="card-body">
+                  <div class="row ml-1">
+                    <div class="col-sm-3"><label class="form-check-label"><input type="checkbox" class="form-check-input"
+                          [(ngModel)]="wl.crit_renal_failure" name="renalFailure">Renal failure</label></div>
+                    <div class="col-sm-3"><button type="button" (click)="openModal(renalTemplate)"
+                        class="badge badge-success btn-xs">Definition</button></div>
+                    <div class="col-sm-3"><label class="form-check-label"><input type="checkbox" class="form-check-input"
+                          [(ngModel)]="wl.crit_inotropes" name="inotropes">Inotropes</label></div>
+                  </div>
+                  <div class="row ml-1">
+                    <div class="col-sm-3"><label class="form-check-label"><input type="checkbox" class="form-check-input"
+                          [(ngModel)]="wl.crit_arrythmia" name="arrhythmia">Arrhythmia</label></div>
+                    <div class="col-sm-3"><button type="button" (click)="openModal(rhythmTemplate)"
+                        class="badge badge-success btn-xs">Definition</button></div>
+                    <div class="col-sm-3"><label class="form-check-label"><input type="checkbox" class="form-check-input"
+                          [(ngModel)]="wl.crit_resuscitation" name="resus">Resuscitation </label></div>
+                  </div>
+                  <div class="row ml-1">
+                    <div class="col-sm-3"><label class="form-check-label"><input type="checkbox" class="form-check-input"
+                          [(ngModel)]="wl.crit_iabp" name="iabp">IABP </label></div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"><label class="form-check-label"><input type="checkbox" class="form-check-input"
+                          [(ngModel)]="wl.crit_ventilated" name="ventilated">Ventilated </label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-sm-12">
+              <button class="badge badge-warning" (click)="saveES()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <ng-template #renalTemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Definition of renal failure</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">Preoperative acute renal failure (anuria or oliguria &lt;10 ml/hour)</div>
+  </ng-template>
+  <ng-template #rhythmTemplate>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Definition of arrythmia</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">Ventricular tachycardia or fibrillation or aborted sudden death</div>
+  </ng-template>
+  <ng-template #testTemplate>
+    <div class="card">
+      <div class="card-header">and my header</div>
+      <div class="card-details">hi my details</div>
+    </div>
+  </ng-template>

@@ -1,0 +1,658 @@
+<div>
+  <form #postOpDetailsForm="ngForm" id="postOpDetailsForm">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h5><span class="badge badge-warning">Patient reintubated ?</span></h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <select [(ngModel)]="pd.reintubated" name="test025" class="form-control">
+                      <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h5><span class="badge badge-warning">Patient readmitted ?</span></h5>
+                  </div>
+                  <div class="col-sm-6">
+                    <select [(ngModel)]="pd.readmitted" name="test125" class="form-control">
+                      <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h5><span class="badge badge-warning">Show complications</span></h5>
+                  </div>
+                  <div class="col-sm-6">
+
+                    <select [(ngModel)]="complication" name="test225" class="form-control">
+                      <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3><span class="badge badge-default">Postoperative details</span></h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3"><span class="badge badge-secondary">Date</span></div>
+                            <div class="col-md-6"><span class="badge badge-secondary">Time</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-3"><span class="badge badge-secondary">ICU arrival</span></div>
+                            <div class="col-md-3"><input type="text" class="form-control"
+                                [ngModel]="pd.ICU_ARRIVAL_DATE | date: 'yyyy/MM/dd'" name="01" readonly /></div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-sm-4"><input type="text" class="form-control"
+                                    [ngModel]="pd.ICU_ARRIVAL_DATE_HOURS" name="02" readonly /></div>
+                                <div class="col-sm-4"><input type="text" class="form-control"
+                                    [ngModel]="pd.ICU_ARRIVAL_DATE_MINUTES" name="03" readonly /></div>
+                                <div class="col-sm-4"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-3"><span class="badge badge-secondary">Extubation</span></div>
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                [(ngModel)]="pd.EXTUBATION_DATE" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                                name="extdatum2" />
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.EXTUBATION_DATE_HOURS" name="at22" class="form-control">
+                                    <option *ngFor="let hr of hours">{{ hr }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.EXTUBATION_DATE_MINUTES" name="at21" class="form-control">
+                                    <option *ngFor="let min of mins">{{ min }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <h6>
+                                    <button (click)="setExtubationTime()" class="badge badge-warning btn-xxs"> now
+                                    </button>
+                                  </h6>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"><span class="badge badge-secondary">ICU discharge</span></div>
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                [(ngModel)]="pd.ICU_DISCHARGE_DATE" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                                name="extdatum" />
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.ICU_DISCHARGE_DATE_HOURS" name="at32" class="form-control">
+                                    <option *ngFor="let hr of hours">{{ hr }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.ICU_DISCHARGE_DATE_MINUTES" name="at31" class="form-control">
+                                    <option *ngFor="let min of mins">{{ min }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <h6>
+                                    <button (click)="setICUDischargeTime()" class="badge badge-warning btn-xxs"> now
+                                    </button>
+                                  </h6>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"><span class="badge badge-secondary">ICU Stay</span></div>
+                            <div class="col-md-9">
+
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <div class="row">
+                                    <div class="col-sm-3">
+                                      <h4><span class="badge badge-secondary">{{calculatedTimeStay |
+                                          number:'1.0-0'}}</span></h4>
+                                    </div>
+                                    <div class="col-sm-3"><span class="badge badge-info" style="float:left">hr.</span>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-4"></div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"><span class="badge badge-secondary">Ventilated</span></div>
+                            <div class="col-md-9">
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <div class="row">
+                                    <div class="col-sm-3">
+                                      <h4><span class="badge badge-secondary">{{calculatedTime | number:'1.0-0'}}</span>
+                                      </h4>
+                                    </div>
+                                    <div class="col-sm-3"><span class="badge badge-info" style="float:left">hr.</span>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-4"></div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3" *ngIf="showReadmis()"><span class="badge badge-secondary">ICU Stay
+                                (secondary)</span></div>
+                            <div class="col-md-3" *ngIf="showReadmis()"><input [ngModel]="calculatedIcuSecondarystay"
+                                name="cicu" class="form-control" readonly style="background-color:yellow" />
+                            </div>
+                            <div class="col-md-3" *ngIf="showReintubation()"><span class="badge badge-secondary">Hrs
+                                ventilated after re-intubation</span></div>
+                            <div class="col-md-3" *ngIf="showReintubation()"> <input [ngModel]="calculatedVentilatedSec"
+                                name="reint12" class="form-control" readonly style="background-color:orange" /></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3" *ngIf="showReadmis()"><span class="badge badge-secondary">ICU Stay
+                                (Overall)</span></div>
+                            <div class="col-md-3" *ngIf="showReadmis()">
+                              <input [ngModel]="calculatedIcuTotalstay" name="cs" class="form-control" readonly
+                                style="background-color:yellow" />
+                            </div>
+                            <div class="col-md-3" *ngIf="showReintubation()"><span class="badge badge-secondary">Hrs
+                                ventilated Overall</span></div>
+                            <div class="col-md-3" *ngIf="showReintubation()"> <input
+                                [ngModel]="calculatedVentilatedTotal" name="reint13" class="form-control" readonly
+                                style="background-color:orange" /></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"><span class="badge badge-secondary">Highest post-op creatinine</span>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="row">
+                                <div class="col-sm-9">
+                                  <select [(ngModel)]="pd.highest_creatinine" name="creat" class="form-control">
+                                    <option *ngFor="let item of maxCreat">{{ item }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-3">
+                                  <h6><span class="badge badge-info">mmol/l</span></h6>
+                                </div>
+
+                              </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"><span class="badge badge-secondary">Blood products used:</span></div>
+                            <div class="col-md-3">
+                              <select [(ngModel)]="pd.blood_products" name="bpr" class="form-control">
+                                <option *ngFor="let item of optionsYN" [value]="item.value">{{ item.description }}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="col-md-6"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="showBloodProductsDetails()">
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                              <div class="row">
+                                <div class="col-sm-6">
+                                  <div class="row">
+                                    <div class="col-sm-7">Autologous blood</div>
+                                    <div class="col-sm-5">
+                                      <select [(ngModel)]="pd.autologous_Blood" name="authB" class="form-control">
+                                        <option *ngFor="let item of optionsYN" [value]="item.value">{{ item.description
+                                          }}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div *ngIf="showAutologousBloodGiven()">
+                                    <select [(ngModel)]="pd.when_used" name="whenUsed" class="form-control">
+                                      <option *ngFor="let item of optionsTiming" [value]="item.value">{{
+                                        item.description }}</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="row">
+                                    <div class="col-sm-6">Packed cells, no of units</div>
+                                    <div class="col-sm-6">
+                                      <select [(ngModel)]="pd.pc" name="pc" class="form-control">
+                                        <option *ngFor="let item of numberOfItems">{{ item }}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="row">
+                                    <div class="col-sm-6">Fresh Frozen Plasma, no of units</div>
+                                    <div class="col-sm-6">
+                                      <select [(ngModel)]="pd.ffp" name="ffp" class="form-control">
+                                        <option *ngFor="let item of numberOfItems">{{ item }}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="row mb-2">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="row">
+                                    <div class="col-sm-6">Platelets, no of units</div>
+                                    <div class="col-sm-6">
+                                      <select [(ngModel)]="pd.platelets" name="pla" class="form-control">
+                                        <option *ngFor="let item of numberOfItems">{{ item }}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-sm-6">
+              <div class="row" *ngIf="showReadmis()">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header">ReAdmission</div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-3"><span class="badge badge-secondary">ICU arrival for readmission</span>
+                            </div>
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                [(ngModel)]="pd.arrival_1_date" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                                name="extdatum14" />
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.arr_1_hr" name="at42" class="form-control">
+                                    <option *ngFor="let hr of hours">{{ hr }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.arr_1_min" name="at41" class="form-control">
+                                    <option *ngFor="let min of mins">{{ min }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <h6>
+                                    <button (click)="setICUSecondArrivalTime()"
+                                      class="badge badge-warning btn-xxs">now</button>
+                                  </h6>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-3"><span class="badge badge-secondary">ICU Second Discharge </span></div>
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                [(ngModel)]="pd.discharge_1_date" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                                name="extdatum19" />
+                            </div>
+                            <div class="col-md-6">
+
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.dis_1_hr" name="at52" class="form-control">
+                                    <option *ngFor="let hr of hours">{{ hr }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.dis_1_min" name="at51" class="form-control">
+                                    <option *ngFor="let min of mins">{{ min }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <h6>
+                                    <button (click)="setICUSecondDischargeTime()"
+                                      class="badge badge-warning btn-xxs">now</button>
+                                  </h6>
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="showReintubation()">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header">ReIntubation</div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-3"><span class="badge badge-secondary">Reintubation</span></div>
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                [(ngModel)]="pd.reintubation_date" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                                name="extdatum24" />
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.reintubation_hr" name="at62" class="form-control">
+                                    <option *ngFor="let hr of hours">{{ hr }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.reintubation_min" name="at61" class="form-control">
+                                    <option *ngFor="let min of mins">{{ min }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <h6>
+                                    <button (click)="setReintubationStartTime()"
+                                      class="badge badge-warning btn-xxs">now</button>
+                                  </h6>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-3"><span class="badge badge-secondary">Extubation second attempt</span>
+                            </div>
+                            <div class="col-md-3">
+                              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                                [(ngModel)]="pd.extubation_1_date" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                                name="extdatum34" />
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.ext_1_hr" name="at72" class="form-control">
+                                    <option *ngFor="let hr of hours">{{ hr }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <select [(ngModel)]="pd.ext_1_min" name="at71" class="form-control">
+                                    <option *ngFor="let min of mins">{{ min }}</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-4">
+                                  <h6>
+                                    <button (click)="setReintubationStopTime()"
+                                      class="badge badge-warning btn-xxs">now</button>
+                                  </h6>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="showComplication()">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-header">Complications</div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Operative, reoperation for:</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_1" name="ath1" class="form-control">
+                            <option *ngFor="let item of compOptions01" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Infection</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_2" name="ath2" class="form-control">
+                            <option *ngFor="let item of compOptions02" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Other</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_3" name="ath3" class="form-control">
+                            <option *ngFor="let item of compOptions03" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Neurologic</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_4" name="ath4" class="form-control">
+                            <option *ngFor="let item of compOptions04" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Cardiac</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_5" name="ath5" class="form-control">
+                            <option *ngFor="let item of compOptions05" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Pulmonary</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_6" name="ath6" class="form-control">
+                            <option *ngFor="let item of compOptions06" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Gastrointestinal</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_7" name="ath7" class="form-control">
+                            <option *ngFor="let item of compOptions07" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Renal</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_8" name="ath8" class="form-control">
+                            <option *ngFor="let item of compOptions08" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <span class="badge badge-secondary">Vascular</span>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.complicatie_9" name="ath9" class="form-control">
+                            <option *ngFor="let item of compOptions09" [value]="item.value">{{ item.description }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row" *ngIf="showImage()">
+                <img src="../../assets/images/else-04.jpeg" width="375px" height="500px" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+
+
+
+
+
+</div>

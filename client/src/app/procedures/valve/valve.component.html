@@ -1,0 +1,128 @@
+<div>
+  <form #valveDetailsForm="ngForm" id="valveDetailsForm" name="valveDetailsForm">
+    <div class="card m-2">
+      <div class="card-header" *ngIf="showAVR()"> Aortic Valve Replacement</div>
+      <div class="card-header" *ngIf="showMVR()"> Mitral Valve Replacement</div>
+      <div class="card-body">
+        <div class="card-title"></div>
+        <div class="card-text">
+          <div class="row">
+            <div class="col-sm-4">
+              <span class="badge badge-secondary">
+                Is this valve surgery associated with another cardiac surgery procedure
+              </span>
+            </div>
+            <div class="col-sm-4">
+              <select [(ngModel)]="procedureValve.Combined" name="q1" class="form-control">
+                <option *ngFor="let item of YN" [value]=item.value>{{ item.description }}</option>
+              </select>
+              <div class="col-sm-4"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4"><span class="badge badge-secondary">Aetiology</span></div>
+            <div class="col-sm-4" *ngIf="showAVR()">
+              <select [(ngModel)]="procedureValve.ProcedureAetiology" name="q2" class="form-control">
+                <option *ngFor="let item of optionsAetiology" [value]=item.value>{{ item.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-4" *ngIf="showMVR()">
+              <select [(ngModel)]="procedureValve.ProcedureAetiology" name="q2" class="form-control">
+                <option *ngFor="let item of optionsAetiology" [value]=item.value>{{ item.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4"><span class="badge badge-secondary">Procedure</span></div>
+            <div class="col-md-4" *ngIf="showAVR()">
+              <select [(ngModel)]="procedureValve.ProcedureType" name="q3" class="form-control">
+                <option *ngFor="let item of optionsAorticProcedure" [value]=item.value>{{ item.description }}</option>
+              </select>
+            </div>
+            <div class="col-md-4" *ngIf="showMVR()">
+              <select [(ngModel)]="procedureValve.ProcedureType" name="q4" class="form-control">
+                <option *ngFor="let item of optionsMitralProcedure" [value]=item.value>
+                  {{ item.description }}
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-4"><span class="badge badge-secondary">Show explantation details</span></div>
+            <div class="col-md-4">
+              <select [(ngModel)]="explanted" name="q5" class="form-control">
+                <option *ngFor="let item of YN" [value]=item.value>{{ item.description }}</option>
+              </select>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+          <div class="row" *ngIf="!readyToSelectValve() && !showValvePresent()">
+            <div class="col-md-4"><button class="btn btn-warning" (click)="selectValve()">Select the valve you want to implant</button></div>
+            <div class="col-md-4"></div>
+            <div class="col-sm-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-sm-12" *ngIf="!showValvePresent() && readyToSelectValve()">
+            <app-selectValve 
+            [ovi]="IsOVIHospital()" 
+            [valveDescription]="Valvedescription"
+            [hospitalId]="this.currentHospitalNo" 
+            [implant]="this.hv.implant_Position"
+            [hv]="hv"
+            [pd]="procedureValve"
+            (pushValve)="receiveFromSelect($event)">
+          </app-selectValve>
+          </div>
+         
+          <div class="col-sm-12" *ngIf="showValvePresent()">
+            <app-valve-present 
+            [pd]="procedureValve" 
+            (del)="deleteFromDatabase($event)"></app-valve-present>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card" *ngIf="explanted === 2">
+          <div class="card-header">Explanted valve </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4"><span class="badge badge-secondary">Type of prosthesis</span></div>
+              <div class="col-md-6"><input [(ngModel)]='pd.tricuspid_type_exp' name='m220' class="form-control" /></div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><span class="badge badge-secondary">Code</span></div>
+              <div class="col-md-6"><input [(ngModel)]='pd.tricuspid_explant' name='m221' class="form-control" /></div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><span class="badge badge-secondary">Model</span></div>
+              <div class="col-md-6"><input [(ngModel)]='pd.tricuspid_model_exp' name='m222' class="form-control" />
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><span class="badge badge-secondary">Serial number</span></div>
+              <div class="col-md-6"><input [(ngModel)]='pd.tricuspid_serial_exp' name='m223' class="form-control" />
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><span class="badge badge-secondary">Size</span></div>
+              <div class="col-md-6"><input [(ngModel)]='pd.tricuspid_size_exp' name='m224' class="form-control" /></div>
+              <div class="col-md-2"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

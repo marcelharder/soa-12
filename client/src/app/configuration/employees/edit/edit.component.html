@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-sm-12"><h4><span class="badge badge-default">{{profession}}</span></h4></div>
+  </div>
+  <form name="eecForm">
+  <div class="row">
+    <div class="col-sm-10">
+      <select [(ngModel)]="selectedPerson" name="test1" class="form-control" (change)="checkEditButton()">
+        <option *ngFor="let an of list" [value]=an.value>{{ an.description }}</option>
+      </select>
+    </div>
+    <div class="col-sm-2 mt-2">
+      <div class="row">
+        <div class="col-sm-6">
+          <h6>
+            <button *ngIf="displayEditButton()"
+                    (click)="editEmployee(selectedPerson)"
+                    class="badge badge-warning btn-xxs">
+              edit
+            </button>
+          </h6>
+        </div>
+        <div class="col-sm-6">
+          <h6>
+            <button (click)="addEmployee()"
+                    class="badge badge-danger btn-xxs">
+              add
+            </button>
+          </h6>
+        </div>
+      </div>
+  
+  
+    </div>
+  </div>
+  </form>
+  

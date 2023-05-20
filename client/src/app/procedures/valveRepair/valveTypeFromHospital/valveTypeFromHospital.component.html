@@ -1,0 +1,85 @@
+<div class="card" *ngIf="!displayDetails()">
+  <div class="card-header">
+    <h4><span class="badge badge-default">{{title}}</span></h4>
+  </div>
+  <div class="card-body">
+ <div *ngIf="recordsFound()">
+    <table class="table table-striped">
+      <tr>
+        <th>Annuloplasty_Ring</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+      <tr *ngIf="showNoRings()">
+        <td>No Rings available for implant</td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr *ngFor="let x of optionsAvailableRings">
+        <td>{{x.code}}</td>
+        <td>{{x.description}}</td>
+        <td><button type="button" class="badge badge-info btn-xxs"
+            (click)="getThisValveType(x.valveTypeId)">select</button></td>
+      </tr>
+    </table>
+  </div>
+  </div>
+  <div  *ngIf="!recordsFound()">
+No rings found ...
+  </div>
+</div>
+<div class="card" *ngIf="displayDetails()">
+  <div class="card-header">
+    <h4><span class="badge badge-default">Please enter additional details for this annuloplasty ring</span></h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm-6"><span class="badge badge-secondary">Implanted size:</span></div>
+          <div class="col-sm-6">
+            <select [(ngModel)]="procedureValve.SIZE" name="vsize" class="form-control">
+              <option *ngFor="let item of optionRingSizes" [value]=item.size>{{ item.size }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"><span class="badge badge-secondary">Serial number:</span></div>
+          <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="procedureValve.SERIAL_IMP"
+              name="sn"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"><span class="badge badge-secondary">Type:</span></div>
+          <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="procedureValve.TYPE" name="ty"
+              disabled></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"><span class="badge badge-secondary">Description:</span></div>
+          <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="procedureValve.valveDescription"
+              name="im" disabled></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"><span class="badge badge-secondary">Code: </span></div>
+          <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="procedureValve.MODEL" name="co"
+              disabled></div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <img src="{{imageUrl}}" alt="" width="250" height="250" />
+      </div>
+    </div>
+
+
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-sm-6 mt-2">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-warning" (click)="cancelEditRepair()">Cancel</button>
+          <button type="button" class="btn btn-success" (click)="saveRepair()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

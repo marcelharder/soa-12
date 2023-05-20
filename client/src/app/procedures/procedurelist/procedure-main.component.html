@@ -1,0 +1,84 @@
+<div class="card mt-5">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-6">
+              <h3>
+                <span class="badge badge-secondary mr-2"> {{selectedHospital}} </span>
+              </h3>
+            </div>
+            <div class="col-sm-6">
+              <button type="button" 
+              class="btn btn-secondary float-right" (click)="openModal(template)">Add Procedure</button>
+              <br><br>
+              <ng-template #template>
+                <div class="modal-body text-center">
+                  <p>Do you want to add a procedure now ?</p>
+                  <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+                  <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                </div>
+              </ng-template>
+           </div>
+          </div>
+         
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-4">Assistant</div>
+                    <div class="col-sm-4"><ui-switch [(ngModel)]="primarySurgeon" name="surgeonType" (change)="changeSurgeonType()"></ui-switch></div>
+                    <div class="col-sm-4">Surgeon</div>
+                  </div>
+                  
+                </div>
+                <div class="col-sm-6"></div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div *ngIf="primarySurgeon"><h5><span class="badge badge-default">Procedures done as primary surgeon</span></h5></div>
+              <div *ngIf="!primarySurgeon"><h5><span class="badge badge-default">Procedures assisted</span></h5></div>
+            </div>
+          </div>
+         
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <table class="table table-striped">
+                <tr>
+                  <th>ID</th>
+                  <th *ngIf="primarySurgeon">Completed</th>
+                  <th>Procedure</th>
+                  <th>Date</th>
+                  <th></th>
+                </tr>
+                <tr *ngFor="let pro of procedures">
+                  <td>{{pro.procedureId}}</td>
+  
+                  <th *ngIf="isCompleted(pro.completed) && primarySurgeon && isEligible(pro.completed)"> <span style="color:green">{{pro.completed}}</span></th>
+                  <th *ngIf="!isCompleted(pro.completed) && primarySurgeon && isEligible(pro.completed)"><span style="color:red">{{pro.completed}}</span></th>
+                  <th *ngIf="primarySurgeon && !isEligible(pro.completed)"><span style="color:blue">{{pro.completed}}</span></th>
+                  
+                  <td>{{pro.description}}</td>
+                  <td>{{pro.dateOfSurgery | date : 'shortDate'}}</td>
+                  <td><a  (click)="testNav(pro)" style='color:crimson'>Details</a></td> 
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <pagination [boundaryLinks]="true"
+                        [totalItems]="pagination.totalItems"
+                        [(ngModel)]="pagination.currentPage"
+                        (pageChanged)="pageChanged($event)"
+                        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+            </pagination>
+  
+          </div>
+  
+  
+  
+        </div>
+</div>
+    
+  

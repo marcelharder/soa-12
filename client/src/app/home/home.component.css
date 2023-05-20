@@ -1,0 +1,37 @@
+.card {
+    width: 600px;
+    background-color: lightgray;
+    opacity: .7;
+    color:white;
+    top: 63px;
+    left: 50px;
+}
+
+.customtitle {
+  background-color: lightblue;
+  opacity: .7;
+  color: white
+}
+
+.bg {
+    background: url('../../assets/images/operating-room.JPG') no-repeat center;
+    background-size: 95% 95%;
+    background-position: bottom center;
+  }
+   
+    img.bg {
+      min-height: 100%;
+      min-width: 1024px;
+      width: 100%;
+      height: auto;
+      position: fixed;
+      top: 50px;
+      left: 0;
+  }
+  
+  @media screen and (max-width: 1024px){
+      img.bg {
+      left: 50%;
+      margin-left: -512px; }
+  }
+  

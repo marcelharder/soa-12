@@ -1,0 +1,272 @@
+<div>
+    <form #editForm="ngForm">
+     <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <input [(ngModel)]="proc.description" type="text" class="form-control" name="desc">
+            </div>
+            <div class="card-body">
+             
+              <div class="row">
+                <div class="col-sm-2"><span class="badge badge-secondary">date of surgery</span></div>
+                <div class="col-sm-4">
+                  <p class="input-group">
+                    <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                      [(ngModel)]="proc.dateOfSurgery" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" name="datum" />
+                  </p>
+                </div>
+                <div class="col-sm-6">
+  
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-2"><span class="badge badge-secondary">start hr</span></div>
+                    <div class="col-sm-4">
+  
+                    </div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="proc.selectedStartHr" name="starthr" class="form-control">
+                        <option *ngFor="let hr of hours">{{ hr }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-4"><span class="badge badge-secondary">start min</span></div>
+                    <div class="col-sm-4">
+                      <select [(ngModel)]="proc.selectedStartMin" name="startMin" class="form-control">
+                        <option *ngFor="let min of mins">{{ min }}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-4">
+                      <h6><button (click)="setStartTime()" class="badge badge-warning btn-xxs">now</button></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-2"><span class="badge badge-secondary">stop hr</span></div>
+                    <div class="col-sm-4">
+  
+                    </div>
+                    <div class="col-sm-6"><select [(ngModel)]="proc.selectedStopHr" name="stophr" class="form-control">
+                        <option *ngFor="let hr of hours">{{ hr }}</option>
+                      </select></div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-sm-4"><span class="badge badge-secondary">stop min</span></div>
+                    <div class="col-sm-4">
+                      <select [(ngModel)]="proc.selectedStopMin" name="stopMin" class="form-control">
+                        <option *ngFor="let min of mins">{{ min }}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-4">
+                      <h6><button (click)="setStopTime()" class="badge badge-warning btn-xxs">now</button></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-md-2"><span class="badge badge-secondary">Timing</span></div>
+                <div class="col-sm-4">
+                  <select [(ngModel)]="proc.selectedTiming" name="tim02" class="form-control">
+                    <option *ngFor="let topt of timingOptions" [value]="topt.value">{{topt.description}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-6"></div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-sm-6">
+                  <h6> <span *ngIf='proc.selectedTiming == 2' class="badge badge-warning">Reason urgent timing:</span>
+                  </h6>
+                  <h6> <span *ngIf='proc.selectedTiming == 3' class="badge badge-warning">Reason emergent timing:</span>
+                  </h6>
+                </div>
+                <div class="col-sm-6">
+                  <select *ngIf='proc.selectedTiming == 2' name="ur" id="DrpUrgent"
+                    [(ngModel)]="proc.selectedUrgentTiming" class="form-control">
+                    <option *ngFor="let a of urgentOptions" [value]="a.value">{{ a.description }}</option>
+                  </select>
+  
+                  <select *ngIf='proc.selectedTiming == 3' name="em" id="DrpEmergent"
+                    [(ngModel)]="proc.selectedEmergencyTiming" class="form-control">
+                    <option *ngFor="let emer of emergentOptions" [value]="emer.value">{{ emer.description }}</option>
+                  </select>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+  
+          <div class="card">
+            <div class="card-header">
+              <h3><span class="badge badge-default">Employees</span></h3> 
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <span class="badge badge-secondary">surgeon</span>
+                </div>
+                <div class="col-sm-3">
+                  <select [(ngModel)]="proc.selectedSurgeon" name="surgeon" class="form-control" (change)="findLtk()">
+                    <option *ngFor="let oop of Assistants" [value]=oop.value>{{ oop.description }}</option>
+                  </select>
+  
+                </div>
+                <div class="col-sm-3">
+                  <span class="badge badge-secondary">Anaesthesist</span>
+                </div>
+                <div class="col-sm-3">
+                  <select [(ngModel)]="proc.selectedAnaesthesist" name="anaesthesioloog" class="form-control">
+                    <option *ngFor="let oop of Anaesthesists" [value]=oop.value>{{ oop.description }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" *ngIf="surgeonHasNoLTK()">
+                <div class="col-sm-3">
+                  <span class="badge badge-secondary">responsible surgeon</span>
+                </div>
+                <div class="col-sm-3">
+                  <select [(ngModel)]="proc.selectedResponsibleSurgeon" name="resp_surgeon" class="form-control">
+                    <option *ngFor="let oop of Surgeons" [value]=oop.value>{{ oop.description }}</option>
+                  </select>
+  
+                </div>
+                <div class="col-sm-3">
+                 
+                </div>
+                <div class="col-sm-3">
+                 
+                </div>
+              </div>
+  
+  
+  
+              <div class="row">
+                <div class="col-md-3">
+                  <span class="badge badge-secondary">Assistant</span>
+                </div>
+                <div class="col-md-3">
+                  <select [(ngModel)]="proc.selectedAssistant" name="assistant" class="form-control">
+                    <option *ngFor="let an of Assistants" [value]=an.value>{{ an.description }}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <span class="badge badge-secondary">Perfusionist</span>
+                </div>
+                <div class="col-md-3">
+                  <select [(ngModel)]="proc.selectedPerfusionist" name="perfusionist" class="form-control">
+                    <option *ngFor="let perf of Perfusionists" [value]=perf.value>{{ perf.description }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <span class="badge badge-secondary">nurse#1</span>
+                </div>
+                <div class="col-md-3">
+                  <select [(ngModel)]="proc.selectedNurse1" name="nurse1" class="form-control">
+                    <option *ngFor="let nurse of Nurses" [value]=nurse.value>{{ nurse.description }}</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <span class="badge badge-secondary">nurse#2</span>
+                </div>
+                <div class="col-md-3">
+                  <select [(ngModel)]="proc.selectedNurse2" name="nurse2" class="form-control">
+                    <option *ngFor="let nursetwee of Nurses" [value]=nursetwee.value>{{ nursetwee.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-header">
+              <h3><span class="badge badge-default">Procedure</span></h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <span class="badge badge-secondary">inotropes</span>
+                </div>
+                <div class="col-md-8">
+                  <select [(ngModel)]="proc.selectedInotropes" name="ino23" class="form-control">
+                    <option *ngFor="let inotroop of inotropeOptions" [value]="inotroop.value">{{ inotroop.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <span class="badge badge-secondary">pacemaker</span>
+                </div>
+                <div class="col-md-8">
+                  <select [(ngModel)]="proc.selectedPacemaker" name="pm" class="form-control">
+                    <option *ngFor="let pm of pacemakerOptions" [value]="pm.value">{{  pm.description  }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <span class="badge badge-secondary">pericard</span>
+                </div>
+                <div class="col-md-8">
+                  <select [(ngModel)]="proc.selectedPericard" name="peri" class="form-control">
+                    <option *ngFor="let pc of pericardOptions" [value]="pc.value">{{  pc.description  }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <span class="badge badge-secondary">pleura</span>
+                </div>
+                <div class="col-md-8">
+                  <select [(ngModel)]="proc.selectedPleura" name="pl" class="form-control">
+                    <option *ngFor="let pl of pleuraOptions" [value]="pl.value">{{ pl.description }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-1">
+                <div class="col-sm-2">
+                  <span class="badge badge-secondary">Comments</span>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" name="comments_1" [(ngModel)]="proc.comment1" class="form-control" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <span class="badge badge-secondary"></span>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" name="comments_2" [(ngModel)]="proc.comment2" class="form-control" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <span class="badge badge-secondary"></span>
+                </div>
+                <div class="col-sm-10">
+                  <input type="text" name="comments_3" [(ngModel)]="proc.comment3" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  

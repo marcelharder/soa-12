@@ -1,0 +1,182 @@
+<div>
+    <form #aorticForm="ngForm" id="aorticForm">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="card">
+            <div class="card-header"></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-4">
+                  <h5><span class="badge badge-secondary">Anatomy</span></h5>
+                </div>
+                <div class="col-sm-8">
+                  <input type="checkbox" [(ngModel)]="pd.aneurysm" name="1" (change)=ChkBox1(); />
+                  <label for="1" class="badge badge-secondary ml-2">Aneurysm</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8" *ngIf="pd.aneurysm">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h5><label for="1" class="badge badge-secondary">Aneurysm Type</label></h5>
+                    </div>
+                    <div class="col-sm-9">
+                      <select [(ngModel)]="pd.aneurysm_type" name="at" class="form-control">
+                        <option *ngFor="let an of optionsAneurysmType" [value]="an.value">{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                  <input type="checkbox" [(ngModel)]="pd.dissection" name="2" (change)=ChkBox2(); />
+                  <label class="badge badge-secondary ml-2">Dissection</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                  <div class="row" *ngIf="pd.dissection">
+                    <div class="col-sm-3">
+                      <h5> <label for="1" class="badge badge-secondary">Onset Dissection</label> </h5>
+                    </div>
+                    <div class="col-sm-9">
+                      <select [(ngModel)]="pd.dissection_onset" name="at" class="form-control">
+                        <option *ngFor="let an of optionsOnsetDissection" [value]="an.value"> {{ an.description }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                  <div class="row" *ngIf="pd.dissection">
+                    <div class="col-sm-3">
+                      <h5>
+                        <label class="badge badge-secondary">Dissection Type</label>
+                      </h5>
+                    </div>
+                    <div class="col-sm-9">
+                      <select [(ngModel)]="pd.dissection_type" name="at2312" class="form-control">
+                        <option *ngFor="let an of optionsDissectionType" [value]="an.value">{{ an.description }} </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                  <input type="checkbox" [(ngModel)]="pd.coarctation" name="3" />
+                  <label for="3" class="badge badge-secondary ml-2">Coarctation</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                  <input type="checkbox" [(ngModel)]="pd.other_congenital" name="4" />
+                  <label for="4" class="badge badge-secondary ml-2">Other congenital</label>
+  
+                </div>
+  
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <h5><span class="badge badge-secondary">Pathology</span></h5>
+                </div>
+                <div class="col-sm-8">
+                  <select [(ngModel)]="pd.pathology" name="67" class="form-control">
+                    <option *ngFor="let an of optionsPathology" [value]="an.value">
+                      {{ an.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <h5>
+                    <span class="badge badge-secondary">Operative Indication</span>
+                  </h5>
+                </div>
+                <div class="col-sm-8">
+                  <select [(ngModel)]="pd.indication" name="34" class="form-control">
+                    <option *ngFor="let an of optionsIndication" [value]="an.value">
+                      {{ an.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <h5>
+                    <span class="badge badge-secondary">Operative Technique</span>
+                  </h5>
+                </div>
+                <div class="col-sm-8">
+                  <select [(ngModel)]="pd.operative_technique" name="78" id="optech" (change)="technique_selected($event)"
+                    class="form-control">
+                    <option *ngFor="let an of optionsTechnique" [value]="an.value">
+                      {{ an.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <h5>
+                    <span class="badge badge-secondary">Range of Replacement</span>
+                  </h5>
+                </div>
+                <div class="col-sm-8">
+                  <select [(ngModel)]="pd.range" name="12" class="form-control">
+                    <option *ngFor="let an of optionsRangeReplacement" [value]="an.value"> {{ an.description }} </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-4" *ngIf="!showOVI()">
+          <div class="row" *ngIf="showAoDetails()">
+            <div class="col-sm-12" *ngIf="conduitFound()"><app-existingconduit
+              [pd]="procedureValve"
+              (markAsDeleted)="existingValveStatus($event)"
+              ></app-existingconduit></div>
+            <div class="col-sm-12" *ngIf="!conduitFound()"><app-gamecard 
+              [OAC]="optionsAvailableConduits" 
+              (tell)="record_added($event)"
+              [currentHospital]="currentHospital"></app-gamecard>
+            </div>
+        </div>
+  
+        </div>
+  
+        <div class="col-sm-4" *ngIf="showOVI()">
+          <div class="card">
+            <div class="card-header">
+              <h6><span>Select valved conduits from {{currentHospital}}</span></h6>
+            </div>
+            <div class="card-body">panel OVI</div>
+          </div>
+        </div>
+      </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    </form>
+  </div>

@@ -1,0 +1,323 @@
+<div class="card m-5">
+    <div class="card-header">
+        <div class="d-flex flex-row">
+         <div class="p-2"><h5><button class="btn btn-info" (click)="displayStart()">About</button></h5></div>
+         <div class="p-2"><h5><button class="btn btn-info" (click)="displayCredits()">Credits</button></h5></div>
+          </div>
+       
+        
+    </div>
+    <div class="class-body">
+        <div class="row" *ngIf="showVersion()">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4><span class="badge badge-secondary">Version history</span></h4>
+                            </div>
+                            <div class="col-sm-6"><button style="float: right;" class="badge badge-default"
+                                    (click)="switchPanel(1)">Contact</button></div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color: beige;">
+                        <div class="row">
+
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-info">Date:</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-info">Version</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">11-11-2020</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">2.04 ()</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">27-11-2020</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">2.05 (debugging)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">22-01-2021</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">2.06 (change password feature added)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">26-01-2021</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">2.07 (filter Users by hospital)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">25-05-2021</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">2.08 (change all hospitals by admin)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">08-11-2021</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">2.09 (bugs)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">24-11-2021</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">2.10 (features added role of chef)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">22-02-2022</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.10 (.net 5 and Identity)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">14-03-2022</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.11 (discharge bug erased)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">22-04-2022</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.20 (service levels introduced)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">28-04-2022</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.21 (documentation/tutorials)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">05-09-2022</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.22 (bugs chased)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">31-10-2022</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.23 (register flow changed)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">16-11-2022</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.24 (OVI integration)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">17-01-2023</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.25 (Valve repair page redone)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">08-03-2023</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.26 (two bugs caught)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">17-05-2023</span></h6>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6><span class="badge badge-default">3.27 (html templates intoduced)</span></h6>
+                            </div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <img  src="../../assets/images/else-05.jpeg" alt="test" width="375" height="500" />
+      
+            </div>
+        </div>
+        <div class="row" *ngIf="showContact()">
+            <div class="col-sm-6">
+                <img  src="../../assets/images/else-04.jpeg" alt="test" width="375" height="500" />
+      
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4><span class="badge badge-secondary">Contact details</span></h4>
+                            </div>
+                            <div class="col-sm-6"><button style="float: right;" class="badge badge-default"
+                                    (click)="switchPanel(2)">Version history</button></div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color: beige;">
+                        <div class="row">
+                            <div class="col-sm-12">
+                              <div class="card">
+                                <div class="card-header"><h4><span class="badge badge-secondary">Cardiacsurgery Software Developers</span></h4></div>
+                                <div class="card-body" style="background-color: beige;">
+                                  <div class="row">
+                                    <div class="col-sm-4"><h5><span class="badge badge-default">Redemark 6</span></h5></div>
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4"></div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-sm-4"><h5><span class="badge badge-default">Almere-Haven </span></h5></div>
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4"></div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-sm-4"><h5><span class="badge badge-default">The Netherlands</span></h5></div>
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4"></div>
+                                  </div>
+                                  
+                                  <div class="row">
+                                    <div class="col-sm-4"><h5><span class="badge badge-default">Mail: marcelharder@protonmail.com</span></h5></div>
+                                    <div class="col-sm-4"></div>
+                                    <div class="col-sm-4"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="showCredits()">
+            <div class="col-sm-6">
+                <img  src="../../assets/images/else-06.jpg" alt="test" width="375" height="500" />
+      
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4><span class="badge badge-secondary">Credits</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+               <div class="row">
+                   <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header"><h4><span class="badge badge-secondary">Inspiration</span></h4></div>
+                        <div class="card-body">This application was inspired by G. Kootstra ... <a (click)="linkToCredit01()" style="color:green">read more</a></div>
+                    </div>
+                    
+                   </div>
+               </div>
+               <div class="row">
+                <div class="col-sm-12">
+                 <div class="card">
+                     <div class="card-header"><h4><span class="badge badge-secondary">Motivation</span></h4></div>
+                     <div class="card-body">My surgical friends Abdullah Ashmeg and Andrew Allan motivated me to develop this application and 
+                         kept me going with constructive criticism ... <a (click)="linkToCredit02()" style="color:green">read more</a></div>
+                 </div>
+                 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                 <div class="card">
+                     <div class="card-header"><h4><span class="badge badge-secondary">Art</span></h4></div>
+                     <div class="card-body">
+                         <div class="row">
+                             <div class="col-sm-6"><img  src="../../assets/images/else-10.jpg" alt="test" heigth="250px" width="250px" /></div>
+                             <div class="col-sm-6">
+                                 The artwork that I used in this website is created by my friend Else Ringnalda.
+                                  I can wholeheartedly recommend that you visit her website on: <a href="http://www.elseringnalda.nl">http://www.elseringnalda.nl</a>
+                                   
+                             </div>
+                            </div>
+                     </div>
+                 </div>
+                 
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <p>&copy; 2022 - CardiacSoftwareDevelopers(<a (click)="linkToCSD()" style="color:blue">CSD</a>)</p>
+    </div>
+</div>

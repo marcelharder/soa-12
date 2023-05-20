@@ -1,0 +1,1798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <!-- Region CABG on-pump -->
+   <Code>
+      <ID>1</ID>
+      <Description>CABG lima and VSM</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>2</ID>
+      <Description>CABG lima and rima</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>21</ID>
+      <Description>CABG lima only</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>23</ID>
+      <Description>CABG lima and radial and VSM</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>24</ID>
+      <Description>CABG lima and radial</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>25</ID>
+      <Description>CABG lima and rima and radial</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>26</ID>
+      <Description>CABG VSM only</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>926</ID>
+      <Description>CABG Radial only</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>1</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <!-- Region CABG off pump -->
+   <Code>
+      <ID>92</ID>
+      <Description>Off Pump CABG lima and VSM</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>93</ID>
+      <Description>Off Pump CABG lima and rima</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>94</ID>
+      <Description>Off Pump CABG lima only</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>95</ID>
+      <Description>Off Pump CABG lima and radial</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>98</ID>
+      <Description>Off Pump CABG lima radial and VSM</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>96</ID>
+      <Description>Off Pump CABG lima and rima and radial</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>97</ID>
+      <Description>Off Pump CABG VSM only</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>997</ID>
+      <Description>Off Pump CABG Radial only</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Procedure details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>mininv</action_3>
+         <action_4>cabg</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>2</report_code>
+      <weight_of_intervention>0</weight_of_intervention>
+   </Code>
+   <!-- Single valve -->
+   <Code>
+      <ID>3</ID>
+      <Description>AVR</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Valve details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>avr</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>3</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>30</ID>
+      <Description>AVR min inv</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Valve details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>avr</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>3</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>4</ID>
+      <Description>MVR</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Valve details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvr</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>4</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>41</ID>
+      <Description>MVP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Repair details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvp</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>4</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>45</ID>
+      <Description>TVP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Repair details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>tvp</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>46</ID>
+      <Description>TVR</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Valve details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>tvr</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <!-- Multiple valve -->
+   <Code>
+      <ID>5</ID>
+      <Description>AVR MVR</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Aortic valve details</button_caption_4>
+         <button_caption_5>Mitral valve details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>avr</action_4>
+         <action_5>mvr</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>5</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>51</ID>
+      <Description>AVR MVP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>AVR details</button_caption_4>
+         <button_caption_5>MVP details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>avr</action_4>
+         <action_5>mvp</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>53</ID>
+      <Description>AVR TVP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>AVR details</button_caption_4>
+         <button_caption_5>TVP details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>avr</action_4>
+         <action_5>tvp</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>54</ID>
+      <Description>MVR TVP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>MVR details</button_caption_4>
+         <button_caption_5>TVP details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvr</action_4>
+         <action_5>tvp</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>55</ID>
+      <Description>MVP TVP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>MVP details</button_caption_4>
+         <button_caption_5>TVP details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvp</action_4>
+         <action_5>tvp</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <!-- General -->
+   <Code>
+      <ID>6</ID>
+      <Description>General</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Postoperative details</button_caption_4>
+         <button_caption_5>Operative report</button_caption_5>
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>postop</action_4>
+         <action_5>previewReport</action_5>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>5</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <!-- Congenital -->
+   <Code>
+      <ID>7</ID>
+      <Description>ASD</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_5></action_5>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>56</ID>
+      <Description>Ross procedure</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>142</ID>
+      <Description>Atrium Septal Defect repair</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_5></action_5>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>102</ID>
+      <Description>VSD Closure</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>104</ID>
+      <Description>PDA Ligation</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>105</ID>
+      <Description>Pulmonary valvulotomy</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>146</ID>
+      <Description>TOF repair</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>1414</ID>
+      <Description>Other congenital defect repair</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Postoperative details</button_caption_3>
+         <button_caption_4>Operative report</button_caption_4>
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+          <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>postop</action_3>
+         <action_4>previewReport</action_4>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>4</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <!-- Valve and CABG -->
+   <Code>
+      <ID>80</ID>
+      <Description>AVR and CABG</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Valve details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>avr</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>81</ID>
+      <Description>MVP and CABG</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Repair details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>mvp</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>82</ID>
+      <Description>MVR and CABG</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>Valve details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>mvr</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>83</ID>
+      <Description>TVP and CABG</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>CABG details</button_caption_4>
+         <button_caption_5>TVP details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>cabg</action_4>
+         <action_5>tvp</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>84</ID>
+      <Description>MVP and TVP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Mitral Repair details</button_caption_4>
+         <button_caption_5>Tricuspid Repair details</button_caption_5>
+         <button_caption_6>Postoperative details</button_caption_6>
+         <button_caption_7>Operative report</button_caption_7>
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvp</action_4>
+         <action_5>tvp</action_5>
+         <action_6>postop</action_6>
+         <action_7>previewReport</action_7>
+         <action_8 />
+      </button_action>
+      <aantal_buttons>7</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>2</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>85</ID>
+      <Description>AVR and MVP and CABG</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Mitral Repair details</button_caption_4>
+         <button_caption_5>AVR details</button_caption_5>
+         <button_caption_6>CABG details</button_caption_6>
+         <button_caption_7>Postoperative details</button_caption_7>
+         <button_caption_8>Operative report</button_caption_8>
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvp</action_4>
+         <action_5>avr</action_5>
+         <action_6>cabg</action_6>
+         <action_7>postop</action_7>
+         <action_8>previewReport</action_8>
+      </button_action>
+      <aantal_buttons>8</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>3</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>86</ID>
+      <Description>AVR and MVR and CABG</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>MVR details</button_caption_4>
+         <button_caption_5>AVR details</button_caption_5>
+         <button_caption_6>CABG details</button_caption_6>
+         <button_caption_7>Postoperative details</button_caption_7>
+         <button_caption_8>Operative report</button_caption_8>
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvr</action_4>
+         <action_5>avr</action_5>
+         <action_6>cabg</action_6>
+         <action_7>postop</action_7>
+         <action_8>previewReport</action_8>
+      </button_action>
+      <aantal_buttons>8</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>3</weight_of_intervention>
+   </Code>
+  <!-- Minimally invasive -->
+   <Code>
+      <ID>88</ID>
+      <Description>Minimally Invasive Mitral Valve Surgery (MVP)</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Minimally Invasive Procedure details</button_caption_3>
+         <button_caption_4>Mitral Repair details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvp</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>89</ID>
+      <Description>Minimally Invasive Mitral Valve Surgery (MVR)</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Minimally Invasive Procedure details</button_caption_3>
+         <button_caption_4>Valve details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>mvr</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>101</ID>
+      <Description>Aortic surgery</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Operative details</button_caption_4>
+         <button_caption_5>Postoperative details</button_caption_5>
+         <button_caption_6>Operative report</button_caption_6>
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>aortic</action_4>
+         <action_5>postop</action_5>
+         <action_6>previewReport</action_6>
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>1417</ID>
+      <Description>Pacemaker implant</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>147</ID>
+      <Description>AICD</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>1412</ID>
+      <Description>Maze</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Postoperative details</button_caption_4>
+         <button_caption_5>Operative report</button_caption_5>
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>postop</action_4>
+         <action_5>previewReport</action_5>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>6</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>145</ID>
+      <Description>Cardiac tumor</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Postoperative details</button_caption_4>
+         <button_caption_5>Operative report</button_caption_5>
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>postop</action_4>
+         <action_5>previewReport</action_5>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>5</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>1418</ID>
+      <Description>LV aneurysmectomy</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Euroscore</button_caption_2>
+         <button_caption_3>Bypass details</button_caption_3>
+         <button_caption_4>Postoperative details</button_caption_4>
+         <button_caption_5>Operative report</button_caption_5>
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>euroscore</action_2>
+         <action_3>cpb</action_3>
+         <action_4>postop</action_4>
+         <action_5>previewReport</action_5>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>5</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>148</ID>
+      <Description>Heart and Lung transplant</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>149</ID>
+      <Description>Pulmonary embolectomy</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>1416</ID>
+      <Description>Cardiac TX</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>1419</ID>
+      <Description>Other</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>151</ID>
+      <Description>Carotid endarterectomy</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>152</ID>
+      <Description>Lung TX</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Bypass details</button_caption_2>
+         <button_caption_3>Operative details</button_caption_3>
+         <button_caption_4>Postoperative details</button_caption_4>
+         <button_caption_5>Operative report</button_caption_5>
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>cpb</action_2>
+         <action_3>ltx</action_3>
+         <action_4>postop</action_4>
+         <action_5>previewReport</action_5>
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>5</aantal_buttons>
+      <cpb_used>1</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>153</ID>
+      <Description>Other vascular procedure</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>154</ID>
+      <Description>Other thoracic procedure</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>601</ID>
+      <Description>Rethoracotomy for bleeding</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>602</ID>
+      <Description>Rewiring of sternum (no infection)</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>603</ID>
+      <Description>Debridement for mediastinitis</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>604</ID>
+      <Description>M. Pectoralis plasty</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+   <Code>
+      <ID>605</ID>
+      <Description>Removal of IABP</Description>
+      <button_caption>
+         <button_caption_1>Details</button_caption_1>
+         <button_caption_2>Postoperative details</button_caption_2>
+         <button_caption_3>Operative report</button_caption_3>
+         <button_caption_4 />
+         <button_caption_5 />
+         <button_caption_6 />
+         <button_caption_7 />
+         <button_caption_8 />
+      </button_caption>
+      <button_action>
+         <action_1>detailsMain</action_1>
+         <action_2>postop</action_2>
+         <action_3>previewReport</action_3>
+         <action_4 />
+         <action_5 />
+         <action_6 />
+         <action_7 />
+         <action_8 />
+      </button_action>
+      <aantal_buttons>3</aantal_buttons>
+      <cpb_used>0</cpb_used>
+      <report_code>6</report_code>
+      <weight_of_intervention>1</weight_of_intervention>
+   </Code>
+</root>

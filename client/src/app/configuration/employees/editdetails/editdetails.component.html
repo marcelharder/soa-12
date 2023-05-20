@@ -1,0 +1,62 @@
+<div class="row mt-2">
+    <div class="col-sm-8">
+      
+        <div class="wrapper ml-1" style="background-color:navajowhite">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="row">
+                <div class="col-sm-6"><h5><span class="badge badge-secondary">ID:</span></h5></div>
+                <div class="col-sm-6"><h5><span class="badge badge-info">{{emp.id}}</span></h5></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><h5><span class="badge badge-secondary">Profession:</span></h5></div>
+                <div class="col-sm-6"><h5><span class="badge badge-info">{{emp.profession}}</span></h5></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><h5><span class="badge badge-secondary">Name:</span></h5></div>
+                <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="emp.name" name="name" /></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><h5><span class="badge badge-secondary">User name:</span></h5></div>
+                <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="emp.user_name" name="uno" /></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><h5><span class="badge badge-secondary">Password:</span></h5></div>
+                <div class="col-sm-6"><input type="password" class="form-control" [(ngModel)]="emp.password" name="pwdo" /></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><h5><span class="badge badge-secondary">Selectable:</span></h5></div>
+                <div class="col-sm-6">
+                  <ui-switch [(ngModel)]="emp.activeState" name="testname" ></ui-switch>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6"><h5><span class="badge badge-secondary">LTK:</span></h5></div>
+                <div class="col-sm-6">
+                  <select [(ngModel)]="emp.liscense_to_kill" name="ltk" class="form-control">
+                    <option *ngFor="let an of optionsYN">{{ an.description }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="row mt-2">
+                <div class="col-sm-12"><img src="{{emp.image}}" alt="ref photo" height="250"></div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-sm-12">
+                  <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
+                                               (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+  
+          
+        </div>
+      
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+  

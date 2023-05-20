@@ -1,0 +1,162 @@
+<div class="card">
+    <div class="card-header">
+      <h4><span class="badge badge-info">Manage cardiologists</span></h4>
+    </div>
+    <div class="card-body">
+      <div class="row" *ngIf="!showEdit()">
+        <div class="col-sm-6">
+          <select [(ngModel)]="selectedRef" name="ref" class="form-control">
+            <option *ngFor="let p of refphysicians" [value]=p.value>{{ p.description }}</option>
+          </select>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="row">
+                <div class="col-sm-4"><button type="button" class="btn btn-primary"
+                    (click)="editCardiologist()">Edit</button></div>
+                <div class="col-sm-4"><button type="button" class="btn btn-warning"
+                    (click)="addCardiologist()">Add</button></div>
+                <div class="col-sm-4"></div>
+              </div>
+            </div>
+            <div class="col-sm-8"></div>
+          </div>
+  
+        </div>
+      </div>
+  
+      <div class="row" *ngIf="showEdit()">
+        <div class="col-sm-12">
+          <form #editForm>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Name:</span></h5>
+                  </div>
+                  <div class="col-sm-10"><input type="text" class="form-control" [(ngModel)]="pd.name" name="name" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Street:</span></h5>
+                  </div>
+                  <div class="col-sm-10"><input type="text" class="form-control" [(ngModel)]="pd.street" name="str" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Postcode:</span></h5>
+                  </div>
+                  <div class="col-sm-10"><input type="text" class="form-control" [(ngModel)]="pd.postcode" name="code" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">City:</span></h5>
+                  </div>
+                  <div class="col-sm-10"><input type="text" class="form-control" [(ngModel)]="pd.city" name="city" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Country:</span></h5>
+                  </div>
+                  <div class="col-sm-10">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <select [(ngModel)]="pd.country" name="country" class="form-control">
+                          <option *ngFor="let p of countries" [value]=p.value>{{ p.description }}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-2" *ngIf="showState()">
+                        <h5><span class="badge badge-secondary">State:</span></h5>
+                      </div>
+                      <div class="col-sm-4" *ngIf="showState()">
+                        <select [(ngModel)]="pd.state" name="state" class="form-control">
+                          <option *ngFor="let p of states" [value]=p.value>{{ p.description }}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Telephone:</span></h5>
+                  </div>
+                  <div class="col-sm-10"><input type="text" class="form-control" [(ngModel)]="pd.tel" name="tel" /></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Fax:</span></h5>
+                  </div>
+                  <div class="col-sm-10"><input type="text" class="form-control" [(ngModel)]="pd.fax" name="fax" /></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Active:</span></h5>
+                  </div>
+                  <div class="col-sm-10">
+                    <ui-switch [(ngModel)]="pd.active" name="testactive"></ui-switch>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <h5><span class="badge badge-secondary">Send email:</span></h5>
+                  </div>
+                  <div class="col-sm-10">
+                    <div class="row">
+                      <div class="col-sm-2">
+                        <ui-switch [(ngModel)]="pd.send_email" name="testmail" ></ui-switch>
+                      </div>
+                      <div class="col-sm-10" *ngIf="pd.send_email">
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <h5><span class="badge badge-secondary">Email:</span></h5>
+                          </div>
+                          <div class="col-sm-8"><input type="text" class="form-control" [(ngModel)]="pd.email"
+                              name="mail" /></div>
+                        </div>
+  
+                      </div>
+  
+                    </div>
+  
+                  </div>
+                </div>
+  
+  
+                <div class="row">
+                  <div class="col-sm-6">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-danger" (click)="DeleteRefPhys(template)"> Delete </button>
+                    <button class="btn btn-warning"(click)="cancelChanges()"> Cancel </button>
+                    <button class="btn btn-success"(click)="SaveRefPhys()"> Save Changes </button>
+                  </div>
+                </div>
+                <div class="col-sm-6"></div>
+               </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-12"><img src="{{pd.image}}" alt="ref photo" height="250"></div>
+                </div>
+                <div class="row mt-2">
+                  <app-photo-editor [refId]="selectedRef" [userId]="0" [hospitalId]="0" (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer"></div>
+    <ng-template #template>
+        <div class="modal-body text-center">
+          <p>Sure you want to delete this referring physician ?</p>
+          <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+          <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+        </div>
+      </ng-template>
+  </div>

@@ -1,0 +1,214 @@
+<div>
+    <form #minForm="ngForm" id="minForm">
+      <div class="row mt-s">
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header"><h4>Procedure details</h4></div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Strategy</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.strategy" name="art02" class="form-control">
+                        <option *ngFor="let an of optionStrategy" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Surgical approach</span></h5></div>
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.primary_incision" name="art03" class="form-control" (change)="primary_incision_follow()">
+                            <option *ngFor="let an of optionPrimaryIncision" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.primary_incision_details" name="art13" class="form-control">
+                            <option *ngFor="let an of optionPrimaryIncisionDetails" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+  
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Total no of incision</span></h5></div>
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.number_of_incisions" name="art05" class="form-control">
+                            <option *ngFor="let an of optionNumberIncisions">{{ an }}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6"></div>
+                      </div>
+  
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Conversion to standard incision</span></h5></div>
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.conversion_to_standard" name="art06" class="form-control">
+                            <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6" *ngIf="conversion()">
+                          <select [(ngModel)]="pd.conversion_details" name="art26" class="form-control">
+                            <option *ngFor="let an of optionConversionDetails" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                      </div>
+  
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Robotic techniques used</span></h5></div>
+                    <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select [(ngModel)]="pd.robot" name="robbie" class="form-control">
+                            <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6"></div>
+                      </div>
+  
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="robot_used()">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                      <label class="checkbox-inline mr-2"><input type="checkbox" value="" [(ngModel)]="pd.robot_cabg"      name="cabg" />CABG</label>
+                      <label class="checkbox-inline mr-2"><input type="checkbox" value="" [(ngModel)]="pd.robot_aortic"    name="cabg1" />Aortic</label>
+                      <label class="checkbox-inline mr-2"><input type="checkbox" value="" [(ngModel)]="pd.robot_mitral"    name="cabg2" />Mitral</label>
+                      <label class="checkbox-inline mr-2"><input type="checkbox" value="" [(ngModel)]="pd.robot_tricuspid" name="cabg3" />Tricuspid</label>
+                      <label class="checkbox-inline"     ><input type="checkbox" value="" [(ngModel)]="pd.robot_pulmonary" name="cabg4" />Pulmonary</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-header"><h4>Minimally invasive coronary surgery</h4></div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Technique of IMA harvest</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.lima_harvest" name="art08" class="form-control">
+                        <option *ngFor="let an of optionLimaHarvest" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Vessel stabilization technique</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.vessel" name="art09" class="form-control">
+                        <option *ngFor="let an of optionStabilization" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Intracoronary shunt used</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.shunt" name="art10" class="form-control">
+                        <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Suture technique</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.suture" name="art11" class="form-control">
+                        <option *ngFor="let an of optionSutureTechnique" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">IABP</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.iabp" name="art12" class="form-control">
+                        <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="iabp_follow()">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">When inserted:</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.iabp_when" name="art22" class="form-control">
+                        <option *ngFor="let an of optionIABPWHEN" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="iabp_follow()">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Why inserted:</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.iabp_why" name="art32" class="form-control">
+                        <option *ngFor="let an of optionIABPWHY" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+  
+  
+  
+  
+                  <div class="row">
+                    <div class="col-sm-6"><h5><span class="badge badge-secondary">Acute flow of grafts(Periop)</span></h5></div>
+                    <div class="col-sm-6">
+                      <select [(ngModel)]="pd.acute_flow" name="art13" class="form-control">
+                        <option *ngFor="let an of optionsYN" [value]=an.value>{{ an.description }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-header"><h4>Cumulative ischemic time</h4></div>
+            <div class="card-body" style="background-color:greenyellow">
+              <div class="row">
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">LAD system</span></h5></div>
+                <div class="col-sm-4">
+                  <select [(ngModel)]="pd.lad_time" name="art14" class="form-control"> <option *ngFor="let an of optionIschemicTime">{{ an }}</option></select>
+                </div>
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">min</span></h5></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">RCA system</span></h5></div>
+                <div class="col-sm-4">
+                  <select [(ngModel)]="pd.rca_time" name="art15" class="form-control"> <option *ngFor="let an of optionIschemicTime">{{ an }}</option></select>
+                </div>
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">min</span></h5></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">CFX system</span></h5></div>
+                <div class="col-sm-4">
+                  <select [(ngModel)]="pd.cx_time" name="art16" class="form-control"> <option *ngFor="let an of optionIschemicTime">{{ an }}</option></select>
+                </div>
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">min</span></h5></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">AL system</span></h5></div>
+                <div class="col-sm-4">
+                  <select [(ngModel)]="pd.al_time" name="art17" class="form-control"> <option *ngFor="let an of optionIschemicTime">{{ an }}</option></select>
+                </div>
+                <div class="col-sm-4"><h5><span class="badge badge-secondary">min</span></h5></div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+  
+

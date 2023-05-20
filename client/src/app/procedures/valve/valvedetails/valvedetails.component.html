@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-sm-12">
+      
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card" *ngIf="showPanel_2()">
+            <div class="card-header">Choose a {{hv.implant_Position | lowercase}} valve from the valves in your hospital</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="d-flex">
+                  <div class="p-2"><span class="badge badge-secondary">Type of prosthesis</span></div>
+                  <div class="p-2">
+                    <select [(ngModel)]="hv.type" name="aorticTypeImplant" class="form-control">
+                      <option *ngFor="let item of optionsTypes" [value]=item.description>{{ item.description }}</option>
+                    </select>
+                  </div>
+                  <div class="ml-auto p-2"><button class="badge badge-danger" (click)="getModelsInHospital()">Search</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <!--list of valves from the server-->
+                  <table class="table table-striped">
+                    <tr>
+                      <th>Code</th>
+                      <th>Description</th>
+                      <th></th>
+                    </tr>
+                    <tr *ngFor="let hv of hospitalValves">
+                      <td>{{hv.code}}</td>
+                      <td>{{hv.description}}</td>
+                      <td><button
+                        (click)="selectThisValve(hv.valveTypeId)"
+                        class="badge badge-warning">Select</button></td>
+                     </tr>
+                  </table>
+                </div>
+              </div>
+  
+  
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card" *ngIf="showPanel_3()">
+           <app-add-valve  
+           [svtid]="selectedValveTypeId" 
+           [implant_position]="hv.implant_Position"
+           (pushValve)="receiveNewValve($event)"
+           ></app-add-valve> 
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+ 
+

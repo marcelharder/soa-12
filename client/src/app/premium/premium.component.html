@@ -1,0 +1,164 @@
+<div class="card mt-5">
+  <div class="card-body" *ngIf="!showPRequest()">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="card-header" style="background-color: darkblue;">
+            <h4><span class="badge badge-default specialfont">The benefits of the premium service vs. the free
+                service</span></h4>
+          </div>
+          <div class="card-body">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-header">Free service</div>
+                      <div class="card-body">
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_free_1"
+                              name="check-1" disabled>  Procedure data entry</div>
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_free_2"
+                              name="check-2" disabled>  Reporting</div>
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_free_3"
+                              name="check-3" disabled>  Configuration</div>
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_free_4"
+                              name="check-4" disabled>  Statistics</div>
+                          <div class="col-sm-2"></div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-header">Premium service</div>
+                      <div class="card-body">
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_premium_1" name="check-10" disabled>  Procedure data entry</div>
+                          <div class="col-sm-2" ></div>
+                          <div class="col-sm-2"></div>
+                        </div>
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_premium_2" name="check-11" disabled>  Reporting</div>
+                          <div class="col-sm-2" ></div>
+                          <div class="col-sm-2"><button type="button" class="btn btn-warning btn-sm" (click)="btnClick(1)">?</button></div>
+                        </div>
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_premium_3" name="check-12" disabled>  Configuration</div>
+                          <div class="col-sm-2" ></div>
+                          <div class="col-sm-2"><button type="button" class="btn btn-warning btn-sm" (click)="btnClick(2)">?</button></div>
+                        </div>
+                        <div class="row mb-1">
+                          <div class="col-sm-8"><input type="checkbox" [(ngModel)]="check_premium_4" name="check-13" disabled>  Statistics</div>
+                          <div class="col-sm-2" ></div>
+                          <div class="col-sm-2"><button type="button" class="btn btn-warning btn-sm" (click)="btnClick(3)">?</button></div>
+                        </div>
+                        
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-6">
+                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                          <button type="button" class="btn btn-danger" (click)='Cancel()'>Cancel</button>
+                          <button type="button" class="btn btn-success"  (click)='RequestPremium()'>Request premium service</button>
+                      </div>
+                  </div>
+                  <div class="col-sm-6"></div>
+              </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <img src="../../assets/images/else-03.jpg" alt="test" width="375" height="500" />
+
+      </div>
+    </div>
+  </div>
+  <div class="card-body" *ngIf="showPRequest()">
+   <div class="row">
+     <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header" style="background-color: darkblue;">
+          <h4><span class="badge badge-default specialfont">Request the premium service ..</span></h4>
+        </div>
+        <div class="card-body">
+          <div class="row"><div class="col-sm-12"><h6><span>You can request for the premium service by filling this form. </span></h6></div></div>
+          <form >
+          <div class="row">
+            <div class="col-sm-6"><h5><span class="badge badge-secondary">Select the timeperiod of the premium service:</span></h5></div>
+            <div class="col-sm-4"><select class="form-control" [(ngModel)]="commitTime" name="commit" (change)="calculateFee(commitTime)">
+              <option *ngFor="let an of optionTimePeriod" [value]=an.value>{{ an.description }}</option>
+            </select></div>
+            <div class="col-sm-2">Invoice: {{money | currency: "EUR":"symbol"}}</div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-12 mb-1"><h5><span class="badge badge-secondary">Add some comments or questions:</span></h5></div>
+            <div class="col-sm-12">
+              <textarea class="form-control mt-2 mb-2" [(ngModel)]="additionalComments" cols="4" rows="5" name="bodystuff" ></textarea>
+            </div>
+          </div>
+        
+        </form>
+          <div class="row"><div class="col-sm-12"><h6><span>A email will then be generated and send to me and you will receive a Paypal payment request,</span></h6></div></div>
+          <div class="row"><div class="col-sm-12"><h6><span>which you can settle with a Paypal account or creditcard. </span></h6></div></div>
+          <div class="row"><div class="col-sm-12"><h6><span>Momentarily this is the most convenient method for me to receive payments. </span></h6></div></div>
+          <div class="row"><div class="col-sm-12"><h6><span>Maybe in the future I will add other ways to facilitate payment. </span></h6></div></div>
+        </div>
+       
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-sm-6">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger" (click)='Cancel()'>Cancel</button>
+                    <button type="button" class="btn btn-success"  (click)="openModal(template)">Send request now</button>
+                </div>
+            </div>
+            <div class="col-sm-6"></div>
+        </div>
+        </div>
+      </div>
+     </div>
+     <div class="col-sm-4">
+      <img src="../../assets/images/else-03.jpg" alt="test" width="375" height="500" />
+     </div>
+   </div>
+
+
+
+
+
+    
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Confirm to send email now ..</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>

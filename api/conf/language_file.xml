@@ -1,0 +1,3696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <history>
+      <select1>
+         <items>
+            <description>No</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Yes</description>
+            <value>2</value>
+         </items>
+      </select1>
+      <select2>
+         <items>
+            <description>Stable</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Unstable</description>
+            <value>2</value>
+         </items>
+      </select2>
+      <select3>
+         <items>
+            <description>No</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Yes</description>
+            <value>2</value>
+         </items>
+      </select3>
+      <select28>
+         <items>
+            <description>Stable</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Unstable</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Recent Unstable</description>
+            <value>3</value>
+         </items>
+      </select28>
+      <select29>
+         <items>
+            <description>I</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>II</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>III</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>IV</description>
+            <value>4</value>
+         </items>
+      </select29>
+      <select23>
+         <items>
+            <description>Rest Angina</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>New class III</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Recent accl</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Variant angina</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Non-Q MI</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Post infarct MI</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>Unknown</description>
+            <value>7</value>
+         </items>
+      </select23>
+      <select24>
+         <items>
+            <description>I</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>II</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>III</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>IV</description>
+            <value>4</value>
+         </items>
+      </select24>
+      <select30>
+         <items>
+            <description>Never</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Now</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Before</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Unknown</description>
+            <value>4</value>
+         </items>
+      </select30>
+      <select32>
+         <items>
+            <description>Sust VT/VF</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Conduction block</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Afib/Flutter</description>
+            <value>3</value>
+         </items>
+      </select32>
+      <select31>
+         <items>
+            <description>Refractary shock</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Hemodynamic instability</description>
+            <value>2</value>
+         </items>
+      </select31>
+      <select33>
+         <items>
+            <description>Temporary</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Permanent</description>
+            <value>2</value>
+         </items>
+      </select33>
+      <surgery_type>
+         <items>
+            <description>Coronary surgery</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Valve surgery</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Aorta ascendens or arch</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Congenital cardiac disease</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Other cardiac disease</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Other thoracic disease</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>Unknown</description>
+            <value>7</value>
+         </items>
+      </surgery_type>
+      <diabetes>
+         <items>
+            <description>None</description>
+            <value>0</value>
+         </items>
+         <items>
+            <description>Diet</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Oral therapy</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Insulin</description>
+            <value>3</value>
+         </items>
+      </diabetes>
+      <card_type>
+         <items>
+            <description>Balloon angioplasty</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Atherectomy</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Stent</description>
+            <value>3</value>
+         </items>
+      </card_type>
+      <severity>
+         <items>
+            <description>None</description>
+            <value>0</value>
+         </items>
+         <items>
+            <description>Mild</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Moderate severe</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Severe</description>
+            <value>3</value>
+         </items>
+      </severity>
+      <vasc_surg>
+         <items>
+            <description>Aorta descendens or abdominal aorta</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Carotid endarterectomy</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Peripheral vascular</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Vascular related amputation</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Other vascular disease</description>
+            <value>5</value>
+         </items>
+      </vasc_surg>
+      <failed_intervention>
+         <items>
+            <description>Within 24 hr before surgery</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>More than 24 hr before surgery</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Same admission</description>
+            <value>3</value>
+         </items>
+      </failed_intervention>
+      <renal_failure>
+         <items>
+            <description>Acute</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Chronic</description>
+            <value>2</value>
+         </items>
+      </renal_failure>
+      <endocarditis>
+         <items>
+            <description>Acute</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Chronic</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Still under AB treatment</description>
+            <value>3</value>
+         </items>
+      </endocarditis>
+      <neuro>
+         <items>
+            <description>Coma</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>CVA</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>RIND</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>TIA</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Carotid stenosis</description>
+            <value>5</value>
+         </items>
+      </neuro>
+      <cva>
+         <months>
+            <items>
+               <description>0</description>
+               <value>0</value>
+            </items>
+            <items>
+               <description>1</description>
+               <value>1</value>
+            </items>
+            <items>
+               <description>2</description>
+               <value>2</value>
+            </items>
+            <items>
+               <description>3</description>
+               <value>3</value>
+            </items>
+            <items>
+               <description>4</description>
+               <value>4</value>
+            </items>
+            <items>
+               <description>5</description>
+               <value>5</value>
+            </items>
+         </months>
+         <weeks>
+            <items>
+               <description>0</description>
+               <value>0</value>
+            </items>
+            <items>
+               <description>1</description>
+               <value>1</value>
+            </items>
+            <items>
+               <description>2</description>
+               <value>2</value>
+            </items>
+            <items>
+               <description>3</description>
+               <value>3</value>
+            </items>
+            <items>
+               <description>4</description>
+               <value>4</value>
+            </items>
+            <items>
+               <description>5</description>
+               <value>5</value>
+            </items>
+         </weeks>
+      </cva>
+      <tia>
+         <months>
+            <items>
+               <description>0</description>
+               <value>0</value>
+            </items>
+            <items>
+               <description>1</description>
+               <value>1</value>
+            </items>
+            <items>
+               <description>2</description>
+               <value>2</value>
+            </items>
+            <items>
+               <description>3</description>
+               <value>3</value>
+            </items>
+            <items>
+               <description>4</description>
+               <value>4</value>
+            </items>
+            <items>
+               <description>5</description>
+               <value>5</value>
+            </items>
+         </months>
+         <weeks>
+            <items>
+               <description>0</description>
+               <value>0</value>
+            </items>
+            <items>
+               <description>1</description>
+               <value>1</value>
+            </items>
+            <items>
+               <description>2</description>
+               <value>2</value>
+            </items>
+            <items>
+               <description>3</description>
+               <value>3</value>
+            </items>
+            <items>
+               <description>4</description>
+               <value>4</value>
+            </items>
+            <items>
+               <description>5</description>
+               <value>5</value>
+            </items>
+         </weeks>
+      </tia>
+      <carotid>
+         <items>
+            <description>60</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>70</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>80</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>90</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>100</description>
+            <value>5</value>
+         </items>
+      </carotid>
+      <select25>
+         <items>
+            <description>0</description>
+            <value>0</value>
+         </items>
+         <items>
+            <description>1</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>2</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>3</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>4</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Unknown</description>
+            <value>5</value>
+         </items>
+      </select25>
+      <LV_function>
+         <items>
+            <description>good(LVEF &gt; 50%)</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>moderately(LVEF 31-50%</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>poor(LVEF 21-30%)</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>very poor(LVEF 20% or less)</description>
+            <value>4</value>
+         </items>
+      </LV_function>
+      <weight_of_intervention>
+         <items>
+            <description>Isolated CABG</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Single non CABG</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>2 procedures</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>3 procedures</description>
+            <value>4</value>
+         </items>
+      </weight_of_intervention>
+      <pulmonary_hypertension>
+         <items>
+            <description>None</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>moderate (PA systolic 31-55 mmHg)</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>severe (PA systolic &gt; 55 mmHg)</description>
+            <value>3</value>
+         </items>
+      </pulmonary_hypertension>
+      <EF_method>
+         <items>
+            <description>LV gram</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>ECHO</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Radionucleotide</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>MRI</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Estimated</description>
+            <value>5</value>
+         </items>
+      </EF_method>
+      <EF>
+         <items>
+            <description>60</description>
+            <value>60</value>
+         </items>
+         <items>
+            <description>55</description>
+            <value>55</value>
+         </items>
+         <items>
+            <description>50</description>
+            <value>50</value>
+         </items>
+         <items>
+            <description>45</description>
+            <value>45</value>
+         </items>
+         <items>
+            <description>40</description>
+            <value>40</value>
+         </items>
+         <items>
+            <description>35</description>
+            <value>35</value>
+         </items>
+         <items>
+            <description>30</description>
+            <value>30</value>
+         </items>
+         <items>
+            <description>25</description>
+            <value>25</value>
+         </items>
+         <items>
+            <description>20</description>
+            <value>20</value>
+         </items>
+         <items>
+            <description>15</description>
+            <value>15</value>
+         </items>
+         <items>
+            <description>10</description>
+            <value>10</value>
+         </items>
+      </EF>
+      <no_vessels>
+         <items>
+            <description>1</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>2</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>3</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>4</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>None</description>
+            <value>5</value>
+         </items>
+      </no_vessels>
+   </history>
+   <demographics>
+      <country_codes>
+         <id>1</id>
+         <description>Afghanistan</description>
+      </country_codes>
+      <country_codes>
+         <id>2</id>
+         <description>Albania</description>
+      </country_codes>
+      <country_codes>
+         <id>3</id>
+         <description>Algeria</description>
+      </country_codes>
+      <country_codes>
+         <id>4</id>
+         <description>American  Samoa</description>
+      </country_codes>
+      <country_codes>
+         <id>5</id>
+         <description>Angola</description>
+      </country_codes>
+      <country_codes>
+         <id>6</id>
+         <description>Anguilla</description>
+      </country_codes>
+      <country_codes>
+         <id>7</id>
+         <description>Antartica</description>
+      </country_codes>
+      <country_codes>
+         <id>8</id>
+         <description>Antigua</description>
+      </country_codes>
+      <country_codes>
+         <id>9</id>
+         <description>Argentina</description>
+      </country_codes>
+      <country_codes>
+         <id>10</id>
+         <description>Armenia</description>
+      </country_codes>
+      <country_codes>
+         <id>11</id>
+         <description>Aruba</description>
+      </country_codes>
+      <country_codes>
+         <id>12</id>
+         <description>Ascension  Island</description>
+      </country_codes>
+      <country_codes>
+         <id>13</id>
+         <description>Australia</description>
+      </country_codes>
+      <country_codes>
+         <id>14</id>
+         <description>Austria</description>
+      </country_codes>
+      <country_codes>
+         <id>15</id>
+         <description>AzerbaiYesn</description>
+      </country_codes>
+      <country_codes>
+         <id>16</id>
+         <description>Bahamas</description>
+      </country_codes>
+      <country_codes>
+         <id>17</id>
+         <description>Bahrain</description>
+      </country_codes>
+      <country_codes>
+         <id>18</id>
+         <description>Bangladesh</description>
+      </country_codes>
+      <country_codes>
+         <id>19</id>
+         <description>Barbados</description>
+      </country_codes>
+      <country_codes>
+         <id>20</id>
+         <description>Belarus</description>
+      </country_codes>
+      <country_codes>
+         <id>21</id>
+         <description>Belgium</description>
+      </country_codes>
+      <country_codes>
+         <id>22</id>
+         <description>Belize</description>
+      </country_codes>
+      <country_codes>
+         <id>23</id>
+         <description>Benin</description>
+      </country_codes>
+      <country_codes>
+         <id>24</id>
+         <description>Bermuda</description>
+      </country_codes>
+      <country_codes>
+         <id>25</id>
+         <description>Bhutan</description>
+      </country_codes>
+      <country_codes>
+         <id>26</id>
+         <description>Bolivia</description>
+      </country_codes>
+      <country_codes>
+         <id>27</id>
+         <description>Bosnia-Herzegovina</description>
+      </country_codes>
+      <country_codes>
+         <id>28</id>
+         <description>Botswana</description>
+      </country_codes>
+      <country_codes>
+         <id>29</id>
+         <description>Brazil</description>
+      </country_codes>
+      <country_codes>
+         <id>30</id>
+         <description>British Virgin Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>31</id>
+         <description>Brunei</description>
+      </country_codes>
+      <country_codes>
+         <id>32</id>
+         <description>Bulgaria</description>
+      </country_codes>
+      <country_codes>
+         <id>33</id>
+         <description>Barkinoa Faso</description>
+      </country_codes>
+      <country_codes>
+         <id>34</id>
+         <description>Burundi</description>
+      </country_codes>
+      <country_codes>
+         <id>35</id>
+         <description>Camaroon</description>
+      </country_codes>
+      <country_codes>
+         <id>36</id>
+         <description>Cambodia</description>
+      </country_codes>
+      <country_codes>
+         <id>37</id>
+         <description>Canada</description>
+      </country_codes>
+      <country_codes>
+         <id>38</id>
+         <description>Cape Verde Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>39</id>
+         <description>Cayman Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>40</id>
+         <description>Central African Rep.</description>
+      </country_codes>
+      <country_codes>
+         <id>41</id>
+         <description>Chad Republic</description>
+      </country_codes>
+      <country_codes>
+         <id>42</id>
+         <description>Chile</description>
+      </country_codes>
+      <country_codes>
+         <id>43</id>
+         <description>China</description>
+      </country_codes>
+      <country_codes>
+         <id>44</id>
+         <description>Colombia</description>
+      </country_codes>
+      <country_codes>
+         <id>45</id>
+         <description>Comoros</description>
+      </country_codes>
+      <country_codes>
+         <id>46</id>
+         <description>Congo</description>
+      </country_codes>
+      <country_codes>
+         <id>47</id>
+         <description>Cook Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>48</id>
+         <description>Costa Rica</description>
+      </country_codes>
+      <country_codes>
+         <id>49</id>
+         <description>Croatia</description>
+      </country_codes>
+      <country_codes>
+         <id>50</id>
+         <description>Cyprus</description>
+      </country_codes>
+      <country_codes>
+         <id>51</id>
+         <description>Czech Republic</description>
+      </country_codes>
+      <country_codes>
+         <id>52</id>
+         <description>Denmark</description>
+      </country_codes>
+      <country_codes>
+         <id>53</id>
+         <description>Diego Garcia</description>
+      </country_codes>
+      <country_codes>
+         <id>54</id>
+         <description>Djibouti</description>
+      </country_codes>
+      <country_codes>
+         <id>55</id>
+         <description>Dominica</description>
+      </country_codes>
+      <country_codes>
+         <id>56</id>
+         <description>Dominican Republic</description>
+      </country_codes>
+      <country_codes>
+         <id>57</id>
+         <description>Ecuador</description>
+      </country_codes>
+      <country_codes>
+         <id>58</id>
+         <description>Egypt</description>
+      </country_codes>
+      <country_codes>
+         <id>59</id>
+         <description>El Salvador</description>
+      </country_codes>
+      <country_codes>
+         <id>60</id>
+         <description>Eqitorial Guinea</description>
+      </country_codes>
+      <country_codes>
+         <id>61</id>
+         <description>Eritrea</description>
+      </country_codes>
+      <country_codes>
+         <id>62</id>
+         <description>Estonia</description>
+      </country_codes>
+      <country_codes>
+         <id>63</id>
+         <description>Ethiopia</description>
+      </country_codes>
+      <country_codes>
+         <id>64</id>
+         <description>Faeroe Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>65</id>
+         <description>Falkland Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>66</id>
+         <description>Fiji Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>67</id>
+         <description>Finland</description>
+      </country_codes>
+      <country_codes>
+         <id>68</id>
+         <description>French Guiana</description>
+      </country_codes>
+      <country_codes>
+         <id>69</id>
+         <description>French Polynesia</description>
+      </country_codes>
+      <country_codes>
+         <id>70</id>
+         <description>France</description>
+      </country_codes>
+      <country_codes>
+         <id>71</id>
+         <description>French Antilles</description>
+      </country_codes>
+      <country_codes>
+         <id>72</id>
+         <description>Gabon</description>
+      </country_codes>
+      <country_codes>
+         <id>73</id>
+         <description>Gambia</description>
+      </country_codes>
+      <country_codes>
+         <id>74</id>
+         <description>Georgia</description>
+      </country_codes>
+      <country_codes>
+         <id>75</id>
+         <description>Germany</description>
+      </country_codes>
+      <country_codes>
+         <id>76</id>
+         <description>Ghana</description>
+      </country_codes>
+      <country_codes>
+         <id>77</id>
+         <description>Gibralter</description>
+      </country_codes>
+      <country_codes>
+         <id>78</id>
+         <description>Greece</description>
+      </country_codes>
+      <country_codes>
+         <id>79</id>
+         <description>Greenland</description>
+      </country_codes>
+      <country_codes>
+         <id>80</id>
+         <description>Grenada</description>
+      </country_codes>
+      <country_codes>
+         <id>81</id>
+         <description>Guadeloupe</description>
+      </country_codes>
+      <country_codes>
+         <id>82</id>
+         <description>Guam</description>
+      </country_codes>
+      <country_codes>
+         <id>83</id>
+         <description>Guantanemo Bay</description>
+      </country_codes>
+      <country_codes>
+         <id>84</id>
+         <description>Guatemala</description>
+      </country_codes>
+      <country_codes>
+         <id>85</id>
+         <description>Guinea</description>
+      </country_codes>
+      <country_codes>
+         <id>86</id>
+         <description>Guinea Bissau</description>
+      </country_codes>
+      <country_codes>
+         <id>87</id>
+         <description>Guyana</description>
+      </country_codes>
+      <country_codes>
+         <id>88</id>
+         <description>Haiti</description>
+      </country_codes>
+      <country_codes>
+         <id>89</id>
+         <description>Honduras</description>
+      </country_codes>
+      <country_codes>
+         <id>90</id>
+         <description>Hong Kong</description>
+      </country_codes>
+      <country_codes>
+         <id>91</id>
+         <description>Hungary</description>
+      </country_codes>
+      <country_codes>
+         <id>92</id>
+         <description>Iceland</description>
+      </country_codes>
+      <country_codes>
+         <id>93</id>
+         <description>India</description>
+      </country_codes>
+      <country_codes>
+         <id>94</id>
+         <description>Indonesia</description>
+      </country_codes>
+      <country_codes>
+         <id>95</id>
+         <description>Iran</description>
+      </country_codes>
+      <country_codes>
+         <id>96</id>
+         <description>Iraq</description>
+      </country_codes>
+      <country_codes>
+         <id>97</id>
+         <description>Ireland</description>
+      </country_codes>
+      <country_codes>
+         <id>98</id>
+         <description>Occupied Palestine</description>
+      </country_codes>
+      <country_codes>
+         <id>99</id>
+         <description>Italy</description>
+      </country_codes>
+      <country_codes>
+         <id>100</id>
+         <description>Ivory Coast</description>
+      </country_codes>
+      <country_codes>
+         <id>101</id>
+         <description>Yesmaica</description>
+      </country_codes>
+      <country_codes>
+         <id>102</id>
+         <description>Yespan</description>
+      </country_codes>
+      <country_codes>
+         <id>103</id>
+         <description>Jordan</description>
+      </country_codes>
+      <country_codes>
+         <id>104</id>
+         <description>Kazakhstan</description>
+      </country_codes>
+      <country_codes>
+         <id>105</id>
+         <description>Kenya</description>
+      </country_codes>
+      <country_codes>
+         <id>106</id>
+         <description>Kiribati</description>
+      </country_codes>
+      <country_codes>
+         <id>107</id>
+         <description>Korea (South)</description>
+      </country_codes>
+      <country_codes>
+         <id>108</id>
+         <description>Korea (North)</description>
+      </country_codes>
+      <country_codes>
+         <id>109</id>
+         <description>Kuwait</description>
+      </country_codes>
+      <country_codes>
+         <id>110</id>
+         <description>Kyrgyzstan</description>
+      </country_codes>
+      <country_codes>
+         <id>111</id>
+         <description>Laos</description>
+      </country_codes>
+      <country_codes>
+         <id>112</id>
+         <description>Latvia</description>
+      </country_codes>
+      <country_codes>
+         <id>113</id>
+         <description>Lebanon</description>
+      </country_codes>
+      <country_codes>
+         <id>114</id>
+         <description>Lesotho</description>
+      </country_codes>
+      <country_codes>
+         <id>115</id>
+         <description>Liberia</description>
+      </country_codes>
+      <country_codes>
+         <id>116</id>
+         <description>Libya</description>
+      </country_codes>
+      <country_codes>
+         <id>117</id>
+         <description>Lithuania</description>
+      </country_codes>
+      <country_codes>
+         <id>118</id>
+         <description>Luxembourg</description>
+      </country_codes>
+      <country_codes>
+         <id>119</id>
+         <description>Macao</description>
+      </country_codes>
+      <country_codes>
+         <id>120</id>
+         <description>Macedonia</description>
+      </country_codes>
+      <country_codes>
+         <id>121</id>
+         <description>Madagascar</description>
+      </country_codes>
+      <country_codes>
+         <id>122</id>
+         <description>Malawi</description>
+      </country_codes>
+      <country_codes>
+         <id>123</id>
+         <description>Malaysia</description>
+      </country_codes>
+      <country_codes>
+         <id>124</id>
+         <description>Maldives</description>
+      </country_codes>
+      <country_codes>
+         <id>125</id>
+         <description>Mali Republic</description>
+      </country_codes>
+      <country_codes>
+         <id>126</id>
+         <description>Malta</description>
+      </country_codes>
+      <country_codes>
+         <id>127</id>
+         <description>Marshall Islands</description>
+      </country_codes>
+      <country_codes>
+         <id>128</id>
+         <description>Mauritania</description>
+      </country_codes>
+      <country_codes>
+         <id>129</id>
+         <description>Mauritius</description>
+      </country_codes>
+      <country_codes>
+         <id>130</id>
+         <description>Mexico</description>
+      </country_codes>
+      <country_codes>
+         <id>131</id>
+         <description>Micronesia</description>
+      </country_codes>
+      <country_codes>
+         <id>132</id>
+         <description>Moldiva (CIS)</description>
+      </country_codes>
+      <country_codes>
+         <id>133</id>
+         <description>Mongolia</description>
+      </country_codes>
+      <country_codes>
+         <id>134</id>
+         <description>Montserrat</description>
+      </country_codes>
+      <country_codes>
+         <id>135</id>
+         <description>Morocco</description>
+      </country_codes>
+      <country_codes>
+         <id>136</id>
+         <description>Mozambique</description>
+      </country_codes>
+      <country_codes>
+         <id>137</id>
+         <description>Namibia</description>
+      </country_codes>
+      <country_codes>
+         <id>138</id>
+         <description>Nauru</description>
+      </country_codes>
+      <country_codes>
+         <id>139</id>
+         <description>Nepal</description>
+      </country_codes>
+      <country_codes>
+         <id>140</id>
+         <description>Netherland Antilles</description>
+      </country_codes>
+      <country_codes>
+         <id>141</id>
+         <description>Netherlands</description>
+      </country_codes>
+      <country_codes>
+         <id>142</id>
+         <description>Nevis</description>
+      </country_codes>
+      <country_codes>
+         <id>143</id>
+         <description>New Calidonia</description>
+      </country_codes>
+      <country_codes>
+         <id>144</id>
+         <description>New Zealand</description>
+      </country_codes>
+      <country_codes>
+         <id>145</id>
+         <description>Nicaragua</description>
+      </country_codes>
+      <country_codes>
+         <id>146</id>
+         <description>Niger</description>
+      </country_codes>
+      <country_codes>
+         <id>147</id>
+         <description>Nigeria</description>
+      </country_codes>
+      <country_codes>
+         <id>148</id>
+         <description>Niue Island</description>
+      </country_codes>
+      <country_codes>
+         <id>149</id>
+         <description>Norfork Island</description>
+      </country_codes>
+      <country_codes>
+         <id>150</id>
+         <description>Norway</description>
+      </country_codes>
+      <country_codes>
+         <id>151</id>
+         <description>Oman</description>
+      </country_codes>
+      <country_codes>
+         <id>152</id>
+         <description>Pakistan</description>
+      </country_codes>
+      <country_codes>
+         <id>153</id>
+         <description>Palau</description>
+      </country_codes>
+      <country_codes>
+         <id>154</id>
+         <description>Panama</description>
+      </country_codes>
+      <country_codes>
+         <id>155</id>
+         <description>Papua New Guinia</description>
+      </country_codes>
+      <country_codes>
+         <id>156</id>
+         <description>Paraguay</description>
+      </country_codes>
+      <country_codes>
+         <id>157</id>
+         <description>Peru</description>
+      </country_codes>
+      <country_codes>
+         <id>158</id>
+         <description>Philippines</description>
+      </country_codes>
+      <country_codes>
+         <id>159</id>
+         <description>Poland</description>
+      </country_codes>
+      <country_codes>
+         <id>160</id>
+         <description>Portugal</description>
+      </country_codes>
+      <country_codes>
+         <id>161</id>
+         <description>Qatar</description>
+      </country_codes>
+      <country_codes>
+         <id>162</id>
+         <description>Reunion Island</description>
+      </country_codes>
+      <country_codes>
+         <id>163</id>
+         <description>Romania</description>
+      </country_codes>
+      <country_codes>
+         <id>164</id>
+         <description>Russia</description>
+      </country_codes>
+      <country_codes>
+         <id>165</id>
+         <description>Rwanda</description>
+      </country_codes>
+      <country_codes>
+         <id>166</id>
+         <description>Saipan</description>
+      </country_codes>
+      <country_codes>
+         <id>167</id>
+         <description>Sao Tome</description>
+      </country_codes>
+      <country_codes>
+         <id>168</id>
+         <description>Saudi Arabia</description>
+      </country_codes>
+      <country_codes>
+         <id>169</id>
+         <description>Senegal Republic</description>
+      </country_codes>
+      <country_codes>
+         <id>170</id>
+         <description>Seychelles Island</description>
+      </country_codes>
+      <country_codes>
+         <id>171</id>
+         <description>Sierrra Leone</description>
+      </country_codes>
+      <country_codes>
+         <id>172</id>
+         <description>Singapore</description>
+      </country_codes>
+      <country_codes>
+         <id>173</id>
+         <description>Slovenia</description>
+      </country_codes>
+      <country_codes>
+         <id>174</id>
+         <description>Soloman Island</description>
+      </country_codes>
+      <country_codes>
+         <id>175</id>
+         <description>Somalia</description>
+      </country_codes>
+      <country_codes>
+         <id>176</id>
+         <description>South Africa</description>
+      </country_codes>
+      <country_codes>
+         <id>177</id>
+         <description>Spain</description>
+      </country_codes>
+      <country_codes>
+         <id>178</id>
+         <description>Sri Lanka</description>
+      </country_codes>
+      <country_codes>
+         <id>179</id>
+         <description>St Helen</description>
+      </country_codes>
+      <country_codes>
+         <id>180</id>
+         <description>St Kitts</description>
+      </country_codes>
+      <country_codes>
+         <id>181</id>
+         <description>St Lucia</description>
+      </country_codes>
+      <country_codes>
+         <id>182</id>
+         <description>St Pierre</description>
+      </country_codes>
+      <country_codes>
+         <id>183</id>
+         <description>St Vincent</description>
+      </country_codes>
+      <country_codes>
+         <id>184</id>
+         <description>Sudan</description>
+      </country_codes>
+      <country_codes>
+         <id>185</id>
+         <description>Suriname</description>
+      </country_codes>
+      <country_codes>
+         <id>186</id>
+         <description>Swaziland</description>
+      </country_codes>
+      <country_codes>
+         <id>187</id>
+         <description>Sweden</description>
+      </country_codes>
+      <country_codes>
+         <id>188</id>
+         <description>Switzerland</description>
+      </country_codes>
+      <country_codes>
+         <id>189</id>
+         <description>Syria</description>
+      </country_codes>
+      <country_codes>
+         <id>190</id>
+         <description>Taiwan</description>
+      </country_codes>
+      <country_codes>
+         <id>191</id>
+         <description>Tanzania</description>
+      </country_codes>
+      <country_codes>
+         <id>192</id>
+         <description>Thailand</description>
+      </country_codes>
+      <country_codes>
+         <id>193</id>
+         <description>Togo</description>
+      </country_codes>
+      <country_codes>
+         <id>194</id>
+         <description>Tonga</description>
+      </country_codes>
+      <country_codes>
+         <id>195</id>
+         <description>Trinidad  Tobago</description>
+      </country_codes>
+      <country_codes>
+         <id>196</id>
+         <description>Tunisia</description>
+      </country_codes>
+      <country_codes>
+         <id>197</id>
+         <description>Turkey</description>
+      </country_codes>
+      <country_codes>
+         <id>198</id>
+         <description>Turks/Caicos</description>
+      </country_codes>
+      <country_codes>
+         <id>199</id>
+         <description>Tuvalu</description>
+      </country_codes>
+      <country_codes>
+         <id>200</id>
+         <description>Uganda</description>
+      </country_codes>
+      <country_codes>
+         <id>201</id>
+         <description>Ukraine</description>
+      </country_codes>
+      <country_codes>
+         <id>202</id>
+         <description>United Arab Emirates</description>
+      </country_codes>
+      <country_codes>
+         <id>203</id>
+         <description>United Kingdom</description>
+      </country_codes>
+      <country_codes>
+         <id>204</id>
+         <description>United States</description>
+      </country_codes>
+      <country_codes>
+         <id>205</id>
+         <description>Canada</description>
+      </country_codes>
+      <country_codes>
+         <id>206</id>
+         <description>Uruguay</description>
+      </country_codes>
+      <country_codes>
+         <id>207</id>
+         <description>Vanuatu</description>
+      </country_codes>
+      <country_codes>
+         <id>208</id>
+         <description>Venezuela</description>
+      </country_codes>
+      <country_codes>
+         <id>209</id>
+         <description>Viet Nam</description>
+      </country_codes>
+      <country_codes>
+         <id>210</id>
+         <description>Wallis / Futuna</description>
+      </country_codes>
+      <country_codes>
+         <id>211</id>
+         <description>West Samoa</description>
+      </country_codes>
+      <country_codes>
+         <id>212</id>
+         <description>Yemen Republic</description>
+      </country_codes>
+      <country_codes>
+         <id>213</id>
+         <description>Yugoslavia</description>
+      </country_codes>
+      <country_codes>
+         <id>214</id>
+         <description>Zaire</description>
+      </country_codes>
+      <country_codes>
+         <id>215</id>
+         <description>Zambia</description>
+      </country_codes>
+      <country_codes>
+         <id>216</id>
+         <description>Zimbabwe</description>
+      </country_codes>
+      <race>
+         <items>
+            <description>Caucasian</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Middle Eastern</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Asian</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Indian Subcontinent</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Black</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Hispanic</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>Pacific Island/Maori</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>Aboriginal/Torres Strait</description>
+            <value>8</value>
+         </items>
+         <items>
+            <description>Latin American</description>
+            <value>9</value>
+         </items>
+         <items>
+            <description>Other</description>
+            <value>10</value>
+         </items>
+         <items>
+            <description>Unknown</description>
+            <value>11</value>
+         </items>
+      </race>
+      <gender>
+         <items>
+            <description>Male</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Female</description>
+            <value>2</value>
+         </items>
+      </gender>
+   </demographics>
+   <ext_history>
+      <presenting_complaints>
+         <items>
+            <description>Complaints of shortness of breath</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Complaints of angina pectoris</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Complaints of fatique</description>
+            <value>3</value>
+         </items>
+      </presenting_complaints>
+      <duration_symptoms>
+         <items>
+            <description>1 month</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>3 months</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>6 months</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>1 year</description>
+            <value>4</value>
+         </items>
+      </duration_symptoms>
+      <NYHA-class>
+         <items>
+            <description>NYHA I</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>NYHA II</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>NYHA III</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>NYHA IV</description>
+            <value>4</value>
+         </items>
+      </NYHA-class>
+      <AHA-stage>
+         <items>
+            <description>Stage A</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Stage B</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Stage C</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Stage D</description>
+            <value>4</value>
+         </items>
+      </AHA-stage>
+   </ext_history>
+   <admission>
+      <diagnosis>
+         <items>
+            <description>Coronary disease</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Valvular disease</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Specify</description>
+            <value>3</value>
+         </items>
+      </diagnosis>
+   </admission>
+   <aortic_surgery>
+      <drp_54>
+         <items>
+            <description>Dissection</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>True aneurysm</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Pseudo aneurysm</description>
+            <value>3</value>
+         </items>
+      </drp_54>
+      <drp_78>
+         <items>
+            <description>Acute, less than 2 weeks</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Chronic more than 2 weeks</description>
+            <value>2</value>
+         </items>
+      </drp_78>
+      <drp_67>
+         <items>
+            <description>Stanford A</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Stanford B</description>
+            <value>2</value>
+         </items>
+      </drp_67>
+      <drp_1>
+         <items>
+            <description>Atheromatous</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Mycotic</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Marfan</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Syphilis</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Infected graft</description>
+            <value>5</value>
+         </items>
+      </drp_1>
+      <drp_2>
+         <items>
+            <description>Dissection</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Dilatation</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Rupture</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Malperfusion</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Embolism</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Other</description>
+            <value>6</value>
+         </items>
+      </drp_2>
+      <drp_3>
+         <items>
+            <description>Aorta patch</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Aorta tubeprothesis</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Aorta valved conduit</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Stent graft</description>
+            <value>4</value>
+         </items>
+      </drp_3>
+      <drp_4>
+         <items>
+            <description>Operative</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Percutaneous</description>
+            <value>2</value>
+         </items>
+      </drp_4>
+      <drp_5>
+         <items>
+            <description>Sinus valsalva</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Ascending aorta</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Ascending aorta and arch</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Arch</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Descending aorta</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Thoracoabdominal</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>Abdominal</description>
+            <value>7</value>
+         </items>
+      </drp_5>
+   </aortic_surgery>
+   <ltx>
+   <drp_1>
+         <items>
+            <description>Cystic Fibrosis</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Pulmonary Hypertension</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Other</description>
+            <value>3</value>
+         </items>
+      </drp_1>
+       <drp_2>
+         <items>
+            <description>Single Lung Transplantation</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Sequential Double Lung Transplantation</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Other</description>
+            <value>3</value>
+         </items>
+      </drp_2>
+   </ltx>
+   <cabg>
+      <quality>
+         <items>
+            <description>good</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>bad</description>
+            <value>2</value>
+         </items>
+      </quality>
+      <proximal>
+         <items>
+            <description>No</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Asc Aorta</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Bypass Conduit</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Coronary artery</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Other place</description>
+            <value>5</value>
+         </items>
+      </proximal>
+      <diameter>
+         <items>
+            <description>less than 1 mm</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>1 mm</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>1.25 mm</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>1.50 mm</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>1.75 mm</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>2.0 mm</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>2.5 mm</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>more than 2.5 mm</description>
+            <value>8</value>
+         </items>
+      </diameter>
+      <locatie>
+         <items>
+            <description>proximal RCA</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>mid RCA</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>distal RCA</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>RCA - PDA</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>RCA - LV branch</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Mainstem CA</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>proximal LAD</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>mid LAD</description>
+            <value>8</value>
+         </items>
+         <items>
+            <description>distal LAD</description>
+            <value>9</value>
+         </items>
+         <items>
+            <description>diag 1</description>
+            <value>10</value>
+         </items>
+         <items>
+            <description>diag 2</description>
+            <value>11</value>
+         </items>
+         <items>
+            <description>proximal CX</description>
+            <value>12</value>
+         </items>
+         <items>
+            <description>distal CX</description>
+            <value>13</value>
+         </items>
+         <items>
+            <description>Anterolateral</description>
+            <value>14</value>
+         </items>
+         <items>
+            <description>OM 1</description>
+            <value>15</value>
+         </items>
+         <items>
+            <description>OM 2</description>
+            <value>16</value>
+         </items>
+         <items>
+            <description>CX-PDA</description>
+            <value>17</value>
+         </items>
+      </locatie>
+      <conduit>
+         <items>
+            <description>LIMA</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>RIMA</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>RGEA</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Free LIMA</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Free RIMA</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Radial art.</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>v. saph magna (lower)</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>v. saph magna (upper)</description>
+            <value>8</value>
+         </items>
+         <items>
+            <description>v. saph parva</description>
+            <value>9</value>
+         </items>
+         <items>
+            <description>v. cephalica</description>
+            <value>10</value>
+         </items>
+         <items>
+            <description>Other graft</description>
+            <value>11</value>
+         </items>
+         <items>
+            <description>Unknown</description>
+            <value>12</value>
+         </items>
+      </conduit>
+      <type>
+         <items>
+            <description>end to side</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>side to side</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>end to end</description>
+            <value>3</value>
+         </items>
+      </type>
+      <procedure>
+         <items>
+            <description>routine</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>endarteriectomy</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>vein patch</description>
+            <value>3</value>
+         </items>
+      </procedure>
+      <angle>
+         <items>
+            <description>0</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>30</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>45</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>60</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>90</description>
+            <value>5</value>
+         </items>
+      </angle>
+      <dropdownlist_1>
+         <items>
+            <description>only radial art.</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>only rima</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>only VSM</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Lima and VSM</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Lima and radial art.</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Lima and rima</description>
+            <value>6</value>
+         </items>
+      </dropdownlist_1>
+      <dropradial>
+         <items>
+            <description>the left arm</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>the right arm</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>both arms</description>
+            <value>3</value>
+         </items>
+      </dropradial>
+      <dropleg>
+         <items>
+            <description>the right lower leg</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>the left lower leg</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>both lower legs</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>the right upper leg</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>the left upper leg</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>both upper legs</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>the right lower and upper leg</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>the left lower and upper leg</description>
+            <value>8</value>
+         </items>
+      </dropleg>
+      <other_procedure>
+         <items>
+            <description>No</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Yes</description>
+            <value>2</value>
+         </items>
+      </other_procedure>
+      <unplanned_procedure>
+         <items>
+            <description>No</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Yes</description>
+            <value>2</value>
+         </items>
+      </unplanned_procedure>
+   </cabg>
+   <cpb>
+      <art_choice>
+         <items>
+            <description>Ascending aorta</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Aortic arch</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>femoral art.</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>iliac art.</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>axillary art.</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>R carotid art.</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>L carotid art.</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>Ao Prost Graft</description>
+            <value>8</value>
+         </items>
+         <items>
+            <description>Other</description>
+            <value>9</value>
+         </items>
+      </art_choice>
+      <ven_choice>
+         <items>
+            <description>R atrium</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>sup caval v.</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>inf caval v.</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>femoral v.</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>iliac v.</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>R jugular v.</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>L sup caval v.</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>R sup caval v.</description>
+            <value>8</value>
+         </items>
+         <items>
+            <description>Other</description>
+            <value>9</value>
+         </items>
+      </ven_choice>
+      <delivery>
+         <items>
+            <description>antegrade</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>retrograde</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>combined ante- en retrograde</description>
+            <value>3</value>
+         </items>
+      </delivery>
+      <iabp_ind>
+         <items>
+            <description>hemodynamic instability</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>PTCA support</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>unstable angina</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>bypass wean</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>prophylactic</description>
+            <value>5</value>
+         </items>
+      </iabp_ind>
+      <iabp_ind_when>
+         <items>
+            <description>pre-operative</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>intra-operative</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>post-operative</description>
+            <value>3</value>
+         </items>
+      </iabp_ind_when>
+      <nccp>
+         <items>
+            <description>Fibrillating with X-clamp</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Coronary perfusion</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Beating heart and perfusion</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>VF and perfusion</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Beating heart and X-clamp</description>
+            <value>5</value>
+         </items>
+      </nccp>
+      <aox>
+         <items>
+            <description>X-clamp</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Balloon occlusion</description>
+            <value>2</value>
+         </items>
+      </aox>
+      <timing>
+         <items>
+            <description>on/off</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>continuous</description>
+            <value>2</value>
+         </items>
+      </timing>
+      <temp>
+         <items>
+            <description>cold</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>lukewarm</description>
+            <value>2</value>
+         </items>
+      </temp>
+      <myocardial_protection>
+         <items>
+            <description>Cardioplegia</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Other myocardial protection technique</description>
+            <value>2</value>
+         </items>
+      </myocardial_protection>
+      <typeCardiopleg>
+         <items>
+            <description>Crystalloid cardioplegia</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Blood cardioplegia</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Blood reperfusion</description>
+            <value>3</value>
+         </items>
+      </typeCardiopleg>
+   </cpb>
+   <postop>
+      <autologous_blood_timing>
+         <items>
+            <description>preoperative</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>intraoperative</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>postoperative</description>
+            <value>1</value>
+         </items>
+      </autologous_blood_timing>
+      <complicatie_1>
+         <items>
+            <description>bleeding</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>valve dysfunction</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>graft occlusion</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>other cardiac problem</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>other non-cardiac problem</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>sternal dehiscence</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>sternal refixation</description>
+            <value>7</value>
+         </items>
+      </complicatie_1>
+      <complicatie_2>
+         <items>
+            <description>sternum (superficial)</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>sternum (deep)</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>sepsis</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>thoracotomy</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>legwound</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>urinary tract</description>
+            <value>6</value>
+         </items>
+      </complicatie_2>
+      <complicatie_3>
+         <items>
+            <description>multi organ failure</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>sternal refixation (no infection)</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>anticoagulant complication</description>
+            <value>3</value>
+         </items>
+      </complicatie_3>
+      <complicatie_4>
+         <items>
+            <description>CVA</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>TIA</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>coma (more than 24 hr)</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>paraplegic-paraparesis</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>confusion-psychosis</description>
+            <value>5</value>
+         </items>
+      </complicatie_4>
+      <complicatie_5>
+         <items>
+            <description>low cardiac output</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>arrhytmia</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>conduction block</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>cardiac arrest</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>tamponade</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>perioperative infarct</description>
+            <value>6</value>
+         </items>
+      </complicatie_5>
+      <complicatie_6>
+         <items>
+            <description>prolonged ventilation</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>reintubation</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>pneumonia</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>pulmonary embolism</description>
+            <value>4</value>
+         </items>
+      </complicatie_6>
+      <complicatie_7>
+         <items>
+            <description>bleeding</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>mesenteric infarction</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>cholecystitis</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>ileus</description>
+            <value>4</value>
+         </items>
+      </complicatie_7>
+      <complicatie_8>
+         <items>
+            <description>kidney failure</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>requires dialysis</description>
+            <value>2</value>
+         </items>
+      </complicatie_8>
+      <complicatie_9>
+         <items>
+            <description>aortic dissection</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>iliac-femoral dissection</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>acute extremity ischemia</description>
+            <value>3</value>
+         </items>
+      </complicatie_9>
+   </postop>
+   <follow>
+      <items>
+         <description>select</description>
+         <value>0</value>
+      </items>
+      <items>
+         <description>I</description>
+         <value>1</value>
+      </items>
+      <items>
+         <description>II</description>
+         <value>2</value>
+      </items>
+      <items>
+         <description>III</description>
+         <value>3</value>
+      </items>
+      <items>
+         <description>IIII</description>
+         <value>4</value>
+      </items>
+   </follow>
+   <min_inv>
+      <conversion>
+         <items>
+            <description>Exposure</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Bleeding</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Rhythm</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Hypotension</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Conduit</description>
+            <value>5</value>
+         </items>
+      </conversion>
+      <strategy>
+         <items>
+            <description>Pure surgical</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Combined surgical and percutaneous</description>
+            <value>2</value>
+         </items>
+      </strategy>
+      <approach>
+         <items>
+            <description>Sternotomy</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Parasternal</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Thoracotomy</description>
+            <value>3</value>
+         </items>
+      </approach>
+      <lima_harvest>
+         <items>
+            <description>Open technique, direct vision</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Thoracotomy</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Combination</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>None</description>
+            <value>4</value>
+         </items>
+      </lima_harvest>
+      <vessel>
+         <items>
+            <description>Octopus</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Suture</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Compression</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Other</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>None</description>
+            <value>5</value>
+         </items>
+      </vessel>
+      <suture>
+         <items>
+            <description>Continuous</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Interrupted sutures</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Stapler</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Combination</description>
+            <value>4</value>
+         </items>
+      </suture>
+      <acute_flow>
+         <items>
+            <description>None</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Intraoperative</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Doppler</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Intraoperative angio</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Postoperative angio</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>Postoperatieve doppler</description>
+            <value>6</value>
+         </items>
+      </acute_flow>
+      <no_yes>
+         <items>
+            <description>No</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Yes</description>
+            <value>2</value>
+         </items>
+      </no_yes>
+      <follow_1>
+         <items>
+            <description>Complete midsternotomy</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Partial midsternotomy</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Transvers sternotomy</description>
+            <value>3</value>
+         </items>
+      </follow_1>
+      <follow_2>
+         <items>
+            <description>R Anterior</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>L Anterior</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Posterolateral</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Xiphoidal</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Epigastric</description>
+            <value>5</value>
+         </items>
+      </follow_2>
+      <follow_3>
+         <items>
+            <description>R Vertical</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>L Vertical</description>
+            <value>2</value>
+         </items>
+      </follow_3>
+   </min_inv>
+   <valve>
+      <aetiology>
+         <items>
+            <description>rheumatic (chronic)</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>rheumatic (acute)</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>congenital</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>marfan</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>ischemic</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>myxomatous degeneration</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>failed repair</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>prosthetic valve failure</description>
+            <value>8</value>
+         </items>
+         <items>
+            <description>paraprosthetic leak, -dehiscense</description>
+            <value>9</value>
+         </items>
+         <items>
+            <description>prosthetic valve thrombosis</description>
+            <value>10</value>
+         </items>
+         <items>
+            <description>active infection</description>
+            <value>11</value>
+         </items>
+         <items>
+            <description>previous infection</description>
+            <value>12</value>
+         </items>
+         <items>
+            <description>calcific degeneration</description>
+            <value>13</value>
+         </items>
+         <items>
+            <description>aortic anular dilatation</description>
+            <value>14</value>
+         </items>
+         <items>
+            <description>other degenerative disease</description>
+            <value>15</value>
+         </items>
+         <items>
+            <description>dissection</description>
+            <value>16</value>
+         </items>
+         <items>
+            <description>tumor</description>
+            <value>17</value>
+         </items>
+         <items>
+            <description>other</description>
+            <value>18</value>
+         </items>
+      </aetiology>
+      <a_procedure>
+         <items>
+            <description>replacement</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>repair</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>root repair w. valved conduit</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>valve sparing repair</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>resuspension aortic valve</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>sub-aortic stenosis</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>replacement and aortic anuloplasty</description>
+            <value>7</value>
+         </items>
+      </a_procedure>
+      <m_procedure>
+         <items>
+            <description>anuloplasty</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>replacement</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>replacement w. anuloplasty</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>replacement wo. anuloplasty</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>replacement w. intact subvalvular app.</description>
+            <value>5</value>
+         </items>
+      </m_procedure>
+      <t_procedure>
+         <items>
+            <description>anuloplasty</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>replacement</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>repair w. anuloplasty</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>repair wo. anuloplasty</description>
+            <value>4</value>
+         </items>
+      </t_procedure>
+      <p_procedure>
+         <items>
+            <description>replacement</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>repair</description>
+            <value>2</value>
+         </items>
+      </p_procedure>
+      <valve_type>
+         <items>
+            <description>Mechanical</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Biological</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Conduit</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Homograft</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Ring</description>
+            <value>5</value>
+         </items>
+      </valve_type>
+      <repair_type>
+         <mitral>
+            <items>
+               <description>Annuloplasty</description>
+               <value>991</value>
+            </items>
+            <items>
+               <description>Qudrangular resection</description>
+               <value>992</value>
+            </items>
+            <items>
+               <description>Chordal transfer</description>
+               <value>994</value>
+            </items>
+         </mitral>
+         <tricuspid>
+            <items>
+               <description>Annuloplasty (deVega)</description>
+               <value>993</value>
+            </items>
+         </tricuspid>
+      </repair_type>
+      <implantPosition>
+       <items>
+            <description>Aortic</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Mitral</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Triscuspid</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Pulmonary</description>
+            <value>4</value>
+         </items>
+      </implantPosition>
+   </valve>
+   <aanvullend_onderzoek>
+      <ritme>
+         <items>
+            <description>Sinus rhythm</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Junctional</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Nodal</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Pacemaker</description>
+            <value>4</value>
+         </items>
+      </ritme>
+      <electrical_axis>
+         <items>
+            <description>R axis</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>L axis</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>vertical axis</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>horizontal axis</description>
+            <value>4</value>
+         </items>
+      </electrical_axis>
+   </aanvullend_onderzoek>
+   <operatie>
+      <urgent_reasons>
+         <items>
+            <description>myocardial infarction</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>IABP</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>crescendo angina</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>anatomy</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>class IV angina</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>valve dysfunction</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>aortic aneurysm</description>
+            <value>8</value>
+         </items>
+      </urgent_reasons>
+      <emergent_reasons>
+         <items>
+            <description>shock on circulatory support</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>shock not on circulatory support</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>pulmonary edema</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>developing infarction</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>continuous ischemic</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>valve dysfunction</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>AA</description>
+            <value>7</value>
+         </items>
+      </emergent_reasons>
+      <pleura>
+         <items>
+            <description>the L pleura opened</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>the R pleura opened</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>both pleurae opened</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>both pleurae remained closed</description>
+            <value>4</value>
+         </items>
+      </pleura>
+      <inotropica>
+         <items>
+            <description>wo. inotropic support</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>with minimal inotropic support</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>with moderate inotropic support</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>with maximal inotropic support</description>
+            <value>4</value>
+         </items>
+      </inotropica>
+      <pericard>
+         <items>
+            <description>stayed open</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>was closed</description>
+            <value>2</value>
+         </items>
+      </pericard>
+      <pacemaker>
+         <items>
+            <description>not used</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>placed on the R atrium</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>placed on the R atrium and ventricle</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>placed on the R ventricle</description>
+            <value>4</value>
+         </items>
+      </pacemaker>
+      <operatie_timing>
+         <items>
+            <description>Elective</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>Urgent</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Emergency</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>Salvage</description>
+            <value>4</value>
+         </items>
+      </operatie_timing>
+      <category>
+         <!--this gives a list of procedures organized by category, for add a procedure page-->
+         <!--category 0-->
+         <items>
+            <cat>0</cat>
+            <description>General</description>
+            <value>6</value>
+         </items>
+         <!--category 1-->
+         <items>
+            <cat>1</cat>
+            <description>CABG lima and VSM</description>
+            <value>1</value>
+         </items>
+         <items>
+            <cat>1</cat>
+            <description>CABG lima and rima</description>
+            <value>2</value>
+         </items>
+         <items>
+            <cat>1</cat>
+            <description>CABG lima only</description>
+            <value>21</value>
+         </items>
+         <items>
+            <cat>1</cat>
+            <description>CABG lima and radial and VSM</description>
+            <value>23</value>
+         </items>
+         <items>
+            <cat>1</cat>
+            <description>CABG lima and radial</description>
+            <value>24</value>
+         </items>
+         <items>
+            <cat>1</cat>
+            <description>CABG lima and rima and radial</description>
+            <value>25</value>
+         </items>
+         <items>
+            <cat>1</cat>
+            <description>CABG VSM only</description>
+            <value>26</value>
+         </items>
+         <items>
+            <cat>1</cat>
+            <description>CABG Radial only</description>
+            <value>926</value>
+         </items>
+         <!--category 2-->
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG lima and VSM</description>
+            <value>92</value>
+         </items>
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG lima and rima</description>
+            <value>93</value>
+         </items>
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG lima only</description>
+            <value>94</value>
+         </items>
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG lima and radial</description>
+            <value>95</value>
+         </items>
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG lima rima and VSM</description>
+            <value>98</value>
+         </items>
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG lima rima and radial</description>
+            <value>96</value>
+         </items>
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG VSM only</description>
+            <value>97</value>
+         </items>
+         <items>
+            <cat>2</cat>
+            <description>Off Pump CABG radial only</description>
+            <value>997</value>
+         </items>
+         <!--category 3-->
+         <items>
+            <cat>3</cat>
+            <description>AVR</description>
+            <value>3</value>
+         </items>
+         <items>
+            <cat>5</cat>
+            <description>AVR min inv</description>
+            <value>30</value>
+         </items>
+         <items>
+            <cat>3</cat>
+            <description>MVR</description>
+            <value>4</value>
+         </items>
+         <items>
+            <cat>3</cat>
+            <description>MVP</description>
+            <value>41</value>
+         </items>
+         <items>
+            <cat>3</cat>
+            <description>TVP</description>
+            <value>45</value>
+         </items>
+         <items>
+            <cat>3</cat>
+            <description>TVR</description>
+            <value>46</value>
+         </items>
+         <!--category 4-->
+         <items>
+            <cat>4</cat>
+            <description>AVR MVR</description>
+            <value>5</value>
+         </items>
+         <items>
+            <cat>4</cat>
+            <description>AVR MVP</description>
+            <value>51</value>
+         </items>
+         <items>
+            <cat>4</cat>
+            <description>AVR TVP</description>
+            <value>53</value>
+         </items>
+         <items>
+            <cat>4</cat>
+            <description>MVR TVP</description>
+            <value>54</value>
+         </items>
+         <items>
+            <cat>4</cat>
+            <description>MVP TVP</description>
+            <value>55</value>
+         </items>
+         <!--category 9-->
+         <items>
+            <cat>9</cat>
+            <description>ASD Closure</description>
+            <value>7</value>
+         </items>
+         <items>
+            <cat>9</cat>
+            <description>Ross Procedure</description>
+            <value>56</value>
+         </items>
+         <items>
+            <cat>9</cat>
+            <description>VSD Closure</description>
+            <value>102</value>
+         </items>
+         <items>
+            <cat>9</cat>
+            <description>PDA ligation</description>
+            <value>104</value>
+         </items>
+         <items>
+            <cat>9</cat>
+            <description>Pulmonary valvulotomy</description>
+            <value>105</value>
+         </items>
+         <items>
+            <cat>9</cat>
+            <description>TOF repair</description>
+            <value>146</value>
+         </items>
+         <items>
+            <cat>9</cat>
+            <description>Other congenital defect repair</description>
+            <value>1414</value>
+         </items>
+         <!--category 6-->
+         <items>
+            <cat>6</cat>
+            <description>AVR and CABG</description>
+            <value>80</value>
+         </items>
+         <items>
+            <cat>6</cat>
+            <description>MVP and CABG</description>
+            <value>81</value>
+         </items>
+         <items>
+            <cat>6</cat>
+            <description>MVR and CABG</description>
+            <value>82</value>
+         </items>
+         <items>
+            <cat>6</cat>
+            <description>TVP and CABG</description>
+            <value>83</value>
+         </items>
+         <items>
+            <cat>6</cat>
+            <description>AVR and MVP and CABG</description>
+            <value>85</value>
+         </items>
+         <items>
+            <cat>6</cat>
+            <description>AVR and MVR and CABG</description>
+            <value>86</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Aortic surgery</description>
+            <value>101</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Pacemaker implant</description>
+            <value>1417</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>AICD implant</description>
+            <value>147</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Maze</description>
+            <value>1412</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Cardiac tumor</description>
+            <value>145</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>LV aneurysmectomy</description>
+            <value>1418</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Heart and Lung transplant</description>
+            <value>148</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Pulmonary embolectomy</description>
+            <value>149</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Cardiac TX</description>
+            <value>1416</value>
+         </items>
+         <items>
+            <cat>7</cat>
+            <description>Other</description>
+            <value>1419</value>
+         </items>
+         <!--category 5-->
+         <items>
+            <cat>5</cat>
+            <description>Minimally Invasive Mitral Valve Surgery (MVP)</description>
+            <value>88</value>
+         </items>
+         <items>
+            <cat>5</cat>
+            <description>Minimally Invasive Mitral Valve Surgery (MVR)</description>
+            <value>89</value>
+         </items>
+         <items>
+            <cat>5</cat>
+            <description>Thymectomy(daVinci manipulator)</description>
+            <value>606</value>
+         </items>
+         <!--category 8-->
+         <items>
+            <cat>8</cat>
+            <description>Carotid endarterectomy</description>
+            <value>151</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>Lung TX</description>
+            <value>152</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>Other vascular procedure</description>
+            <value>153</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>Other thoracic procedure</description>
+            <value>154</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>Rethoracotomy for bleeding</description>
+            <value>601</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>Rewiring of sternum (no infection)</description>
+            <value>602</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>Debridement for mediastinitis</description>
+            <value>603</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>M. Pectoralis plasty</description>
+            <value>604</value>
+         </items>
+         <items>
+            <cat>8</cat>
+            <description>Removal of IABP</description>
+            <value>605</value>
+         </items>
+      </category>
+   </operatie>
+   <discharge>
+      <ecg>
+         <items>
+            <description>sinusrhythm 72 bpm</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>controlled AF</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>Pacemaker 70 bpm</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>full description</description>
+            <value>4</value>
+         </items>
+      </ecg>
+      <finaldiagnosis>
+         <items>
+            <description>CABG for coronary disease</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>aortic valve replacement for aortic valve disease</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>mitral valve replacement for mitral valve disease</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>aortic valve replacement and CABG</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>mitral valve replacement and CABG</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>full description</description>
+            <value>6</value>
+         </items>
+      </finaldiagnosis>
+      <course>
+         <items>
+            <description>uncomplicated course</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>complicated course</description>
+            <value>2</value>
+         </items>
+      </course>
+      <alive_dead>
+         <items>
+            <description>alive</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>dead</description>
+            <value>2</value>
+         </items>
+      </alive_dead>
+      <activities>
+         <items>
+            <description>not compromised</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>moderately compromised</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>severely compromised</description>
+            <value>3</value>
+         </items>
+      </activities>
+      <discharged_to>
+         <items>
+            <description>home</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>other hospital</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>other specialty, same hospital</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>convalescence home</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>Unknown</description>
+            <value>5</value>
+         </items>
+      </discharged_to>
+      <cause>
+         <items>
+            <description>cardiac</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>neurological</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>renal</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>vascular</description>
+            <value>4</value>
+         </items>
+         <items>
+            <description>carcinoma</description>
+            <value>5</value>
+         </items>
+         <items>
+            <description>infection</description>
+            <value>6</value>
+         </items>
+         <items>
+            <description>pulmonary</description>
+            <value>7</value>
+         </items>
+         <items>
+            <description>valvular</description>
+            <value>8</value>
+         </items>
+         <items>
+            <description>bleeding</description>
+            <value>9</value>
+         </items>
+         <items>
+            <description>other</description>
+            <value>10</value>
+         </items>
+      </cause>
+      <location>
+         <items>
+            <description>OR</description>
+            <value>1</value>
+         </items>
+         <items>
+            <description>hospital</description>
+            <value>2</value>
+         </items>
+         <items>
+            <description>home</description>
+            <value>3</value>
+         </items>
+         <items>
+            <description>other facility</description>
+            <value>4</value>
+         </items>
+      </location>
+      <discharge_summary>
+         <line_1_a>Your patient</line_1_a>
+         <line_1_b>dob</line_1_b>
+         <line_1_c>was admitted in our hospital.</line_1_c>
+         <line_2_a>from</line_2_a>
+         <line_2_b>till</line_2_b>
+         <line_2_c>for the operative treatment of</line_2_c>
+         <line_3_a>After the usual preoperative investigations that revealed no contraindication for the</line_3_a>
+         <line_4_a>planned procedure the</line_4_a>
+         <line_4_b>was performed on</line_4_b>
+         <line_5_a>Both the operative procedure and the postoperative course were uneventful.</line_5_a>
+         <line_6_a>The patient was ventilated for a few hours and discharged from the ICU the next day.</line_6_a>
+         <line_7_a>The subsequent postoperative course was uncomplicated and the woundhealing was per primam.</line_7_a>
+         <line_8_a>The sternum was stable and our patient was fully mobilised during the stay in the ward</line_8_a>
+         <line_9_a>On</line_9_a>
+         <line_9_b>we could discharge the patient in good health</line_9_b>
+      </discharge_summary>
+   </discharge>
+   
+   <closing_remark_by_type_of_surgery>
+      <soort>
+         <value>1</value>
+         <closing_remark_1>and supported the circulation</closing_remark_1>
+         <closing_remark_2>An intra-aortic balloon pump</closing_remark_2>
+         <closing_remark_3>Pacemaker wires were</closing_remark_3>
+         <closing_remark_4 />
+         <closing_remark_5 />
+         <closing_remark_6 />
+      </soort>
+      <soort>
+         <value>2</value>
+         <closing_remark_1 />
+         <closing_remark_2 />
+         <closing_remark_3 />
+         <closing_remark_4 />
+         <closing_remark_5 />
+         <closing_remark_6 />
+      </soort>
+   </closing_remark_by_type_of_surgery>
+   
+   
+   <career>
+      <items>
+         <description>Entrusted Professional Activity</description>
+         <value>1</value>
+      </items>
+      <items>
+         <description>Courses</description>
+         <value>2</value>
+      </items>
+      <items>
+         <description>Publications</description>
+         <value>3</value>
+      </items>
+      <items>
+         <description>Presentations</description>
+         <value>4</value>
+      </items>
+      <items>
+         <description>Registration</description>
+         <value>5</value>
+      </items>
+   </career>
+</root>

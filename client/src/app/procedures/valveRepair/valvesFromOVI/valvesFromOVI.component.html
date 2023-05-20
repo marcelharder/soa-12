@@ -1,0 +1,23 @@
+<div *ngIf="!displayNoRecordsFound()">
+  <h5><span class="badge badge-warning">No rings in the online inventory</span></h5>
+</div>
+<div *ngIf="displayNoRecordsFound()">
+
+<table class="table table-striped">
+  <tr>
+    <th>Serial #</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Size</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let x of optionsAvailableRingsFromOVI">
+    <td>{{x.serial_no}}</td>
+    <td>{{x.description}}</td>
+    <td>{{x.location}}</td>
+    <td>{{x.size}}</td>
+    <td><button type="button" class="badge badge-info btn-xxs"
+        (click)="getThisOne(x.valveId)">select</button></td>
+  </tr>
+</table>
+</div>

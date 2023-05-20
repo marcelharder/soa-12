@@ -1,0 +1,38 @@
+<div class="card m-5">
+    <div class="card-header">
+        <h5><span class="badge badge-info">Online users</span></h5>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th style="width: 30%;">Username</th>
+                <th style="width: 40%;"></th>
+                <th style="width: 15%;"></th>
+                <th style="width: 15%;"></th>
+            </tr>
+            <tr *ngFor="let u of users_online">
+              <td >
+                  {{u}}
+              </td>
+              <td >
+                
+            </td>
+              
+           
+            
+            </tr>
+        </table> 
+
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger" (click)='Cancel()'>Cancel</button>
+                    <button type="submit" class="btn btn-success">Update</button>
+                </div>
+            </div>
+            <div class="col-sm-6"></div>
+        </div> 
+    </div>
+</div>

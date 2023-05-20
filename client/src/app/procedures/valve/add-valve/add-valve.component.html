@@ -1,0 +1,41 @@
+<div class="card" >
+  <div class="card-header" >
+    <div class="d-flex">
+      <div class="p-2">Valve to be implanted</div>
+      <div class="ml-auto p-2"><button class="badge badge-success" (click)="implantValve(template)">Implant</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12"><h4><span class="badge badge-primary">{{valveDescription}}</span></h4></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><span class="badge badge-secondary">Valve annulur size:</span></div>
+      <div class="col-sm-6">
+        <select [(ngModel)]="valveSize" name="vsize" class="form-control" (ngModelChange)="findEOA()">
+        <option *ngFor="let item of optionSizes" [value]=item.size>{{ item.size }}</option>
+      </select></div>
+    </div>
+    <div class="row" *ngIf="showEoaAdvice()">
+      <div class="col-sm-6"><span class="badge badge-secondary">Patient-Prosthesis Mismatch:</span></div>
+      <div class="col-sm-6"> 
+        <span *ngIf="noPPM" style="color: green;">{{adviceText}}</span>
+        <span *ngIf="moderatePPM" style="color: orange;">{{adviceText}}</span>
+        <span *ngIf="severePPM" style="color: red;">{{adviceText}}</span>
+      </div>  
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><span class="badge badge-secondary">Serial number:</span></div>
+      <div class="col-sm-6"><input type="text" class="form-control" [(ngModel)]="pd.SERIAL_IMP" name="sn"></div>
+    </div>
+   </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Confirm you want to implant this valve ?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>

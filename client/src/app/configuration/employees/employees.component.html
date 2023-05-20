@@ -1,0 +1,72 @@
+
+<div class="card m-5">
+  <div class="card-header"><h5><span class="badge badge-default">Manage employees in {{hospitalName}}</span></h5></div>
+  <div class="class-body">
+
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="row ml-1">
+        <div class="col-sm-12"><app-edit [profession]="anaesthesia" [list]="hl" (add)="addEmployee($event)" (edit)="editEmployee($event)"></app-edit></div>
+      </div>
+      <div class="row ml-1">
+        <div class="col-sm-12"><app-edit [profession]="anaesthesiaTech" [list]="tl" (add)="addEmployee($event)" (edit)="editEmployee($event)"></app-edit></div>
+      </div>
+    </div>
+  
+    <div class="col-sm-4">
+      <div class="row ml-1">
+        <div class="col-sm-12"><app-edit [profession]="nurse" [list]="cl" (add)="addEmployee($event)" (edit)="editEmployee($event)"></app-edit></div>
+      </div>
+      <div class="row ml-1">
+        <div class="col-sm-12"><app-edit [profession]="perfusie" [list]="pl" (add)="addEmployee($event)" (edit)="editEmployee($event)"></app-edit></div>
+      </div>
+      
+    </div>
+    <div class="col-sm-4">
+      <img src={{hospitalImage}} height="250" width="350"/>
+    </div>
+     
+  </div>
+  
+  <div *ngIf="showEditForm()">
+    <div class="row ml-1">
+      <div class="col-sm-10">
+        <app-editdetails [emp]="emp" (savePhoto)="updatePhoto($event)"></app-editdetails>
+      </div>
+      <div class="col-sm-2">  </div>
+    </div>
+  
+    <div class="row ml-1">
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="row">
+  
+              <div class="col-sm-6">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+                  <button type="button" class="btn btn-secondary" (click)="saveEmployee()">Save this entry</button>
+                </div>
+  
+              </div>
+              <div class="col-sm-6"></div>
+  
+            </div>
+          </div>
+          <div class="col-sm-7"></div>
+        </div>
+      </div>
+      <div class="col-sm-2">  </div>
+    </div>
+  </div>
+      
+</div>
+<div class="card-footer"></div>
+</div> 
+  
+  
+  
+  
+  
+  

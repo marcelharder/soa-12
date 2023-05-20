@@ -1,0 +1,133 @@
+<div>
+    <form #ltxForm="ngForm" id="ltxForm">
+      <div class="card">
+        <div class="card-header">This page needs some attention</div>
+        <div class="card-body">
+          <div class="row">
+          <div class="col-sm-3"><h5><span class="badge badge-secondary">Indication</span></h5></div>
+          <div class="col-sm-3"><select
+            [(ngModel)]="proc.Indication"
+            name="at"
+            class="form-control"
+          >
+            <option
+              *ngFor="let an of optionsIndication"
+              [value]="an.value"
+            >
+              {{ an.description }}
+            </option>
+          </select></div>
+          <div class="col-sm-3"></div>
+         
+        </div>
+        <div class="row">
+          <div class="col-sm-3"><h5><span class="badge badge-secondary">Type</span></h5></div>
+          <div class="col-sm-3"><select
+            [(ngModel)]="proc.TypeOfTX"
+            name="at233"
+            class="form-control"
+          >
+            <option
+              *ngFor="let an of optionsTypeTx"
+              [value]="an.value"
+            >
+              {{ an.description }}
+            </option>
+          </select></div>
+          <div class="col-sm-3"></div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-sm-3"><h5><span class="badge badge-secondary">Donor Procedure Times</span></h5></div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-6"><h6><span class="badge badge-secondary">Procedure start</span></h6></div>
+              <div class="col-sm-6"><input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                [(ngModel)]="proc.DonorProcedureStart" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" name="datum" /></div>
+            </div>
+            </div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-6"> <select [(ngModel)]="proc.startHr01" name="1" class="form-control">
+                <option *ngFor="let hr of hours">{{ hr }}</option>
+              </select></div>
+              <div class="col-sm-6"><select [(ngModel)]="proc.startMin01" name="2" class="form-control">
+                <option *ngFor="let min of minutes">{{ min }}</option>
+              </select></div>
+            </div>
+           </div>
+          <div class="col-sm-3"> </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-6"><h6><span class="badge badge-secondary">Start Ischemia</span></h6></div>
+              <div class="col-sm-6"><input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                [(ngModel)]="proc.DonorStartIschemia" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" name="datum" /></div>
+            </div>
+            
+           </div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-6"><select [(ngModel)]="proc.startHr02" name="3" class="form-control">
+                <option *ngFor="let hr of hours">{{ hr }}</option>
+              </select></div>
+              <div class="col-sm-6"><select [(ngModel)]="proc.startMin02" name="4" class="form-control">
+                <option *ngFor="let min of minutes">{{ min }}</option>
+              </select></div>
+            </div>
+            
+            
+            
+            </div>
+          <div class="col-sm-3"></div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-sm-3"><h5><span class="badge badge-secondary">Acceptor Procedure Times</span></h5></div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-6"><h6><span class="badge badge-secondary">Procedure start</span></h6></div>
+              <div class="col-sm-6"> <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                [(ngModel)]="proc.AcceptorProcedureStart" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" name="datum" /></div>
+            </div>
+           </div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-6"><select [(ngModel)]="proc.startHr03" name="5" class="form-control">
+                <option *ngFor="let hr of hours">{{ hr }}</option>
+              </select></div>
+              <div class="col-sm-6"><select [(ngModel)]="proc.startMin03" name="6" class="form-control">
+                <option *ngFor="let min of minutes">{{ min }}</option>
+              </select></div>
+            </div>
+            </div>
+          <div class="col-sm-3"> </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-3">
+            <div class="row">
+             <div class="col-sm-6"><h6><span class="badge badge-secondary">Reperfusion</span></h6></div>
+             <div class="col-sm-6"><input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+              [(ngModel)]="proc.DonorStartReperfusion" [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" name="datum" /></div>
+            </div>
+            </div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-sm-6"><select [(ngModel)]="proc.startHr04" name="7" class="form-control">
+                <option *ngFor="let hr of hours">{{ hr }}</option>
+              </select></div>
+              <div class="col-sm-6"><select [(ngModel)]="proc.startMin04" name="8" class="form-control">
+                <option *ngFor="let min of minutes">{{ min }}</option>
+              </select></div>
+            </div>
+            
+            </div>
+          <div class="col-sm-3"></div>
+        </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  

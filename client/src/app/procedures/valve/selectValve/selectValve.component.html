@@ -1,0 +1,20 @@
+
+
+<div *ngIf="getOviStatus()">
+  
+  <app-valvesinovi 
+               
+                [hospitalId]="this.hospitalId" 
+                [pd]="pd" 
+                [implant]="this.hv.implant_Position"
+                (pushValve)="receiveNewValve($event)"></app-valvesinovi>
+</div>
+<div *ngIf="!getOviStatus()">
+  
+  <app-valvedetails 
+                [hv]="hv" 
+                [valveDescription]="this.valveDescription"
+                [pd]="pd" 
+                [hospitalId]="this.hospitalId"
+                (pushValve)="receiveNewValve($event)"></app-valvedetails>
+</div>

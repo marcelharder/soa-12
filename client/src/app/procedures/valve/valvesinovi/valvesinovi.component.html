@@ -1,0 +1,100 @@
+
+  <div class="card" *ngIf="!showAddedValve()">
+    <div class="card-header">
+      <div class="d-flex">
+        <div class="p-2">
+          <h5><label class="badge badge-default">List of {{implant}} valves in the online valve inventoryl</label></h5></div>
+        <div class="ml-auto p-2">
+          <div class="d-flex">
+            <div class="p-2">
+             
+            </div>
+            <div class="p-2"><select 
+              [(ngModel)]="selectedSoort" 
+              name="q1" 
+              class="form-control">
+                <option *ngFor="let item of optionsSoort" [value]=item.value>{{ item.description }}</option>
+              </select></div>
+            <div class="p-2"><button class="btn btn-success " (click)="findSelectedValves()">Go</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div *ngIf="optionsAvailableValves.length === 0">
+        <h4><span class="badge badge-warning">There are no valves available in the online inventory</span></h4>
+      </div>
+      <table style="width: 100%" *ngIf="optionsAvailableValves.length !== 0">
+        <thead>
+          <tr>
+            <th style="white-space:nowrap">Valve</th>
+            <th>Description</th>
+            <th>Size</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let x of optionsAvailableValves" class="bg.secondary">
+          <tr>
+            <td style="white-space:nowrap">{{x.product_code}}</td>
+            <td style="padding-right:40px;white-space:nowrap">{{x.description}}</td>
+            <td style="padding-right:40px;white-space:nowrap">{{x.size}}</td>
+            <td><button type="button" class="btn btn-info btn-xxs" (click)="getThisOne(x)">--></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      <!-- <button class="btn btn-warning" (click)="cancel()">Cancel</button> -->
+    </div>
+  </div>
+  <div class="card" *ngIf="showAddedValve()">
+    <div class="card-header">
+      <div class="d-flex justify-content-between"> 
+        <div class="p-2">
+          <h5><label class="badge badge-default">You selected this {{implant}} valve</label></h5></div>
+        <div class="p-2"> 
+          <span *ngIf="noPPM" style="color: green;">{{adviceText}}</span>
+          <span *ngIf="moderatePPM" style="color: orange;">{{adviceText}}</span>
+          <span *ngIf="severePPM" style="color: red;">{{adviceText}}</span></div></div>
+     </div>
+    <div class="card-body">
+      <div class="row mb-5">
+        <div class="col-sm-6"><img src="{{valveImageUrl}}" height="200em" width="300em"></div>
+        <div class="col-sm-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6"><h5><span class="badge badge-secondary">Description</span></h5></div>
+            <div class="col-sm-6">{{description}}</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6"><h5><span class="badge badge-secondary">Serial</span></h5></div>
+            <div class="col-sm-6">{{this.new_valve.SERIAL_IMP}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6"><h5><span class="badge badge-secondary">Implant position</span></h5></div>
+            <div class="col-sm-6">{{this.new_valve.Implant_Position}}</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-6"><h5><span class="badge badge-secondary">Size</span></h5></div>
+            <div class="col-sm-6">{{this.new_valve.SIZE}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-default" (click)="cancel()" >Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="save()" >Save</button>
+    </div>
+  </div>
+  
+

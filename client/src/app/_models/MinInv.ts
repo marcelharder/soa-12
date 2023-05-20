@@ -1,0 +1,29 @@
+export interface MinInv {
+    id: number;
+    procedure_id: number;
+    strategy: number;
+    primary_incision: number;
+    primary_incision_details: number;
+    number_of_incisions: number;
+    conversion_to_standard: number;
+    conversion_details: number;
+    robot: number;
+    robot_cabg: number;
+    robot_aortic: number;
+    robot_mitral: number;
+    robot_tricuspid: number;
+    robot_pulmonary: number;
+    lima_harvest: number;
+    vessel: number;
+    shunt: number;
+    lad_time: number;
+    rca_time: number;
+    cx_time: number;
+    al_time: number;
+    suture: number;
+    iabp: number;
+    iabp_when: number;
+    iabp_why: number;
+    acute_flow: number;
+    acute_flow_details: number;
+}

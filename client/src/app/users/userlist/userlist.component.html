@@ -1,0 +1,97 @@
+<div class="card m-5">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-6"> <h5><span class="badge badge-info">Admin Panel</span></h5></div>
+            <div class="col-sm-6">
+                <div class="row" *ngIf="!showEdit() && !showAdd()">
+                    <div class="col-sm-12" *ngIf="showHospitalDrop()" >
+                        <div class="d-flex flex-row">
+                            <div class="p-2"><span class="badge badge-default badge-xs">Find user by ID</span></div>
+                            <div class="p-2"><input class="form-control" [(ngModel)]="lookupId" id="lupid" /></div>
+                            <div class="p-2"><button class="btn btn-secondary btn-xxs" (click)="LookUpUserId()">Go</button></div>
+                            <div class="p-2"><select  [(ngModel)]="currentHospital" 
+                                name="selectHospital" 
+                                class="form-control"
+                                id="sh" 
+                                (change)="selectUserPerHospital()">
+                                <option *ngFor="let item of hospitals" [value]=item.value>{{ item.description }}</option>
+                                </select></div>
+                          </div>
+                        
+                </div>
+            </div>
+        </div>
+       </div>
+    <div class="class-body">
+      
+        <div class="row" *ngIf="!showEdit() && !showAdd()">
+            <div class="col-sm-12">
+                <div class="member-tabset">
+                    <tabset class="member-tabset">
+                        <tab heading="User management" *appHasRole='["Admin"]'  (selectTab)="onSelect($event)">
+                            <div class="container">
+                                <div class="row">
+                                    <table class="table">
+                                        <tr>
+                                            <th style="width: 30%;">Username</th>
+                                            <th style="width: 40%;">Surgeon/Resident</th>
+                                            <th style="width: 15%;"></th>
+                                            <th style="width: 15%;"></th>
+                                        </tr>
+                                        <tr *ngFor="let user of users">
+                                          <td class="fa-fa-person">
+                                              {{user.UserName}}
+                                          </td>
+                                          <td>
+                                            {{getPosition(user.ltk)}}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-info" (click)="editUser(user.Id)">Edit User</button>
+                                        </td>
+
+                                        <td>
+                                            <button class="btn btn-info" (click)="deleteUser(user.Id)">Delete User</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger" (click)="changePWDUser(user.Id)">PWD</button>
+                                        </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                            <button type="button" class="btn btn-danger" (click)="Cancel()">Cancel</button>
+                                            <button type="button" class="btn btn-success"  (click)="AddUser()">Add</button>
+                                          </div>
+                                    </div>
+                                    <div class="col-sm-6"></div>
+                                </div>
+                            </div>
+                        </tab>
+                        <tab heading="Role management" *appHasRole='["Admin"]'  (selectTab)="onSelect($event)">
+                            <div class="container">
+                                <app-app-user-management></app-app-user-management>
+                            </div>
+                        </tab>
+                        <tab heading="Photo management" *appHasRole='["Admin"]'  (selectTab)="onSelect($event)">
+                            <div class="container">
+                               photos management
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+           
+        </div>
+        <div *ngIf="showEdit()">
+            <app-userdetails (cancelThis)="cancelEdit($event)" [user]='user' (fromUserEdit)="returnFromUserEdit($event)"></app-userdetails>
+        </div>
+        <div *ngIf="showAdd()">
+            <app-add-user (cancelThis)="cancelAdd($event)"
+             [selectedHospital]="currentHospital" 
+             ></app-add-user>
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div>

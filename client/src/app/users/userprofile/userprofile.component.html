@@ -1,0 +1,124 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3><span class="badge badge-info">Your profile</span></h3>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="editForm.dirty" class="alert alert-info">
+        <strong><span class="badge badge-default">Your data are changed, please Save ...</span></strong>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img class="card-img-top img-thumbnail" src="{{ user.PhotoUrl || '../../../../../assets/images/user.jpg'}}"
+          alt="{{ user.knownAs }}" />
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12"><strong><span class="badge badge-default">Location</span></strong>
+              <p>{{ user.city }}, {{ countryWhereUserLives }}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12"><strong><span class="badge badge-default">Last active</span></strong>
+              <p>{{ user.lastActive | date}}</p>
+            </div>
+          </div>
+
+          <div class="row" *appHasRole='["Surgery"]'>
+            <div class="col-sm-12" *ngIf="showPremium()">
+              <h6><span style="color: green">Premium service till {{user.paidTill | date: 'longDate'}}</span></h6>
+            </div>
+            <div class="col-sm-6" *ngIf="!showPremium()">
+              <h6><span style="color: red">Free service</span></h6>
+            </div>
+            <div class="col-sm-6" *ngIf="!showPremium()"><button class="btn btn-primary btn-sm"
+                (click)="requestPremium()">Get premium service</button></div>
+          </div>
+        </div>
+          
+          <div class="card-footer">
+            <div class="btn-group d-flex mt-3">
+              <button class="btn btn-danger w-50 mr-5" (click)='cancel()'><span
+                  class="badge badge-default">Cancel</span></button>
+              <button class="btn btn-success w-50" [disabled]="!editForm.dirty" form="editForm"><span
+                  class="badge badge-default">Save</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="tab-panel">
+          <tabset class="member-tabset">
+            <tab heading="Change password">
+
+
+              <form [formGroup]="changePasswordForm" id="changePwdForm" (submit)="changePasswordNow()">
+                <div class="row">
+                  <div class="col-sm-5"><strong><span class="badge badge-default">Old password</span></strong></div>
+                  <app-text-input [formControl]='changePasswordForm.controls["currentPassword"]' [label]='"old password"'> [type]='"password"'</app-text-input>
+                  <div class="col-sm-2"></div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-5"><strong><span class="badge badge-default">New password</span></strong></div>
+                  <app-text-input [formControl]='changePasswordForm.controls["password"]' [label]='"password"'> [type]='"password"'</app-text-input>
+                  <div class="col-sm-2">
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-5"><strong><span class="badge badge-default">Repeat new password</span></strong>
+                  </div>
+                  <app-text-input [formControl]='changePasswordForm.controls["confirmPassword"]' [label]='"confirm password"'> [type]='"password"'</app-text-input>
+                  <div class="col-sm-2"></div>
+
+                </div>
+                <div class="row">
+                  <div class="col-sm-5"><button type="submit" [disabled]="!changePasswordForm.valid" class="btn btn-secondary btn-xs" >Change Password</button></div>
+                  <div class="col-sm-5"></div>
+                  <div class="col-sm-2"></div>
+                </div>
+              </form>
+
+
+              
+            </tab>
+            <tab heading="Change profile">
+              <form #editForm="ngForm" (ngSubmit)="updateUser()" id="editForm">
+                <strong><span class="badge badge-default">Phone</span></strong>
+                <input class="form-control" type="text" name="phone" [(ngModel)]="user.mobile" />
+                <strong><span class="badge badge-default">Email</span></strong>
+                <input class="form-control" type="text" name="email" [(ngModel)]="user.email" />
+                <strong><span class="badge badge-default">Alias as used in reports:</span></strong>
+                <input class="form-control" type="text" name="kas" [(ngModel)]="user.knownAs" />
+                <strong><span class="badge badge-default">Location details</span></strong>
+                <div class="form-inline">
+                  <label for="city">City</label>
+                  <input class="form-control ml-2 mr-2" type="text" name="city" [(ngModel)]="user.city" />
+                  <label for="country">Country</label>
+                  <select [(ngModel)]="user.country" name="q12" (change)="changeCountry()"
+                    class="form-control ml-2 mr-2">
+                    <option *ngFor="let item of optionCountries" [value]=item.value>{{ item.description }}</option>
+                  </select>
+                </div>
+              </form>
+            </tab>
+            <tab heading="Upload Photo">
+              <app-photo-editor 
+              [userId]="currentUserId" 
+              [refId]="0" 
+              [hospitalId]="0"
+              (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>
+            </tab>
+            <tab heading="Hospitals">
+              <app-worked-in 
+              [user]="user" 
+              (updateUserToParent)="updateFromWorkedIn($event)"></app-worked-in>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
