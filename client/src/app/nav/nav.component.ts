@@ -42,6 +42,8 @@ export class NavComponent implements OnInit {
   login() {
     // check if the username is a valid email
     localStorage.removeItem("user");// make sure there is no residual user in browser localstorage
+    localStorage.setItem("user-email", this.model.username);//save the email in localstorage in case we need to reset the password
+   
     this.accountService.isThisEmailInDatabase(this.model.username).subscribe(
       (next) => {
         if (next === 1) {

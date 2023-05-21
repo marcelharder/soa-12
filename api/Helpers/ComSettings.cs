@@ -9,6 +9,7 @@ namespace api.Helpers
         public string smsURL { get; set; }
         public string valveURL { get; set; }
         public string valveIdURL { get; set; }
+        public string registeredPhone {get; set;}
 
     }
 }

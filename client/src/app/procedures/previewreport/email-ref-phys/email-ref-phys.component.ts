@@ -13,7 +13,7 @@ import { RefPhysService } from 'src/app/_services/refPhys.service';
 export class EmailRefPhysComponent implements OnInit {
   @Input() email: EmailModel;
   @Output() sendCancel = new EventEmitter<string>();
-  sms: SMSModel = { From: '', Password: '', Body: '', Phone: '', Subject: '', User: '', api_id: '' };
+  sms: SMSModel = { From: '', To: '', Text: ''};
   smsFlag = 0;
   emailFlag = 1;
   editPanel = 0;
@@ -53,9 +53,9 @@ export class EmailRefPhysComponent implements OnInit {
       this.smsFlag = 1;
       this.emailFlag = 0;
       // get the phone number of this refPhys
-      this.sms.Phone = this.email.phone;
-      this.sms.Body = this.email.body;
-      this.sms.Subject = this.email.subject;
+      this.sms.To = this.email.phone;
+      this.sms.Text = this.email.body;
+      
     }
   }
 
@@ -94,7 +94,7 @@ export class EmailRefPhysComponent implements OnInit {
   }
 
   SendSMS() {
-    if (this.sms.Phone !== '' && this.sms.Body !== '') {
+    if (this.sms.To !== '' && this.sms.Text !== '') {
       this.refPhys.sendSMS(this.sms).subscribe((nex) => {
         this.alertify.show(nex);
         this.sendCancel.emit('1');
