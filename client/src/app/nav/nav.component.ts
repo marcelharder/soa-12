@@ -57,7 +57,6 @@ export class NavComponent implements OnInit {
             // push the hospitalname to the behavior subject, if the loggedin person is not admin, want hospital_id of the admin  = 0
             if (!this.currentRoles.includes('Admin')) {
               this.userService.getUser(this.currentUserId).subscribe((next) => {
-                debugger;
                 this.model.KnownAs = next.knownAs;
                 this.hospitalService.getSpecificHospital(next.hospital_id).subscribe((d) => {
                   this.accountService.changeCurrentHospital(d.hospitalName); // save the name of this hospital
@@ -65,6 +64,7 @@ export class NavComponent implements OnInit {
               })
 
             }
+            else {this.model.KnownAs = "Admin";}
             this.router.navigate(['/procedures']);
           }
           )
