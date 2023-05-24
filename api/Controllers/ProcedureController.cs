@@ -44,6 +44,10 @@ namespace api.Controllers
         public async Task<IActionResult> gethashAsync(int id){
 
              // add item to timingsRefReport this happens when the report sms is send
+
+             // first remove any previous record with this id in the timingsRefReport XML file
+             await _fr.removeIdFromXML(id);
+
              ReportTiming r = new ReportTiming();
              r.id = id;
              r.publishTime = DateTime.Now;
