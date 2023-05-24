@@ -740,10 +740,9 @@ namespace api.Implementations.reports
                         l.Remove(itemToRemove);
                     }
                 }
-               
+                // write new report timings to file
+                SaveXmlDetails(l);
             });
-
-
             return 4;
         }
         public async Task<bool> isReportExpired(int id)
