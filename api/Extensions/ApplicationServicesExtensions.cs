@@ -71,6 +71,7 @@ namespace api.Extensions
             services.AddScoped<ISuggestion, Suggestion>();
             services.AddScoped<IComposeFinalReport, ComposeFinalReport>();
             services.AddScoped<IUserOnline, UserOnline>();
+            services.AddScoped<IOperativeReportPdf, OperativeReportPdf>();
 
 
             services.AddScoped<IStatistics, Statistics>();

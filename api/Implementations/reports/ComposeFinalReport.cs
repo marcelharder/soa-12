@@ -709,7 +709,7 @@ namespace api.Implementations.reports
             var report_code = Convert.ToInt32(_rm.getReportCode(currentProcedure.fdType));
             return report_code;
         }
- 
+
         public int addToExpiredReports(ReportTiming rt)
         {
             var l = new List<ReportTiming>();
@@ -743,168 +743,164 @@ namespace api.Implementations.reports
             });
             return result;
         }
- 
-
-
-
-public int  deleteExpiredReports()
-{
-    // this is called by a CRON job and checks if there are expired reports, which are then deleted
-    var currentTicks = DateTime.UtcNow.Ticks; // use UTC time instead of local time
-    var interval = TimeSpan.FromDays(3).Ticks; // use TimeSpan to define interval
-
-    try
-    {
-        // load the xml file im a list of ReportTimings
-        var reportTimings =  GetXmlDetails();
-        // filter on expired report timings
-        var expiredReportTimings = reportTimings.Where(rt => (rt.publishTime.Ticks + interval) < currentTicks).ToList();
-        foreach(ReportTiming rt in expiredReportTimings){ deletePDF(rt.id);} // delete expired pdf's
-
-        
-        // filter out expired report timings
-        var newReportTimings = reportTimings.Where(rt => (rt.publishTime.Ticks + interval) >= currentTicks).ToList();
-
-        // write new report timings to file
-         SaveXmlDetails(newReportTimings);
-
-        return 1;
-    }
-    catch (Exception ex)
-    {
-        // log the exception instead of returning ret value
-        Console.WriteLine("Failed to delete expired reports: " + ex.Message);
-        return 2;
-    }
-}
-private List<ReportTiming> GetXmlDetails()
-{
-    // load the xml file into a list of ReportTimings
-    var pathToFile = Path.Combine(_env.ContentRootPath, "conf", "timingsRefReport.xml");
-    
-    if (!File.Exists(pathToFile))
-    {
-        return new List<ReportTiming>();
-    }
-    
-    using (var stream = File.Open(pathToFile, FileMode.Open))
-    {
-        var serializer = new XmlSerializer(typeof(List<ReportTiming>));
-        return (List<ReportTiming>)serializer.Deserialize(stream);
-    }
-}
-private void SaveXmlDetails(List<ReportTiming> reportTimings)
-{
-    // save the list of ReportTimings to an xml file
-    var pathToFile = Path.Combine(_env.ContentRootPath, "conf", "timingsRefReport.xml");
-    
-    using (var stream = File.Open(pathToFile, FileMode.Create))
-    {
-        var serializer = new XmlSerializer(typeof(List<ReportTiming>));
-        serializer.Serialize(stream, reportTimings);
-    }
-}
-
-
-   /*   public async Task<int> deleteExpiredReports()
+        public int deleteExpiredReports()
         {
-            // this is called by a CRON job and checks every if there are expired reports, which are then deleted
-            var ret = 0;
+            // this is called by a CRON job and checks if there are expired reports, which are then deleted
+            var currentTicks = DateTime.UtcNow.Ticks; // use UTC time instead of local time
+            var interval = TimeSpan.FromDays(3).Ticks; // use TimeSpan to define interval
 
-            await Task.Run(() =>
+            try
             {
-                var currentTicks = DateTime.Now.Ticks;
-                var interval = 2592000000000; // interval is set to 3 days for now
-                var l = new List<ReportTiming>();
-                var new_list = new List<ReportTiming>();
+                // load the xml file im a list of ReportTimings
+                var reportTimings = GetXmlDetails();
+                // filter on expired report timings
+                var expiredReportTimings = reportTimings.Where(rt => (rt.publishTime.Ticks + interval) < currentTicks).ToList();
+                foreach (ReportTiming rt in expiredReportTimings) { deletePDF(rt.id); } // delete expired pdf's
 
-                l = getXMLDetails();  // load the xml file im a list of ReportTimings
 
-                if (l.Count != 0)
-                {
-                    // delete the pdf now
-                    var pathToFile = _env.ContentRootPath + "/conf/";
-                    var file_name = pathToFile + "timingsRefReport.xml";
-                    System.IO.File.Delete(file_name);
+                // filter out expired report timings
+                var newReportTimings = reportTimings.Where(rt => (rt.publishTime.Ticks + interval) >= currentTicks).ToList();
 
-                    foreach (ReportTiming rt in l)
-                    {
-                        if ((rt.publishTime.Ticks + interval) < currentTicks)
-                        {
-                            // the report is expired now
-                        }
-                        else
-                        {
-                            // the report is not expired
-                            new_list.Add(rt);
-                        }
-                        // write this new list to the timingsRefReport.xml
-                    }
-                    saveXMLFile(new_list);
-                }
-                else { ret = 2; }
-                ret = 1;
-            });
-            return ret;
+                // write new report timings to file
+                SaveXmlDetails(newReportTimings);
+
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                // log the exception instead of returning ret value
+                Console.WriteLine("Failed to delete expired reports: " + ex.Message);
+                return 2;
+            }
         }
- */
-    /*   private void saveXMLFile(List<ReportTiming> l)
+        private List<ReportTiming> GetXmlDetails()
         {
+            // load the xml file into a list of ReportTimings
+            var pathToFile = Path.Combine(_env.ContentRootPath, "conf", "timingsRefReport.xml");
 
-            var pathToFile = _env.ContentRootPath + "/conf/";
-            var file_name = pathToFile + "timingsRefReport.xml";
-
-
-            XmlSerializer xsSubmit = new XmlSerializer(typeof(List<ReportTiming>));
-            var xml = "";
-
-            using (var sww = new StringWriter())
+            if (!File.Exists(pathToFile))
             {
-                using (XmlWriter writer = XmlWriter.Create(sww))
-                {
-                    xsSubmit.Serialize(writer, l);
-                    xml = sww.ToString(); // Your XML
+                return new List<ReportTiming>();
+            }
 
-                    UnicodeEncoding encoding = new UnicodeEncoding();
-                    byte[] bytes = encoding.GetBytes(xml);
-                   
-                    using (FileStream fs = new FileStream(file_name, FileMode.Create))
+            using (var stream = File.Open(pathToFile, FileMode.Open))
+            {
+                var serializer = new XmlSerializer(typeof(List<ReportTiming>));
+                return (List<ReportTiming>)serializer.Deserialize(stream);
+            }
+        }
+        private void SaveXmlDetails(List<ReportTiming> reportTimings)
+        {
+            // save the list of ReportTimings to an xml file
+            var pathToFile = Path.Combine(_env.ContentRootPath, "conf", "timingsRefReport.xml");
+
+            using (var stream = File.Open(pathToFile, FileMode.Create))
+            {
+                var serializer = new XmlSerializer(typeof(List<ReportTiming>));
+                serializer.Serialize(stream, reportTimings);
+            }
+        }
+
+
+        /*   public async Task<int> deleteExpiredReports()
+             {
+                 // this is called by a CRON job and checks every if there are expired reports, which are then deleted
+                 var ret = 0;
+
+                 await Task.Run(() =>
+                 {
+                     var currentTicks = DateTime.Now.Ticks;
+                     var interval = 2592000000000; // interval is set to 3 days for now
+                     var l = new List<ReportTiming>();
+                     var new_list = new List<ReportTiming>();
+
+                     l = getXMLDetails();  // load the xml file im a list of ReportTimings
+
+                     if (l.Count != 0)
+                     {
+                         // delete the pdf now
+                         var pathToFile = _env.ContentRootPath + "/conf/";
+                         var file_name = pathToFile + "timingsRefReport.xml";
+                         System.IO.File.Delete(file_name);
+
+                         foreach (ReportTiming rt in l)
+                         {
+                             if ((rt.publishTime.Ticks + interval) < currentTicks)
+                             {
+                                 // the report is expired now
+                             }
+                             else
+                             {
+                                 // the report is not expired
+                                 new_list.Add(rt);
+                             }
+                             // write this new list to the timingsRefReport.xml
+                         }
+                         saveXMLFile(new_list);
+                     }
+                     else { ret = 2; }
+                     ret = 1;
+                 });
+                 return ret;
+             }
+      */
+        /*   private void saveXMLFile(List<ReportTiming> l)
+            {
+
+                var pathToFile = _env.ContentRootPath + "/conf/";
+                var file_name = pathToFile + "timingsRefReport.xml";
+
+
+                XmlSerializer xsSubmit = new XmlSerializer(typeof(List<ReportTiming>));
+                var xml = "";
+
+                using (var sww = new StringWriter())
+                {
+                    using (XmlWriter writer = XmlWriter.Create(sww))
                     {
-                        fs.Write(bytes);
-                        fs.Flush();
+                        xsSubmit.Serialize(writer, l);
+                        xml = sww.ToString(); // Your XML
+
+                        UnicodeEncoding encoding = new UnicodeEncoding();
+                        byte[] bytes = encoding.GetBytes(xml);
+
+                        using (FileStream fs = new FileStream(file_name, FileMode.Create))
+                        {
+                            fs.Write(bytes);
+                            fs.Flush();
+                        }
                     }
                 }
             }
-        }
- */
-    /*   private List<ReportTiming> getXMLDetails()
-        {
-            var list = new List<ReportTiming>();
-            ReportTiming dr;
-            var pathToFile = _env.ContentRootPath + "/conf/";
-            var file_name = pathToFile + "timingsRefReport.xml";
-            if (System.IO.File.Exists(file_name))
+     */
+        /*   private List<ReportTiming> getXMLDetails()
             {
-
-                XDocument order = XDocument.Load(file_name);
-                IEnumerable<System.Xml.Linq.XElement> help = from d in order.Descendants("ReportTiming") select d;
-                foreach (XElement x in help)
+                var list = new List<ReportTiming>();
+                ReportTiming dr;
+                var pathToFile = _env.ContentRootPath + "/conf/";
+                var file_name = pathToFile + "timingsRefReport.xml";
+                if (System.IO.File.Exists(file_name))
                 {
-                    dr = new ReportTiming();
-                    dr.id = Convert.ToInt32(x.Element("procedureId").Value);
-                    DateTime dt = new DateTime(Convert.ToInt64(x.Element("time_sent").Value));
-                    dr.publishTime = dt;
-                    dr.fileLocation = x.Element("pdf_location").Value;
-                    list.Add(dr);
+
+                    XDocument order = XDocument.Load(file_name);
+                    IEnumerable<System.Xml.Linq.XElement> help = from d in order.Descendants("ReportTiming") select d;
+                    foreach (XElement x in help)
+                    {
+                        dr = new ReportTiming();
+                        dr.id = Convert.ToInt32(x.Element("procedureId").Value);
+                        DateTime dt = new DateTime(Convert.ToInt64(x.Element("time_sent").Value));
+                        dr.publishTime = dt;
+                        dr.fileLocation = x.Element("pdf_location").Value;
+                        list.Add(dr);
+                    }
+                    return list;
                 }
-                return list;
+                else { return list; }
+
+
             }
-            else { return list; }
+     */
 
-
-        }
- */
- 
 
 
 
