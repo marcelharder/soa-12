@@ -2,21 +2,6 @@
 <ArrayOfReportTiming xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ReportTiming>
     <id>9</id>
-    <publishTime>2023-05-21T12:10:06.3732002+02:00</publishTime>
-    <fileLocation />
-  </ReportTiming>
-  <ReportTiming>
-    <id>9</id>
-    <publishTime>2023-05-21T12:14:02.7907174+02:00</publishTime>
-    <fileLocation />
-  </ReportTiming>
-  <ReportTiming>
-    <id>9</id>
-    <publishTime>2023-05-21T12:16:29.2238929+02:00</publishTime>
-    <fileLocation />
-  </ReportTiming>
-  <ReportTiming>
-    <id>9</id>
     <publishTime>2023-05-23T10:23:02.677209+02:00</publishTime>
     <fileLocation />
   </ReportTiming>

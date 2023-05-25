@@ -741,15 +741,22 @@ namespace api.Helpers
         private async Task<List<string>> getHeaderTextAsync(string current_hospital_id)
         {
             var help = new List<string>();
-
-
-            // get this from the hospital details, so it will be changeable
-            var sh = await _context.Hospitals.FirstOrDefaultAsync(x => x.HospitalNo == current_hospital_id.makeSureTwoChar());
-            help.Add(sh.OpReportDetails1);
-            help.Add(sh.OpReportDetails2);
-            help.Add("Hospital No:");
-            help.Add(sh.OpReportDetails4);
-            help.Add(sh.OpReportDetails5);
+           // get this from the hospital details, so it will be changeable
+           
+           try
+           {
+                 var sh = await _context.Hospitals.FirstOrDefaultAsync(x => x.HospitalNo == current_hospital_id.makeSureTwoChar());
+                 help.Add(sh.OpReportDetails1);
+                 help.Add(sh.OpReportDetails2);
+                 help.Add("Hospital No:");
+                 help.Add(sh.OpReportDetails4);
+                 help.Add(sh.OpReportDetails5);
+           }
+           catch (System.Exception)
+           {
+               
+               throw;
+           }
 
 
 
@@ -910,15 +917,6 @@ namespace api.Helpers
             help.Regel62 = prev.regel_13;
             help.Regel63 = prev.regel_14;
             return help;
-
         }
-   
-   
-   
-   
-   
-   
     }
-
-
 }

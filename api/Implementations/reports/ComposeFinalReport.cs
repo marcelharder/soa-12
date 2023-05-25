@@ -26,13 +26,12 @@ namespace api.Implementations.reports
 
 
 
-
         public ComposeFinalReport(IWebHostEnvironment env, SpecialReportMaps rm, DataContext context)
         {
             _env = env;
             _rm = rm;
             _context = context;
-
+         
         }
         iTextSharp.text.Font smallfont = FontFactory.GetFont("Arial", 8);
         iTextSharp.text.Font boldfont = FontFactory.GetFont("Arial", 8, iTextSharp.text.Font.BOLD);
@@ -46,6 +45,8 @@ namespace api.Implementations.reports
         public async Task composeAsync(int procedure_id)
         {
             var _frs = await _context.finalReports.FirstOrDefaultAsync(r => r.procedure_id == procedure_id);
+           
+            
             var currentProcedure = await _context.Procedures.FirstOrDefaultAsync(r => r.ProcedureId == procedure_id);
             var report_code = Convert.ToInt32(_rm.getReportCode(currentProcedure.fdType));
             var soort = currentProcedure.fdType;
@@ -62,17 +63,15 @@ namespace api.Implementations.reports
                 doc.SetMargins(0.0F, 10.0F, 70.0F, 10.0F);
                 compose_pdf(doc, writer, report_code, soort, _frs);
             }
-            // remove the final report now in the database
-            _context.finalReports.Remove(_frs);
-            await _context.SaveChangesAsync();
+            // remove the final report now in the database once the pdf is made
+             _context.finalReports.Remove(_frs);
+             await _context.SaveChangesAsync();
         }
-        private int compose_pdf(iTextSharp.text.Document doc,
-        iTextSharp.text.pdf.PdfWriter wri,
-        int report_code,
-        int soort,
-        Class_Final_operative_report fr)
-        {
 
+
+
+        private int compose_pdf(iTextSharp.text.Document doc,iTextSharp.text.pdf.PdfWriter wri,int report_code,int soort,Class_Final_operative_report fr)
+        {
             switch (report_code)
             {
                 case 1:
@@ -190,18 +189,26 @@ namespace api.Implementations.reports
         }
         private PdfPTable getHeader(Class_Final_operative_report _frs)
         {
-            // Image.GetInstance(_frs.HospitalUrl).ScaleToFit(85.0F, 100.0F);
-
+           
             var header = new PdfPTable(3);
             header.TotalWidth = 500.0F;
             header.LockedWidth = true;
 
 
-            //  Image test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1567769565/Hospitals/zwolle_ziekenhuis.jpg"));
             Image test;
             if (_frs.HospitalUrl == null)
             {
-                test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1668181198/zbzftf4medwmdyqnuobi.jpg"));
+
+                try
+                {
+                    test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1668181198/zbzftf4medwmdyqnuobi.jpg"));
+
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
             }
             else
             {
@@ -689,9 +696,9 @@ namespace api.Implementations.reports
 
             return footer;
         }
-       
-       
-       
+
+
+
         public int deletePDF(int id)
         {
             var id_string = id.ToString();
@@ -729,22 +736,8 @@ namespace api.Implementations.reports
 
             return 3;
         }
-        
-        public async Task<int> removeIdFromXML(int id){
-         await Task.Run(() =>
-            {
-                var l = GetXmlDetails();
-                foreach(ReportTiming rt in l){
-                    if(rt.id == id ){
-                        var itemToRemove = l.SingleOrDefault(r => r.id == id);
-                        l.Remove(itemToRemove);
-                    }
-                }
-                // write new report timings to file
-                SaveXmlDetails(l);
-            });
-            return 4;
-        }
+
+
         public async Task<bool> isReportExpired(int id)
         {
             var result = false;
