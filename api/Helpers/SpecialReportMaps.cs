@@ -922,10 +922,10 @@ namespace api.Helpers
             help.Regel62 = prev.regel_13;
             help.Regel63 = prev.regel_14;
             return help;
-
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50879ae5f521063c0c7b51266a196f15534a5961
     }
-
-
 }

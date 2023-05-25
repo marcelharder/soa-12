@@ -53,9 +53,7 @@ namespace api.Controllers
             var id = await _proc.getProcedureIdFromHash(hash);
             if (id != 0)
             {
-                
-
-                if (await _proc.IsThisReportNotExpired(id))
+                 if (await _proc.IsThisReportNotExpired(id))
                 {
                     var id_string = id.ToString();
                     if (await _proc.pdfDoesNotExists(id_string))

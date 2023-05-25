@@ -26,13 +26,12 @@ namespace api.Implementations.reports
 
 
 
-
         public ComposeFinalReport(IWebHostEnvironment env, SpecialReportMaps rm, DataContext context)
         {
             _env = env;
             _rm = rm;
             _context = context;
-
+         
         }
         iTextSharp.text.Font smallfont = FontFactory.GetFont("Arial", 8);
         iTextSharp.text.Font boldfont = FontFactory.GetFont("Arial", 8, iTextSharp.text.Font.BOLD);
@@ -46,6 +45,8 @@ namespace api.Implementations.reports
         public async Task composeAsync(int procedure_id)
         {
             var _frs = await _context.finalReports.FirstOrDefaultAsync(r => r.procedure_id == procedure_id);
+           
+            
             var currentProcedure = await _context.Procedures.FirstOrDefaultAsync(r => r.ProcedureId == procedure_id);
             var report_code = Convert.ToInt32(_rm.getReportCode(currentProcedure.fdType));
             var soort = currentProcedure.fdType;
@@ -62,17 +63,15 @@ namespace api.Implementations.reports
                 doc.SetMargins(0.0F, 10.0F, 70.0F, 10.0F);
                 compose_pdf(doc, writer, report_code, soort, _frs);
             }
-            // remove the final report now in the database
-            _context.finalReports.Remove(_frs);
-            await _context.SaveChangesAsync();
+            // remove the final report now in the database once the pdf is made
+             _context.finalReports.Remove(_frs);
+             await _context.SaveChangesAsync();
         }
-        private int compose_pdf(iTextSharp.text.Document doc,
-        iTextSharp.text.pdf.PdfWriter wri,
-        int report_code,
-        int soort,
-        Class_Final_operative_report fr)
-        {
 
+
+
+        private int compose_pdf(iTextSharp.text.Document doc,iTextSharp.text.pdf.PdfWriter wri,int report_code,int soort,Class_Final_operative_report fr)
+        {
             switch (report_code)
             {
                 case 1:
@@ -190,18 +189,26 @@ namespace api.Implementations.reports
         }
         private PdfPTable getHeader(Class_Final_operative_report _frs)
         {
-            // Image.GetInstance(_frs.HospitalUrl).ScaleToFit(85.0F, 100.0F);
-
+           
             var header = new PdfPTable(3);
             header.TotalWidth = 500.0F;
             header.LockedWidth = true;
 
 
-            //  Image test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1567769565/Hospitals/zwolle_ziekenhuis.jpg"));
             Image test;
             if (_frs.HospitalUrl == null)
             {
-                test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1668181198/zbzftf4medwmdyqnuobi.jpg"));
+
+                try
+                {
+                    test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1668181198/zbzftf4medwmdyqnuobi.jpg"));
+
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
             }
             else
             {
@@ -689,6 +696,9 @@ namespace api.Implementations.reports
 
             return footer;
         }
+
+
+
         public int deletePDF(int id)
         {
             var id_string = id.ToString();
@@ -702,22 +712,32 @@ namespace api.Implementations.reports
             }
             return 1;
         }
-
         public async Task<int> getReportCode(int procedure_id)
         {
             var currentProcedure = await _context.Procedures.FirstOrDefaultAsync(r => r.ProcedureId == procedure_id);
             var report_code = Convert.ToInt32(_rm.getReportCode(currentProcedure.fdType));
             return report_code;
         }
-
         public int addToExpiredReports(ReportTiming rt)
         {
-            var l = new List<ReportTiming>();
-            l = GetXmlDetails();  // load the xml file im a list of ReportTimings
-            l.Add(rt);
-            SaveXmlDetails(l);
+            var l = GetXmlDetails();
+            bool changesMade = false;
+
+            if (!l.Any(r => r.id == rt.id))
+            {
+                l.Add(rt);
+                changesMade = true;
+            }
+
+            if (changesMade)
+            {
+                SaveXmlDetails(l);
+            }
+
             return 3;
         }
+
+
         public async Task<bool> isReportExpired(int id)
         {
             var result = false;
@@ -753,10 +773,10 @@ namespace api.Implementations.reports
             {
                 // load the xml file im a list of ReportTimings
                 var reportTimings = GetXmlDetails();
+
                 // filter on expired report timings
                 var expiredReportTimings = reportTimings.Where(rt => (rt.publishTime.Ticks + interval) < currentTicks).ToList();
                 foreach (ReportTiming rt in expiredReportTimings) { deletePDF(rt.id); } // delete expired pdf's
-
 
                 // filter out expired report timings
                 var newReportTimings = reportTimings.Where(rt => (rt.publishTime.Ticks + interval) >= currentTicks).ToList();
@@ -800,111 +820,5 @@ namespace api.Implementations.reports
                 serializer.Serialize(stream, reportTimings);
             }
         }
-
-
-        /*   public async Task<int> deleteExpiredReports()
-             {
-                 // this is called by a CRON job and checks every if there are expired reports, which are then deleted
-                 var ret = 0;
-
-                 await Task.Run(() =>
-                 {
-                     var currentTicks = DateTime.Now.Ticks;
-                     var interval = 2592000000000; // interval is set to 3 days for now
-                     var l = new List<ReportTiming>();
-                     var new_list = new List<ReportTiming>();
-
-                     l = getXMLDetails();  // load the xml file im a list of ReportTimings
-
-                     if (l.Count != 0)
-                     {
-                         // delete the pdf now
-                         var pathToFile = _env.ContentRootPath + "/conf/";
-                         var file_name = pathToFile + "timingsRefReport.xml";
-                         System.IO.File.Delete(file_name);
-
-                         foreach (ReportTiming rt in l)
-                         {
-                             if ((rt.publishTime.Ticks + interval) < currentTicks)
-                             {
-                                 // the report is expired now
-                             }
-                             else
-                             {
-                                 // the report is not expired
-                                 new_list.Add(rt);
-                             }
-                             // write this new list to the timingsRefReport.xml
-                         }
-                         saveXMLFile(new_list);
-                     }
-                     else { ret = 2; }
-                     ret = 1;
-                 });
-                 return ret;
-             }
-      */
-        /*   private void saveXMLFile(List<ReportTiming> l)
-            {
-
-                var pathToFile = _env.ContentRootPath + "/conf/";
-                var file_name = pathToFile + "timingsRefReport.xml";
-
-
-                XmlSerializer xsSubmit = new XmlSerializer(typeof(List<ReportTiming>));
-                var xml = "";
-
-                using (var sww = new StringWriter())
-                {
-                    using (XmlWriter writer = XmlWriter.Create(sww))
-                    {
-                        xsSubmit.Serialize(writer, l);
-                        xml = sww.ToString(); // Your XML
-
-                        UnicodeEncoding encoding = new UnicodeEncoding();
-                        byte[] bytes = encoding.GetBytes(xml);
-
-                        using (FileStream fs = new FileStream(file_name, FileMode.Create))
-                        {
-                            fs.Write(bytes);
-                            fs.Flush();
-                        }
-                    }
-                }
-            }
-     */
-        /*   private List<ReportTiming> getXMLDetails()
-            {
-                var list = new List<ReportTiming>();
-                ReportTiming dr;
-                var pathToFile = _env.ContentRootPath + "/conf/";
-                var file_name = pathToFile + "timingsRefReport.xml";
-                if (System.IO.File.Exists(file_name))
-                {
-
-                    XDocument order = XDocument.Load(file_name);
-                    IEnumerable<System.Xml.Linq.XElement> help = from d in order.Descendants("ReportTiming") select d;
-                    foreach (XElement x in help)
-                    {
-                        dr = new ReportTiming();
-                        dr.id = Convert.ToInt32(x.Element("procedureId").Value);
-                        DateTime dt = new DateTime(Convert.ToInt64(x.Element("time_sent").Value));
-                        dr.publishTime = dt;
-                        dr.fileLocation = x.Element("pdf_location").Value;
-                        list.Add(dr);
-                    }
-                    return list;
-                }
-                else { return list; }
-
-
-            }
-     */
-
-
-
-
-
-
     }
 }

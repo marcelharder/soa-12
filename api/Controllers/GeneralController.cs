@@ -212,6 +212,7 @@ namespace api.Controllers
         [Route("sendSMS")]
         public async Task<IActionResult> postSMSAsync(smsDTO em)
         {
+            em.From = _com.Value.registeredPhone;
             var comaddress = _com.Value.smsURL;
             string result = "";
             var jsonString = JsonSerializer.Serialize(em);

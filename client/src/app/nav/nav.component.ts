@@ -42,6 +42,8 @@ export class NavComponent implements OnInit {
   login() {
     // check if the username is a valid email
     localStorage.removeItem("user");// make sure there is no residual user in browser localstorage
+    localStorage.setItem("user-email", this.model.username);//save the email in localstorage in case we need to reset the password
+   
     this.accountService.isThisEmailInDatabase(this.model.username).subscribe(
       (next) => {
         if (next === 1) {
@@ -55,7 +57,6 @@ export class NavComponent implements OnInit {
             // push the hospitalname to the behavior subject, if the loggedin person is not admin, want hospital_id of the admin  = 0
             if (!this.currentRoles.includes('Admin')) {
               this.userService.getUser(this.currentUserId).subscribe((next) => {
-                debugger;
                 this.model.KnownAs = next.knownAs;
                 this.hospitalService.getSpecificHospital(next.hospital_id).subscribe((d) => {
                   this.accountService.changeCurrentHospital(d.hospitalName); // save the name of this hospital
@@ -63,6 +64,7 @@ export class NavComponent implements OnInit {
               })
 
             }
+            else {this.model.KnownAs = "Admin";}
             this.router.navigate(['/procedures']);
           }
           )

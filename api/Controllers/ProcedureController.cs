@@ -44,6 +44,8 @@ namespace api.Controllers
         public async Task<IActionResult> gethashAsync(int id){
 
              // add item to timingsRefReport this happens when the report sms is send
+
+            
              ReportTiming r = new ReportTiming();
              r.id = id;
              r.publishTime = DateTime.Now;

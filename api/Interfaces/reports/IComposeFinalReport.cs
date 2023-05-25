@@ -11,5 +11,6 @@ namespace api.interfaces.reports
         int deleteExpiredReports();
         int addToExpiredReports(ReportTiming rt);
         Task<bool> isReportExpired(int id);
+       
     }
 }
