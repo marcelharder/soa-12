@@ -14,6 +14,7 @@ using api.Interfaces;
 using api.Data;
 using api.DTOs;
 using Microsoft.AspNetCore.Identity;
+using api.interfaces.reports;
 
 namespace api.Helpers
 {
@@ -30,6 +31,8 @@ namespace api.Helpers
         private DataContext _context;
         private OperatieDrops _drops;
 
+        private IOperativeReportPdf _pdf;
+
         private IWebHostEnvironment _env;
         public SpecialReportMaps(
 
@@ -41,6 +44,7 @@ namespace api.Helpers
             OperatieDrops drops,
             UserManager<AppUser> userManager,
             IWebHostEnvironment env,
+            IOperativeReportPdf pdf,
             DataContext context)
         {
             _http = http;
@@ -52,6 +56,7 @@ namespace api.Helpers
             _user = user;
             _emp = emp;
             _userManager = userManager;
+            _pdf = pdf;
 
 
 
@@ -734,22 +739,11 @@ namespace api.Helpers
 
 
             // now make it straight into pdf skipping the finalreport step
-
-            transformToPDF(report_code,help);  
-
-            // save PDF and mark the creation date, delete after 3 days
-
-          //  _context.finalReports.Add(help);
-
-          //  if (await _context.SaveChangesAsync() > 0) { return help; }
-
+            await _pdf.getPdf(report_code,help);  
             return null;
         }
 
-        private void transformToPDF(int Code,Class_Final_operative_report help)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         private async Task<List<string>> getHeaderTextAsync(string current_hospital_id)
         {
@@ -923,9 +917,5 @@ namespace api.Helpers
             help.Regel63 = prev.regel_14;
             return help;
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 50879ae5f521063c0c7b51266a196f15534a5961
     }
 }
