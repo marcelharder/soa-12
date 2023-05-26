@@ -30,7 +30,6 @@ namespace api.Implementations
 
         private XElement _el;
 
-        private IComposeFinalReport _fr;
         private IWebHostEnvironment _env;
 
         private SpecialMaps _spec;
@@ -42,8 +41,7 @@ namespace api.Implementations
             DataContext context,
             IValveRepository valve,
             IPV rep, IAorticSurgery cas,
-            IMinInv inv,
-            IComposeFinalReport fr)
+            IMinInv inv)
         {
             _context = context;
             _valve = valve;
@@ -52,8 +50,7 @@ namespace api.Implementations
             _inv = inv;
             _ltx=ltx;
             _spec=spec;
-            _fr=fr;
-
+         
             _env = env;
             var content = _env.ContentRootPath;
             var filename = "conf/procedure.xml";
@@ -263,19 +260,6 @@ namespace api.Implementations
                 result = selectedprocedure.ProcedureId;
             }
             return result;
-        }
-        public async Task<bool> IsThisReportNotExpired(int id)
-        {
-            // look this record up in the reportTimings.xml
-            if(await _fr.isReportExpired(id)){return false;} else {return true;}
-        }
-        public async Task<bool> pdfDoesNotExists(string id_string)
-        {
-            var result = false;
-            var pathToFile = _env.ContentRootPath + "/assets/pdf/";
-            var file_name = pathToFile + id_string + ".pdf";
-            await Task.Run(()=>{ if (System.IO.File.Exists(file_name)){result = false;} else { result = true;}});
-           return result;
         }
 
 

@@ -21,7 +21,6 @@ namespace api.Implementations.reports
     public class OperativeReportPdf : IOperativeReportPdf
     {
         private readonly IWebHostEnvironment _env;
-        private readonly SpecialReportMaps _rm;
         private readonly DataContext _context;
 
         iTextSharp.text.Font smallfont = FontFactory.GetFont("Arial", 8);
@@ -31,10 +30,9 @@ namespace api.Implementations.reports
         CmykColor footer_background_color = new CmykColor(0, 0, 0, 14);
         PdfPCell cell;
 
-        public OperativeReportPdf(IWebHostEnvironment env, SpecialReportMaps rm, DataContext context)
+        public OperativeReportPdf(IWebHostEnvironment env, DataContext context)
         {
             _env = env;
-            _rm = rm;
             _context = context;
         }
         public async Task<int> getPdf(int report_code, Class_Final_operative_report fr)
@@ -175,7 +173,7 @@ namespace api.Implementations.reports
             }
         }
 
-               private PdfPTable getHeader(Class_Final_operative_report _frs)
+        private PdfPTable getHeader(Class_Final_operative_report _frs)
         {
            
             var header = new PdfPTable(3);

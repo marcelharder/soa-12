@@ -8,6 +8,8 @@ using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using api.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -17,20 +19,22 @@ namespace api.Controllers
 
         private IPV _repo;
         private IValveRepository _valve;
-        private IComposeFinalReport _fr;
-        private ICABGRepository _cabg;
+         private ICABGRepository _cabg;
         private IUserRepository _ur;
         private IHospitalRepository _hos;
         private IProcedureRepository _proc;
+        private DataContext _context;
         private SpecialMaps _sm;
         private SpecialReportMaps _sprm;
+        private IOperativeReportPdf _ioprep;
 
         public PreviewReportController(IPV repo,
             IUserRepository ur,
+            DataContext context,
+            IOperativeReportPdf ioprep,
             IHospitalRepository hos,
             SpecialMaps sm,
             ICABGRepository cabg,
-            IComposeFinalReport fr,
             IValveRepository valve,
             SpecialReportMaps sprm,
             IProcedureRepository proc)
@@ -41,9 +45,10 @@ namespace api.Controllers
             _ur = ur;
             _hos = hos;
             _sprm = sprm;
-            _fr = fr;
             _cabg = cabg;
             _valve = valve;
+            _ioprep = ioprep;
+            _context = context;
 
         }
 
@@ -54,14 +59,14 @@ namespace api.Controllers
         [HttpGet("reset/{id}", Name = "ResetView")]
         public async Task<IActionResult> Reset(int id) { return Ok(await _repo.resetPreViewAsync(id)); }
 
-
         [HttpGet("isFinalReportReady/{id}")]
         public async Task<int> IsReportReady(int id)
         {
             var result = 0;
             var procedure = await _proc.GetProcedure(id); if (procedure == null) { return result; }
-
-            var reportcode = await _fr.getReportCode(id);
+            var reportcode = Convert.ToInt32(_sprm.getReportCode(procedure.fdType));
+            
+            
             if (reportcode == 1 || reportcode == 2) // these are the cabg procedures
             {
                 var selectedCabg = await _cabg.GetSpecificCABG(id);
@@ -82,9 +87,9 @@ namespace api.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Post(PreviewForReturnDTO pvfr)
-        {
+        { // this comes from the save and print button
             try
-            {
+            {  
                 Class_privacy_model pm = _sprm.mapToClassPrivacyModel(pvfr);
                 Class_Preview_Operative_report pv = await _repo.getPreViewAsync(pvfr.procedure_id);
                 pv = _sprm.mapToClassPreviewOperativeReport(pvfr, pv);
@@ -92,14 +97,23 @@ namespace api.Controllers
                 // save the Class_Preview_Operative_report to the database first
                 var result = await _repo.updatePVR(pv);
 
-                // generate final operative report and save to database, all done in _sprm;
-                var fop = await _sprm.updateFinalReportAsync(pm, pv.procedure_id);
+                // generate final operative report Class
+                var classFR = await _sprm.updateFinalReportAsync(pm, pv.procedure_id);
 
-
-
-                
-
-                return Ok(result);
+                // generate PDF and store for 3 days
+                // first get the procedure so that we can get the fdtype and subsequent report_code
+               try
+               {
+                     var current_procedure = await _context.Procedures.FirstOrDefaultAsync(x => x.ProcedureId == pvfr.procedure_id);
+                     var report_code = Convert.ToInt32(_sprm.getReportCode(current_procedure.fdType));
+                     await _ioprep.getPdf(report_code,classFR);
+               }
+               catch (Exception a)
+               {
+                   Console.WriteLine(a.InnerException); 
+                   return BadRequest("Error creating the pdf");
+               } 
+               return Ok(result);
             }
             catch (Exception e) { Console.WriteLine(e.InnerException); }
             return BadRequest("Error saving the preview report");

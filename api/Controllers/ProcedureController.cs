@@ -22,35 +22,34 @@ namespace api.Controllers
     public class ProcedureController : BaseApiController
     {
         private IProcedureRepository _rep;
-        private IComposeFinalReport _fr;
+
+        private IManageFinalReport _imrep;
         private UserManager<AppUser> _manager;
         private IPatientRepository _pat;
         private SpecialMaps _special;
         
         public ProcedureController(IProcedureRepository rep, 
-            UserManager<AppUser> manager, 
+            UserManager<AppUser> manager,
+            IManageFinalReport imrep, 
             SpecialMaps special,
-            IPatientRepository pat,
-            IComposeFinalReport fr)
+            IPatientRepository pat)
         {
             _rep = rep;
             _manager = manager;
             _pat = pat;
+            _imrep = imrep;
             _special = special;
-            _fr = fr;
         }
 
         [HttpGet("refPhysEmailHash/{id}")]
         public async Task<IActionResult> gethashAsync(int id){
 
              // add item to timingsRefReport this happens when the report sms is send
-
-            
              ReportTiming r = new ReportTiming();
              r.id = id;
              r.publishTime = DateTime.Now;
              r.fileLocation = "";
-             _fr.addToExpiredReports(r);
+             _imrep.addToExpiredReports(r);
 
              // now calculate the hash which is the way the ref phys can find the report
              var p = await _rep.refPhysEmailHash(id);

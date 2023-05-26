@@ -24,8 +24,6 @@ namespace api.Interfaces
         Task<string> getProdedureDescription(int soort);
         Task<string> refPhysEmailHash(int id);
         Task<int> getProcedureIdFromHash(string hash);
-        Task<bool> IsThisReportNotExpired(int id);
-        Task<bool> pdfDoesNotExists(string id_string);
-       
+        
     }
 }

@@ -34,6 +34,8 @@ namespace api.Helpers
         private IOperativeReportPdf _pdf;
 
         private IWebHostEnvironment _env;
+
+
         public SpecialReportMaps(
 
             IHttpContextAccessor http,
@@ -387,43 +389,58 @@ namespace api.Helpers
         }
         public async Task<ReportHeaderDTO> mapToReportHeaderAsync(Class_Procedure proc)
         {
-            var selectedProcedure = proc;
-            var current_hospital_id = selectedProcedure.hospital.ToString();
-            var current_hospital = await _hos.GetSpecificHospital(current_hospital_id);
-            var current_user = await _user.GetUser(proc.SelectedSurgeon);
+            var current_hospital = await _hos.GetSpecificHospital(proc.hospital.ToString());
 
-            var dto = new ReportHeaderDTO();
+            if (current_hospital == null) { return new ReportHeaderDTO(); }
+            else
+            {
+                var current_user = await _user.GetUser(proc.SelectedSurgeon);
+                var current_perfusionist = "";
+                var current_anaesthesiologist = "";
 
-            dto.Id = selectedProcedure.ProcedureId;
-            dto.hospital_image = current_hospital.imageUrl;
 
-            var l = new List<string>();
-            l = await this.getHeaderTextAsync(current_hospital_id);
+                if (proc.SelectedPerfusionist == 0) { current_perfusionist = "n/a"; }
+                else
+                {
+                    (await _emp.getSpecificEmployee(proc.SelectedPerfusionist)).name.UppercaseFirst();
+                }
+                if (proc.SelectedAnaesthesist == 0) { current_anaesthesiologist = "n/a"; }
+                else
+                {
+                    (await _emp.getSpecificEmployee(proc.SelectedAnaesthesist)).name.UppercaseFirst();
 
-            dto.hospital_city = l[0];
-            dto.hospital_name = l[1];
-            dto.hospital_number = l[2];
-            dto.hospital_unit = l[3];
-            dto.hospital_dept = l[4];
+                }
 
-            dto.operation_date = selectedProcedure.DateOfSurgery;
-            var help = await _emp.getSpecificEmployee(selectedProcedure.SelectedPerfusionist);
-            dto.perfusionist = help.name.UppercaseFirst();
-            dto.surgeon = current_user.KnownAs.UppercaseFirst();
-            dto.physician = current_user.KnownAs.UppercaseFirst();
-            help = await _emp.getSpecificEmployee(selectedProcedure.SelectedAnaesthesist);
-            dto.anaesthesiologist = help.name.UppercaseFirst();
-            var user = await _user.GetUser(selectedProcedure.SelectedAssistant);
-            if (user != null) { dto.assistant = user.KnownAs.UppercaseFirst(); } else { dto.assistant = "n/a"; }
-            dto.surgeon_picture = current_user.PhotoUrl;
-            dto.diagnosis = "";
-            dto.operation = selectedProcedure.Description;
-            dto.title = "Operative Report";
-            dto.Comment_1 = selectedProcedure.Comment1;
-            dto.Comment_2 = selectedProcedure.Comment2;
-            dto.Comment_3 = selectedProcedure.Comment3;
+                var l = new List<string>();
+                l = await this.getHeaderTextAsync(proc.hospital.ToString());
 
-            return dto;
+                var dto = new ReportHeaderDTO
+                {
+                    Id = proc.ProcedureId,
+                    hospital_image = current_hospital.imageUrl,
+                    hospital_city = l[0],
+                    hospital_name = l[1],
+                    hospital_number = l[2],
+                    hospital_unit = l[3],
+                    hospital_dept = l[4],
+                    operation_date = proc.DateOfSurgery,
+
+                    perfusionist = current_perfusionist,
+                    surgeon = current_user.KnownAs.UppercaseFirst(),
+                    physician = current_user.KnownAs.UppercaseFirst(),
+                    anaesthesiologist = current_anaesthesiologist,
+                    assistant = (await _user.GetUser(proc.SelectedAssistant))?.KnownAs.UppercaseFirst() ?? "n/a",
+                    surgeon_picture = current_user.PhotoUrl,
+                    diagnosis = "",
+                    operation = proc.Description,
+                    title = "Operative Report",
+                    Comment_1 = proc.Comment1,
+                    Comment_2 = proc.Comment2,
+                    Comment_3 = proc.Comment3,
+                };
+
+                return dto;
+            }
         }
         public async Task<Class_Final_operative_report> updateFinalReportAsync(Class_privacy_model pm, int procedure_id)
         {
@@ -738,12 +755,11 @@ namespace api.Helpers
               help.MitralLineC = ""; */
 
 
-            // now make it straight into pdf skipping the finalreport step
-            await _pdf.getPdf(report_code,help);  
-            return null;
+
+            return help;
         }
 
-       
+
 
         private async Task<List<string>> getHeaderTextAsync(string current_hospital_id)
         {
@@ -780,9 +796,6 @@ namespace api.Helpers
              } */
             return help;
         }
-
-
-
         private async Task<Class_CABG> getCabgDetailsAsync(int procedure_id)
         {
             var help = await _context.CABGS.FirstOrDefaultAsync(x => x.PROCEDURE_ID == procedure_id);
