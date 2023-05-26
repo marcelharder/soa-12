@@ -95,6 +95,10 @@ namespace api.Controllers
                 // generate final operative report and save to database, all done in _sprm;
                 var fop = await _sprm.updateFinalReportAsync(pm, pv.procedure_id);
 
+
+
+                
+
                 return Ok(result);
             }
             catch (Exception e) { Console.WriteLine(e.InnerException); }

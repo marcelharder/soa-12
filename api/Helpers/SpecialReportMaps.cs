@@ -449,7 +449,7 @@ namespace api.Helpers
                 help.Regel23 = prev.regel_7;
                 help.Regel24 = prev.regel_8;
 
-                
+
 
                 Class_CABG cb = await getCabgDetailsAsync(procedure_id);
 
@@ -502,7 +502,7 @@ namespace api.Helpers
                 help.Regel23 = prev.regel_7;
                 help.Regel24 = prev.regel_8;
 
-               
+
 
                 Class_CABG cb = await getCabgDetailsAsync(procedure_id);
                 help.Regel25 = translateCabgStuff(1, cb.B1_SITE);
@@ -539,7 +539,7 @@ namespace api.Helpers
 
                 help = this.getGeneralCABGDetails(help, prev);
 
-               
+
             }
             if (report_code == 3)
             {
@@ -732,31 +732,39 @@ namespace api.Helpers
               help.MitralLineB = "";
               help.MitralLineC = ""; */
 
-            _context.finalReports.Add(help);
 
-            if (await _context.SaveChangesAsync() > 0) { return help; }
+            // now make it straight into pdf skipping the finalreport step
+
+            transformToPDF(report_code,help);  
+
+            // save PDF and mark the creation date, delete after 3 days
+
+          //  _context.finalReports.Add(help);
+
+          //  if (await _context.SaveChangesAsync() > 0) { return help; }
 
             return null;
         }
+
+        private void transformToPDF(int Code,Class_Final_operative_report help)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task<List<string>> getHeaderTextAsync(string current_hospital_id)
         {
             var help = new List<string>();
-           // get this from the hospital details, so it will be changeable
-           
-           try
-           {
-                 var sh = await _context.Hospitals.FirstOrDefaultAsync(x => x.HospitalNo == current_hospital_id.makeSureTwoChar());
-                 help.Add(sh.OpReportDetails1);
-                 help.Add(sh.OpReportDetails2);
-                 help.Add("Hospital No:");
-                 help.Add(sh.OpReportDetails4);
-                 help.Add(sh.OpReportDetails5);
-           }
-           catch (System.Exception)
-           {
-               
-               throw;
-           }
+            // get this from the hospital details, so it will be changeable
+            var sh = await _context.Hospitals.FirstOrDefaultAsync(x => x.HospitalNo == current_hospital_id.makeSureTwoChar());
+            if (sh != null) // check if this id is in the list of hospitals
+            {
+                help.Add(sh.OpReportDetails1);
+                help.Add(sh.OpReportDetails2);
+                help.Add("Hospital No:");
+                help.Add(sh.OpReportDetails4);
+                help.Add(sh.OpReportDetails5);
+            }
+
 
 
 
@@ -791,7 +799,6 @@ namespace api.Helpers
             var help = await _context.Valves.FirstOrDefaultAsync(x => x.SERIAL_IMP == serial);
             return help;
         }
-
         private string translateCabgStuff(int soort, string test)
         {
             var result = "";
@@ -859,8 +866,6 @@ namespace api.Helpers
             }
             return result;
         }
-
-
         private Class_Final_operative_report getGeneralDetails(Class_Final_operative_report help, Class_Preview_Operative_report prev)
         {
 
@@ -890,7 +895,7 @@ namespace api.Helpers
             help.Regel35 = prev.regel_31;
             help.Regel36 = prev.regel_32;
 
-            
+
 
 
             return help;
@@ -918,5 +923,9 @@ namespace api.Helpers
             help.Regel63 = prev.regel_14;
             return help;
         }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 50879ae5f521063c0c7b51266a196f15534a5961
     }
 }
