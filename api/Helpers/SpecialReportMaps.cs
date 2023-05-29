@@ -764,7 +764,6 @@ namespace api.Helpers
         private async Task<List<string>> getHeaderTextAsync(string current_hospital_id)
         {
             var help = new List<string>();
-            // get this from the hospital details, so it will be changeable
             var sh = await _context.Hospitals.FirstOrDefaultAsync(x => x.HospitalNo == current_hospital_id.makeSureTwoChar());
             if (sh != null) // check if this id is in the list of hospitals
             {
@@ -774,26 +773,6 @@ namespace api.Helpers
                 help.Add(sh.OpReportDetails4);
                 help.Add(sh.OpReportDetails5);
             }
-
-
-
-
-
-            /*  // this is the opreportdetails from the xml file
-             var contentRoot = _env.ContentRootPath;
-             var filename = Path.Combine(contentRoot, "data/config/reportHeader.xml");
-             XDocument order = XDocument.Load(filename);
-             IEnumerable<XElement> h = from d in order.Descendants("hospital")
-                                       where d.Attribute("id").Value == current_hospital_id.makeSureTwoChar()
-                                       select d;
-             foreach (XElement x in h)
-             {
-                 help.Add(x.Element("items").Element("reportHeader01").Value);
-                 help.Add(x.Element("items").Element("reportHeader02").Value);
-                 help.Add(x.Element("items").Element("reportHeader03").Value);
-                 help.Add(x.Element("items").Element("reportHeader04").Value);
-                 help.Add(x.Element("items").Element("reportHeader05").Value);
-             } */
             return help;
         }
         private async Task<Class_CABG> getCabgDetailsAsync(int procedure_id)

@@ -25,7 +25,7 @@ services:
     volumes:
       - mariadb-data:/var/lib/mysql
   comservice:
-    image: comservice:v91
+    image: comservice:v3
     restart: always
     networks: 
      - internal-container-network 
@@ -42,7 +42,7 @@ services:
      - db
 
   tracPersonal:
-    image: sql_app:v81
+    image: sql_app:v86
     ports:
      - 8086:80
     networks: 

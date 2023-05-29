@@ -1,20 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml.Linq;
-using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Entities;
-using api.Helpers;
 using api.interfaces.reports;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using System.Xml.Serialization;
-using System.Xml;
-using System.Text;
 
 namespace api.Implementations.reports
 {
