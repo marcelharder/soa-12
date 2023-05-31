@@ -67,8 +67,11 @@ namespace api.Controllers
             
             public async Task<IActionResult> GetOpReport(int id)
             {
-           
-             return File(this.GetStream(id.ToString()), "application/pdf", $"{id}.pdf");
+            await Task.Run(()=>{
+                return File(this.GetStream(id.ToString()), "application/pdf", $"{id}.pdf");
+            });
+            return BadRequest();
+             
       
             }
 

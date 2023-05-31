@@ -3,7 +3,7 @@ export const environment = {
   apiUrl: 'api/',
   hubUrl: 'hubs/',
   resetUrl:    'https://trac.surgical-outcomes.nl/#/resetpassword',
-  locationUrl: 'https://trac.surgical-outcomes.nl/#/api/',
+  locationUrl: 'https://trac.surgical-outcomes.nl/api/',
 
   defaultLanguage: 'nl'
 };
