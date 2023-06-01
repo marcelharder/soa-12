@@ -121,8 +121,25 @@ namespace api.Controllers
         }
 
        
+       
+       
+       
+        #region <!-- InstitutionalReports stuff -->
+        
+        [HttpGet("InstitutionalReport/{id}")]
+        public async Task<IActionResult> getIRep(){
 
+        }
+        [HttpPut("InstitutionalReport/{id}")]
+        public async Task<IActionResult> updateIRep(int id){
+            
+        }
+        [HttpPost("InstitutionalReport/{id}")]
+        public async Task<IActionResult> createIRep(int id){
+            
+        }
 
+        #endregion
 
 
     }
