@@ -126,17 +126,20 @@ namespace api.Controllers
        
         #region <!-- InstitutionalReports stuff -->
         
-        [HttpGet("InstitutionalReport/{id}")]
-        public async Task<IActionResult> getIRep(){
-
+        [HttpGet("InstitutionalReport/{id}/{soort}")]
+        public async Task<IActionResult> getIRep(int id, int soort){
+          var help = await _repo.getInstitutionalReport(id, soort);
+          return Ok(help);
         }
-        [HttpPut("InstitutionalReport/{id}")]
-        public async Task<IActionResult> updateIRep(int id){
-            
+        [HttpPut("InstitutionalReport")]
+        public async Task<IActionResult> updateIRep([FromBody] InstitutionalReport rep){
+             var help = await _repo.updateInstitutionalReport(rep);
+          return Ok(help);
         }
         [HttpPost("InstitutionalReport/{id}")]
         public async Task<IActionResult> createIRep(int id){
-            
+             var help = await _repo.createInstitutionalReport(id);
+          return Ok(help);
         }
 
         #endregion

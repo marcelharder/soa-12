@@ -1,33 +1,48 @@
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+using api.DTOs;
 using api.Entities;
 using api.Helpers;
 using api.interfaces.reports;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Data
 {
-    public class PV:IPV
+    public class PV : IPV
     {
         private DataContext _context;
         private SpecialReportMaps _special;
         private SpecialMaps _sm;
         private IMapper _map;
         private IInstitutionalText _text;
-        public PV(DataContext context, SpecialReportMaps special, IMapper map, IInstitutionalText text, SpecialMaps sm)
+
+        private IWebHostEnvironment _env;
+        public PV(
+            DataContext context,
+            IWebHostEnvironment env,
+            SpecialReportMaps special,
+            IMapper map,
+            IInstitutionalText text,
+            SpecialMaps sm)
         {
             _context = context;
             _special = special;
             _map = map;
             _text = text;
             _sm = sm;
+            _env = env;
         }
 
-      
+
         public async Task<Class_Preview_Operative_report> getPreViewAsync(int id)
         {
             // check if there is a record for this preview procedure in the database
@@ -54,11 +69,15 @@ namespace api.Data
                     result = _map.Map<Class_Suggestion, Class_Preview_Operative_report>(special_procedure_suggestion);
                     result.procedure_id = id;
                     _context.Previews.Add(result);
-                   if( await SaveAll()){
-                       return result;}
-                        else {
-                           return null;}
-                 }
+                    if (await SaveAll())
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
                 else
                 // this user has no suggestion for this type of procedure
                 {
@@ -113,7 +132,7 @@ namespace api.Data
 
         public async Task<int> updatePVR(Class_Preview_Operative_report cp)
         {
-           _context.Update(cp);
+            _context.Update(cp);
             if (await this.SaveAll())
             {
                 return 1;
@@ -157,9 +176,59 @@ namespace api.Data
                 }
                 else { return null; } */
             }
-           return await getPreViewAsync(procedure_id); 
+            return await getPreViewAsync(procedure_id);
 
 
+        }
+
+        public async Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort)
+        {
+
+            int type = 0;
+            switch (soort){
+                case 1: type = 0;break;
+                case 2: type = 1;break;
+                case 3: type = 2;break;
+                case 30: type = 3;break;
+                case 4: type = 4;break;
+                case 41: type = 5;break;
+                case 5: type = 6;break;
+                case 51: type = 7;break;
+            }
+            Hospital rep = new Hospital();
+            //  get the XML file in memory
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument order = XDocument.Load(filename);
+            // select hospital where id attribute = hospitalNo
+            IEnumerable<XElement> help = from d in order.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            // serialize to test
+            foreach (XElement x in help)
+            {
+                var serializer = new XmlSerializer(typeof(Hospital));
+                rep = (Hospital)serializer.Deserialize(x.CreateReader());
+            }
+            // construct dto
+            InstitutionalDTO it = new InstitutionalDTO();
+
+            it.Regel1A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel1A;
+            it.Regel1B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel1B;
+            it.Regel1C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel1C;
+            it.Regel2A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2A;
+
+            return it;
+        }
+
+        public async Task<string> createInstitutionalReport(int hospitalNo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<string> updateInstitutionalReport(InstitutionalReport rep)
+        {
+            throw new NotImplementedException();
         }
     }
 }
