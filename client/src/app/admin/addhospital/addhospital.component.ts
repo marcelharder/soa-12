@@ -14,6 +14,7 @@ export class AddhospitalComponent implements OnInit {
   @Output() pushHospital = new EventEmitter<Partial<Hospital>>();
   @Output() cancelThis = new EventEmitter<number>();
   @Input() selectedCountry: string;
+  @Input() alreadySelected: Array<Hospital>;
 
   selectedHospital='';
   listOfHospitals:Array<dropItem> = [];
@@ -30,6 +31,17 @@ export class AddhospitalComponent implements OnInit {
     // get the available hospitals from the server with selectedCountry as parameter
   this.drop.getAvailableHospitals(this.selectedCountry).subscribe((next)=>{
     this.listOfHospitals = next;
+    // now substract all the hospitals that are in the already selected list
+    for (let i of this.listOfHospitals){
+      for (let h of this.alreadySelected){
+        if(h.hospitalNo == i.value.toString()){
+          // this means that the hospital is already in my list
+          // so remove this hospitalnumber from the list of hospitals array
+          this.listOfHospitals = this.listOfHospitals.filter(item => item.value !== i.value);
+        }
+      }
+         
+    }
   })
   }
 

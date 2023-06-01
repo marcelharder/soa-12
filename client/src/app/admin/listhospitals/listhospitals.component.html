@@ -49,14 +49,14 @@
                 <div class="col-sm-6">
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button type="button" class="btn btn-danger" (click)="Cancel()">Cancel</button>
-                        <!-- <button type="button" class="btn btn-success"  (click)="addHospital()">Add</button> -->
+                        <button type="button" class="btn btn-success"  (click)="addHospital()">Add</button>
                       </div>
                 </div>
                 <div class="col-sm-6"></div>
             </div>
         </div>
         </div>
-        <div *ngIf="showAdd()" ><app-addhospital [selectedCountry]="selectedCountry" (pushHospital)="receiveHospital($event)"  (cancelThis)="backFromAdd($event)"></app-addhospital></div>
+        <div *ngIf="showAdd()" ><app-addhospital [alreadySelected]="hospitals" [selectedCountry]="selectedCountry" (pushHospital)="receiveHospital($event)"  (cancelThis)="backFromAdd($event)"></app-addhospital></div>
         <div *ngIf="showEdit()"><app-edithospital [pd]="selectedHospital" (cancelThis)="backFromEdit($event)"></app-edithospital></div>
     </div>
     <div class="card-footer"></div>

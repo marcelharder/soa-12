@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-sm-3"><h4><span>Available Hospitals</span></h4></div>
+        <div class="col-sm-3"><h4><span>Available Hospitals in {{selectedCountry}}</span></h4></div>
         <div class="col-sm-3"><select [(ngModel)]="selectedHospital" name="test1" class="form-control">
           <option *ngFor="let an of listOfHospitals" [value]=an.value>{{ an.description }}</option>
         </select>

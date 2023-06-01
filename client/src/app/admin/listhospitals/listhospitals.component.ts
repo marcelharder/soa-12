@@ -110,6 +110,7 @@ export class ListhospitalsComponent implements OnInit {
   receiveHospital(hos: Hospital){
 
     this.selectedHospital = hos;
+    // push this new hospital to the api
     this.addFlag = 0;
     this.listFlag = 0;
     this.editFlag = 1;
