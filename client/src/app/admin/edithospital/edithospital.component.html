@@ -1,7 +1,8 @@
-<div class="card m-5">
+<div class="card m-5" *ngIf="!displayIR()">
     <div class="card-header">
-        <h5><span class="badge badge-info">Edit hospital</span></h5>
-    </div>
+        <h5><span class="badge badge-info">Edit hospital</span>
+        <span class="btn btn-success float-right" (click)="editInstitutionalReport()">Institutional operative report</span></h5>
+      </div>
     <div class="card-body">
         <div class="row">
             <div class="col-sm-4">
@@ -152,3 +153,25 @@
             <div class="col-sm-6"></div>
         </div> 
     </div>
+</div>
+<div class="card m-5" *ngIf="displayIR()">
+  <div class="card-header">
+    <h5><span class="badge badge-info">Institutional Operative Report</span>
+      <span class="btn btn-success float-right" (click)="backToEdit()">Hospital details</span>
+    </h5>
+  </div>
+  <div class="card-body">
+    <app-blok1 [pre]="pre"></app-blok1>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-sm-6">
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button type="button" class="btn btn-danger" (click)='Cancel()'>Cancel</button>
+              <button type="submit" class="btn btn-success" (click)="SaveInstitutionaOperativeReport()">Save</button>
+          </div>
+      </div>
+      <div class="col-sm-6"></div>
+  </div> 
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { Hospital } from '../_models/Hospital';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from './account.service';
+import { previewReport } from '../_models/previewReport';
 
 @Injectable({
   providedIn: 'root'
@@ -33,4 +34,10 @@ export class HospitalService {
  
   addHospital(country: string, no: number) { return this.http.post<Hospital>(this.baseUrl + 'hospital/' + country + '/' + no, null); }
   deleteHospital(id: string) { return this.http.delete<number>(this.baseUrl + 'hospital/' + id); }
+
+  saveIOReport(id: string){return this.http.get<number>(this.baseUrl + 'hospital/addInstitutionalReport' + id); }
+  getIOReport(id: string){return this.http.get<previewReport>(this.baseUrl + 'hospital/getInstitutionalReport' + id); }
+  updateIOReport(rep: previewReport){return this.http.put<number>(this.baseUrl + 'hospital/updateInstitutionalReport',rep); }
+
+
 }

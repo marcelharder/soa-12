@@ -16,41 +16,35 @@ export class AddhospitalComponent implements OnInit {
   @Input() selectedCountry: string;
   @Input() alreadySelected: Array<Hospital>;
 
-  selectedHospital='';
-  listOfHospitals:Array<dropItem> = [];
-
+  selectedHospital = '';
+  listOfHospitals: Array<dropItem> = [];
   pd: Partial<Hospital> = {};
 
-  
 
-  constructor(private hospitalService: HospitalService, 
+  constructor(private hospitalService: HospitalService,
     private alertify: ToastrService,
     private drop: DropdownService) { }
 
   ngOnInit(): void {
     // get the available hospitals from the server with selectedCountry as parameter
-  this.drop.getAvailableHospitals(this.selectedCountry).subscribe((next)=>{
-    this.listOfHospitals = next;
-    // now substract all the hospitals that are in the already selected list
-    for (let i of this.listOfHospitals){
-      for (let h of this.alreadySelected){
-        if(h.hospitalNo == i.value.toString()){
-          // this means that the hospital is already in my list
-          // so remove this hospitalnumber from the list of hospitals array
-          this.listOfHospitals = this.listOfHospitals.filter(item => item.value !== i.value);
+    this.drop.getAvailableHospitals(this.selectedCountry).subscribe((next) => {
+      this.listOfHospitals = next;
+      // now substract all the hospitals that are in the already selected list
+      for (let i of this.listOfHospitals) {
+        for (let h of this.alreadySelected) {
+          if (h.hospitalNo == i.value.toString()) {
+            // this means that the hospital is already in my list
+            // so remove this hospitalnumber from the list of hospitals array
+            this.listOfHospitals = this.listOfHospitals.filter(item => item.value !== i.value);
+            if (this.listOfHospitals.length === 0) { this.alertify.error("No additional hospitals found in this country") }
+          }
         }
       }
-         
-    }
-  })
+    })
   }
 
- 
-  
-
-  Select(){
-    
-    this.hospitalService.getSpecificHospitalFromInventory(+this.selectedHospital).subscribe((next)=>{
+  Select() {
+    this.hospitalService.getSpecificHospitalFromInventory(+this.selectedHospital).subscribe((next) => {
       this.pd.hospitalNo = next.hospitalNo;
       this.pd.hospitalName = next.hospitalName;
       this.pd.address = next.address;
@@ -60,10 +54,4 @@ export class AddhospitalComponent implements OnInit {
       this.pushHospital.emit(this.pd);
     })
   }
-
-  
-
-  
-
-
 }
