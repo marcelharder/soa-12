@@ -14,6 +14,6 @@ namespace api.interfaces.reports
         Task<Class_Preview_Operative_report> resetPreViewAsync(int procedure_id);
         Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort);
         Task<string> createInstitutionalReport(int hospitalNo);
-        Task<string> updateInstitutionalReport(InstitutionalReport rep);
+        Task<string> updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
     }
 }

@@ -132,8 +132,8 @@ namespace api.Controllers
           return Ok(help);
         }
         [HttpPut("InstitutionalReport")]
-        public async Task<IActionResult> updateIRep([FromBody] InstitutionalReport rep){
-             var help = await _repo.updateInstitutionalReport(rep);
+        public async Task<IActionResult> updateIRep([FromBody] InstitutionalDTO rep, int id, int soort){
+             var help = await _repo.updateInstitutionalReport(rep,soort,id);
           return Ok(help);
         }
         [HttpPost("InstitutionalReport")]

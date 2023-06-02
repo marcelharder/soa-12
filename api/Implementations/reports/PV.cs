@@ -208,6 +208,7 @@ namespace api.Data
             // serialize to test
             foreach (XElement x in help)
             {
+                // select soort 
                 var serializer = new XmlSerializer(typeof(Hospital));
                 rep = (Hospital)serializer.Deserialize(x.CreateReader());
             }
@@ -218,32 +219,67 @@ namespace api.Data
 
         public async Task<string> createInstitutionalReport(int hospitalNo)
         {
+            var result = "";
             await Task.Run(() =>
             {
+
                 // get the xml file in memory
                 var contentRoot = _env.ContentRootPath;
                 var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
                 XDocument doc = XDocument.Load(filename);
-                
-                // get the element for the correct language
-                IEnumerable<XElement> help = from d in doc.Descendants("hospital")
-                                             where d.Attribute("id").Value == "99999"
+                // see if there is already an XElelemt with this id
+                IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
                                              select d;
-                foreach (XElement x in help)
+                if (test.Any()) { result = "this hospital already exists"; }
+                else
                 {
-                    XElement copy = new XElement(x);
-                    copy = changeHospitalNo(copy, hospitalNo.ToString().makeSureTwoChar());
-                    doc.Root.Add(copy);
+                    // get the element for the correct language
+                    IEnumerable<XElement> help = from d in doc.Descendants("hospital")
+                                                 where d.Attribute("id").Value == "99999"
+                                                 select d;
+                    foreach (XElement x in help)
+                    {
+                        XElement copy = new XElement(x);
+                        copy = changeHospitalNo(copy, hospitalNo.ToString().makeSureTwoChar());
+                        doc.Root.Add(copy);
+                    }
+                    doc.Save(filename);
+                    result = "created";
                 }
-                doc.Save(filename);
-                return "changed";
+
             });
-           return "";
+            return result;
         }
 
-        public async Task<string> updateInstitutionalReport(InstitutionalReport rep)
+        public async Task<string> updateInstitutionalReport(InstitutionalDTO rep, int soort, int hospitalNo)
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+                var contentRoot = _env.ContentRootPath;
+                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+                XDocument doc = XDocument.Load(filename);
+                IEnumerable<XElement> help = from d in doc.Descendants("hospital")
+                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                             select d;
+                if (help.Any())
+                {
+                    foreach (XElement original in help)
+                    {
+                        IEnumerable<XElement> items = from d in original.Descendants("reports").Elements("text_by_type_of_surgery")
+                                                      where d.Element("soort").Value == soort.ToString()
+                                                      select d;
+                        foreach (XElement f in items)
+                        {
+                            f.Element("regel_1_a").SetValue(rep.Regel1A);
+                        }
+
+                        doc.Save(filename);
+                    }
+
+                }
+            });
+            return "";
         }
 
         private InstitutionalDTO getIDTO(InstitutionalDTO it, Hospital rep, int type)
@@ -340,6 +376,11 @@ namespace api.Data
 
         }
 
+        private XElement updateXML(XElement el, InstitutionalReport rep)
+        {
+
+            return el;
+        }
 
     }
 

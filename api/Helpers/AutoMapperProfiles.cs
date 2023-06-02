@@ -96,6 +96,8 @@ namespace api.Helpers
 
             CreateMap<Class_Course, CourseDetailsDto>();
             CreateMap<CourseDetailsDto, Class_Course>().ForMember(dest => dest.CourseId, opt => opt.Ignore());
+
+            
         }
     }
 }
