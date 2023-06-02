@@ -136,7 +136,7 @@ namespace api.Controllers
              var help = await _repo.updateInstitutionalReport(rep);
           return Ok(help);
         }
-        [HttpPost("InstitutionalReport/{id}")]
+        [HttpPost("InstitutionalReport")]
         public async Task<IActionResult> createIRep(int id){
              var help = await _repo.createInstitutionalReport(id);
           return Ok(help);
