@@ -266,17 +266,17 @@ namespace api.Data
                 {
                     foreach (XElement original in help)
                     {
-                        IEnumerable<XElement> items = from d in original.Descendants("reports").Elements("text_by_type_of_surgery")
-                                                      where d.Element("soort").Value == soort.ToString()
-                                                      select d;
-                        foreach (XElement f in items)
+                        IEnumerable<XElement> help2 = from d in original.Elements("reports")
+                        .Elements("text_by_type_of_surgery")
+                        .Elements("soort")
+                         where d.Attribute("id").Value == soort.ToString()
+                         select d;
+                        foreach (XElement f in help2)
                         {
                             f.Element("regel_1_a").SetValue(rep.Regel1A);
                         }
-
-                        doc.Save(filename);
+                        // doc.Save(filename);
                     }
-
                 }
             });
             return "";
