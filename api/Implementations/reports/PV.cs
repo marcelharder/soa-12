@@ -469,8 +469,8 @@ namespace api.Data
         private InstitutionalDTO checkForNullValues(InstitutionalDTO test)
         {
             test.Regel1A = test.Regel1A == null ? "" : test.Regel1A;
-            test.Regel1B = test.Regel1A == null ? "" : test.Regel1A;
-            test.Regel1C = test.Regel1A == null ? "" : test.Regel1A;
+            test.Regel1B = test.Regel1B == null ? "" : test.Regel1B;
+            test.Regel1C = test.Regel1C == null ? "" : test.Regel1C;
 
             test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
             test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
@@ -524,6 +524,26 @@ namespace api.Data
             test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
             test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
 
+            test.Regel15 = test.Regel15 == null ? "" : test.Regel15;
+            test.Regel16 = test.Regel16 == null ? "" : test.Regel16;
+            test.Regel17 = test.Regel17 == null ? "" : test.Regel17;
+            test.Regel18 = test.Regel18 == null ? "" : test.Regel18;
+            test.Regel19 = test.Regel19 == null ? "" : test.Regel19;
+            test.Regel20 = test.Regel20 == null ? "" : test.Regel20;
+
+            test.Regel21 = test.Regel21 == null ? "" : test.Regel21;
+            test.Regel22 = test.Regel22 == null ? "" : test.Regel22;
+            test.Regel23 = test.Regel23 == null ? "" : test.Regel23;
+            test.Regel24 = test.Regel24 == null ? "" : test.Regel24;
+            test.Regel25 = test.Regel25 == null ? "" : test.Regel25;
+            test.Regel26 = test.Regel26 == null ? "" : test.Regel26;
+            test.Regel27 = test.Regel27 == null ? "" : test.Regel27;
+            test.Regel28 = test.Regel28 == null ? "" : test.Regel28;
+            test.Regel29 = test.Regel29 == null ? "" : test.Regel29;
+            test.Regel30 = test.Regel30 == null ? "" : test.Regel30;
+            test.Regel31 = test.Regel31 == null ? "" : test.Regel31;
+            test.Regel32 = test.Regel32 == null ? "" : test.Regel32;
+            test.Regel33 = test.Regel33 == null ? "" : test.Regel33;
 
 
             return test;
