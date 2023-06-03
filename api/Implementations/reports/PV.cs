@@ -269,13 +269,13 @@ namespace api.Data
                         IEnumerable<XElement> help2 = from d in original.Elements("reports")
                         .Elements("text_by_type_of_surgery")
                         .Elements("soort")
-                         where d.Attribute("id").Value == soort.ToString()
-                         select d;
+                                                      where d.Attribute("id").Value == soort.ToString()
+                                                      select d;
                         foreach (XElement f in help2)
                         {
-                            f.Element("regel_1_a").SetValue(rep.Regel1A);
+                            updateXML(f, rep);
                         }
-                        // doc.Save(filename);
+                        doc.Save(filename);
                     }
                 }
             });
@@ -376,12 +376,158 @@ namespace api.Data
 
         }
 
-        private XElement updateXML(XElement el, InstitutionalReport rep)
+        private XElement updateXML(XElement el, InstitutionalDTO rep)
         {
+            rep = checkForNullValues(rep);
+
+            el.Element("regel_1_a").SetValue(rep.Regel1A);
+            el.Element("regel_1_b").SetValue(rep.Regel1B);
+            el.Element("regel_1_c").SetValue(rep.Regel1C);
+
+            el.Element("regel_2_a").SetValue(rep.Regel2A);
+            el.Element("regel_2_b").SetValue(rep.Regel2B);
+            el.Element("regel_2_c").SetValue(rep.Regel2C);
+
+            el.Element("regel_3_a").SetValue(rep.Regel3A);
+            el.Element("regel_3_b").SetValue(rep.Regel3B);
+            el.Element("regel_3_c").SetValue(rep.Regel3C);
+
+            el.Element("regel_4_a").SetValue(rep.Regel4A);
+            el.Element("regel_4_b").SetValue(rep.Regel4B);
+            el.Element("regel_4_c").SetValue(rep.Regel4C);
+
+            el.Element("regel_5_a").SetValue(rep.Regel5A);
+            el.Element("regel_5_b").SetValue(rep.Regel5B);
+            el.Element("regel_5_c").SetValue(rep.Regel5C);
+
+            el.Element("regel_6_a").SetValue(rep.Regel6A);
+            el.Element("regel_6_b").SetValue(rep.Regel6B);
+            el.Element("regel_6_c").SetValue(rep.Regel6C);
+
+            el.Element("regel_7_a").SetValue(rep.Regel7A);
+            el.Element("regel_7_b").SetValue(rep.Regel7B);
+            el.Element("regel_7_c").SetValue(rep.Regel7C);
+
+            el.Element("regel_8_a").SetValue(rep.Regel8A);
+            el.Element("regel_8_b").SetValue(rep.Regel8B);
+            el.Element("regel_8_c").SetValue(rep.Regel8C);
+
+            el.Element("regel_9_a").SetValue(rep.Regel9A);
+            el.Element("regel_9_b").SetValue(rep.Regel9B);
+            el.Element("regel_9_c").SetValue(rep.Regel9C);
+
+            el.Element("regel_10_a").SetValue(rep.Regel10A);
+            el.Element("regel_10_b").SetValue(rep.Regel10B);
+            el.Element("regel_10_c").SetValue(rep.Regel10C);
+
+            el.Element("regel_11_a").SetValue(rep.Regel11A);
+            el.Element("regel_11_b").SetValue(rep.Regel11B);
+            el.Element("regel_11_c").SetValue(rep.Regel11C);
+
+            el.Element("regel_12_a").SetValue(rep.Regel12A);
+            el.Element("regel_12_b").SetValue(rep.Regel12B);
+            el.Element("regel_12_c").SetValue(rep.Regel12C);
+
+            el.Element("regel_13_a").SetValue(rep.Regel13A);
+            el.Element("regel_13_b").SetValue(rep.Regel13B);
+            el.Element("regel_13_c").SetValue(rep.Regel13C);
+
+            el.Element("regel_14_a").SetValue(rep.Regel14A);
+            el.Element("regel_14_b").SetValue(rep.Regel14B);
+            el.Element("regel_14_c").SetValue(rep.Regel14C);
+
+            el.Element("regel_15").SetValue(rep.Regel15);
+            el.Element("regel_16").SetValue(rep.Regel16);
+            el.Element("regel_17").SetValue(rep.Regel17);
+            el.Element("regel_18").SetValue(rep.Regel18);
+            el.Element("regel_19").SetValue(rep.Regel19);
+
+            el.Element("regel_20").SetValue(rep.Regel20);
+            el.Element("regel_21").SetValue(rep.Regel21);
+            el.Element("regel_22").SetValue(rep.Regel22);
+            el.Element("regel_23").SetValue(rep.Regel23);
+            el.Element("regel_24").SetValue(rep.Regel24);
+            el.Element("regel_25").SetValue(rep.Regel25);
+            el.Element("regel_26").SetValue(rep.Regel26);
+            el.Element("regel_27").SetValue(rep.Regel27);
+            el.Element("regel_28").SetValue(rep.Regel28);
+            el.Element("regel_29").SetValue(rep.Regel29);
+            el.Element("regel_30").SetValue(rep.Regel30);
+            el.Element("regel_31").SetValue(rep.Regel31);
+            el.Element("regel_32").SetValue(rep.Regel32);
+            el.Element("regel_33").SetValue(rep.Regel33);
+
+
+
+
+
+
 
             return el;
         }
 
+        private InstitutionalDTO checkForNullValues(InstitutionalDTO test)
+        {
+            test.Regel1A = test.Regel1A == null ? "" : test.Regel1A;
+            test.Regel1B = test.Regel1A == null ? "" : test.Regel1A;
+            test.Regel1C = test.Regel1A == null ? "" : test.Regel1A;
+
+            test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
+            test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
+            test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
+
+            test.Regel3A = test.Regel3A == null ? "" : test.Regel3A;
+            test.Regel3A = test.Regel3A == null ? "" : test.Regel3A;
+            test.Regel3A = test.Regel3A == null ? "" : test.Regel3A;
+
+            test.Regel4A = test.Regel4A == null ? "" : test.Regel4A;
+            test.Regel4A = test.Regel4A == null ? "" : test.Regel4A;
+            test.Regel4A = test.Regel4A == null ? "" : test.Regel4A;
+
+            test.Regel5A = test.Regel5A == null ? "" : test.Regel5A;
+            test.Regel5A = test.Regel5A == null ? "" : test.Regel5A;
+            test.Regel5A = test.Regel5A == null ? "" : test.Regel5A;
+
+            test.Regel6A = test.Regel6A == null ? "" : test.Regel6A;
+            test.Regel6B = test.Regel6A == null ? "" : test.Regel6A;
+            test.Regel6C = test.Regel6A == null ? "" : test.Regel6A;
+
+            test.Regel7A = test.Regel7A == null ? "" : test.Regel7A;
+            test.Regel7A = test.Regel7A == null ? "" : test.Regel7A;
+            test.Regel7A = test.Regel7A == null ? "" : test.Regel7A;
+
+            test.Regel8A = test.Regel8A == null ? "" : test.Regel8A;
+            test.Regel8A = test.Regel8A == null ? "" : test.Regel8A;
+            test.Regel8A = test.Regel8A == null ? "" : test.Regel8A;
+
+            test.Regel9A = test.Regel9A == null ? "" : test.Regel9A;
+            test.Regel9A = test.Regel9A == null ? "" : test.Regel9A;
+            test.Regel9A = test.Regel9A == null ? "" : test.Regel9A;
+
+            test.Regel10A = test.Regel10A == null ? "" : test.Regel10A;
+            test.Regel10A = test.Regel10A == null ? "" : test.Regel10A;
+            test.Regel10A = test.Regel10A == null ? "" : test.Regel10A;
+
+            test.Regel11A = test.Regel11A == null ? "" : test.Regel11A;
+            test.Regel11B = test.Regel11A == null ? "" : test.Regel11A;
+            test.Regel11C = test.Regel11A == null ? "" : test.Regel11A;
+
+            test.Regel12A = test.Regel12A == null ? "" : test.Regel12A;
+            test.Regel12A = test.Regel12A == null ? "" : test.Regel12A;
+            test.Regel12A = test.Regel12A == null ? "" : test.Regel12A;
+
+            test.Regel13A = test.Regel13A == null ? "" : test.Regel13A;
+            test.Regel13A = test.Regel13A == null ? "" : test.Regel13A;
+            test.Regel13A = test.Regel13A == null ? "" : test.Regel13A;
+
+            test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
+            test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
+            test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
+
+
+
+            return test;
+        }
     }
 
 
