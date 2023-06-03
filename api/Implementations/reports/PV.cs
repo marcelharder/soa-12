@@ -181,21 +181,9 @@ namespace api.Data
 
         }
 
-        public async Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort)
+        public async Task<InstitutionalDTO> getInstitutionalReport(int soort, int hospitalNo)
         {
-
-            int type = 0;
-            switch (soort)
-            {
-                case 1: type = 0; break;
-                case 2: type = 1; break;
-                case 3: type = 2; break;
-                case 30: type = 3; break;
-                case 4: type = 4; break;
-                case 41: type = 5; break;
-                case 5: type = 6; break;
-                case 51: type = 7; break;
-            }
+            InstitutionalDTO it = new InstitutionalDTO();
             Hospital rep = new Hospital();
             //  get the XML file in memory
             var contentRoot = _env.ContentRootPath;
@@ -205,17 +193,57 @@ namespace api.Data
             IEnumerable<XElement> help = from d in order.Descendants("hospital")
                                          where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
                                          select d;
-            // serialize to test
             foreach (XElement x in help)
             {
-                // select soort 
-                var serializer = new XmlSerializer(typeof(Hospital));
-                rep = (Hospital)serializer.Deserialize(x.CreateReader());
+                if (help.Any())
+                {
+                    foreach (XElement original in help)
+                    {
+                        IEnumerable<XElement> help2 = from d in original.Elements("reports")
+                        .Elements("text_by_type_of_surgery")
+                        .Elements("soort")
+                                                      where d.Attribute("id").Value == soort.ToString()
+                                                      select d;
+                        foreach (XElement f in help2)
+                        {
+                            it = getIDTO(it, f);
+                            checkForNullValues(it);
+                        }
+                    }
+                }
             }
-            // construct dto
-            InstitutionalDTO it = new InstitutionalDTO();
-            return getIDTO(it, rep, type);
+            return it;
         }
+
+        public async Task<List<Class_Item>> getAdditionalReportItems(int soort, int hospitalNo)
+        {
+            // this used to send hospital-specific details about pm-wires, iabp and circulatory support
+            var l = new List<Class_Item>();
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument doc = XDocument.Load(filename);
+            // see if there is already an XElelemt with this id
+            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            foreach (XElement org in test)
+            {
+                IEnumerable<XElement> help2 = from d in org.Elements("reports").Elements("circulation_support") select d;
+                foreach (XElement f in help2)
+                {
+                    Class_Item drop = new Class_Item();
+                    drop.value = Convert.ToInt32(f.Element("items").Attribute("id").Value);
+                    drop.description = f.Element("items").Element("regel_21").Value;
+                    l.Add(drop);
+                }
+
+            }
+
+            return l;
+
+        }
+
+
 
         public async Task<string> createInstitutionalReport(int hospitalNo)
         {
@@ -282,88 +310,87 @@ namespace api.Data
             return "";
         }
 
-        private InstitutionalDTO getIDTO(InstitutionalDTO it, Hospital rep, int type)
+        private InstitutionalDTO getIDTO(InstitutionalDTO it, XElement el)
         {
+            it.Regel1A = el.Element("regel_1_a").Value;
+            it.Regel1B = el.Element("regel_1_b").Value;
+            it.Regel1C = el.Element("regel_1_c").Value;
 
-            it.Regel1A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel1A.ToString();
-            it.Regel1B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel1B.ToString();
-            it.Regel1C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel1C.ToString();
+            /*  it.Regel2A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2A.ToString();
+             it.Regel2B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2B.ToString();
+             it.Regel2C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2C.ToString();
 
-            it.Regel2A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2A.ToString();
-            it.Regel2B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2B.ToString();
-            it.Regel2C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2C.ToString();
+             it.Regel3A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3A.ToString();
+             it.Regel3B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3B.ToString();
+             it.Regel3C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3C.ToString();
 
-            it.Regel3A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3A.ToString();
-            it.Regel3B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3B.ToString();
-            it.Regel3C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3C.ToString();
+             it.Regel4A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4A.ToString();
+             it.Regel4B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4B.ToString();
+             it.Regel4C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4C.ToString();
 
-            it.Regel4A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4A.ToString();
-            it.Regel4B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4B.ToString();
-            it.Regel4C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4C.ToString();
+             it.Regel5A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5A.ToString();
+             it.Regel5B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5B.ToString();
+             it.Regel5C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5C.ToString();
 
-            it.Regel5A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5A.ToString();
-            it.Regel5B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5B.ToString();
-            it.Regel5C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5C.ToString();
-
-            it.Regel6A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6A.ToString();
-            it.Regel6B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6B.ToString();
-            it.Regel6C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6C.ToString();
-
-
-            it.Regel7A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7A.ToString();
-            it.Regel7B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7B.ToString();
-            it.Regel7C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7C.ToString();
-
-            it.Regel8A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8A.ToString();
-            it.Regel8B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8B.ToString();
-            it.Regel8C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8C.ToString();
-
-            it.Regel9A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9A.ToString();
-            it.Regel9B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9B.ToString();
-            it.Regel9C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9C.ToString();
-
-            it.Regel10A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10A.ToString();
-            it.Regel10B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10B.ToString();
-            it.Regel10C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10C.ToString();
-
-            it.Regel11A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11A.ToString();
-            it.Regel11B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11B.ToString();
-            it.Regel11C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11C.ToString();
-
-            it.Regel12A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12A.ToString();
-            it.Regel12B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12B.ToString();
-            it.Regel12C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12C.ToString();
-
-            it.Regel13A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13A.ToString();
-            it.Regel13B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13B.ToString();
-            it.Regel13C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13C.ToString();
-
-            it.Regel14A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14A.ToString();
-            it.Regel14B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14B.ToString();
-            it.Regel14C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14C.ToString();
-
-            it.Regel15 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel15.ToString();
-            it.Regel16 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel16.ToString();
-            it.Regel17 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel17.ToString();
-            it.Regel18 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel18.ToString();
-            it.Regel19 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel19.ToString();
-            it.Regel20 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel20.ToString();
-            it.Regel21 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel21.ToString();
-            it.Regel22 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel22.ToString();
-            it.Regel23 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel23.ToString();
-            it.Regel24 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel24.ToString();
-            it.Regel25 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel25.ToString();
-            it.Regel26 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel26.ToString();
-            it.Regel27 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel27.ToString();
-            it.Regel28 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel28.ToString();
-            it.Regel29 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel29.ToString();
-            it.Regel30 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel30.ToString();
-            it.Regel31 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel31.ToString();
-            it.Regel32 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel32.ToString();
-            it.Regel33 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel33.ToString();
+             it.Regel6A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6A.ToString();
+             it.Regel6B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6B.ToString();
+             it.Regel6C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6C.ToString();
 
 
+             it.Regel7A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7A.ToString();
+             it.Regel7B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7B.ToString();
+             it.Regel7C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7C.ToString();
 
+             it.Regel8A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8A.ToString();
+             it.Regel8B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8B.ToString();
+             it.Regel8C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8C.ToString();
+
+             it.Regel9A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9A.ToString();
+             it.Regel9B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9B.ToString();
+             it.Regel9C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9C.ToString();
+
+             it.Regel10A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10A.ToString();
+             it.Regel10B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10B.ToString();
+             it.Regel10C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10C.ToString();
+
+             it.Regel11A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11A.ToString();
+             it.Regel11B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11B.ToString();
+             it.Regel11C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11C.ToString();
+
+             it.Regel12A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12A.ToString();
+             it.Regel12B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12B.ToString();
+             it.Regel12C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12C.ToString();
+
+             it.Regel13A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13A.ToString();
+             it.Regel13B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13B.ToString();
+             it.Regel13C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13C.ToString();
+
+             it.Regel14A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14A.ToString();
+             it.Regel14B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14B.ToString();
+             it.Regel14C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14C.ToString();
+
+             it.Regel15 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel15.ToString();
+             it.Regel16 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel16.ToString();
+             it.Regel17 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel17.ToString();
+             it.Regel18 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel18.ToString();
+             it.Regel19 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel19.ToString();
+             it.Regel20 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel20.ToString();
+             it.Regel21 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel21.ToString();
+             it.Regel22 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel22.ToString();
+             it.Regel23 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel23.ToString();
+             it.Regel24 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel24.ToString();
+             it.Regel25 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel25.ToString();
+             it.Regel26 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel26.ToString();
+             it.Regel27 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel27.ToString();
+             it.Regel28 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel28.ToString();
+             it.Regel29 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel29.ToString();
+             it.Regel30 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel30.ToString();
+             it.Regel31 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel31.ToString();
+             it.Regel32 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel32.ToString();
+             it.Regel33 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel33.ToString();
+
+
+  */
             return it;
         }
 
@@ -473,56 +500,56 @@ namespace api.Data
             test.Regel1C = test.Regel1C == null ? "" : test.Regel1C;
 
             test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
-            test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
-            test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
+            test.Regel2B = test.Regel2B == null ? "" : test.Regel2B;
+            test.Regel2C = test.Regel2C == null ? "" : test.Regel2C;
 
             test.Regel3A = test.Regel3A == null ? "" : test.Regel3A;
-            test.Regel3A = test.Regel3A == null ? "" : test.Regel3A;
-            test.Regel3A = test.Regel3A == null ? "" : test.Regel3A;
+            test.Regel3B = test.Regel3B == null ? "" : test.Regel3B;
+            test.Regel3C = test.Regel3C == null ? "" : test.Regel3C;
 
             test.Regel4A = test.Regel4A == null ? "" : test.Regel4A;
-            test.Regel4A = test.Regel4A == null ? "" : test.Regel4A;
-            test.Regel4A = test.Regel4A == null ? "" : test.Regel4A;
+            test.Regel4B = test.Regel4B == null ? "" : test.Regel4B;
+            test.Regel4C = test.Regel4C == null ? "" : test.Regel4C;
 
             test.Regel5A = test.Regel5A == null ? "" : test.Regel5A;
-            test.Regel5A = test.Regel5A == null ? "" : test.Regel5A;
-            test.Regel5A = test.Regel5A == null ? "" : test.Regel5A;
+            test.Regel5B = test.Regel5B == null ? "" : test.Regel5B;
+            test.Regel5C = test.Regel5C == null ? "" : test.Regel5C;
 
             test.Regel6A = test.Regel6A == null ? "" : test.Regel6A;
-            test.Regel6B = test.Regel6A == null ? "" : test.Regel6A;
-            test.Regel6C = test.Regel6A == null ? "" : test.Regel6A;
+            test.Regel6B = test.Regel6B == null ? "" : test.Regel6B;
+            test.Regel6C = test.Regel6C == null ? "" : test.Regel6C;
 
             test.Regel7A = test.Regel7A == null ? "" : test.Regel7A;
-            test.Regel7A = test.Regel7A == null ? "" : test.Regel7A;
-            test.Regel7A = test.Regel7A == null ? "" : test.Regel7A;
+            test.Regel7B = test.Regel7B == null ? "" : test.Regel7B;
+            test.Regel7C = test.Regel7C == null ? "" : test.Regel7C;
 
             test.Regel8A = test.Regel8A == null ? "" : test.Regel8A;
-            test.Regel8A = test.Regel8A == null ? "" : test.Regel8A;
-            test.Regel8A = test.Regel8A == null ? "" : test.Regel8A;
+            test.Regel8B = test.Regel8B == null ? "" : test.Regel8B;
+            test.Regel8C = test.Regel8C == null ? "" : test.Regel8C;
 
             test.Regel9A = test.Regel9A == null ? "" : test.Regel9A;
-            test.Regel9A = test.Regel9A == null ? "" : test.Regel9A;
-            test.Regel9A = test.Regel9A == null ? "" : test.Regel9A;
+            test.Regel9B = test.Regel9B == null ? "" : test.Regel9B;
+            test.Regel9C = test.Regel9C == null ? "" : test.Regel9C;
 
             test.Regel10A = test.Regel10A == null ? "" : test.Regel10A;
-            test.Regel10A = test.Regel10A == null ? "" : test.Regel10A;
-            test.Regel10A = test.Regel10A == null ? "" : test.Regel10A;
+            test.Regel10B = test.Regel10B == null ? "" : test.Regel10B;
+            test.Regel10C = test.Regel10C == null ? "" : test.Regel10C;
 
             test.Regel11A = test.Regel11A == null ? "" : test.Regel11A;
-            test.Regel11B = test.Regel11A == null ? "" : test.Regel11A;
-            test.Regel11C = test.Regel11A == null ? "" : test.Regel11A;
+            test.Regel11B = test.Regel11B == null ? "" : test.Regel11B;
+            test.Regel11C = test.Regel11C == null ? "" : test.Regel11C;
 
             test.Regel12A = test.Regel12A == null ? "" : test.Regel12A;
-            test.Regel12A = test.Regel12A == null ? "" : test.Regel12A;
-            test.Regel12A = test.Regel12A == null ? "" : test.Regel12A;
+            test.Regel12B = test.Regel12B == null ? "" : test.Regel12B;
+            test.Regel12C = test.Regel12C == null ? "" : test.Regel12C;
 
             test.Regel13A = test.Regel13A == null ? "" : test.Regel13A;
-            test.Regel13A = test.Regel13A == null ? "" : test.Regel13A;
-            test.Regel13A = test.Regel13A == null ? "" : test.Regel13A;
+            test.Regel13B = test.Regel13B == null ? "" : test.Regel13B;
+            test.Regel13C = test.Regel13C == null ? "" : test.Regel13C;
 
             test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
-            test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
-            test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
+            test.Regel14B = test.Regel14B == null ? "" : test.Regel14B;
+            test.Regel14C = test.Regel14C == null ? "" : test.Regel14C;
 
             test.Regel15 = test.Regel15 == null ? "" : test.Regel15;
             test.Regel16 = test.Regel16 == null ? "" : test.Regel16;

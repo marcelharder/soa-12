@@ -142,6 +142,12 @@ namespace api.Controllers
           return Ok(help);
         }
 
+         [HttpGet("AdditionalReportItems/{id}/{soort}")]
+        public async Task<IActionResult> getARI(int id, int soort){
+          var help = await _repo.getAdditionalReportItems(id, soort);
+          return Ok(help);
+        }
+
         #endregion
 
 

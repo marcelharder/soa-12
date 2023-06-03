@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using api.DTOs;
 using api.Entities;
@@ -15,5 +16,6 @@ namespace api.interfaces.reports
         Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort);
         Task<string> createInstitutionalReport(int hospitalNo);
         Task<string> updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
+        Task<List<Class_Item>>getAdditionalReportItems(int hospitalNo, int soort);
     }
 }
