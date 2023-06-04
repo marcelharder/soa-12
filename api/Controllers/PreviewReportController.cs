@@ -142,9 +142,9 @@ namespace api.Controllers
           return Ok(help);
         }
 
-         [HttpGet("AdditionalReportItems/{id}/{soort}")]
-        public async Task<IActionResult> getARI(int id, int soort){
-          var help = await _repo.getAdditionalReportItems(id, soort);
+         [HttpGet("AdditionalReportItems/{id}/{soort}/{which}")]
+        public async Task<IActionResult> getARI(int id, int soort,int which){
+          var help = await _repo.getAdditionalReportItems(id,soort,which);
           return Ok(help);
         }
 

@@ -215,7 +215,7 @@ namespace api.Data
             return it;
         }
 
-        public async Task<List<Class_Item>> getAdditionalReportItems(int soort, int hospitalNo)
+        public async Task<List<Class_Item>> getAdditionalReportItems(int hospitalNo, int soort, int which)
         {
             // this used to send hospital-specific details about pm-wires, iabp and circulatory support
             var l = new List<Class_Item>();
@@ -228,20 +228,76 @@ namespace api.Data
                                          select d;
             foreach (XElement org in test)
             {
-                IEnumerable<XElement> help2 = from d in org.Elements("reports").Elements("circulation_support") select d;
-                foreach (XElement f in help2)
+                switch (which)
                 {
-                    Class_Item drop = new Class_Item();
-                    drop.value = Convert.ToInt32(f.Element("items").Attribute("id").Value);
-                    drop.description = f.Element("items").Element("regel_21").Value;
-                    l.Add(drop);
-                }
+                    case 1:
+                        IEnumerable<XElement> help1 = from d in org
+                                        .Elements("reports")
+                                        .Elements("circulation_support").Elements("items")
+                                                      select d;
+                        foreach (XElement f in help1)
+                        {
+                            Class_Item drop = new Class_Item();
+                            drop.value = Convert.ToInt32(f.Attribute("id").Value);
+                            drop.description = f.Element("regel_21").Value;
+                            l.Add(drop);
+                        }; break;
+                    case 2:
+                        IEnumerable<XElement> help2 = from d in org
+                                        .Elements("reports")
+                                        .Elements("iabp").Elements("items")
+                                                      select d;
+                        foreach (XElement f in help2)
+                        {
+                            Class_Item drop = new Class_Item();
+                            drop.value = Convert.ToInt32(f.Attribute("id").Value);
+                            drop.description = f.Element("regel_22").Value;
+                            l.Add(drop);
+                        }; break;
 
+                    case 3:
+                        IEnumerable<XElement> help3 = from d in org
+                                        .Elements("reports")
+                                        .Elements("pmwires").Elements("items")
+                                                      select d;
+                        foreach (XElement f in help3)
+                        {
+                            Class_Item drop = new Class_Item();
+                            drop.value = Convert.ToInt32(f.Attribute("id").Value);
+                            drop.description = f.Element("regel_23").Value;
+                            l.Add(drop);
+                        }; break;
+                }
             }
 
             return l;
 
         }
+
+        public async Task<string> updateAdditionalReportItem(List<string> up, int hospitalNo, int soort, int which)
+        {
+            // this used to send hospital-specific details about pm-wires, iabp and circulatory support
+            var l = new List<Class_Item>();
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument doc = XDocument.Load(filename);
+            // see if there is already an XElelemt with this id
+            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            foreach (XElement org in test)
+            {
+                switch (which)
+                {
+                    case 1:; break;
+                    case 2:; break;
+                    case 3:; break;
+                }
+            }
+
+
+        }
+
 
 
 
@@ -315,6 +371,26 @@ namespace api.Data
             it.Regel1A = el.Element("regel_1_a").Value;
             it.Regel1B = el.Element("regel_1_b").Value;
             it.Regel1C = el.Element("regel_1_c").Value;
+
+            it.Regel2A = el.Element("regel_1_a").Value;
+            it.Regel2B = el.Element("regel_1_b").Value;
+            it.Regel2C = el.Element("regel_1_c").Value;
+
+            it.Regel3A = el.Element("regel_1_a").Value;
+            it.Regel3B = el.Element("regel_1_b").Value;
+            it.Regel3C = el.Element("regel_1_c").Value;
+
+            it.Regel4A = el.Element("regel_1_a").Value;
+            it.Regel4B = el.Element("regel_1_b").Value;
+            it.Regel4C = el.Element("regel_1_c").Value;
+
+            it.Regel5A = el.Element("regel_1_a").Value;
+            it.Regel5B = el.Element("regel_1_b").Value;
+            it.Regel5C = el.Element("regel_1_c").Value;
+
+            it.Regel6A = el.Element("regel_1_a").Value;
+            it.Regel6B = el.Element("regel_1_b").Value;
+            it.Regel6C = el.Element("regel_1_c").Value;
 
             /*  it.Regel2A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2A.ToString();
              it.Regel2B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2B.ToString();
