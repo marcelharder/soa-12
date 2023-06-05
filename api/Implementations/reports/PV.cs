@@ -14,6 +14,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Operators;
 
 namespace api.Data
 {
@@ -162,7 +163,6 @@ namespace api.Data
             return help;
         }
 
-
         [Authorize]
         public async Task<Class_Preview_Operative_report> resetPreViewAsync(int procedure_id)
         {
@@ -170,148 +170,176 @@ namespace api.Data
             if (sl != null)
             {
                 await DeleteAsync(sl);
-                /* if (await DeleteAsync(sl) == 1)
-                {
-                    return await getPreViewAsync(procedure_id);
-                }
-                else { return null; } */
             }
             return await getPreViewAsync(procedure_id);
 
 
         }
 
+        #region <!--institutional report suggestions -->
+        
         public async Task<InstitutionalDTO> getInstitutionalReport(int soort, int hospitalNo)
         {
-            InstitutionalDTO it = new InstitutionalDTO();
-            Hospital rep = new Hospital();
-            //  get the XML file in memory
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-            XDocument order = XDocument.Load(filename);
-            // select hospital where id attribute = hospitalNo
-            IEnumerable<XElement> help = from d in order.Descendants("hospital")
-                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                         select d;
-            foreach (XElement x in help)
+            await Task.Run(() =>
             {
-                if (help.Any())
+                InstitutionalDTO it = new InstitutionalDTO();
+                Hospital rep = new Hospital();
+                //  get the XML file in memory
+                var contentRoot = _env.ContentRootPath;
+                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+                XDocument order = XDocument.Load(filename);
+                // select hospital where id attribute = hospitalNo
+                IEnumerable<XElement> help = from d in order.Descendants("hospital")
+                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                             select d;
+                foreach (XElement x in help)
                 {
-                    foreach (XElement original in help)
+                    if (help.Any())
                     {
-                        IEnumerable<XElement> help2 = from d in original.Elements("reports")
-                        .Elements("text_by_type_of_surgery")
-                        .Elements("soort")
-                                                      where d.Attribute("id").Value == soort.ToString()
-                                                      select d;
-                        foreach (XElement f in help2)
+                        foreach (XElement original in help)
                         {
-                            it = getIDTO(it, f);
-                            checkForNullValues(it);
+                            IEnumerable<XElement> help2 = from d in original.Elements("reports")
+                            .Elements("text_by_type_of_surgery")
+                            .Elements("soort")
+                                                          where d.Attribute("id").Value == soort.ToString()
+                                                          select d;
+                            foreach (XElement f in help2)
+                            {
+                                it = getIDTO(it, f);
+                                checkForNullValues(it);
+                            }
                         }
                     }
                 }
-            }
-            return it;
+                return it;
+            });
+            return null;
         }
 
         public async Task<List<Class_Item>> getAdditionalReportItems(int hospitalNo, int soort, int which)
         {
-            // this used to send hospital-specific details about pm-wires, iabp and circulatory support
-            var l = new List<Class_Item>();
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-            XDocument doc = XDocument.Load(filename);
-            // see if there is already an XElelemt with this id
-            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
-                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                         select d;
-            foreach (XElement org in test)
+            await Task.Run(() =>
             {
-                switch (which)
+                // this used to send hospital-specific details about pm-wires, iabp and circulatory support
+                var l = new List<Class_Item>();
+                var contentRoot = _env.ContentRootPath;
+                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+                XDocument doc = XDocument.Load(filename);
+                // see if there is already an XElelemt with this id
+                IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                             select d;
+                foreach (XElement org in test)
                 {
-                    case 1:
-                        IEnumerable<XElement> help1 = from d in org
-                                        .Elements("reports")
-                                        .Elements("circulation_support").Elements("items")
-                                                      select d;
-                        foreach (XElement f in help1)
-                        {
-                            Class_Item drop = new Class_Item();
-                            drop.value = Convert.ToInt32(f.Attribute("id").Value);
-                            drop.description = f.Element("regel_21").Value;
-                            l.Add(drop);
-                        }; break;
-                    case 2:
-                        IEnumerable<XElement> help2 = from d in org
-                                        .Elements("reports")
-                                        .Elements("iabp").Elements("items")
-                                                      select d;
-                        foreach (XElement f in help2)
-                        {
-                            Class_Item drop = new Class_Item();
-                            drop.value = Convert.ToInt32(f.Attribute("id").Value);
-                            drop.description = f.Element("regel_22").Value;
-                            l.Add(drop);
-                        }; break;
+                    switch (which)
+                    {
+                        case 1:
+                            IEnumerable<XElement> help1 = from d in org
+                                            .Elements("reports")
+                                            .Elements("circulation_support").Elements("items")
+                                                          select d;
+                            foreach (XElement f in help1)
+                            {
+                                Class_Item drop = new Class_Item();
+                                drop.value = Convert.ToInt32(f.Attribute("id").Value);
+                                drop.description = f.Element("regel_21").Value;
+                                l.Add(drop);
+                            }; break;
+                        case 2:
+                            IEnumerable<XElement> help2 = from d in org
+                                            .Elements("reports")
+                                            .Elements("iabp").Elements("items")
+                                                          select d;
+                            foreach (XElement f in help2)
+                            {
+                                Class_Item drop = new Class_Item();
+                                drop.value = Convert.ToInt32(f.Attribute("id").Value);
+                                drop.description = f.Element("regel_22").Value;
+                                l.Add(drop);
+                            }; break;
 
-                    case 3:
-                        IEnumerable<XElement> help3 = from d in org
-                                        .Elements("reports")
-                                        .Elements("pmwires").Elements("items")
-                                                      select d;
-                        foreach (XElement f in help3)
-                        {
-                            Class_Item drop = new Class_Item();
-                            drop.value = Convert.ToInt32(f.Attribute("id").Value);
-                            drop.description = f.Element("regel_23").Value;
-                            l.Add(drop);
-                        }; break;
+                        case 3:
+                            IEnumerable<XElement> help3 = from d in org
+                                            .Elements("reports")
+                                            .Elements("pmwires").Elements("items")
+                                                          select d;
+                            foreach (XElement f in help3)
+                            {
+                                Class_Item drop = new Class_Item();
+                                drop.value = Convert.ToInt32(f.Attribute("id").Value);
+                                drop.description = f.Element("regel_23").Value;
+                                l.Add(drop);
+                            }; break;
+                    }
                 }
-            }
 
-            return l;
-
+                return l;
+            });
+            return null;
         }
 
-        public async Task<string> updateAdditionalReportItem(List<string> up, int hospitalNo, int soort, int which)
+        public async Task<string> updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int soort, int which)
         {
-            // this used to send hospital-specific details about pm-wires, iabp and circulatory support
-            var l = new List<Class_Item>();
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-            XDocument doc = XDocument.Load(filename);
-            // see if there is already an XElelemt with this id
-            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
-                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                         select d;
-            foreach (XElement org in test)
+            await Task.Run(() =>
             {
-                switch (which)
+                // this used to send hospital-specific details about pm-wires, iabp and circulatory support
+                
+                var contentRoot = _env.ContentRootPath;
+                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+                XDocument doc = XDocument.Load(filename);
+                // see if there is already an XElelemt with this id
+                IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                             select d;
+                foreach (XElement org in test)
                 {
-                    case 1:
-                    // get the circulatory-support
-                     var index = 0;
-                     IEnumerable<XElement> help1 = from d in org
-                                        .Elements("reports")
-                                        .Elements("circulation_support").Elements("items")
-                                                      select d;
-                        foreach (XElement f in help1)
-                        {
-                           f.Element("regel_22").SetValue(up[index]);
-                           index++;
-                        }; break;
-                                        
-                    case 2:; break;
-                    case 3:; break;
+                    switch (which)
+                    {
+                        case 1:
+                            // get the circulatory-support
+                            var index = 0;
+                            IEnumerable<XElement> help1 = from d in org
+                                               .Elements("reports")
+                                               .Elements("circulation_support").Elements("items")
+                                                          select d;
+                            foreach (XElement f in help1)
+                            {
+                                f.Element("regel_21").SetValue(up[index].description);
+                                index++;
+                            }; break;
+
+                        case 2:
+
+                            // get the iabp
+                            index = 0;
+                            IEnumerable<XElement> help2 = from d in org
+                                               .Elements("reports")
+                                               .Elements("iabp").Elements("items")
+                                                          select d;
+                            foreach (XElement f in help2)
+                            {
+                                f.Element("regel_22").SetValue(up[index].description);
+                                index++;
+                            }; break;
+                        case 3:
+
+                            // get the pm-wires
+                            index = 0;
+                            IEnumerable<XElement> help3 = from d in org
+                                               .Elements("reports")
+                                               .Elements("pmwires").Elements("items")
+                                                          select d;
+                            foreach (XElement f in help3)
+                            {
+                                f.Element("regel_23").SetValue(up[index].description);
+                                index++;
+                            }; break;
+                    }
                 }
-            }
+            });
 
-
+            return "";
         }
-
-
-
 
         public async Task<string> createInstitutionalReport(int hospitalNo)
         {
@@ -455,9 +483,9 @@ namespace api.Data
             it.Regel31 = el.Element("regel_31").Value;
             it.Regel32 = el.Element("regel_32").Value;
             it.Regel33 = el.Element("regel_33").Value;
-           
 
-            
+
+
             return it;
         }
 
@@ -642,6 +670,9 @@ namespace api.Data
 
             return test;
         }
+    
+        #endregion
+    
     }
 
 

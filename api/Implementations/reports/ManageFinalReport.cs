@@ -8,6 +8,7 @@ using api.Helpers;
 using api.interfaces.reports;
 using Microsoft.AspNetCore.Hosting;
 using System.Xml.Serialization;
+using System.Threading;
 
 namespace api.Implementations.reports
 {
@@ -18,25 +19,26 @@ namespace api.Implementations.reports
         private DataContext _context;
 
 
-
         public ManageFinalReport(IWebHostEnvironment env, SpecialReportMaps rm, DataContext context)
         {
             _env = env;
             _rm = rm;
             _context = context;
-         
-        }
-        public int deletePDF(int id){
-           var id_string = id.ToString();
-            var pathToFile = _env.ContentRootPath + "/assets/pdf/";
-            var file_name = pathToFile + id_string + ".pdf";
 
-            if (System.IO.File.Exists(file_name))
+        }
+        public int deletePDF(int id)
+        {
+            var idString = id.ToString();
+            var pathToFile = Path.Combine(_env.ContentRootPath, "assets", "pdf");
+            var fileName = Path.Combine(pathToFile, $"{idString}.pdf");
+
+            if (File.Exists(fileName))
             {
-                System.IO.File.Delete(file_name);
-                System.Threading.Thread.Sleep(20);
+                File.Delete(fileName);
+                Thread.Sleep(20);
             }
-            return 1;  
+            return 1;
+
         }
         public int addToExpiredReports(ReportTiming rt)
         {
@@ -69,13 +71,20 @@ namespace api.Implementations.reports
                     if (rep.id == id)
                     {
                         var currentTicks = DateTime.Now.Ticks;
-                        var interval = 2592000000000; // interval is set to 3 days for now
-                        if ((rep.publishTime.Ticks + interval) < currentTicks)
+                        var interval = TimeSpan.FromDays(3).Ticks;
+                        var publishTime = new DateTime(rep.publishTime.Ticks);
+                        var expirationTime = publishTime.Add(TimeSpan.FromTicks(interval));
+
+                        if (expirationTime.Ticks < currentTicks)
                         {
                             // report is expired
                             result = true;
                         }
-                        else { result = false; }
+                        else
+                        {
+                            result = false;
+                        }
+
                     }
                 }
             });
@@ -140,12 +149,10 @@ namespace api.Implementations.reports
         }
         public async Task<bool> pdfDoesNotExists(string id_string)
         {
-            var result = false;
-            var pathToFile = _env.ContentRootPath + "/assets/pdf/";
-            var file_name = pathToFile + id_string + ".pdf";
-            await Task.Run(()=>{ if (System.IO.File.Exists(file_name)){result = false;} else { result = true;}});
-           return result;
-        }
-    
+            var pathToFile = Path.Combine(_env.ContentRootPath, "assets", "pdf", $"{id_string}.pdf");
+            var fileExists = await Task.Run(() => File.Exists(pathToFile));
+            return !fileExists;
+          }
+
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using api.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace api.Controllers
 {
@@ -142,9 +143,15 @@ namespace api.Controllers
           return Ok(help);
         }
 
-         [HttpGet("AdditionalReportItems/{id}/{soort}/{which}")]
+        [HttpGet("AdditionalReportItems/{id}/{soort}/{which}")]
         public async Task<IActionResult> getARI(int id, int soort,int which){
           var help = await _repo.getAdditionalReportItems(id,soort,which);
+          return Ok(help);
+        }
+
+        [HttpPut("UpdateAdditionalReportItems/{id}/{soort}/{which}")]
+        public async Task<IActionResult> getARk([FromBody] AdditionalReportDTO l,int id, int soort,int which){
+          var help = await _repo.updateAdditionalReportItem(l,id,soort,which);
           return Ok(help);
         }
 
