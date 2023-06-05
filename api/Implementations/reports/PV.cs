@@ -289,7 +289,19 @@ namespace api.Data
             {
                 switch (which)
                 {
-                    case 1:; break;
+                    case 1:
+                    // get the circulatory-support
+                     var index = 0;
+                     IEnumerable<XElement> help1 = from d in org
+                                        .Elements("reports")
+                                        .Elements("circulation_support").Elements("items")
+                                                      select d;
+                        foreach (XElement f in help1)
+                        {
+                           f.Element("regel_22").SetValue(up[index]);
+                           index++;
+                        }; break;
+                                        
                     case 2:; break;
                     case 3:; break;
                 }
@@ -372,101 +384,80 @@ namespace api.Data
             it.Regel1B = el.Element("regel_1_b").Value;
             it.Regel1C = el.Element("regel_1_c").Value;
 
-            it.Regel2A = el.Element("regel_1_a").Value;
-            it.Regel2B = el.Element("regel_1_b").Value;
-            it.Regel2C = el.Element("regel_1_c").Value;
+            it.Regel2A = el.Element("regel_2_a").Value;
+            it.Regel2B = el.Element("regel_2_b").Value;
+            it.Regel2C = el.Element("regel_2_c").Value;
 
-            it.Regel3A = el.Element("regel_1_a").Value;
-            it.Regel3B = el.Element("regel_1_b").Value;
-            it.Regel3C = el.Element("regel_1_c").Value;
+            it.Regel3A = el.Element("regel_3_a").Value;
+            it.Regel3B = el.Element("regel_3_b").Value;
+            it.Regel3C = el.Element("regel_3_c").Value;
 
-            it.Regel4A = el.Element("regel_1_a").Value;
-            it.Regel4B = el.Element("regel_1_b").Value;
-            it.Regel4C = el.Element("regel_1_c").Value;
+            it.Regel4A = el.Element("regel_4_a").Value;
+            it.Regel4B = el.Element("regel_4_b").Value;
+            it.Regel4C = el.Element("regel_4_c").Value;
 
-            it.Regel5A = el.Element("regel_1_a").Value;
-            it.Regel5B = el.Element("regel_1_b").Value;
-            it.Regel5C = el.Element("regel_1_c").Value;
+            it.Regel5A = el.Element("regel_5_a").Value;
+            it.Regel5B = el.Element("regel_5_b").Value;
+            it.Regel5C = el.Element("regel_5_c").Value;
 
-            it.Regel6A = el.Element("regel_1_a").Value;
-            it.Regel6B = el.Element("regel_1_b").Value;
-            it.Regel6C = el.Element("regel_1_c").Value;
+            it.Regel6A = el.Element("regel_6_a").Value;
+            it.Regel6B = el.Element("regel_6_b").Value;
+            it.Regel6C = el.Element("regel_6_c").Value;
 
-            /*  it.Regel2A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2A.ToString();
-             it.Regel2B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2B.ToString();
-             it.Regel2C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel2C.ToString();
+            it.Regel7A = el.Element("regel_7_a").Value;
+            it.Regel7B = el.Element("regel_7_b").Value;
+            it.Regel7C = el.Element("regel_7_c").Value;
 
-             it.Regel3A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3A.ToString();
-             it.Regel3B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3B.ToString();
-             it.Regel3C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel3C.ToString();
+            it.Regel8A = el.Element("regel_8_a").Value;
+            it.Regel8B = el.Element("regel_8_b").Value;
+            it.Regel8C = el.Element("regel_8_c").Value;
 
-             it.Regel4A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4A.ToString();
-             it.Regel4B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4B.ToString();
-             it.Regel4C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel4C.ToString();
+            it.Regel9A = el.Element("regel_9_a").Value;
+            it.Regel9B = el.Element("regel_9_b").Value;
+            it.Regel9C = el.Element("regel_9_c").Value;
 
-             it.Regel5A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5A.ToString();
-             it.Regel5B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5B.ToString();
-             it.Regel5C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel5C.ToString();
+            it.Regel10A = el.Element("regel_10_a").Value;
+            it.Regel10B = el.Element("regel_10_b").Value;
+            it.Regel10C = el.Element("regel_10_c").Value;
 
-             it.Regel6A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6A.ToString();
-             it.Regel6B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6B.ToString();
-             it.Regel6C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel6C.ToString();
+            it.Regel11A = el.Element("regel_11_a").Value;
+            it.Regel11B = el.Element("regel_11_b").Value;
+            it.Regel11C = el.Element("regel_11_c").Value;
 
+            it.Regel12A = el.Element("regel_12_a").Value;
+            it.Regel12B = el.Element("regel_12_b").Value;
+            it.Regel12C = el.Element("regel_12_c").Value;
 
-             it.Regel7A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7A.ToString();
-             it.Regel7B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7B.ToString();
-             it.Regel7C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel7C.ToString();
+            it.Regel13A = el.Element("regel_13_a").Value;
+            it.Regel13B = el.Element("regel_13_b").Value;
+            it.Regel13C = el.Element("regel_13_c").Value;
 
-             it.Regel8A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8A.ToString();
-             it.Regel8B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8B.ToString();
-             it.Regel8C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel8C.ToString();
+            it.Regel14A = el.Element("regel_14_a").Value;
+            it.Regel14B = el.Element("regel_14_b").Value;
+            it.Regel14C = el.Element("regel_14_c").Value;
 
-             it.Regel9A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9A.ToString();
-             it.Regel9B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9B.ToString();
-             it.Regel9C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel9C.ToString();
+            it.Regel15 = el.Element("regel_15").Value;
+            it.Regel16 = el.Element("regel_16").Value;
+            it.Regel17 = el.Element("regel_17").Value;
+            it.Regel18 = el.Element("regel_18").Value;
+            it.Regel19 = el.Element("regel_19").Value;
+            it.Regel20 = el.Element("regel_20").Value;
+            it.Regel21 = el.Element("regel_21").Value;
+            it.Regel22 = el.Element("regel_22").Value;
+            it.Regel23 = el.Element("regel_23").Value;
+            it.Regel24 = el.Element("regel_24").Value;
+            it.Regel25 = el.Element("regel_25").Value;
+            it.Regel26 = el.Element("regel_26").Value;
+            it.Regel27 = el.Element("regel_27").Value;
+            it.Regel28 = el.Element("regel_28").Value;
+            it.Regel29 = el.Element("regel_29").Value;
+            it.Regel30 = el.Element("regel_30").Value;
+            it.Regel31 = el.Element("regel_31").Value;
+            it.Regel32 = el.Element("regel_32").Value;
+            it.Regel33 = el.Element("regel_33").Value;
+           
 
-             it.Regel10A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10A.ToString();
-             it.Regel10B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10B.ToString();
-             it.Regel10C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel10C.ToString();
-
-             it.Regel11A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11A.ToString();
-             it.Regel11B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11B.ToString();
-             it.Regel11C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel11C.ToString();
-
-             it.Regel12A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12A.ToString();
-             it.Regel12B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12B.ToString();
-             it.Regel12C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel12C.ToString();
-
-             it.Regel13A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13A.ToString();
-             it.Regel13B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13B.ToString();
-             it.Regel13C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel13C.ToString();
-
-             it.Regel14A = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14A.ToString();
-             it.Regel14B = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14B.ToString();
-             it.Regel14C = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel14C.ToString();
-
-             it.Regel15 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel15.ToString();
-             it.Regel16 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel16.ToString();
-             it.Regel17 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel17.ToString();
-             it.Regel18 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel18.ToString();
-             it.Regel19 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel19.ToString();
-             it.Regel20 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel20.ToString();
-             it.Regel21 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel21.ToString();
-             it.Regel22 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel22.ToString();
-             it.Regel23 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel23.ToString();
-             it.Regel24 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel24.ToString();
-             it.Regel25 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel25.ToString();
-             it.Regel26 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel26.ToString();
-             it.Regel27 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel27.ToString();
-             it.Regel28 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel28.ToString();
-             it.Regel29 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel29.ToString();
-             it.Regel30 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel30.ToString();
-             it.Regel31 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel31.ToString();
-             it.Regel32 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel32.ToString();
-             it.Regel33 = rep.Reports.TextByTypeOfSurgery.Soort[type].Regel33.ToString();
-
-
-  */
+            
             return it;
         }
 
