@@ -304,8 +304,11 @@ namespace api.Data
                                                           select d;
                             foreach (XElement f in help1)
                             {
-                                f.Element("regel_21").SetValue(up[index].description);
-                                index++;
+                              f.Element("regel_21").SetValue(up.line_1);  
+                              f.Element("regel_21").SetValue(up.line_2);  
+                              f.Element("regel_21").SetValue(up.line_3);  
+                              f.Element("regel_21").SetValue(up.line_4);  
+                              f.Element("regel_21").SetValue(up.line_5);  
                             }; break;
 
                         case 2:
@@ -318,8 +321,11 @@ namespace api.Data
                                                           select d;
                             foreach (XElement f in help2)
                             {
-                                f.Element("regel_22").SetValue(up[index].description);
-                                index++;
+                              f.Element("regel_22").SetValue(up.line_1);  
+                              f.Element("regel_22").SetValue(up.line_2);  
+                              f.Element("regel_22").SetValue(up.line_3);  
+                              f.Element("regel_22").SetValue(up.line_4);  
+                              f.Element("regel_22").SetValue(up.line_5);  
                             }; break;
                         case 3:
 
@@ -331,8 +337,11 @@ namespace api.Data
                                                           select d;
                             foreach (XElement f in help3)
                             {
-                                f.Element("regel_23").SetValue(up[index].description);
-                                index++;
+                              f.Element("regel_23").SetValue(up.line_1);  
+                              f.Element("regel_23").SetValue(up.line_2);  
+                              f.Element("regel_23").SetValue(up.line_3);  
+                              f.Element("regel_23").SetValue(up.line_4);  
+                              f.Element("regel_23").SetValue(up.line_5);  
                             }; break;
                     }
                 }
