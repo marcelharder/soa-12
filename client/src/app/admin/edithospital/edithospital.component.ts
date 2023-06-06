@@ -34,6 +34,7 @@ export class EdithospitalComponent implements OnInit {
 
   displayIR(){if(this.showInstitutionalReport){return true;}}
   backToEdit(){this.showInstitutionalReport = false;}
+  editInstitutionalReport(){this.showInstitutionalReport = true;}
 
   Cancel() { this.cancelThis.emit(1); }
   Save(){

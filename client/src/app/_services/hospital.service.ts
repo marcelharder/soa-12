@@ -39,19 +39,19 @@ export class HospitalService {
 
  
   updateAdditionalReports(id: number,soort: number,which: number, model: additionalReportModel)
-  {return this.http.put<string>(this.baseUrl = 'hospital/UpdateAdditionalReportItems/' + id + '/' + soort + '/' + which, model);}
+  {return this.http.put<string>(this.baseUrl + 'hospital/UpdateAdditionalReportItems/' + id + '/' + soort + '/' + which, model);}
   
   updateInstitutionalReport(id: number,soort: number, model: mainTextModel)
-  {return this.http.put<string>(this.baseUrl = 'hospital/InstitutionalReport/' + id + '/' + soort, model);}
+  {return this.http.put<string>(this.baseUrl + 'hospital/InstitutionalReport/' + id + '/' + soort, model);}
 
   getInstitutionalReport(id: number, soort: number)
-  {return this.http.get<mainTextModel>(this.baseUrl = 'hospital/InstitutionalReport/' + id + '/' + soort);}
+  {return this.http.get<mainTextModel>(this.baseUrl + 'hospital/InstitutionalReport/' + id + '/' + soort);}
 
   createInstitutionalReport(id:number)
-  {return this.http.post<string>(this.baseUrl = 'hospital/InstitutionalReport/' + id, null);}
+  {return this.http.post<string>(this.baseUrl + 'hospital/InstitutionalReport/' + id, null);}
 
   getAdditionalInstitutionalReport(id: number, soort: number)
-  {return this.http.get<additionalReportModel>(this.baseUrl = 'hospital/AdditionalReportItems/' + soort + '/' + id);}
+  {return this.http.get<additionalReportModel>(this.baseUrl + 'hospital/AdditionalReportItems/' + soort + '/' + id);}
  
 
 

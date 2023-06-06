@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -164,30 +165,30 @@ namespace api.Controllers
 
         #region <!-- InstitutionalReports stuff -->
         [HttpGet("InstitutionalReport/{id}/{soort}")]
-        public async Task<IActionResult> getIRep(int id, int soort){
-          var help = await _hos.getInstitutionalReport(id, soort);
+        public async Task<IActionResult> getIRep(string id, int soort){
+          var help = await _hos.getInstitutionalReport(Convert.ToInt32(id), soort);
           return Ok(help);
         }
         [HttpPut("InstitutionalReport/{id}/{soort}")]
-        public async Task<IActionResult> updateIRep([FromBody] InstitutionalDTO rep, int id, int soort){
-             var help = await _hos.updateInstitutionalReport(rep,soort,id);
+        public async Task<IActionResult> updateIRep([FromBody] InstitutionalDTO rep, string id, int soort){
+             var help = await _hos.updateInstitutionalReport(rep,soort,Convert.ToInt32(id));
           return Ok(help);
         }
         [HttpPost("InstitutionalReport/{id}")]
-        public async Task<IActionResult> createIRep(int id){
-             var help = await _hos.createInstitutionalReport(id);
+        public async Task<IActionResult> createIRep(string id){
+             var help = await _hos.createInstitutionalReport(Convert.ToInt32(id));
           return Ok(help);
         }
 
         [HttpGet("AdditionalReportItems/{id}/{soort}/{which}")]
-        public async Task<IActionResult> getARI(int id, int soort,int which){
-          var help = await _hos.getAdditionalReportItems(id,soort,which);
+        public async Task<IActionResult> getARI(string id, int soort,int which){
+          var help = await _hos.getAdditionalReportItems(Convert.ToInt32(id),soort,which);
           return Ok(help);
         }
 
         [HttpPut("UpdateAdditionalReportItems/{id}/{soort}/{which}")]
-        public async Task<IActionResult> getARk([FromBody] AdditionalReportDTO l,int id, int soort,int which){
-          var help = await _hos.updateAdditionalReportItem(l,id,soort,which);
+        public async Task<IActionResult> getARk([FromBody] AdditionalReportDTO l,string id, int soort,int which){
+          var help = await _hos.updateAdditionalReportItem(l,Convert.ToInt32(id),soort,which);
           return Ok(help);
         }
 

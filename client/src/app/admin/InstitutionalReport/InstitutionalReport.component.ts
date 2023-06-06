@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { dropItem } from 'src/app/_models/dropItem';
 import { additionalReportModel } from 'src/app/_models/InstitutionalReportModels/additionalReportModel';
 import { mainTextModel } from 'src/app/_models/InstitutionalReportModels/mainTextModel';
 import { HospitalService } from 'src/app/_services/hospital.service';
@@ -14,13 +15,17 @@ export class InstitutionalReportComponent implements OnInit {
   @Output() done = new EventEmitter<number>(); 
   pre: Partial<mainTextModel> = { };
   additional:Partial<additionalReportModel> = {};
+  additionalReportItems: dropItem[];
   
   constructor(private hos:HospitalService) { }
 
   ngOnInit() {
+    
     this.hos.getInstitutionalReport(this.hospitalNo, 1).subscribe((next)=>{
       this.pre = next;
-    })
+    });
+
+    
   }
 
   changeOperCode(soort: number){

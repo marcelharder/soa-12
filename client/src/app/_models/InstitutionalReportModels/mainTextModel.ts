@@ -1,7 +1,7 @@
 export interface mainTextModel {
-    regel_1_a: string,
-    regel_1_b: string,
-    regel_1_c: string,
+    Regel1A: string,
+    Regel1B: string,
+    Regel1C: string,
     
     regel_2_a: string,
     regel_2_b: string,
