@@ -9996,16 +9996,16 @@
       </text_by_type_of_surgery>
       <circulation_support>
         <items id="1">
-          <regel_21>wo. inotropic support.</regel_21>
+          <regel_21>Hallo-1</regel_21>
         </items>
         <items id="2">
-          <regel_21>with minimal inotropic support.</regel_21>
+          <regel_21>Hallo-2</regel_21>
         </items>
         <items id="3">
-          <regel_21>with moderate inotropic support.</regel_21>
+          <regel_21>Hallo-3</regel_21>
         </items>
         <items id="4">
-          <regel_21>with maximal inotropic support.</regel_21>
+          <regel_21>Hallo-4</regel_21>
         </items>
       </circulation_support>
       <iabp>
@@ -10013,33 +10013,33 @@
           <regel_22></regel_22>
         </items>
         <items id="1">
-          <regel_22>An IABP was used for hemodynamic instability.</regel_22>
+          <regel_22>Hallo-11</regel_22>
         </items>
         <items id="2">
-          <regel_22>An IABP was used for PTCA support.</regel_22>
+          <regel_22>Hallo-12</regel_22>
         </items>
         <items id="3">
-          <regel_22>An IABP was used for unstable anginal complaints.</regel_22>
+          <regel_22>Hallo-13</regel_22>
         </items>
         <items id="4">
-          <regel_22>An IABP was used to wean from CPB.</regel_22>
+          <regel_22>Hallo-14</regel_22>
         </items>
         <items id="5">
-          <regel_22>An IABP was inserted prophylactically.</regel_22>
+          <regel_22>Hallo-15</regel_22>
         </items>
       </iabp>
       <pmwires>
         <items id="1">
-          <regel_23>Pacemaker wires were not used.</regel_23>
+          <regel_23>Hallo-21</regel_23>
         </items>
         <items id="2">
-          <regel_23>Pacemaker wires were placed on the right atrium.</regel_23>
+          <regel_23>Hallo-22</regel_23>
         </items>
         <items id="3">
-          <regel_23>Pacemaker wires were placed on the right atrium and ventricle.</regel_23>
+          <regel_23>Hallo-23</regel_23>
         </items>
         <items id="4">
-          <regel_23>Pacemaker wires were placed on the right ventricle.</regel_23>
+          <regel_23>Hallo-24</regel_23>
         </items>
       </pmwires>
     </reports>

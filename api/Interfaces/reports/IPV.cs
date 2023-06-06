@@ -17,6 +17,6 @@ namespace api.interfaces.reports
         Task<string> createInstitutionalReport(int hospitalNo);
         Task<string> updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
         Task<List<Class_Item>>getAdditionalReportItems(int hospitalNo, int soort, int which);
-        Task<string> updateAdditionalReportItem(List<Class_Item> l, int id, int soort, int which);
+        Task<string> updateAdditionalReportItem(AdditionalReportDTO l, int id, int soort, int which);
     }
 }

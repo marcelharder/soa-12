@@ -297,52 +297,54 @@ namespace api.Data
                     {
                         case 1:
                             // get the circulatory-support
-                            var index = 0;
-                            IEnumerable<XElement> help1 = from d in org
+                           IEnumerable<XElement> help1 = from d in org
                                                .Elements("reports")
                                                .Elements("circulation_support").Elements("items")
                                                           select d;
                             foreach (XElement f in help1)
                             {
-                              f.Element("regel_21").SetValue(up.line_1);  
-                              f.Element("regel_21").SetValue(up.line_2);  
-                              f.Element("regel_21").SetValue(up.line_3);  
-                              f.Element("regel_21").SetValue(up.line_4);  
-                              f.Element("regel_21").SetValue(up.line_5);  
-                            }; break;
+                             if(f.Attribute("id").Value == "1"){f.Element("regel_21").SetValue(up.line_1);}; 
+                             if(f.Attribute("id").Value == "2"){f.Element("regel_21").SetValue(up.line_2);}; 
+                             if(f.Attribute("id").Value == "3"){f.Element("regel_21").SetValue(up.line_3);}; 
+                             if(f.Attribute("id").Value == "4"){f.Element("regel_21").SetValue(up.line_4);}; 
+                             if(f.Attribute("id").Value == "5"){f.Element("regel_21").SetValue(up.line_5);}; 
+                            }; 
+                            doc.Save(filename);
+                            break;
 
                         case 2:
 
-                            // get the iabp
-                            index = 0;
-                            IEnumerable<XElement> help2 = from d in org
+                           IEnumerable<XElement> help2 = from d in org
                                                .Elements("reports")
                                                .Elements("iabp").Elements("items")
                                                           select d;
                             foreach (XElement f in help2)
                             {
-                              f.Element("regel_22").SetValue(up.line_1);  
-                              f.Element("regel_22").SetValue(up.line_2);  
-                              f.Element("regel_22").SetValue(up.line_3);  
-                              f.Element("regel_22").SetValue(up.line_4);  
-                              f.Element("regel_22").SetValue(up.line_5);  
-                            }; break;
+                             if(f.Attribute("id").Value == "1"){f.Element("regel_22").SetValue(up.line_1);}; 
+                             if(f.Attribute("id").Value == "2"){f.Element("regel_22").SetValue(up.line_2);}; 
+                             if(f.Attribute("id").Value == "3"){f.Element("regel_22").SetValue(up.line_3);}; 
+                             if(f.Attribute("id").Value == "4"){f.Element("regel_22").SetValue(up.line_4);}; 
+                             if(f.Attribute("id").Value == "5"){f.Element("regel_22").SetValue(up.line_5);};  
+                            }; 
+                            doc.Save(filename);
+                            break;
                         case 3:
 
-                            // get the pm-wires
-                            index = 0;
                             IEnumerable<XElement> help3 = from d in org
                                                .Elements("reports")
                                                .Elements("pmwires").Elements("items")
                                                           select d;
                             foreach (XElement f in help3)
                             {
-                              f.Element("regel_23").SetValue(up.line_1);  
-                              f.Element("regel_23").SetValue(up.line_2);  
-                              f.Element("regel_23").SetValue(up.line_3);  
-                              f.Element("regel_23").SetValue(up.line_4);  
-                              f.Element("regel_23").SetValue(up.line_5);  
-                            }; break;
+                             if(f.Attribute("id").Value == "1"){f.Element("regel_23").SetValue(up.line_1);}; 
+                             if(f.Attribute("id").Value == "2"){f.Element("regel_23").SetValue(up.line_2);}; 
+                             if(f.Attribute("id").Value == "3"){f.Element("regel_23").SetValue(up.line_3);}; 
+                             if(f.Attribute("id").Value == "4"){f.Element("regel_23").SetValue(up.line_4);}; 
+                             if(f.Attribute("id").Value == "5"){f.Element("regel_23").SetValue(up.line_5);};  
+                      
+                            }; 
+                            doc.Save(filename);
+                            break;
                     }
                 }
             });
