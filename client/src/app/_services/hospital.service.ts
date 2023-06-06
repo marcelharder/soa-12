@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from './account.service';
 import { previewReport } from '../_models/previewReport';
+import { additionalReportModel } from '../_models/InstitutionalReportModels/additionalReportModel';
+import { mainTextModel } from '../_models/InstitutionalReportModels/mainTextModel';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +37,22 @@ export class HospitalService {
   addHospital(country: string, no: number) { return this.http.post<Hospital>(this.baseUrl + 'hospital/' + country + '/' + no, null); }
   deleteHospital(id: string) { return this.http.delete<number>(this.baseUrl + 'hospital/' + id); }
 
-  saveIOReport(id: string){return this.http.get<number>(this.baseUrl + 'hospital/addInstitutionalReport' + id); }
-  getIOReport(id: string){return this.http.get<previewReport>(this.baseUrl + 'hospital/getInstitutionalReport' + id); }
-  updateIOReport(rep: previewReport){return this.http.put<number>(this.baseUrl + 'hospital/updateInstitutionalReport',rep); }
+ 
+  updateAdditionalReports(id: number,soort: number,which: number, model: additionalReportModel)
+  {return this.http.put<string>(this.baseUrl = 'hospital/UpdateAdditionalReportItems/' + id + '/' + soort + '/' + which, model);}
+  
+  updateInstitutionalReport(id: number,soort: number, model: mainTextModel)
+  {return this.http.put<string>(this.baseUrl = 'hospital/InstitutionalReport/' + id + '/' + soort, model);}
+
+  getInstitutionalReport(id: number, soort: number)
+  {return this.http.get<mainTextModel>(this.baseUrl = 'hospital/InstitutionalReport/' + id + '/' + soort);}
+
+  createInstitutionalReport(id:number)
+  {return this.http.post<string>(this.baseUrl = 'hospital/InstitutionalReport/' + id, null);}
+
+  getAdditionalInstitutionalReport(id: number, soort: number)
+  {return this.http.get<additionalReportModel>(this.baseUrl = 'hospital/AdditionalReportItems/' + soort + '/' + id);}
+ 
 
 
 }

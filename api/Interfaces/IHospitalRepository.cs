@@ -25,6 +25,12 @@ namespace api.Interfaces
         Task<bool> HospitalImplementsOVI(string id);
         Task<List<Class_Hospital>> getAllFullHospitals();
         Task<List<Class_Hospital>> getAllFullHospitalsPerCountry(string id);
+
+        Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort);
+        Task<string> createInstitutionalReport(int hospitalNo);
+        Task<string> updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
+        Task<List<Class_Item>>getAdditionalReportItems(int hospitalNo, int soort, int which);
+        Task<string> updateAdditionalReportItem(AdditionalReportDTO l, int id, int soort, int which);
         
     }
 }

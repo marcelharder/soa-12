@@ -162,5 +162,36 @@ namespace api.Controllers
             return Ok(await _hos.HospitalImplementsOVI(id));
         }
 
+        #region <!-- InstitutionalReports stuff -->
+        [HttpGet("InstitutionalReport/{id}/{soort}")]
+        public async Task<IActionResult> getIRep(int id, int soort){
+          var help = await _hos.getInstitutionalReport(id, soort);
+          return Ok(help);
         }
+        [HttpPut("InstitutionalReport/{id}/{soort}")]
+        public async Task<IActionResult> updateIRep([FromBody] InstitutionalDTO rep, int id, int soort){
+             var help = await _hos.updateInstitutionalReport(rep,soort,id);
+          return Ok(help);
+        }
+        [HttpPost("InstitutionalReport/{id}")]
+        public async Task<IActionResult> createIRep(int id){
+             var help = await _hos.createInstitutionalReport(id);
+          return Ok(help);
+        }
+
+        [HttpGet("AdditionalReportItems/{id}/{soort}/{which}")]
+        public async Task<IActionResult> getARI(int id, int soort,int which){
+          var help = await _hos.getAdditionalReportItems(id,soort,which);
+          return Ok(help);
+        }
+
+        [HttpPut("UpdateAdditionalReportItems/{id}/{soort}/{which}")]
+        public async Task<IActionResult> getARk([FromBody] AdditionalReportDTO l,int id, int soort,int which){
+          var help = await _hos.updateAdditionalReportItem(l,id,soort,which);
+          return Ok(help);
+        }
+
+        #endregion
+
+    }
 }

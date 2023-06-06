@@ -158,6 +158,7 @@ import { EditRepairComponent } from './procedures/valveRepair/editRepair/editRep
 import { ValvesFromOVIComponent } from './procedures/valveRepair/valvesFromOVI/valvesFromOVI.component';
 import { OnBlurDirective } from './_directives/OnBlur.directive';
 import { HardresetPwdComponent } from './users/hardresetPwd/hardresetPwd.component';
+import { InstitutionalReportComponent } from './admin/InstitutionalReport/InstitutionalReport.component';
 
 @NgModule({
   declarations: [				
@@ -245,7 +246,8 @@ import { HardresetPwdComponent } from './users/hardresetPwd/hardresetPwd.compone
     RepairExistsComponent,
     EditRepairComponent,
     ValvesFromOVIComponent,
-    HardresetPwdComponent
+    HardresetPwdComponent,
+    InstitutionalReportComponent
    ],
   imports: [
     FileUploadModule,

@@ -5,6 +5,8 @@ import { previewReport } from '../_models/previewReport';
 import { dropItem } from '../_models/dropItem';
 import { Suggestion } from '../_models/Suggestion';
 import { reportHeader } from '../_models/reportHeader';
+import { additionalReportModel } from '../_models/InstitutionalReportModels/additionalReportModel';
+import { mainTextModel } from '../_models/InstitutionalReportModels/mainTextModel';
 
 @Injectable()
 export class PreViewReportService {
@@ -33,4 +35,11 @@ export class PreViewReportService {
 
     getReportCode(id: number) { return this.http.get<number>(this.baseUrl + 'General/loadReportCode/' + id);}
 
-    }
+    
+
+
+     
+
+
+
+}

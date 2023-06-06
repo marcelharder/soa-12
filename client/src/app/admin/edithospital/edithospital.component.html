@@ -161,9 +161,9 @@
     </h5>
   </div>
   <div class="card-body">
-    
+    <app-InstitutionalReport [hospitalNo]="pd.hospitalNo" (done)="receiveDone($event)"></app-InstitutionalReport>
   </div>
-  <div class="card-footer">
+  <div class="card-footer" *ngIf="!displayIR()">
     <div class="row">
       <div class="col-sm-6">
           <div class="btn-group" role="group" aria-label="Basic mixed styles example">
