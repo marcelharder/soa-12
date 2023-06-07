@@ -63,14 +63,37 @@ export class InstitutionalReportComponent implements OnInit {
     // update the changed report to the api
     this.hos.updateInstitutionalReport(this.hospitalNo, this.selectedProcedure, this.pre )
     .subscribe(()=>{this.alertify.success("report changed")}, (error)=>{this.alertify.error(error)});
+    
+
+
+
+
+
+
     this.done.emit(1);}
     
   Cancel(){this.done.emit(1);}
 
   onSelect(data: TabDirective): void {
     let value  = data.heading;
-    if(value === 'Main text'){this.alertify.info("Hallo");
+    if(value === 'Main text'){
+      this.alertify.info("Main selected");
+
     }
+    if(value === 'Circulation Support'){
+      this.alertify.info("Support selected");
+
+    }
+    if(value === 'IABP'){
+      this.alertify.info("IABP selected");
+
+    }
+    if(value === 'PMWires'){
+      this.alertify.info("PMWires selected");
+
+    }
+    
+    
   }
 
   activateTextInserts(soort: string){
