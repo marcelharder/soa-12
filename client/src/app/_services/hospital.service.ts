@@ -41,7 +41,7 @@ export class HospitalService {
   updateAdditionalReports(id: number,soort: number,which: number, model: additionalReportModel)
   {return this.http.put<string>(this.baseUrl + 'hospital/UpdateAdditionalReportItems/' + id + '/' + soort + '/' + which, model);}
   
-  updateInstitutionalReport(id: number,soort: number, model: mainTextModel)
+  updateInstitutionalReport(id: number,soort: number, model: Partial<mainTextModel>)
   {return this.http.put<string>(this.baseUrl + 'hospital/InstitutionalReport/' + id + '/' + soort, model);}
 
   getInstitutionalReport(id: number, soort: number)

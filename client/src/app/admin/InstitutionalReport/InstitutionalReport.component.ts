@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { dropItem } from 'src/app/_models/dropItem';
 import { additionalReportModel } from 'src/app/_models/InstitutionalReportModels/additionalReportModel';
 import { mainTextModel } from 'src/app/_models/InstitutionalReportModels/mainTextModel';
@@ -29,7 +30,7 @@ export class InstitutionalReportComponent implements OnInit {
     {value:5,description:"AVR/MVR"},
     {value:51,description:"AVR/MVP"}];
   
-  constructor(private hos:HospitalService) { }
+  constructor(private hos:HospitalService, private alertify: ToastrService) { }
 
   ngOnInit() {
     
@@ -57,7 +58,12 @@ export class InstitutionalReportComponent implements OnInit {
     })
   }
 
-  Save(){this.done.emit(1);}
+  Save(){
+    // update the changed report to the api
+    this.hos.updateInstitutionalReport(this.hospitalNo, this.selectedProcedure, this.pre )
+    .subscribe(()=>{this.alertify.success("report changed")}, (error)=>{this.alertify.error(error)});
+    this.done.emit(1);}
+    
   Cancel(){this.done.emit(1);}
 
   activateTextInserts(soort: string){
