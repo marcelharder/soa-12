@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="tab-panel">
       <tabset class="member-tabset">
-        <tab heading="Main text">
+        <tab heading="Main text" (selectTab)="onSelect($event)">
           <div class="card">
             <div class="card-body">
               <div class="d-flex flex-row">
@@ -286,18 +286,18 @@
               </div>
               <div class="row">
                 <div class="col-sm-12">
-                  
-                    <input type="text" maxlength="100" style=" width: 850px; background-color: lightgreen"
-                      class="form-control ml-2" name="line15" [(ngModel)]="pre.Regel15" />
-                  
+
+                  <input type="text" maxlength="100" style=" width: 850px; background-color: lightgreen"
+                    class="form-control ml-2" name="line15" [(ngModel)]="pre.Regel15" />
+
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-12">
-                  
-                    <input type="text" maxlength="100" style=" width: 850px; background-color: lightgreen"
-                      class="form-control ml-2" name="line16" [(ngModel)]="pre.Regel16" />
-                  
+
+                  <input type="text" maxlength="100" style=" width: 850px; background-color: lightgreen"
+                    class="form-control ml-2" name="line16" [(ngModel)]="pre.Regel16" />
+
                 </div>
               </div>
               <div class="row">
@@ -419,17 +419,164 @@
         </tab>
         <tab heading="Circulation Support">
           <div class="card">
-            <div class="card-body"></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[0]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[1]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[2]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[3]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[4]" /></div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </tab>
         <tab heading="IABP">
           <div class="card">
-            <div class="card-body"></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[0]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[1]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[2]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[3]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[4]" /></div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </tab>
         <tab heading="PMWires">
           <div class="card">
-            <div class="card-body"></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[0]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[1]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[2]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[3]" /></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <h5><span class="badge badge-secondary">1.</span></h5>
+                      </div>
+                      <div class="col-sm-6"><input type="text" maxlength="100"
+                          style=" width: 400px; background-color: lightgreen" class="form-control ml-2" name="line17"
+                          [(ngModel)]="additionalReportItems[4]" /></div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </tab>
       </tabset>

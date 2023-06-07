@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { dropItem } from 'src/app/_models/dropItem';
 import { additionalReportModel } from 'src/app/_models/InstitutionalReportModels/additionalReportModel';
@@ -16,7 +17,7 @@ export class InstitutionalReportComponent implements OnInit {
   @Output() done = new EventEmitter<number>(); 
   pre: Partial<mainTextModel> = { };
   additional:Partial<additionalReportModel> = {};
-  additionalReportItems: dropItem[];
+  additionalReportItems: dropItem[] = [];
   selectedProcedure = 0;
   text_insert:string[] = [];
   procedureChoices:dropItem[] = [
@@ -65,6 +66,12 @@ export class InstitutionalReportComponent implements OnInit {
     this.done.emit(1);}
     
   Cancel(){this.done.emit(1);}
+
+  onSelect(data: TabDirective): void {
+    let value  = data.heading;
+    if(value === 'Main text'){this.alertify.info("Hallo");
+    }
+  }
 
   activateTextInserts(soort: string){
     // clear the array first
