@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../environments/environment';
+import { AccountService } from '../_services/account.service';
 
 @Component({
     selector: 'app-photo-editor',
@@ -19,12 +20,14 @@ export class PhotoEditorComponent implements OnInit {
     baseUrl = environment.apiUrl;
 
     constructor(
-        private alertify: ToastrService
+        private alertify: ToastrService,
+        private account: AccountService
     ) { }
 
     ngOnInit() {
-    let help = JSON.parse(localStorage.getItem('user'));
-    this.token = help.Token;
+    this.account.currentUser$.subscribe((next)=>{this.token = next.Token});
+    //let help = JSON.parse(localStorage.getItem('user'));
+    //this.token = help.Token;
 
         this.initializeUploader();
     }

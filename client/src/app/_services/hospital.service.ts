@@ -38,8 +38,14 @@ export class HospitalService {
   deleteHospital(id: string) { return this.http.delete<number>(this.baseUrl + 'hospital/' + id); }
 
  
-  updateAdditionalReports(id: number,soort: number,which: number, model: additionalReportModel)
-  {return this.http.put<string>(this.baseUrl + 'hospital/UpdateAdditionalReportItems/' + id + '/' + soort + '/' + which, model);}
+  updateAdditionalReports(id: number,which: number, model: Partial<additionalReportModel>)
+  {return this.http.put<string>(this.baseUrl + 'hospital/UpdateAdditionalReportItems/' + id + '/' + which, model);}
+  
+  getAdditionalInstitutionalReport(id: number, which: number)
+  {return this.http.get<additionalReportModel>(this.baseUrl + 'hospital/AdditionalReportItems/' + id + '/' + which);}
+ 
+  
+  
   
   updateInstitutionalReport(id: number,soort: number, model: Partial<mainTextModel>)
   {return this.http.put<string>(this.baseUrl + 'hospital/InstitutionalReport/' + id + '/' + soort, model);}
@@ -50,8 +56,6 @@ export class HospitalService {
   createInstitutionalReport(id:number)
   {return this.http.post<string>(this.baseUrl + 'hospital/InstitutionalReport/' + id, null);}
 
-  getAdditionalInstitutionalReport(id: number, soort: number)
-  {return this.http.get<additionalReportModel>(this.baseUrl + 'hospital/AdditionalReportItems/' + soort + '/' + id);}
  
 
 

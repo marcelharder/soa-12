@@ -180,15 +180,15 @@ namespace api.Controllers
           return Ok(help);
         }
 
-        [HttpGet("AdditionalReportItems/{id}/{soort}/{which}")]
-        public async Task<IActionResult> getARI(string id, int soort,int which){
-          var help = await _hos.getAdditionalReportItems(Convert.ToInt32(id),soort,which);
+        [HttpGet("AdditionalReportItems/{id}/{which}")]
+        public async Task<IActionResult> getARI(string id, int which){
+          var help = await _hos.getAdditionalReportItems(Convert.ToInt32(id),which);
           return Ok(help);
         }
 
-        [HttpPut("UpdateAdditionalReportItems/{id}/{soort}/{which}")]
-        public async Task<IActionResult> getARk([FromBody] AdditionalReportDTO l,string id, int soort,int which){
-          var help = await _hos.updateAdditionalReportItem(l,Convert.ToInt32(id),soort,which);
+        [HttpPut("UpdateAdditionalReportItems/{id}/{which}")]
+        public async Task<IActionResult> getARk([FromBody] AdditionalReportDTO l,string id,int which){
+          var help = await _hos.updateAdditionalReportItem(l,Convert.ToInt32(id),which);
           return Ok(help);
         }
 

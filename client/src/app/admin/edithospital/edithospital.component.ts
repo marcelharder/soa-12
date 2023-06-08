@@ -12,7 +12,7 @@ import { HospitalService } from 'src/app/_services/hospital.service';
   styleUrls: ['./edithospital.component.css']
 })
 export class EdithospitalComponent implements OnInit {
-  @Input() pd?: Hospital;
+  @Input() pd: Hospital;
   @Output() cancelThis = new EventEmitter<number>();
 
   showInstitutionalReport = false;

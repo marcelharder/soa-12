@@ -17,9 +17,9 @@ export class InstitutionalReportComponent implements OnInit {
   @Output() done = new EventEmitter<number>(); 
   pre: Partial<mainTextModel> = { };
   additional:Partial<additionalReportModel> = {};
-  additionalReportItems: dropItem[] = [];
   selectedProcedure = 0;
   text_insert:string[] = [];
+  addRepToBeSaved = 0;
   procedureChoices:dropItem[] = [
     {value:0,description:"Choose"},
     {value:1,description:"CABG on pump"},
@@ -34,14 +34,9 @@ export class InstitutionalReportComponent implements OnInit {
   constructor(private hos:HospitalService, private alertify: ToastrService) { }
 
   ngOnInit() {
-    
-   /*  this.hos.getInstitutionalReport(this.hospitalNo, 1).subscribe((next)=>{
-      this.pre = next;
-    }); */
-
-
-
-    
+  // get the first additionalReport for circulatorysupport
+  this.hos.getAdditionalInstitutionalReport(this.hospitalNo, 1).subscribe((next)=>{this.additional = next;})
+  this.addRepToBeSaved = 1;
   }
 
   findnewreport(){
@@ -63,37 +58,31 @@ export class InstitutionalReportComponent implements OnInit {
     // update the changed report to the api
     this.hos.updateInstitutionalReport(this.hospitalNo, this.selectedProcedure, this.pre )
     .subscribe(()=>{this.alertify.success("report changed")}, (error)=>{this.alertify.error(error)});
-    
-
-
-
-
-
-
     this.done.emit(1);}
     
   Cancel(){this.done.emit(1);}
 
   onSelect(data: TabDirective): void {
+    this.saveAdditionalReport(this.addRepToBeSaved);
     let value  = data.heading;
     if(value === 'Main text'){
       this.alertify.info("Main selected");
-
     }
     if(value === 'Circulation Support'){
       this.alertify.info("Support selected");
-
+      this.addRepToBeSaved = 1;
+      this.getAdditionalReport(1);
     }
     if(value === 'IABP'){
       this.alertify.info("IABP selected");
-
+      this.addRepToBeSaved = 2;
+      this.getAdditionalReport(2);
     }
     if(value === 'PMWires'){
       this.alertify.info("PMWires selected");
-
+      this.addRepToBeSaved = 3;
+      this.getAdditionalReport(3);
     }
-    
-    
   }
 
   activateTextInserts(soort: string){
@@ -115,6 +104,16 @@ export class InstitutionalReportComponent implements OnInit {
       case "5": break;
       case "51": break;
     }
+  }
+
+  saveAdditionalReport(id: number){
+    if(this.additional.line_1 !== null){
+    this.hos.updateAdditionalReports(this.hospitalNo, id, this.additional).subscribe(
+      ()=>{}, (error)=>{this.alertify.error(error)})
+  }}
+  getAdditionalReport(id: number){
+    this.hos.getAdditionalInstitutionalReport(this.hospitalNo, id).subscribe(
+      (next)=>{this.additional = next}, (error)=>{this.alertify.error(error)})
   }
 
 }

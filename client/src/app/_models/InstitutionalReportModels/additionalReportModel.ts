@@ -4,4 +4,5 @@ export interface additionalReportModel {
     line_3: string,
     line_4: string,
     line_5: string,
+    line_6: string,
 }

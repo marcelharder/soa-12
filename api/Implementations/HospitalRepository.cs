@@ -169,7 +169,7 @@ namespace api.Implementations
 
         public async Task<HospitalForReturnDTO> GetSpecificHospitalFromInventory(string code)
         {
-            
+
             var invaddress = _com.Value.valveURL;
             var test = invaddress + "getHospitalDetails/" + code;
             Class_Hospital hos = new Class_Hospital();
@@ -186,8 +186,10 @@ namespace api.Implementations
                 using (var response = await httpClient.SendAsync(request))
                 {
                     var apiResponse = await response.Content.ReadAsStringAsync();
-                    var intermediate = System.Text.Json.JsonSerializer.Deserialize<ReceiveFromInventoryDTO>(apiResponse, new JsonSerializerOptions{
-                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true
+                    var intermediate = System.Text.Json.JsonSerializer.Deserialize<ReceiveFromInventoryDTO>(apiResponse, new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                        WriteIndented = true
                     });
                     hos.Address = intermediate.adres;
                     hos.Country = intermediate.country;
@@ -197,7 +199,7 @@ namespace api.Implementations
                     hos.ImageUrl = intermediate.image;
                 }
             }
-            
+
 
 
             return _sm.mapToHospitalForReturn(hos);
@@ -221,27 +223,28 @@ namespace api.Implementations
         public async Task<int> checkHospitalExists(string id)
         {
             var result = 0;
-            var help = await _context.Hospitals.Where(a => a.HospitalNo == id.makeSureTwoChar()).FirstOrDefaultAsync();            
-            if(help == null){
+            var help = await _context.Hospitals.Where(a => a.HospitalNo == id.makeSureTwoChar()).FirstOrDefaultAsync();
+            if (help == null)
+            {
                 result = 1;
                 // add new hospital now, first get the hospital details from the inventory
                 Class_Hospital ch = new Class_Hospital();
                 HospitalForReturnDTO hfr = new HospitalForReturnDTO();
                 hfr = await GetSpecificHospitalFromInventory(id);
-                ch = _sm.mapToHospital(hfr,ch);
+                ch = _sm.mapToHospital(hfr, ch);
                 var help2 = await addHospital(ch);
             }
             return result;
 
         }
-               #region <!--institutional report suggestions -->
-        
+        #region <!--institutional report suggestions -->
+
         public async Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort)
         {
             InstitutionalDTO it = new InstitutionalDTO();
             await Task.Run(() =>
             {
-                
+
                 Hospital rep = new Hospital();
                 //  get the XML file in memory
                 var contentRoot = _env.ContentRootPath;
@@ -270,80 +273,89 @@ namespace api.Implementations
                         }
                     }
                 }
-                
+
             });
             return it;
         }
 
-        public async Task<List<Class_Item>> getAdditionalReportItems(int hospitalNo, int soort, int which)
+        public async Task<AdditionalReportDTO> getAdditionalReportItems(int hospitalNo, int which)
         {
-            var l = new List<Class_Item>();
+            var l = new List<string>();
+            var ar = new AdditionalReportDTO();
+
             await Task.Run(() =>
             {
-                // this used to send hospital-specific details about pm-wires, iabp and circulatory support
-                
                 var contentRoot = _env.ContentRootPath;
                 var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-                XDocument doc = XDocument.Load(filename);
-                // see if there is already an XElelemt with this id
-                IEnumerable<XElement> test = from d in doc.Descendants("hospital")
-                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                             select d;
-                foreach (XElement org in test)
+                var doc = XDocument.Load(filename);
+
+                var hospital = doc.Descendants("hospital")
+                   .FirstOrDefault(h => h.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar());
+
+                if (hospital != null)
                 {
+                    var reports = hospital.Element("reports");
+
                     switch (which)
                     {
                         case 1:
-                            IEnumerable<XElement> help1 = from d in org
-                                            .Elements("reports")
-                                            .Elements("circulation_support").Elements("items")
-                                                          select d;
-                            foreach (XElement f in help1)
+                            var circulationSupport = reports.Element("circulation_support");
+                            var items = circulationSupport.Elements("items");
+                            foreach (var item in items)
                             {
-                                Class_Item drop = new Class_Item();
-                                drop.value = Convert.ToInt32(f.Attribute("id").Value);
-                                drop.description = f.Element("regel_21").Value;
-                                l.Add(drop);
-                            }; break;
+                                l.Add(item.Element("regel_21").Value);
+                            }
+                            break;
                         case 2:
-                            IEnumerable<XElement> help2 = from d in org
-                                            .Elements("reports")
-                                            .Elements("iabp").Elements("items")
-                                                          select d;
-                            foreach (XElement f in help2)
+                            var iabp = reports.Element("iabp");
+                            var iabpItems = iabp.Elements("items");
+                            foreach (var item in iabpItems)
                             {
-                                Class_Item drop = new Class_Item();
-                                drop.value = Convert.ToInt32(f.Attribute("id").Value);
-                                drop.description = f.Element("regel_22").Value;
-                                l.Add(drop);
-                            }; break;
-
+                                l.Add(item.Element("regel_22").Value);
+                            }
+                            break;
                         case 3:
-                            IEnumerable<XElement> help3 = from d in org
-                                            .Elements("reports")
-                                            .Elements("pmwires").Elements("items")
-                                                          select d;
-                            foreach (XElement f in help3)
+                            var pmwires = reports.Element("pmwires");
+                            var pmwiresItems = pmwires.Elements("items");
+                            foreach (var item in pmwiresItems)
                             {
-                                Class_Item drop = new Class_Item();
-                                drop.value = Convert.ToInt32(f.Attribute("id").Value);
-                                drop.description = f.Element("regel_23").Value;
-                                l.Add(drop);
-                            }; break;
+                                l.Add(item.Element("regel_23").Value);
+                            }
+                            break;
+                    }
+
+                    if (l.Count > 0)
+                    {
+                        ar.line_1 = l[0];
+                        if (l.Count > 1)
+                        {
+                            ar.line_2 = l[1];
+                            if (l.Count > 2)
+                            {
+                                ar.line_3 = l[2];
+                                if (l.Count > 3)
+                                {
+                                    ar.line_4 = l[3];
+                                    if (l.Count > 4)
+                                    {
+                                        ar.line_5 = l[4];
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-
-                
             });
-            return l;
-        } 
 
-        public async Task<string> updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int soort, int which)
+            return ar;
+        }
+
+        public async Task<string> updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
         {
             await Task.Run(() =>
             {
                 // this used to send hospital-specific details about pm-wires, iabp and circulatory support
-                
+
                 var contentRoot = _env.ContentRootPath;
                 var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
                 XDocument doc = XDocument.Load(filename);
@@ -357,35 +369,35 @@ namespace api.Implementations
                     {
                         case 1:
                             // get the circulatory-support
-                           IEnumerable<XElement> help1 = from d in org
-                                               .Elements("reports")
-                                               .Elements("circulation_support").Elements("items")
+                            IEnumerable<XElement> help1 = from d in org
+                                                .Elements("reports")
+                                                .Elements("circulation_support").Elements("items")
                                                           select d;
                             foreach (XElement f in help1)
                             {
-                             if(f.Attribute("id").Value == "1"){f.Element("regel_21").SetValue(up.line_1);}; 
-                             if(f.Attribute("id").Value == "2"){f.Element("regel_21").SetValue(up.line_2);}; 
-                             if(f.Attribute("id").Value == "3"){f.Element("regel_21").SetValue(up.line_3);}; 
-                             if(f.Attribute("id").Value == "4"){f.Element("regel_21").SetValue(up.line_4);}; 
-                             if(f.Attribute("id").Value == "5"){f.Element("regel_21").SetValue(up.line_5);}; 
-                            }; 
+                                if (f.Attribute("id").Value == "1") { f.Element("regel_21").SetValue(up.line_1); };
+                                if (f.Attribute("id").Value == "2") { f.Element("regel_21").SetValue(up.line_2); };
+                                if (f.Attribute("id").Value == "3") { f.Element("regel_21").SetValue(up.line_3); };
+                                if (f.Attribute("id").Value == "4") { f.Element("regel_21").SetValue(up.line_4); };
+                                if (f.Attribute("id").Value == "5") { f.Element("regel_21").SetValue(up.line_5); };
+                            };
                             doc.Save(filename);
                             break;
 
                         case 2:
 
-                           IEnumerable<XElement> help2 = from d in org
-                                               .Elements("reports")
-                                               .Elements("iabp").Elements("items")
+                            IEnumerable<XElement> help2 = from d in org
+                                                .Elements("reports")
+                                                .Elements("iabp").Elements("items")
                                                           select d;
                             foreach (XElement f in help2)
                             {
-                             if(f.Attribute("id").Value == "1"){f.Element("regel_22").SetValue(up.line_1);}; 
-                             if(f.Attribute("id").Value == "2"){f.Element("regel_22").SetValue(up.line_2);}; 
-                             if(f.Attribute("id").Value == "3"){f.Element("regel_22").SetValue(up.line_3);}; 
-                             if(f.Attribute("id").Value == "4"){f.Element("regel_22").SetValue(up.line_4);}; 
-                             if(f.Attribute("id").Value == "5"){f.Element("regel_22").SetValue(up.line_5);};  
-                            }; 
+                                if (f.Attribute("id").Value == "1") { f.Element("regel_22").SetValue(up.line_1); };
+                                if (f.Attribute("id").Value == "2") { f.Element("regel_22").SetValue(up.line_2); };
+                                if (f.Attribute("id").Value == "3") { f.Element("regel_22").SetValue(up.line_3); };
+                                if (f.Attribute("id").Value == "4") { f.Element("regel_22").SetValue(up.line_4); };
+                                if (f.Attribute("id").Value == "5") { f.Element("regel_22").SetValue(up.line_5); };
+                            };
                             doc.Save(filename);
                             break;
                         case 3:
@@ -396,13 +408,13 @@ namespace api.Implementations
                                                           select d;
                             foreach (XElement f in help3)
                             {
-                             if(f.Attribute("id").Value == "1"){f.Element("regel_23").SetValue(up.line_1);}; 
-                             if(f.Attribute("id").Value == "2"){f.Element("regel_23").SetValue(up.line_2);}; 
-                             if(f.Attribute("id").Value == "3"){f.Element("regel_23").SetValue(up.line_3);}; 
-                             if(f.Attribute("id").Value == "4"){f.Element("regel_23").SetValue(up.line_4);}; 
-                             if(f.Attribute("id").Value == "5"){f.Element("regel_23").SetValue(up.line_5);};  
-                      
-                            }; 
+                                if (f.Attribute("id").Value == "1") { f.Element("regel_23").SetValue(up.line_1); };
+                                if (f.Attribute("id").Value == "2") { f.Element("regel_23").SetValue(up.line_2); };
+                                if (f.Attribute("id").Value == "3") { f.Element("regel_23").SetValue(up.line_3); };
+                                if (f.Attribute("id").Value == "4") { f.Element("regel_23").SetValue(up.line_4); };
+                                if (f.Attribute("id").Value == "5") { f.Element("regel_23").SetValue(up.line_5); };
+
+                            };
                             doc.Save(filename);
                             break;
                     }
@@ -741,8 +753,8 @@ namespace api.Implementations
 
             return test;
         }
-    
+
         #endregion
-    
+
     }
 }
