@@ -63,7 +63,9 @@ export class InstitutionalReportComponent implements OnInit {
   Cancel(){this.done.emit(1);}
 
   onSelect(data: TabDirective): void {
-    this.saveAdditionalReport(this.addRepToBeSaved);
+
+    //this.saveAdditionalReport(this.addRepToBeSaved);
+
     let value  = data.heading;
     if(value === 'Main text'){
       this.alertify.info("Main selected");
@@ -111,6 +113,7 @@ export class InstitutionalReportComponent implements OnInit {
     this.hos.updateAdditionalReports(this.hospitalNo, id, this.additional).subscribe(
       ()=>{}, (error)=>{this.alertify.error(error)})
   }}
+
   getAdditionalReport(id: number){
     this.hos.getAdditionalInstitutionalReport(this.hospitalNo, id).subscribe(
       (next)=>{this.additional = next}, (error)=>{this.alertify.error(error)})

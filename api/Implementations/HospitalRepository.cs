@@ -339,6 +339,10 @@ namespace api.Implementations
                                     if (l.Count > 4)
                                     {
                                         ar.line_5 = l[4];
+                                        if(l.Count > 5)
+                                        {
+                                            ar.line_6 = l[5];
+                                        }
                                     }
                                 }
                             }
@@ -352,6 +356,7 @@ namespace api.Implementations
 
         public async Task<string> updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
         {
+            up = checkforNullInAdditionalReport(up);
             await Task.Run(() =>
             {
                 // this used to send hospital-specific details about pm-wires, iabp and circulatory support
@@ -375,11 +380,12 @@ namespace api.Implementations
                                                           select d;
                             foreach (XElement f in help1)
                             {
-                                if (f.Attribute("id").Value == "1") { f.Element("regel_21").SetValue(up.line_1); };
-                                if (f.Attribute("id").Value == "2") { f.Element("regel_21").SetValue(up.line_2); };
-                                if (f.Attribute("id").Value == "3") { f.Element("regel_21").SetValue(up.line_3); };
-                                if (f.Attribute("id").Value == "4") { f.Element("regel_21").SetValue(up.line_4); };
-                                if (f.Attribute("id").Value == "5") { f.Element("regel_21").SetValue(up.line_5); };
+                                if (f.Attribute("id").Value == "0") { f.Element("regel_21").SetValue(up.line_1); };
+                                if (f.Attribute("id").Value == "1") { f.Element("regel_21").SetValue(up.line_2); };
+                                if (f.Attribute("id").Value == "2") { f.Element("regel_21").SetValue(up.line_3); };
+                                if (f.Attribute("id").Value == "3") { f.Element("regel_21").SetValue(up.line_4); };
+                                if (f.Attribute("id").Value == "4") { f.Element("regel_21").SetValue(up.line_5); };
+                                if (f.Attribute("id").Value == "5") { f.Element("regel_21").SetValue(up.line_6); };
                             };
                             doc.Save(filename);
                             break;
@@ -392,11 +398,14 @@ namespace api.Implementations
                                                           select d;
                             foreach (XElement f in help2)
                             {
-                                if (f.Attribute("id").Value == "1") { f.Element("regel_22").SetValue(up.line_1); };
-                                if (f.Attribute("id").Value == "2") { f.Element("regel_22").SetValue(up.line_2); };
-                                if (f.Attribute("id").Value == "3") { f.Element("regel_22").SetValue(up.line_3); };
-                                if (f.Attribute("id").Value == "4") { f.Element("regel_22").SetValue(up.line_4); };
-                                if (f.Attribute("id").Value == "5") { f.Element("regel_22").SetValue(up.line_5); };
+
+                                if (f.Attribute("id").Value == "0") { f.Element("regel_22").SetValue(up.line_1); };
+                                if (f.Attribute("id").Value == "1") { f.Element("regel_22").SetValue(up.line_2); };
+                                if (f.Attribute("id").Value == "2") { f.Element("regel_22").SetValue(up.line_3); };
+                                if (f.Attribute("id").Value == "3") { f.Element("regel_22").SetValue(up.line_4); };
+                                if (f.Attribute("id").Value == "4") { f.Element("regel_22").SetValue(up.line_5); };
+                                if (f.Attribute("id").Value == "5") { f.Element("regel_22").SetValue(up.line_6); };
+                           
                             };
                             doc.Save(filename);
                             break;
@@ -408,11 +417,13 @@ namespace api.Implementations
                                                           select d;
                             foreach (XElement f in help3)
                             {
-                                if (f.Attribute("id").Value == "1") { f.Element("regel_23").SetValue(up.line_1); };
-                                if (f.Attribute("id").Value == "2") { f.Element("regel_23").SetValue(up.line_2); };
-                                if (f.Attribute("id").Value == "3") { f.Element("regel_23").SetValue(up.line_3); };
-                                if (f.Attribute("id").Value == "4") { f.Element("regel_23").SetValue(up.line_4); };
-                                if (f.Attribute("id").Value == "5") { f.Element("regel_23").SetValue(up.line_5); };
+                                if (f.Attribute("id").Value == "0") { f.Element("regel_23").SetValue(up.line_1); };
+                                if (f.Attribute("id").Value == "1") { f.Element("regel_23").SetValue(up.line_2); };
+                                if (f.Attribute("id").Value == "2") { f.Element("regel_23").SetValue(up.line_3); };
+                                if (f.Attribute("id").Value == "3") { f.Element("regel_23").SetValue(up.line_4); };
+                                if (f.Attribute("id").Value == "4") { f.Element("regel_23").SetValue(up.line_5); };
+                                if (f.Attribute("id").Value == "5") { f.Element("regel_23").SetValue(up.line_6); };
+                              
 
                             };
                             doc.Save(filename);
@@ -422,6 +433,18 @@ namespace api.Implementations
             });
 
             return "";
+        }
+
+        private AdditionalReportDTO checkforNullInAdditionalReport(AdditionalReportDTO up)
+        {
+
+            up.line_1 = up.line_1 == null ? "" : up.line_1;
+            up.line_2 = up.line_2 == null ? "" : up.line_2;
+            up.line_3 = up.line_3 == null ? "" : up.line_3;
+            up.line_4 = up.line_4 == null ? "" : up.line_4;
+            up.line_5 = up.line_5 == null ? "" : up.line_5;
+            up.line_6 = up.line_6 == null ? "" : up.line_6;
+            return up;
         }
 
         public async Task<string> createInstitutionalReport(int hospitalNo)

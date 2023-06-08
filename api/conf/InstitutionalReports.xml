@@ -8,14 +8,14 @@
           <regel_1_b>the saphenous vein harvested from</regel_1_b>
           <regel_1_c>and the wound was closed.</regel_1_c>
           <regel_2_a>Subsequently the left internal mammary artery was dissected and prepared for grafting. </regel_2_a>
-          <regel_2_b />
+          <regel_2_b></regel_2_b>
           <regel_2_c>The patient was</regel_2_c>
           <regel_3_a>heparinized and pursestring sutures placed on the ascending aorta and right atrium. After checking the ACT, the</regel_3_a>
-          <regel_3_b />
-          <regel_3_c />
+          <regel_3_b></regel_3_b>
+          <regel_3_c></regel_3_c>
           <regel_4_a>aortic and venous cannula introduced and the cardiopulmonary bypass started. The temperature of the patient</regel_4_a>
-          <regel_4_b />
-          <regel_4_c />
+          <regel_4_b></regel_4_b>
+          <regel_4_c></regel_4_c>
           <regel_5_a>was taken down to</regel_5_a>
           <regel_5_b></regel_5_b>
           <regel_5_c>degrees Centigrade. The aorta clamped and we used</regel_5_c>
@@ -23,48 +23,48 @@
           <regel_6_b></regel_6_b>
           <regel_6_c>to arrest the heart.</regel_6_c>
           <regel_7_a>The cardioplegia was frequently repeated during the cross clamp time.</regel_7_a>
-          <regel_7_b />
-          <regel_7_c />
+          <regel_7_b></regel_7_b>
+          <regel_7_c></regel_7_c>
           <regel_8_a>After inspection of the coronary arteries we decided to do the following distal anastomoses:</regel_8_a>
-          <regel_8_b />
-          <regel_8_c />
-          <regel_9_a />
-          <regel_9_b />
-          <regel_9_c />
-          <regel_10_a />
-          <regel_10_b />
-          <regel_10_c />
-          <regel_11_a />
-          <regel_11_b />
-          <regel_11_c />
-          <regel_12_a />
-          <regel_12_b />
-          <regel_12_c />
-          <regel_13_a />
-          <regel_13_b />
-          <regel_13_c />
-          <regel_14_a />
-          <regel_14_b />
-          <regel_14_c />
+          <regel_8_b></regel_8_b>
+          <regel_8_c></regel_8_c>
+          <regel_9_a></regel_9_a>
+          <regel_9_b></regel_9_b>
+          <regel_9_c></regel_9_c>
+          <regel_10_a></regel_10_a>
+          <regel_10_b></regel_10_b>
+          <regel_10_c></regel_10_c>
+          <regel_11_a></regel_11_a>
+          <regel_11_b></regel_11_b>
+          <regel_11_c></regel_11_c>
+          <regel_12_a></regel_12_a>
+          <regel_12_b></regel_12_b>
+          <regel_12_c></regel_12_c>
+          <regel_13_a></regel_13_a>
+          <regel_13_b></regel_13_b>
+          <regel_13_c></regel_13_c>
+          <regel_14_a></regel_14_a>
+          <regel_14_b></regel_14_b>
+          <regel_14_c></regel_14_c>
           <regel_15>After completion of the proximal anastomoses we removed the aortic crossclamp and rewarmed</regel_15>
           <regel_16>the patient to a normothermic core temperature. The heart regained sinusrhythm spontaneously</regel_16>
-          <regel_17 />
-          <regel_18 />
-          <regel_19 />
-          <regel_20 />
-          <regel_21 />
-          <regel_22 />
-          <regel_23 />
-          <regel_24 />
-          <regel_25 />
-          <regel_26 />
-          <regel_27 />
-          <regel_28 />
-          <regel_29 />
-          <regel_30 />
-          <regel_31 />
-          <regel_32 />
-          <regel_33 />
+          <regel_17></regel_17>
+          <regel_18></regel_18>
+          <regel_19></regel_19>
+          <regel_20></regel_20>
+          <regel_21></regel_21>
+          <regel_22></regel_22>
+          <regel_23></regel_23>
+          <regel_24></regel_24>
+          <regel_25></regel_25>
+          <regel_26></regel_26>
+          <regel_27></regel_27>
+          <regel_28></regel_28>
+          <regel_29></regel_29>
+          <regel_30></regel_30>
+          <regel_31></regel_31>
+          <regel_32></regel_32>
+          <regel_33></regel_33>
         </soort>
         <soort id="2">
           <regel_1_a>Iodine, draping of the patient,</regel_1_a>
@@ -523,37 +523,35 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
-          <regel_22></regel_22>
-        </items>
-        <items id="2">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
-        <items id="3">
+        <items id="2">
           <regel_22>An IABP was used for PTCA support.</regel_22>
         </items>
-        <items id="4">
+        <items id="3">
           <regel_22>An IABP was used for unstable anginal complaints.</regel_22>
         </items>
-        <items id="5">
+        <items id="4">
           <regel_22>An IABP was used to wean from CPB.</regel_22>
+        </items>
+        <items id="5">
+          <regel_22>An IABP was inserted prophylactically, oh zo.</regel_22>
         </items>
       </iabp>
       <pmwires>
         <items id="1">
-          <regel_23>Pacemaker wires were not used.</regel_23>
-        </items>
-        <items id="2">
           <regel_23>Pacemaker wires were placed on the right atrium.</regel_23>
         </items>
-        <items id="3">
+        <items id="2">
           <regel_23>Pacemaker wires were placed on the right atrium and ventricle.</regel_23>
         </items>
+        <items id="3">
+          <regel_23>Pacemaker wires were placed on the right ventricle. yeah</regel_23>
+        </items>
         <items id="4">
-          <regel_23>Pacemaker wires were placed on the right ventricle.</regel_23>
+          <regel_23></regel_23>
         </items>
       </pmwires>
     </reports>
@@ -1081,9 +1079,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -1639,9 +1635,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -1660,16 +1654,16 @@
       </iabp>
       <pmwires>
         <items id="1">
-          <regel_23>Hallo-now</regel_23>
+          <regel_23></regel_23>
         </items>
         <items id="2">
-          <regel_23>Hallo-ook</regel_23>
+          <regel_23></regel_23>
         </items>
         <items id="3">
-          <regel_23>Hallo-23</regel_23>
+          <regel_23>An IABP was used for hemodynamic instability.</regel_23>
         </items>
         <items id="4">
-          <regel_23>Hallo-24</regel_23>
+          <regel_23>An IABP was used for PTCA support.</regel_23>
         </items>
       </pmwires>
     </reports>
@@ -2197,9 +2191,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -2755,9 +2747,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -3313,9 +3303,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -3871,9 +3859,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -4429,9 +4415,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -4987,9 +4971,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -5545,9 +5527,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -6103,9 +6083,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -6661,9 +6639,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -7219,9 +7195,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -7777,9 +7751,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -8335,9 +8307,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -8893,9 +8863,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -9451,9 +9419,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -10009,9 +9975,7 @@
         </items>
       </circulation_support>
       <iabp>
-        <items id="0">
-          <regel_22></regel_22>
-        </items>
+        
         <items id="1">
           <regel_22>Hallo-11</regel_22>
         </items>
