@@ -16,7 +16,13 @@ export class InstitutionalReportComponent implements OnInit {
   @Input() hospitalNo: number;
   @Output() done = new EventEmitter<number>(); 
   pre: Partial<mainTextModel> = { };
-  additional:Partial<additionalReportModel> = {};
+  additional:additionalReportModel = {
+    line_1:"",
+    line_2:"",
+    line_3:'',
+    line_4:'',
+    line_5:''
+  };
   selectedProcedure = 0;
   text_insert:string[] = [];
   addRepToBeSaved = 0;
@@ -64,7 +70,7 @@ export class InstitutionalReportComponent implements OnInit {
 
   onSelect(data: TabDirective): void {
 
-    //this.saveAdditionalReport(this.addRepToBeSaved);
+    this.saveAdditionalReport(this.addRepToBeSaved);
 
     let value  = data.heading;
     if(value === 'Main text'){

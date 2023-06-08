@@ -30,7 +30,7 @@ namespace api.Interfaces
         Task<string> createInstitutionalReport(int hospitalNo);
         Task<string> updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
         Task<AdditionalReportDTO>getAdditionalReportItems(int hospitalNo,int which);
-        Task<string> updateAdditionalReportItem(AdditionalReportDTO l, int id, int which);
+        Task<int> updateAdditionalReportItem(AdditionalReportDTO l, int id, int which);
         
     }
 }

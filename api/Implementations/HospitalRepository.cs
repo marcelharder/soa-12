@@ -351,13 +351,11 @@ namespace api.Implementations
             return ar;
         }
 
-        public async Task<string> updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
+        public async Task<int> updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
         {
             up = checkforNullInAdditionalReport(up);
             await Task.Run(() =>
             {
-                // this used to send hospital-specific details about pm-wires, iabp and circulatory support
-
                 var contentRoot = _env.ContentRootPath;
                 var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
                 XDocument doc = XDocument.Load(filename);
@@ -400,7 +398,6 @@ namespace api.Implementations
                                 if (f.Attribute("id").Value == "3") { f.Element("regel_22").SetValue(up.line_3); };
                                 if (f.Attribute("id").Value == "4") { f.Element("regel_22").SetValue(up.line_4); };
                                 if (f.Attribute("id").Value == "5") { f.Element("regel_22").SetValue(up.line_5); };
-                           
                             };
                             doc.Save(filename);
                             break;
@@ -425,9 +422,8 @@ namespace api.Implementations
                     }
                 }
             });
-
-            return "";
-        }
+            return 1;
+       }
 
         private AdditionalReportDTO checkforNullInAdditionalReport(AdditionalReportDTO up)
         {
