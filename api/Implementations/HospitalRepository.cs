@@ -333,8 +333,6 @@ namespace api.Implementations
 
             return "";
         }
-
-
         #endregion
 
         #region <!--additionalReport stuff-->
@@ -346,6 +344,13 @@ namespace api.Implementations
             var jsonData = System.IO.File.ReadAllText(filename);
             var oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
             var selectedARep = oldjson.Find(x => x.hospitalNo == hospitalNo);
+
+            if(selectedARep == null){
+                this.createAdditionalReport(hospitalNo);
+                jsonData = System.IO.File.ReadAllText(filename);
+                oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
+                selectedARep = oldjson.Find(x => x.hospitalNo == hospitalNo);
+               }
 
 
             switch (which)
@@ -529,18 +534,6 @@ namespace api.Implementations
 
         #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
         private AdditionalReportDTO checkforNullInAdditionalReport(AdditionalReportDTO up)
         {
 
@@ -551,7 +544,6 @@ namespace api.Implementations
             up.line_5 = up.line_5 == null ? "" : up.line_5;
             return up;
         }
-
         private InstitutionalDTO getIDTO(InstitutionalDTO it, XElement el)
         {
             it.Regel1A = el.Element("regel_1_a").Value;
@@ -634,7 +626,6 @@ namespace api.Implementations
 
             return it;
         }
-
         private XElement changeHospitalNo(XElement el, string help)
         {
 
@@ -643,7 +634,6 @@ namespace api.Implementations
             return el;
 
         }
-
         private XElement updateXML(XElement el, InstitutionalDTO rep)
         {
             rep = checkForNullValues(rep);
@@ -733,7 +723,6 @@ namespace api.Implementations
 
             return el;
         }
-
         private InstitutionalDTO checkForNullValues(InstitutionalDTO test)
         {
             test.Regel1A = test.Regel1A == null ? "" : test.Regel1A;
@@ -816,7 +805,6 @@ namespace api.Implementations
 
             return test;
         }
-
         #endregion
 
     }
