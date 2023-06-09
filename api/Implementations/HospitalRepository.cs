@@ -340,71 +340,84 @@ namespace api.Implementations
         #region <!--additionalReport stuff-->
         public AdditionalReportDTO getAdditionalReportItems(int hospitalNo, int which)
         {
-            var l = new List<string>();
             var ar = new AdditionalReportDTO();
-
-
             var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-            var doc = XDocument.Load(filename);
+            var filename = Path.Combine(contentRoot, "assets/json/additionalReportItems.json");
+            var jsonData = System.IO.File.ReadAllText(filename);
+            var oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
+            var selectedARep = oldjson.Find(x => x.hospitalNo == hospitalNo);
 
-            var hospital = doc.Descendants("hospital")
-               .FirstOrDefault(h => h.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar());
 
-            if (hospital != null)
+            switch (which)
             {
-                var reports = hospital.Element("reports");
-
-                switch (which)
-                {
-                    case 1:
-                        var circulationSupport = reports.Element("circulation_support");
-                        var items = circulationSupport.Elements("items");
-                        foreach (var item in items)
-                        {
-                            l.Add(item.Element("regel_21").Value);
-                        }
-                        break;
-                    case 2:
-                        var iabp = reports.Element("iabp");
-                        var iabpItems = iabp.Elements("items");
-                        foreach (var item in iabpItems)
-                        {
-                            l.Add(item.Element("regel_22").Value);
-                        }
-                        break;
-                    case 3:
-                        var pmwires = reports.Element("pmwires");
-                        var pmwiresItems = pmwires.Elements("items");
-                        foreach (var item in pmwiresItems)
-                        {
-                            l.Add(item.Element("regel_23").Value);
-                        }
-                        break;
-                }
-
-                if (l.Count > 0)
-                {
-                    ar.line_1 = l[0];
-                    if (l.Count > 1)
-                    {
-                        ar.line_2 = l[1];
-                        if (l.Count > 2)
-                        {
-                            ar.line_3 = l[2];
-                            if (l.Count > 3)
-                            {
-                                ar.line_4 = l[3];
-                                if (l.Count > 4)
-                                {
-                                    ar.line_5 = l[4];
-
-                                }
-                            }
-                        }
-                    }
-                }
+                // request circ. support items
+                case 1:
+                    ar.line_1 = selectedARep.circulation_support.items[0].content;
+                    ar.line_2 = selectedARep.circulation_support.items[1].content;
+                    ar.line_3 = selectedARep.circulation_support.items[2].content;
+                    ar.line_4 = selectedARep.circulation_support.items[3].content;
+                    ar.line_5 = selectedARep.circulation_support.items[4].content;
+                    break;
+                // request iabp. support items
+                case 2:
+                    ar.line_1 = selectedARep.iabp.items[0].content;
+                    ar.line_2 = selectedARep.iabp.items[1].content;
+                    ar.line_3 = selectedARep.iabp.items[2].content;
+                    ar.line_4 = selectedARep.iabp.items[3].content;
+                    ar.line_5 = selectedARep.iabp.items[4].content;
+                    break;
+                // request pmwires. support items
+                case 3:
+                    ar.line_1 = selectedARep.pmwires.items[0].content;
+                    ar.line_2 = selectedARep.pmwires.items[1].content;
+                    ar.line_3 = selectedARep.pmwires.items[2].content;
+                    ar.line_4 = selectedARep.pmwires.items[3].content;
+                    ar.line_5 = selectedARep.pmwires.items[4].content;
+                    break;
             }
+
+
+            /*  var contentRoot = _env.ContentRootPath;
+             var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+             var doc = XDocument.Load(filename);
+
+             var hospital = doc.Descendants("hospital")
+                .FirstOrDefault(h => h.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar());
+
+             if (hospital != null)
+             {
+                 var reports = hospital.Element("reports");
+
+                 switch (which)
+                 {
+                     case 1:
+                         var circulationSupport = reports.Element("circulation_support");
+                         var items = circulationSupport.Elements("items");
+                         foreach (var item in items)
+                         {
+                             l.Add(item.Element("regel_21").Value);
+                         }
+                         break;
+                     case 2:
+                         var iabp = reports.Element("iabp");
+                         var iabpItems = iabp.Elements("items");
+                         foreach (var item in iabpItems)
+                         {
+                             l.Add(item.Element("regel_22").Value);
+                         }
+                         break;
+                     case 3:
+                         var pmwires = reports.Element("pmwires");
+                         var pmwiresItems = pmwires.Elements("items");
+                         foreach (var item in pmwiresItems)
+                         {
+                             l.Add(item.Element("regel_23").Value);
+                         }
+                         break;
+                 } */
+
+
+
             return ar;
         }
         public int updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
@@ -414,34 +427,36 @@ namespace api.Implementations
             var filename = Path.Combine(contentRoot, "assets/json/additionalReportItems.json");
             var jsonData = System.IO.File.ReadAllText(filename);
             var oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
- 
+
             var selectedARep = oldjson.Find(x => x.hospitalNo == hospitalNo);
 
-            switch(which){
-                
-                case 1:
-                selectedARep.circulation_support.items.RemoveAll(x => x.content != "");
-                var h = new Data.Item();
-                h.content = up.line_1;
-                selectedARep.circulation_support.items.Add(h);
-                
-                h = new Data.Item();
-                h.content = up.line_2;
-                selectedARep.circulation_support.items.Add(h);
-               
-                h = new Data.Item();
-                h.content = up.line_3;
-                selectedARep.circulation_support.items.Add(h);
-               
-                h = new Data.Item();
-                h.content = up.line_4;
-                selectedARep.circulation_support.items.Add(h);
+            switch (which)
+            {
 
-                h = new Data.Item();
-                h.content = up.line_5;
-                selectedARep.circulation_support.items.Add(h);
-                           
-                break;
+                case 1:
+                    selectedARep.circulation_support.items.RemoveAll(item => item.content != "");
+                    selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_1 });
+                    selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_2 });
+                    selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_3 });
+                    selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_4 });
+                    selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_5 });
+                    break;
+                case 2:
+                    selectedARep.iabp.items.RemoveAll(item => item.content != "");
+                    selectedARep.iabp.items.Add(new Data.Item { content = up.line_1 });
+                    selectedARep.iabp.items.Add(new Data.Item { content = up.line_2 });
+                    selectedARep.iabp.items.Add(new Data.Item { content = up.line_3 });
+                    selectedARep.iabp.items.Add(new Data.Item { content = up.line_4 });
+                    selectedARep.iabp.items.Add(new Data.Item { content = up.line_5 });
+                    break;
+                case 3:
+                    selectedARep.pmwires.items.RemoveAll(item => item.content != "");
+                    selectedARep.pmwires.items.Add(new Data.Item { content = up.line_1 });
+                    selectedARep.pmwires.items.Add(new Data.Item { content = up.line_2 });
+                    selectedARep.pmwires.items.Add(new Data.Item { content = up.line_3 });
+                    selectedARep.pmwires.items.Add(new Data.Item { content = up.line_4 });
+                    selectedARep.pmwires.items.Add(new Data.Item { content = up.line_5 });
+                    break;
             }
 
             var test_json = System.Text.Json.JsonSerializer.Serialize(oldjson);
