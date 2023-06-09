@@ -239,191 +239,306 @@ namespace api.Implementations
         }
         #region <!--institutional report suggestions -->
 
-        public async Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort)
+        public InstitutionalDTO getInstitutionalReport(int hospitalNo, int soort)
         {
             InstitutionalDTO it = new InstitutionalDTO();
-            await Task.Run(() =>
-            {
 
-                Hospital rep = new Hospital();
-                //  get the XML file in memory
-                var contentRoot = _env.ContentRootPath;
-                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-                XDocument order = XDocument.Load(filename);
-                // select hospital where id attribute = hospitalNo
-                IEnumerable<XElement> help = from d in order.Descendants("hospital")
-                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                             select d;
-                foreach (XElement x in help)
+
+            Hospital rep = new Hospital();
+            //  get the XML file in memory
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument order = XDocument.Load(filename);
+            // select hospital where id attribute = hospitalNo
+            IEnumerable<XElement> help = from d in order.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            foreach (XElement x in help)
+            {
+                if (help.Any())
                 {
-                    if (help.Any())
+                    foreach (XElement original in help)
                     {
-                        foreach (XElement original in help)
+                        IEnumerable<XElement> help2 = from d in original.Elements("reports")
+                        .Elements("text_by_type_of_surgery")
+                        .Elements("soort")
+                                                      where d.Attribute("id").Value == soort.ToString()
+                                                      select d;
+                        foreach (XElement f in help2)
                         {
-                            IEnumerable<XElement> help2 = from d in original.Elements("reports")
-                            .Elements("text_by_type_of_surgery")
-                            .Elements("soort")
-                                                          where d.Attribute("id").Value == soort.ToString()
-                                                          select d;
-                            foreach (XElement f in help2)
-                            {
-                                it = getIDTO(it, f);
-                                checkForNullValues(it);
-                            }
+                            it = getIDTO(it, f);
+                            checkForNullValues(it);
                         }
                     }
                 }
-
-            });
+            }
             return it;
         }
 
-        public async Task<AdditionalReportDTO> getAdditionalReportItems(int hospitalNo, int which)
+        public AdditionalReportDTO getAdditionalReportItems(int hospitalNo, int which)
         {
             var l = new List<string>();
             var ar = new AdditionalReportDTO();
 
-            await Task.Run(() =>
+
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            var doc = XDocument.Load(filename);
+
+            var hospital = doc.Descendants("hospital")
+               .FirstOrDefault(h => h.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar());
+
+            if (hospital != null)
             {
-                var contentRoot = _env.ContentRootPath;
-                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-                var doc = XDocument.Load(filename);
+                var reports = hospital.Element("reports");
 
-                var hospital = doc.Descendants("hospital")
-                   .FirstOrDefault(h => h.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar());
-
-                if (hospital != null)
+                switch (which)
                 {
-                    var reports = hospital.Element("reports");
-
-                    switch (which)
-                    {
-                        case 1:
-                            var circulationSupport = reports.Element("circulation_support");
-                            var items = circulationSupport.Elements("items");
-                            foreach (var item in items)
-                            {
-                                l.Add(item.Element("regel_21").Value);
-                            }
-                            break;
-                        case 2:
-                            var iabp = reports.Element("iabp");
-                            var iabpItems = iabp.Elements("items");
-                            foreach (var item in iabpItems)
-                            {
-                                l.Add(item.Element("regel_22").Value);
-                            }
-                            break;
-                        case 3:
-                            var pmwires = reports.Element("pmwires");
-                            var pmwiresItems = pmwires.Elements("items");
-                            foreach (var item in pmwiresItems)
-                            {
-                                l.Add(item.Element("regel_23").Value);
-                            }
-                            break;
-                    }
-
-                    if (l.Count > 0)
-                    {
-                        ar.line_1 = l[0];
-                        if (l.Count > 1)
+                    case 1:
+                        var circulationSupport = reports.Element("circulation_support");
+                        var items = circulationSupport.Elements("items");
+                        foreach (var item in items)
                         {
-                            ar.line_2 = l[1];
-                            if (l.Count > 2)
+                            l.Add(item.Element("regel_21").Value);
+                        }
+                        break;
+                    case 2:
+                        var iabp = reports.Element("iabp");
+                        var iabpItems = iabp.Elements("items");
+                        foreach (var item in iabpItems)
+                        {
+                            l.Add(item.Element("regel_22").Value);
+                        }
+                        break;
+                    case 3:
+                        var pmwires = reports.Element("pmwires");
+                        var pmwiresItems = pmwires.Elements("items");
+                        foreach (var item in pmwiresItems)
+                        {
+                            l.Add(item.Element("regel_23").Value);
+                        }
+                        break;
+                }
+
+                if (l.Count > 0)
+                {
+                    ar.line_1 = l[0];
+                    if (l.Count > 1)
+                    {
+                        ar.line_2 = l[1];
+                        if (l.Count > 2)
+                        {
+                            ar.line_3 = l[2];
+                            if (l.Count > 3)
                             {
-                                ar.line_3 = l[2];
-                                if (l.Count > 3)
+                                ar.line_4 = l[3];
+                                if (l.Count > 4)
                                 {
-                                    ar.line_4 = l[3];
-                                    if (l.Count > 4)
-                                    {
-                                        ar.line_5 = l[4];
-                                       
-                                    }
+                                    ar.line_5 = l[4];
+
                                 }
                             }
                         }
                     }
                 }
-            });
-
+            }
             return ar;
         }
 
-        public async Task<int> updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
+        public int updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
         {
             up = checkforNullInAdditionalReport(up);
-            await Task.Run(() =>
+
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument doc = XDocument.Load(filename);
+            // see if there is already an XElelemt with this id
+            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            foreach (XElement org in test)
             {
-                var contentRoot = _env.ContentRootPath;
-                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-                XDocument doc = XDocument.Load(filename);
-                // see if there is already an XElelemt with this id
-                IEnumerable<XElement> test = from d in doc.Descendants("hospital")
-                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                             select d;
-                foreach (XElement org in test)
+                switch (which)
                 {
-                    switch (which)
-                    {
-                        case 1:
-                            // get the circulatory-support
-                            IEnumerable<XElement> help1 = from d in org
-                                                .Elements("reports")
-                                                .Elements("circulation_support").Elements("items")
-                                                          select d;
-                            foreach (XElement f in help1)
-                            {
-                                if (f.Attribute("id").Value == "1") { f.Element("regel_21").SetValue(up.line_1); };
-                                if (f.Attribute("id").Value == "2") { f.Element("regel_21").SetValue(up.line_2); };
-                                if (f.Attribute("id").Value == "3") { f.Element("regel_21").SetValue(up.line_3); };
-                                if (f.Attribute("id").Value == "4") { f.Element("regel_21").SetValue(up.line_4); };
-                                if (f.Attribute("id").Value == "5") { f.Element("regel_21").SetValue(up.line_5); };
-                            };
-                            doc.Save(filename);
-                            break;
+                    case 1:
+                        // get the circulatory-support
+                        IEnumerable<XElement> help1 = from d in org
+                                            .Elements("reports")
+                                            .Elements("circulation_support").Elements("items")
+                                                      select d;
+                        foreach (XElement f in help1)
+                        {
+                            if (f.Attribute("id").Value == "1") { f.Element("regel_21").SetValue(up.line_1); };
+                            if (f.Attribute("id").Value == "2") { f.Element("regel_21").SetValue(up.line_2); };
+                            if (f.Attribute("id").Value == "3") { f.Element("regel_21").SetValue(up.line_3); };
+                            if (f.Attribute("id").Value == "4") { f.Element("regel_21").SetValue(up.line_4); };
+                            if (f.Attribute("id").Value == "5") { f.Element("regel_21").SetValue(up.line_5); };
+                        };
+                        doc.Save(filename);
+                        break;
 
-                        case 2:
+                    case 2:
 
-                            IEnumerable<XElement> help2 = from d in org
-                                                .Elements("reports")
-                                                .Elements("iabp").Elements("items")
-                                                          select d;
-                            foreach (XElement f in help2)
-                            {
+                        IEnumerable<XElement> help2 = from d in org
+                                            .Elements("reports")
+                                            .Elements("iabp").Elements("items")
+                                                      select d;
+                        foreach (XElement f in help2)
+                        {
 
-                                if (f.Attribute("id").Value == "1") { f.Element("regel_22").SetValue(up.line_1); };
-                                if (f.Attribute("id").Value == "2") { f.Element("regel_22").SetValue(up.line_2); };
-                                if (f.Attribute("id").Value == "3") { f.Element("regel_22").SetValue(up.line_3); };
-                                if (f.Attribute("id").Value == "4") { f.Element("regel_22").SetValue(up.line_4); };
-                                if (f.Attribute("id").Value == "5") { f.Element("regel_22").SetValue(up.line_5); };
-                            };
-                            doc.Save(filename);
-                            break;
-                        case 3:
+                            if (f.Attribute("id").Value == "1") { f.Element("regel_22").SetValue(up.line_1); };
+                            if (f.Attribute("id").Value == "2") { f.Element("regel_22").SetValue(up.line_2); };
+                            if (f.Attribute("id").Value == "3") { f.Element("regel_22").SetValue(up.line_3); };
+                            if (f.Attribute("id").Value == "4") { f.Element("regel_22").SetValue(up.line_4); };
+                            if (f.Attribute("id").Value == "5") { f.Element("regel_22").SetValue(up.line_5); };
+                        };
+                        doc.Save(filename);
+                        break;
+                    case 3:
 
-                            IEnumerable<XElement> help3 = from d in org
-                                               .Elements("reports")
-                                               .Elements("pmwires").Elements("items")
-                                                          select d;
-                            foreach (XElement f in help3)
-                            {
-                                if (f.Attribute("id").Value == "1") { f.Element("regel_23").SetValue(up.line_1); };
-                                if (f.Attribute("id").Value == "2") { f.Element("regel_23").SetValue(up.line_2); };
-                                if (f.Attribute("id").Value == "3") { f.Element("regel_23").SetValue(up.line_3); };
-                                if (f.Attribute("id").Value == "4") { f.Element("regel_23").SetValue(up.line_4); };
-                                if (f.Attribute("id").Value == "5") { f.Element("regel_23").SetValue(up.line_5); };
-                               
+                        IEnumerable<XElement> help3 = from d in org
+                                           .Elements("reports")
+                                           .Elements("pmwires").Elements("items")
+                                                      select d;
+                        foreach (XElement f in help3)
+                        {
+                            if (f.Attribute("id").Value == "1") { f.Element("regel_23").SetValue(up.line_1); };
+                            if (f.Attribute("id").Value == "2") { f.Element("regel_23").SetValue(up.line_2); };
+                            if (f.Attribute("id").Value == "3") { f.Element("regel_23").SetValue(up.line_3); };
+                            if (f.Attribute("id").Value == "4") { f.Element("regel_23").SetValue(up.line_4); };
+                            if (f.Attribute("id").Value == "5") { f.Element("regel_23").SetValue(up.line_5); };
 
-                            };
-                            doc.Save(filename);
-                            break;
-                    }
+
+                        };
+                        doc.Save(filename);
+                        break;
                 }
-            });
+            }
+
             return 1;
-       }
+        }
+
+
+        public string createAdditionalReport(int hospitalNo)
+        {
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "assets/json/additionalReportItems.json");
+            var jsonData = System.IO.File.ReadAllText(filename);
+            var oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
+
+
+            var circ = new Data.CirculationSupport
+            {
+                items = new List<Data.Item>
+    {
+        new Data.Item { content = "Circ-1" },
+        new Data.Item { content = "Circ-2" },
+        new Data.Item { content = "Circ-3" },
+        new Data.Item { content = "Circ-4" },
+        new Data.Item { content = "Circ-5" }
+    }
+            };
+
+            var iabp = new Data.Iabp
+            {
+                items = new List<Data.Item>
+    {
+        new Data.Item { content = "iabp_1" },
+        new Data.Item { content = "iabp_2" },
+        new Data.Item { content = "iabp_3" },
+        new Data.Item { content = "iabp_4" },
+        new Data.Item { content = "iabp_5" }
+    }
+            };
+
+            var pm = new Data.Pmwires
+            {
+                items = new List<Data.Item>
+    {
+        new Data.Item { content = "pm_1" },
+        new Data.Item { content = "pm_2" },
+        new Data.Item { content = "pm_3" },
+        new Data.Item { content = "pm_4" },
+        new Data.Item { content = "pm_5" }
+    }
+            };
+
+            var test = new Root
+            {
+                hospitalNo = hospitalNo,
+                circulation_support = circ,
+                iabp = iabp,
+                pmwires = pm
+            };
+
+            oldjson.Add(test);
+
+            var test_json = System.Text.Json.JsonSerializer.Serialize(oldjson);
+
+            File.WriteAllText(filename, test_json);
+
+            // now write this to the json file 
+            Console.WriteLine(oldjson);
+
+            return test_json;
+        }
+        public string createInstitutionalReport(int hospitalNo)
+        {
+            var result = "";
+            // get the xml file in memory
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument doc = XDocument.Load(filename);
+            // see if there is already an XElelemt with this id
+            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            if (test.Any()) { result = "this hospital already exists"; }
+            else
+            {
+                // get the element for the correct language
+                IEnumerable<XElement> help = from d in doc.Descendants("hospital")
+                                             where d.Attribute("id").Value == "99999"
+                                             select d;
+                foreach (XElement x in help)
+                {
+                    XElement copy = new XElement(x);
+                    copy = changeHospitalNo(copy, hospitalNo.ToString().makeSureTwoChar());
+                    doc.Root.Add(copy);
+                }
+                doc.Save(filename);
+                result = "created";
+            }
+            return result;
+        }
+        public string updateInstitutionalReport(InstitutionalDTO rep, int soort, int hospitalNo)
+        {
+
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument doc = XDocument.Load(filename);
+            IEnumerable<XElement> help = from d in doc.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            if (help.Any())
+            {
+                foreach (XElement original in help)
+                {
+                    IEnumerable<XElement> help2 = from d in original.Elements("reports")
+                    .Elements("text_by_type_of_surgery")
+                    .Elements("soort")
+                                                  where d.Attribute("id").Value == soort.ToString()
+                                                  select d;
+                    foreach (XElement f in help2)
+                    {
+                        updateXML(f, rep);
+                    }
+                    doc.Save(filename);
+                }
+            }
+
+            return "";
+        }
 
         private AdditionalReportDTO checkforNullInAdditionalReport(AdditionalReportDTO up)
         {
@@ -436,70 +551,6 @@ namespace api.Implementations
             return up;
         }
 
-        public async Task<string> createInstitutionalReport(int hospitalNo)
-        {
-            var result = "";
-            await Task.Run(() =>
-            {
-
-                // get the xml file in memory
-                var contentRoot = _env.ContentRootPath;
-                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-                XDocument doc = XDocument.Load(filename);
-                // see if there is already an XElelemt with this id
-                IEnumerable<XElement> test = from d in doc.Descendants("hospital")
-                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                             select d;
-                if (test.Any()) { result = "this hospital already exists"; }
-                else
-                {
-                    // get the element for the correct language
-                    IEnumerable<XElement> help = from d in doc.Descendants("hospital")
-                                                 where d.Attribute("id").Value == "99999"
-                                                 select d;
-                    foreach (XElement x in help)
-                    {
-                        XElement copy = new XElement(x);
-                        copy = changeHospitalNo(copy, hospitalNo.ToString().makeSureTwoChar());
-                        doc.Root.Add(copy);
-                    }
-                    doc.Save(filename);
-                    result = "created";
-                }
-
-            });
-            return result;
-        }
-
-        public async Task<string> updateInstitutionalReport(InstitutionalDTO rep, int soort, int hospitalNo)
-        {
-            await Task.Run(() =>
-            {
-                var contentRoot = _env.ContentRootPath;
-                var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-                XDocument doc = XDocument.Load(filename);
-                IEnumerable<XElement> help = from d in doc.Descendants("hospital")
-                                             where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                             select d;
-                if (help.Any())
-                {
-                    foreach (XElement original in help)
-                    {
-                        IEnumerable<XElement> help2 = from d in original.Elements("reports")
-                        .Elements("text_by_type_of_surgery")
-                        .Elements("soort")
-                                                      where d.Attribute("id").Value == soort.ToString()
-                                                      select d;
-                        foreach (XElement f in help2)
-                        {
-                            updateXML(f, rep);
-                        }
-                        doc.Save(filename);
-                    }
-                }
-            });
-            return "";
-        }
 
         private InstitutionalDTO getIDTO(InstitutionalDTO it, XElement el)
         {

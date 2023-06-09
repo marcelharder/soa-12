@@ -165,30 +165,30 @@ namespace api.Controllers
 
         #region <!-- InstitutionalReports stuff -->
         [HttpGet("InstitutionalReport/{id}/{soort}")]
-        public async Task<IActionResult> getIRep(string id, int soort){
-          var help = await _hos.getInstitutionalReport(Convert.ToInt32(id), soort);
+        public IActionResult getIRep(string id, int soort){
+          var help = _hos.getInstitutionalReport(Convert.ToInt32(id), soort);
           return Ok(help);
         }
         [HttpPut("InstitutionalReport/{id}/{soort}")]
-        public async Task<IActionResult> updateIRep([FromBody] InstitutionalDTO rep, string id, int soort){
-             var help = await _hos.updateInstitutionalReport(rep,soort,Convert.ToInt32(id));
+        public IActionResult updateIRep([FromBody] InstitutionalDTO rep, string id, int soort){
+             var help = _hos.updateInstitutionalReport(rep,soort,Convert.ToInt32(id));
           return Ok(help);
         }
         [HttpPost("InstitutionalReport/{id}")]
-        public async Task<IActionResult> createIRep(string id){
-             var help = await _hos.createInstitutionalReport(Convert.ToInt32(id));
+        public IActionResult createIRep(string id){
+             var help = _hos.createInstitutionalReport(Convert.ToInt32(id));
           return Ok(help);
         }
 
         [HttpGet("AdditionalReportItems/{id}/{which}")]
-        public async Task<IActionResult> getARI(string id, int which){
-          var help = await _hos.getAdditionalReportItems(Convert.ToInt32(id),which);
+        public IActionResult getARI(string id, int which){
+          var help = _hos.getAdditionalReportItems(Convert.ToInt32(id),which);
           return Ok(help);
         }
 
         [HttpPut("UpdateAdditionalReportItems/{id}/{which}")]
-        public async Task<IActionResult> getARk([FromBody] AdditionalReportDTO l,string id,int which){
-          var help = await _hos.updateAdditionalReportItem(l,Convert.ToInt32(id),which);
+        public IActionResult getARk([FromBody] AdditionalReportDTO l,string id,int which){
+          var help = _hos.updateAdditionalReportItem(l,Convert.ToInt32(id),which);
           return Ok(help);
         }
 

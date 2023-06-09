@@ -510,7 +510,7 @@
       </text_by_type_of_surgery>
       <circulation_support>
         <items id="1">
-          <regel_21>wo. inotropic support oh zo i het maar net</regel_21>
+          <regel_21>wo. inotropic support oh zo i het maar net ook een keer</regel_21>
         </items>
         <items id="2">
           <regel_21>with minimal inotropic support.</regel_21>
@@ -9388,51 +9388,6 @@
           <regel_33 />
         </soort>
       </text_by_type_of_surgery>
-      <circulation_support>
-        <items id="1">
-          <regel_21>wo. inotropic support.</regel_21>
-        </items>
-        <items id="2">
-          <regel_21>with minimal inotropic support.</regel_21>
-        </items>
-        <items id="3">
-          <regel_21>with moderate inotropic support.</regel_21>
-        </items>
-        <items id="4">
-          <regel_21>with maximal inotropic support.</regel_21>
-        </items>
-      </circulation_support>
-      <iabp>
-        <items id="1">
-          <regel_22>An IABP was used for hemodynamic instability.</regel_22>
-        </items>
-        <items id="2">
-          <regel_22>An IABP was used for PTCA support.</regel_22>
-        </items>
-        <items id="3">
-          <regel_22>An IABP was used for unstable anginal complaints.</regel_22>
-        </items>
-        <items id="4">
-          <regel_22>An IABP was used to wean from CPB.</regel_22>
-        </items>
-        <items id="5">
-          <regel_22>An IABP was inserted prophylactically.</regel_22>
-        </items>
-      </iabp>
-      <pmwires>
-        <items id="1">
-          <regel_23>Pacemaker wires were not used.</regel_23>
-        </items>
-        <items id="2">
-          <regel_23>Pacemaker wires were placed on the right atrium.</regel_23>
-        </items>
-        <items id="3">
-          <regel_23>Pacemaker wires were placed on the right atrium and ventricle.</regel_23>
-        </items>
-        <items id="4">
-          <regel_23>Pacemaker wires were placed on the right ventricle.</regel_23>
-        </items>
-      </pmwires>
     </reports>
   </hospital>
   <hospital id="98">
