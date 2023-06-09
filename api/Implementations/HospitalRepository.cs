@@ -239,6 +239,8 @@ namespace api.Implementations
         }
         #region <!--institutional report suggestions -->
 
+
+        #region <!--institutional stuff-->
         public InstitutionalDTO getInstitutionalReport(int hospitalNo, int soort)
         {
             InstitutionalDTO it = new InstitutionalDTO();
@@ -274,7 +276,68 @@ namespace api.Implementations
             }
             return it;
         }
+        public string createInstitutionalReport(int hospitalNo)
+        {
+            var result = "";
+            // get the xml file in memory
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument doc = XDocument.Load(filename);
+            // see if there is already an XElelemt with this id
+            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            if (test.Any()) { result = "this hospital already exists"; }
+            else
+            {
+                // get the element for the correct language
+                IEnumerable<XElement> help = from d in doc.Descendants("hospital")
+                                             where d.Attribute("id").Value == "99999"
+                                             select d;
+                foreach (XElement x in help)
+                {
+                    XElement copy = new XElement(x);
+                    copy = changeHospitalNo(copy, hospitalNo.ToString().makeSureTwoChar());
+                    doc.Root.Add(copy);
+                }
+                doc.Save(filename);
+                result = "created";
+            }
+            return result;
+        }
+        public string updateInstitutionalReport(InstitutionalDTO rep, int soort, int hospitalNo)
+        {
 
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
+            XDocument doc = XDocument.Load(filename);
+            IEnumerable<XElement> help = from d in doc.Descendants("hospital")
+                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
+                                         select d;
+            if (help.Any())
+            {
+                foreach (XElement original in help)
+                {
+                    IEnumerable<XElement> help2 = from d in original.Elements("reports")
+                    .Elements("text_by_type_of_surgery")
+                    .Elements("soort")
+                                                  where d.Attribute("id").Value == soort.ToString()
+                                                  select d;
+                    foreach (XElement f in help2)
+                    {
+                        updateXML(f, rep);
+                    }
+                    doc.Save(filename);
+                }
+            }
+
+            return "";
+        }
+
+
+        #endregion
+
+        #region <!--additionalReport stuff-->
         public AdditionalReportDTO getAdditionalReportItems(int hospitalNo, int which)
         {
             var l = new List<string>();
@@ -344,81 +407,47 @@ namespace api.Implementations
             }
             return ar;
         }
-
         public int updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
         {
             up = checkforNullInAdditionalReport(up);
-
             var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-            XDocument doc = XDocument.Load(filename);
-            // see if there is already an XElelemt with this id
-            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
-                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                         select d;
-            foreach (XElement org in test)
-            {
-                switch (which)
-                {
-                    case 1:
-                        // get the circulatory-support
-                        IEnumerable<XElement> help1 = from d in org
-                                            .Elements("reports")
-                                            .Elements("circulation_support").Elements("items")
-                                                      select d;
-                        foreach (XElement f in help1)
-                        {
-                            if (f.Attribute("id").Value == "1") { f.Element("regel_21").SetValue(up.line_1); };
-                            if (f.Attribute("id").Value == "2") { f.Element("regel_21").SetValue(up.line_2); };
-                            if (f.Attribute("id").Value == "3") { f.Element("regel_21").SetValue(up.line_3); };
-                            if (f.Attribute("id").Value == "4") { f.Element("regel_21").SetValue(up.line_4); };
-                            if (f.Attribute("id").Value == "5") { f.Element("regel_21").SetValue(up.line_5); };
-                        };
-                        doc.Save(filename);
-                        break;
+            var filename = Path.Combine(contentRoot, "assets/json/additionalReportItems.json");
+            var jsonData = System.IO.File.ReadAllText(filename);
+            var oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
+ 
+            var selectedARep = oldjson.Find(x => x.hospitalNo == hospitalNo);
 
-                    case 2:
+            switch(which){
+                
+                case 1:
+                selectedARep.circulation_support.items.RemoveAll(x => x.content != "");
+                var h = new Data.Item();
+                h.content = up.line_1;
+                selectedARep.circulation_support.items.Add(h);
+                
+                h = new Data.Item();
+                h.content = up.line_2;
+                selectedARep.circulation_support.items.Add(h);
+               
+                h = new Data.Item();
+                h.content = up.line_3;
+                selectedARep.circulation_support.items.Add(h);
+               
+                h = new Data.Item();
+                h.content = up.line_4;
+                selectedARep.circulation_support.items.Add(h);
 
-                        IEnumerable<XElement> help2 = from d in org
-                                            .Elements("reports")
-                                            .Elements("iabp").Elements("items")
-                                                      select d;
-                        foreach (XElement f in help2)
-                        {
-
-                            if (f.Attribute("id").Value == "1") { f.Element("regel_22").SetValue(up.line_1); };
-                            if (f.Attribute("id").Value == "2") { f.Element("regel_22").SetValue(up.line_2); };
-                            if (f.Attribute("id").Value == "3") { f.Element("regel_22").SetValue(up.line_3); };
-                            if (f.Attribute("id").Value == "4") { f.Element("regel_22").SetValue(up.line_4); };
-                            if (f.Attribute("id").Value == "5") { f.Element("regel_22").SetValue(up.line_5); };
-                        };
-                        doc.Save(filename);
-                        break;
-                    case 3:
-
-                        IEnumerable<XElement> help3 = from d in org
-                                           .Elements("reports")
-                                           .Elements("pmwires").Elements("items")
-                                                      select d;
-                        foreach (XElement f in help3)
-                        {
-                            if (f.Attribute("id").Value == "1") { f.Element("regel_23").SetValue(up.line_1); };
-                            if (f.Attribute("id").Value == "2") { f.Element("regel_23").SetValue(up.line_2); };
-                            if (f.Attribute("id").Value == "3") { f.Element("regel_23").SetValue(up.line_3); };
-                            if (f.Attribute("id").Value == "4") { f.Element("regel_23").SetValue(up.line_4); };
-                            if (f.Attribute("id").Value == "5") { f.Element("regel_23").SetValue(up.line_5); };
-
-
-                        };
-                        doc.Save(filename);
-                        break;
-                }
+                h = new Data.Item();
+                h.content = up.line_5;
+                selectedARep.circulation_support.items.Add(h);
+                           
+                break;
             }
 
+            var test_json = System.Text.Json.JsonSerializer.Serialize(oldjson);
+            File.WriteAllText(filename, test_json);
             return 1;
         }
-
-
         public string createAdditionalReport(int hospitalNo)
         {
             var contentRoot = _env.ContentRootPath;
@@ -482,63 +511,20 @@ namespace api.Implementations
 
             return test_json;
         }
-        public string createInstitutionalReport(int hospitalNo)
-        {
-            var result = "";
-            // get the xml file in memory
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-            XDocument doc = XDocument.Load(filename);
-            // see if there is already an XElelemt with this id
-            IEnumerable<XElement> test = from d in doc.Descendants("hospital")
-                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                         select d;
-            if (test.Any()) { result = "this hospital already exists"; }
-            else
-            {
-                // get the element for the correct language
-                IEnumerable<XElement> help = from d in doc.Descendants("hospital")
-                                             where d.Attribute("id").Value == "99999"
-                                             select d;
-                foreach (XElement x in help)
-                {
-                    XElement copy = new XElement(x);
-                    copy = changeHospitalNo(copy, hospitalNo.ToString().makeSureTwoChar());
-                    doc.Root.Add(copy);
-                }
-                doc.Save(filename);
-                result = "created";
-            }
-            return result;
-        }
-        public string updateInstitutionalReport(InstitutionalDTO rep, int soort, int hospitalNo)
-        {
 
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/InstitutionalReports.xml");
-            XDocument doc = XDocument.Load(filename);
-            IEnumerable<XElement> help = from d in doc.Descendants("hospital")
-                                         where d.Attribute("id").Value == hospitalNo.ToString().makeSureTwoChar()
-                                         select d;
-            if (help.Any())
-            {
-                foreach (XElement original in help)
-                {
-                    IEnumerable<XElement> help2 = from d in original.Elements("reports")
-                    .Elements("text_by_type_of_surgery")
-                    .Elements("soort")
-                                                  where d.Attribute("id").Value == soort.ToString()
-                                                  select d;
-                    foreach (XElement f in help2)
-                    {
-                        updateXML(f, rep);
-                    }
-                    doc.Save(filename);
-                }
-            }
+        #endregion
 
-            return "";
-        }
+
+
+
+
+
+
+
+
+
+
+
 
         private AdditionalReportDTO checkforNullInAdditionalReport(AdditionalReportDTO up)
         {
@@ -550,7 +536,6 @@ namespace api.Implementations
             up.line_5 = up.line_5 == null ? "" : up.line_5;
             return up;
         }
-
 
         private InstitutionalDTO getIDTO(InstitutionalDTO it, XElement el)
         {
