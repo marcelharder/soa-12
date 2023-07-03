@@ -108,11 +108,11 @@ export class ListhospitalsComponent implements OnInit {
     this.editFlag = 0;
   }
   receiveHospital(hos: Hospital){
-
     this.selectedHospital = hos;
     // push this new hospital to the api
 
     // don't forget to load the institutional report
+
     this.addFlag = 0;
     this.listFlag = 0;
     this.editFlag = 1;

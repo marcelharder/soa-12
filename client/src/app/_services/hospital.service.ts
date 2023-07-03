@@ -38,7 +38,7 @@ export class HospitalService {
   deleteHospital(id: string) { return this.http.delete<number>(this.baseUrl + 'hospital/' + id); }
 
  
-  updateAdditionalReports(id: number,which: number, model: Partial<additionalReportModel>)
+  updateAdditionalReports(id: number,which: number, model: additionalReportModel)
   {return this.http.put<string>(this.baseUrl + 'hospital/UpdateAdditionalReportItems/' + id + '/' + which, model);}
   
   getAdditionalInstitutionalReport(id: number, which: number)

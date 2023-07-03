@@ -320,66 +320,66 @@
         </soort>
         <soort id="41">
           <regel_1_a>Iodine, draping and full sternotomy.</regel_1_a>
-          <regel_1_b />
-          <regel_1_c />
+          <regel_1_b>hallo</regel_1_b>
+          <regel_1_c></regel_1_c>
           <regel_2_a>The pericardium opened with a T-shaped incision and suspended to the sternal retractor. Careful hemostasis</regel_2_a>
-          <regel_2_b />
-          <regel_2_c />
+          <regel_2_b></regel_2_b>
+          <regel_2_c></regel_2_c>
           <regel_3_a>of the sternal edges and thymus remnants. The heparin was given and we placed pursestring sutures</regel_3_a>
-          <regel_3_b />
-          <regel_3_c />
+          <regel_3_b></regel_3_b>
+          <regel_3_c></regel_3_c>
           <regel_4_a>on the ascending aorta and right atrium. Cardiopulmonary bypass was started after we checked the ACT</regel_4_a>
-          <regel_4_b />
-          <regel_4_c />
+          <regel_4_b></regel_4_b>
+          <regel_4_c></regel_4_c>
           <regel_5_a>The temperature of the patient was brought down to</regel_5_a>
           <regel_5_b>degrees Centigrade and the aortic cross clamp placed</regel_5_b>
-          <regel_5_c />
+          <regel_5_c></regel_5_c>
           <regel_6_a>We arrested the heart with</regel_6_a>
-          <regel_6_b />
-          <regel_6_c />
+          <regel_6_b></regel_6_b>
+          <regel_6_c></regel_6_c>
           <regel_7_a>We opened the left atrium and obtained a good view of the mitral valve. The valve had pliable leaflets</regel_7_a>
-          <regel_7_b />
-          <regel_7_c />
+          <regel_7_b></regel_7_b>
+          <regel_7_c></regel_7_c>
           <regel_8_a>and we decided to attempt a mitral valve repair. The valve was repaired by</regel_8_a>
-          <regel_8_b />
-          <regel_8_c />
-          <regel_9_a />
-          <regel_9_b />
-          <regel_9_c />
-          <regel_10_a />
-          <regel_10_b />
-          <regel_10_c />
-          <regel_11_a />
-          <regel_11_b />
-          <regel_11_c />
-          <regel_12_a />
-          <regel_12_b />
-          <regel_12_c />
-          <regel_13_a />
-          <regel_13_b />
-          <regel_13_c />
-          <regel_14_a />
-          <regel_14_b />
-          <regel_14_c />
+          <regel_8_b></regel_8_b>
+          <regel_8_c></regel_8_c>
+          <regel_9_a></regel_9_a>
+          <regel_9_b></regel_9_b>
+          <regel_9_c></regel_9_c>
+          <regel_10_a></regel_10_a>
+          <regel_10_b></regel_10_b>
+          <regel_10_c></regel_10_c>
+          <regel_11_a></regel_11_a>
+          <regel_11_b></regel_11_b>
+          <regel_11_c></regel_11_c>
+          <regel_12_a></regel_12_a>
+          <regel_12_b></regel_12_b>
+          <regel_12_c></regel_12_c>
+          <regel_13_a></regel_13_a>
+          <regel_13_b></regel_13_b>
+          <regel_13_c></regel_13_c>
+          <regel_14_a></regel_14_a>
+          <regel_14_b></regel_14_b>
+          <regel_14_c></regel_14_c>
           <regel_15>The mitral valve repair was checked after discontinuation of the CPB with an intraoperative echo</regel_15>
           <regel_16>and found to be acceptable. The heart regained sinusrhythm</regel_16>
-          <regel_17 />
-          <regel_18 />
-          <regel_19 />
-          <regel_20 />
-          <regel_21 />
-          <regel_22 />
-          <regel_23 />
-          <regel_24 />
-          <regel_25 />
-          <regel_26 />
-          <regel_27 />
-          <regel_28 />
-          <regel_29 />
-          <regel_30 />
-          <regel_31 />
-          <regel_32 />
-          <regel_33 />
+          <regel_17></regel_17>
+          <regel_18></regel_18>
+          <regel_19></regel_19>
+          <regel_20></regel_20>
+          <regel_21></regel_21>
+          <regel_22></regel_22>
+          <regel_23></regel_23>
+          <regel_24></regel_24>
+          <regel_25></regel_25>
+          <regel_26></regel_26>
+          <regel_27></regel_27>
+          <regel_28></regel_28>
+          <regel_29></regel_29>
+          <regel_30></regel_30>
+          <regel_31></regel_31>
+          <regel_32></regel_32>
+          <regel_33></regel_33>
         </soort>
         <soort id="5">
           <regel_1_a>Iodine, draping and full midsternotomy.</regel_1_a>
@@ -510,7 +510,7 @@
       </text_by_type_of_surgery>
       <circulation_support>
         <items id="1">
-          <regel_21>wo. inotropic support.</regel_21>
+          <regel_21>wo. inotropic support oh zo i het maar net ook een keer</regel_21>
         </items>
         <items id="2">
           <regel_21>with minimal inotropic support.</regel_21>
@@ -523,9 +523,8 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
-          <regel_22>An IABP was used for hemodynamic instability.</regel_22>
+          <regel_22>An IABP was used for hemodynamic instability.dus</regel_22>
         </items>
         <items id="2">
           <regel_22>An IABP was used for PTCA support.</regel_22>
@@ -537,21 +536,21 @@
           <regel_22>An IABP was used to wean from CPB.</regel_22>
         </items>
         <items id="5">
-          <regel_22>An IABP was inserted prophylactically, oh zo.</regel_22>
+          <regel_22>An IABP was inserted prophylactically.</regel_22>
         </items>
       </iabp>
       <pmwires>
         <items id="1">
-          <regel_23>Pacemaker wires were placed on the right atrium.</regel_23>
+          <regel_23>Pacemaker wires were not used.hier ook pm wires</regel_23>
         </items>
         <items id="2">
-          <regel_23>Pacemaker wires were placed on the right atrium and ventricle.</regel_23>
+          <regel_23>Pacemaker wires were placed on the right atrium.</regel_23>
         </items>
         <items id="3">
-          <regel_23>Pacemaker wires were placed on the right ventricle. yeah</regel_23>
+          <regel_23>Pacemaker wires were placed on the right atrium and ventricle.</regel_23>
         </items>
         <items id="4">
-          <regel_23></regel_23>
+          <regel_23>Pacemaker wires were placed on the right ventricle.</regel_23>
         </items>
       </pmwires>
     </reports>
@@ -1079,7 +1078,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -1182,64 +1180,64 @@
           <regel_1_a>Iodine, draping of the patient,</regel_1_a>
           <regel_1_b>the saphenous vein harvested from</regel_1_b>
           <regel_1_c>and the wound was closed.</regel_1_c>
-          <regel_2_a />
-          <regel_2_b />
-          <regel_2_c />
+          <regel_2_a></regel_2_a>
+          <regel_2_b></regel_2_b>
+          <regel_2_c></regel_2_c>
           <regel_3_a>heparinized with half the usual heparin dose. The heart luxated in order to place the sling behind the</regel_3_a>
-          <regel_3_b />
-          <regel_3_c />
+          <regel_3_b></regel_3_b>
+          <regel_3_c></regel_3_c>
           <regel_4_a>heart. The heart further positioned for grafting and the coronary vessels stabilized with the octopus</regel_4_a>
-          <regel_4_b />
-          <regel_4_c />
+          <regel_4_b></regel_4_b>
+          <regel_4_c></regel_4_c>
           <regel_5_a>device. We used a shunt in all coronary vessels to ensure uninterrupted boodflow to the periphery</regel_5_a>
-          <regel_5_b />
-          <regel_5_c />
+          <regel_5_b></regel_5_b>
+          <regel_5_c></regel_5_c>
           <regel_6_a>After inspection of the coronary arteries we decided to do the following distal anastomoses:</regel_6_a>
-          <regel_6_b />
-          <regel_6_c />
-          <regel_7_a />
-          <regel_7_b />
-          <regel_7_c />
-          <regel_8_a />
-          <regel_8_b />
-          <regel_8_c />
-          <regel_9_a />
-          <regel_9_b />
-          <regel_9_c />
-          <regel_10_a />
-          <regel_10_b />
-          <regel_10_c />
-          <regel_11_a />
-          <regel_11_b />
-          <regel_11_c />
-          <regel_12_a />
-          <regel_12_b />
-          <regel_12_c />
-          <regel_13_a />
-          <regel_13_b />
-          <regel_13_c />
-          <regel_14_a />
-          <regel_14_b />
-          <regel_14_c />
-          <regel_15 />
-          <regel_16 />
-          <regel_17 />
-          <regel_18 />
-          <regel_19 />
-          <regel_20 />
-          <regel_21 />
-          <regel_22 />
-          <regel_23 />
-          <regel_24 />
-          <regel_25 />
-          <regel_26 />
-          <regel_27 />
-          <regel_28 />
-          <regel_29 />
-          <regel_30 />
-          <regel_31 />
-          <regel_32 />
-          <regel_33 />
+          <regel_6_b></regel_6_b>
+          <regel_6_c></regel_6_c>
+          <regel_7_a></regel_7_a>
+          <regel_7_b></regel_7_b>
+          <regel_7_c></regel_7_c>
+          <regel_8_a></regel_8_a>
+          <regel_8_b></regel_8_b>
+          <regel_8_c></regel_8_c>
+          <regel_9_a></regel_9_a>
+          <regel_9_b></regel_9_b>
+          <regel_9_c></regel_9_c>
+          <regel_10_a></regel_10_a>
+          <regel_10_b></regel_10_b>
+          <regel_10_c></regel_10_c>
+          <regel_11_a></regel_11_a>
+          <regel_11_b></regel_11_b>
+          <regel_11_c></regel_11_c>
+          <regel_12_a></regel_12_a>
+          <regel_12_b></regel_12_b>
+          <regel_12_c></regel_12_c>
+          <regel_13_a></regel_13_a>
+          <regel_13_b></regel_13_b>
+          <regel_13_c></regel_13_c>
+          <regel_14_a></regel_14_a>
+          <regel_14_b></regel_14_b>
+          <regel_14_c></regel_14_c>
+          <regel_15></regel_15>
+          <regel_16></regel_16>
+          <regel_17></regel_17>
+          <regel_18></regel_18>
+          <regel_19></regel_19>
+          <regel_20></regel_20>
+          <regel_21></regel_21>
+          <regel_22></regel_22>
+          <regel_23></regel_23>
+          <regel_24></regel_24>
+          <regel_25></regel_25>
+          <regel_26></regel_26>
+          <regel_27></regel_27>
+          <regel_28></regel_28>
+          <regel_29></regel_29>
+          <regel_30></regel_30>
+          <regel_31></regel_31>
+          <regel_32></regel_32>
+          <regel_33></regel_33>
         </soort>
         <soort id="3">
           <regel_1_a>Iodine, draping and full midsternotomy.</regel_1_a>
@@ -1635,7 +1633,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -2191,7 +2188,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -2747,7 +2743,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -3303,7 +3298,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -3859,7 +3853,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -4415,7 +4408,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -4971,7 +4963,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -5527,7 +5518,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -6083,7 +6073,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -6639,7 +6628,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -7195,7 +7183,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -7751,7 +7738,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -8307,7 +8293,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -8863,7 +8848,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>An IABP was used for hemodynamic instability.</regel_22>
         </items>
@@ -9404,52 +9388,6 @@
           <regel_33 />
         </soort>
       </text_by_type_of_surgery>
-      <circulation_support>
-        <items id="1">
-          <regel_21>wo. inotropic support.</regel_21>
-        </items>
-        <items id="2">
-          <regel_21>with minimal inotropic support.</regel_21>
-        </items>
-        <items id="3">
-          <regel_21>with moderate inotropic support.</regel_21>
-        </items>
-        <items id="4">
-          <regel_21>with maximal inotropic support.</regel_21>
-        </items>
-      </circulation_support>
-      <iabp>
-        
-        <items id="1">
-          <regel_22>An IABP was used for hemodynamic instability.</regel_22>
-        </items>
-        <items id="2">
-          <regel_22>An IABP was used for PTCA support.</regel_22>
-        </items>
-        <items id="3">
-          <regel_22>An IABP was used for unstable anginal complaints.</regel_22>
-        </items>
-        <items id="4">
-          <regel_22>An IABP was used to wean from CPB.</regel_22>
-        </items>
-        <items id="5">
-          <regel_22>An IABP was inserted prophylactically.</regel_22>
-        </items>
-      </iabp>
-      <pmwires>
-        <items id="1">
-          <regel_23>Pacemaker wires were not used.</regel_23>
-        </items>
-        <items id="2">
-          <regel_23>Pacemaker wires were placed on the right atrium.</regel_23>
-        </items>
-        <items id="3">
-          <regel_23>Pacemaker wires were placed on the right atrium and ventricle.</regel_23>
-        </items>
-        <items id="4">
-          <regel_23>Pacemaker wires were placed on the right ventricle.</regel_23>
-        </items>
-      </pmwires>
     </reports>
   </hospital>
   <hospital id="98">
@@ -9975,7 +9913,6 @@
         </items>
       </circulation_support>
       <iabp>
-        
         <items id="1">
           <regel_22>Hallo-11</regel_22>
         </items>

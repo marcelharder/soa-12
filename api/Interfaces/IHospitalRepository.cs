@@ -26,11 +26,12 @@ namespace api.Interfaces
         Task<List<Class_Hospital>> getAllFullHospitals();
         Task<List<Class_Hospital>> getAllFullHospitalsPerCountry(string id);
 
-        Task<InstitutionalDTO> getInstitutionalReport(int hospitalNo, int soort);
-        Task<string> createInstitutionalReport(int hospitalNo);
-        Task<string> updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
-        Task<AdditionalReportDTO>getAdditionalReportItems(int hospitalNo,int which);
-        Task<string> updateAdditionalReportItem(AdditionalReportDTO l, int id, int which);
+        InstitutionalDTO getInstitutionalReport(int hospitalNo, int soort);
+        string createInstitutionalReport(int hospitalNo);
+        string createAdditionalReport(int hospitalNo);
+        string updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
+        AdditionalReportDTO getAdditionalReportItems(int hospitalNo,int which);
+        int updateAdditionalReportItem(AdditionalReportDTO l, int id, int which);
         
     }
 }

@@ -7,7 +7,6 @@ namespace api.DTOs
         public string line_3 { get; set; }
         public string line_4 { get; set; }
         public string line_5 { get; set; }
-        public string line_6 { get; set; }
    
     }
 }
