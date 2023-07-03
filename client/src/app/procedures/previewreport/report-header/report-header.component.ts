@@ -13,6 +13,7 @@ import { UserService } from 'src/app/_services/user.service';
     styleUrls: ['./report-header.component.css']
 })
 export class ReportHeaderComponent {
+    @Input() refPhysNo: string;
     @Input() rh: reportHeader;
     @Output() sendMessage = new EventEmitter();
     @Output() sendHeader: EventEmitter<reportHeader> = new EventEmitter<reportHeader>();
@@ -60,6 +61,7 @@ export class ReportHeaderComponent {
         if (username === "demo") { result = false; }
         return result;
     }
+    showEmailButton(){if(this.refPhysNo === "9999"){return false;} else {return true;}}
 
 
 

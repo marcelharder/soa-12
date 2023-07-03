@@ -11,7 +11,7 @@
         <form #preViewForm="ngForm" id="preViewForm">
   
   
-          <app-report-header [rh]="reportHeader" (sendMessage)="acceptMessage($event)" (sendHeader)="saveAndPrint($event)"> </app-report-header>
+          <app-report-header [rh]="reportHeader" [refPhysNo]="proc.refPhys" (sendMessage)="acceptMessage($event)" (sendHeader)="saveAndPrint($event)"> </app-report-header>
     
     
           <div *ngIf="reportCode === 6">

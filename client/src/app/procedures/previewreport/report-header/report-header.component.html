@@ -1,7 +1,7 @@
 <div class="row mt-2 mb-2">
     <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="SaveSuggestion()">Save as suggestion</button></div>
     <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="Clear()">Reset</button></div>
-    <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="Email()">Email/SMS</button></div>
+    <div class="col-sm-2" *ngIf="showEmailButton()"><button type="button" class="btn btn-secondary form-control" (click)="Email()">Email/SMS</button></div>
     <div class="col-sm-2"><button type="button" class="btn btn-secondary form-control" (click)="SaveAndPrint()">Save and Print</button></div>
     <div class="col-sm-2"></div>
   </div>

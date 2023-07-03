@@ -97,16 +97,15 @@ export class PreviewreportComponent implements OnInit {
 
     this.auth.currentServiceLevel$.pipe(take(1)).subscribe((n) => {
       if (n === 1) {
-        this.auth.currentUser$.pipe(take(1)).subscribe((u) => {
-           this.currentUserName = u.UserName;
-         });
+        this.auth.currentUser$.pipe(take(1)).subscribe((u) => {this.currentUserName = u.UserName;});
         this.auth.HospitalName.subscribe((n)=>{this.currentHospitalName = n;});
         this.route.data.subscribe(data => {
           this.prev = data.preView;
           this.procedureId = this.prev.procedure_id;
           this.procedureservice.getProcedure(this.procedureId).subscribe((next) => {
             this.proc = next;
-            this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => { this.ref = ne; })
+            if(this.proc.refPhys != "9999"){this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => { this.ref = ne; })}
+            
             this.preview.getReportCode(this.proc.fdType).subscribe((nex) => {
               this.reportCode = nex;
               this.getAdditionalStuff(this.reportCode);// gets the cabg / valve details
@@ -140,6 +139,7 @@ export class PreviewreportComponent implements OnInit {
 
   composeAndSendMailMessage() {
     // check if the report is saved
+    // only works when the emailbutton is shown, when refPhys !== '9999'
     if (this.finalReportCompiled) {
       
       this.procedureservice.getRefPhysEmailHash(this.proc.procedureId)
@@ -163,21 +163,9 @@ export class PreviewreportComponent implements OnInit {
         this.refEmail = '1'; // show the email/sms page
     }
     else { this.alertify.error("Save and print report first ..."); }
+
   }
   showEmailRefPhys() { if (this.refEmail === '1') { return true; } }
-
-  /*  saveAndPrint(rh: reportHeader) {
-     
-     this.finalReportCompiled = true; // to stop the email button if the report is not saved
-     this.prev.Diagnosis = rh.diagnosis;
-     this.prev.MedicalRecordNumber = rh.hospital_number;
-     this.prev.patientName = rh.patient_name;
-     this.final.postReportId(this.prev).subscribe((next) => { },
-       () => {},
-       () => {
-         window.location.href = this.baseUrl + 'finalOperativeReport/' + this.prev.procedure_id;
-       });
-   } */
 
   saveAndPrint(rh: reportHeader) {
     this.finalReportCompiled = true; // to stop the email button if the report is not saved
@@ -210,9 +198,6 @@ export class PreviewreportComponent implements OnInit {
     // this.preview.resetPreView(this.procedureId).subscribe((next)=>{this.prev = next;})
     this.preview.resetPreView(this.procedureId).subscribe((next) => { this.prev = next; })
   }
-
- 
-  
 
   saveAsSuggestion() {
     // save the current preview report details which get transformed to a suggestion on the server

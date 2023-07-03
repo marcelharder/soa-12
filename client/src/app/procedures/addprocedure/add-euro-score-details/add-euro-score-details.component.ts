@@ -28,6 +28,7 @@ export class AddEuroScoreDetailsComponent implements OnInit {
     @ViewChild('addFormDetails') addFormDetails: NgForm;
     euroScore: dropItem[];
     currentUserId = 0;
+    required_RefPhys: boolean = false;
 
     modalRef: BsModalRef;
 
@@ -91,6 +92,7 @@ export class AddEuroScoreDetailsComponent implements OnInit {
 
     showDetailsPanel() { if (this.showPanel) { return true; } }
     showPreviousProcedures() { if (this.showPrevP) { return true; } }
+    showRefPhysDetails(){if(this.required_RefPhys){return true;} else {return false;}}
 
     openModal(template: TemplateRef<any>) {
         this.modalRef = this.modalService.show(template);
@@ -152,13 +154,8 @@ export class AddEuroScoreDetailsComponent implements OnInit {
 
 
     addNewPatient() {
-        if(this.refphysicians.length === 0){this.alertify.error("This hospital should have ref physicians ..")}
+        if(this.refphysicians.length === 0 && this.required_RefPhys){this.alertify.error("This hospital should have ref physicians ..")}
         else{
-
-
-
-
-
         let error = '';
         if (this.checkAge(this.patient.age)) {
             if (this.patient.gender !== '0') {
@@ -176,7 +173,11 @@ export class AddEuroScoreDetailsComponent implements OnInit {
             this.patientservice.addPatientToDatabase(this.patient, this.currentUserId)
                 .subscribe(result => {
                     this.sendPatientId.emit(result.patientId); // send patient up to the parent
-                    this.sendRef.emit(this.selectedRef);       // send selected ref to the parent
+                    if(this.required_RefPhys){
+                        this.sendRef.emit(this.selectedRef); // send the refId to the parent
+                    }
+                    else{this.sendRef.emit(9999); } // no refphys required, so no emails etc
+                          
                     this.showPanel = false;
                 },
                     (err) => {
