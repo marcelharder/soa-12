@@ -159,6 +159,11 @@ import { ValvesFromOVIComponent } from './procedures/valveRepair/valvesFromOVI/v
 import { OnBlurDirective } from './_directives/OnBlur.directive';
 import { HardresetPwdComponent } from './users/hardresetPwd/hardresetPwd.component';
 import { InstitutionalReportComponent } from './admin/InstitutionalReport/InstitutionalReport.component';
+import { EpaComponent } from './training/epa/epa.component';
+import { CmeComponent } from './training/cme/cme.component';
+import { DocumentsComponent } from './training/documents/documents.component';
+import { TrainingComponent } from './training/training/training.component';
+import { CoursesComponent } from './training/courses/courses.component';
 
 @NgModule({
   declarations: [				
@@ -247,7 +252,12 @@ import { InstitutionalReportComponent } from './admin/InstitutionalReport/Instit
     EditRepairComponent,
     ValvesFromOVIComponent,
     HardresetPwdComponent,
-    InstitutionalReportComponent
+    InstitutionalReportComponent,
+    EpaComponent,
+    CmeComponent,
+    DocumentsComponent,
+    TrainingComponent,
+    CoursesComponent
    ],
   imports: [
     FileUploadModule,

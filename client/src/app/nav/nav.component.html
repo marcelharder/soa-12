@@ -44,7 +44,8 @@
     <div class="dropdown" *ngIf="accountService.currentUser$ |async" dropdown>
       <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{model.KnownAs}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" routerLink='/profile' *appHasRole='["Surgery"]'>Edit Profile</a>
+        <div><a class="dropdown-item" routerLink='/profile' *appHasRole='["Surgery"]'>Edit Profile</a></div>
+        <div><a class="dropdown-item" routerLink='/training' *appHasRole='["Surgery"]'>Continous Training</a></div>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()">Logout</a>
       </div>

@@ -73,6 +73,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ValveRepairComponent } from './procedures/valveRepair/valveRepair.component';
 import { HardresetPwdComponent } from './users/hardresetPwd/hardresetPwd.component';
+import { TrainingComponent } from './training/training/training.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -81,6 +82,7 @@ const routes: Routes = [
   { path: 'resetpassword', component: ResetPasswordComponent },
   { path: 'hardresetpassword/:id', component: HardresetPwdComponent },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'training', component: TrainingComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'premium', component: PremiumComponent},
   { path: 'tutorials', component: TutorialsComponent},

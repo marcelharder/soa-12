@@ -19,7 +19,7 @@ namespace api.Controllers
         {
             _com = com;
         }
-
+        #region <!--epa -->
         [HttpGet("getEpaDefinition")]
         public async Task<IActionResult> getEpaDef()
         {
@@ -106,6 +106,47 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+        #endregion
+
+        #region <!--courses-->
+        [HttpGet("getListDocuments/{userId}")]
+        public async Task<IActionResult> getDocumentList(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Epa/Epas/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+        #endregion
+        #region <!--documents-->
+         [HttpGet("createDocument/{userId}")]
+         public async Task<IActionResult> createDocument(int userId){
+             var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Pdf/create-document/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+         }
+        #endregion
+
+
+
+
 
     }
 }
