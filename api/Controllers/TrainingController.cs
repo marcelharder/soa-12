@@ -71,9 +71,8 @@ namespace api.Controllers
             return Ok(help);
         }
         [HttpPut("updateEpa")]
-        public async Task<IActionResult> Update([FromForm] EpaDetailsDto ep)
+        public async Task<IActionResult> Update([FromBody] EpaDetailsDto ep)
         {
-
             var help = "";
             var comaddress = _com.Value.trainingURL;
             var st = "Epa/UpdateEpa";

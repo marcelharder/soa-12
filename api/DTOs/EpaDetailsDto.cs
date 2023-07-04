@@ -10,15 +10,16 @@ namespace api.DTOs
     public int year {get; set;}
     public DateTime created {get; set;}
     public string image {get; set;}
-    public int Id { get; set; }
+    public int Id {get; set;}
+    public int userId {get; set;}
     public DateTime started {get; set;}
-    public Boolean finished {get; set;}
+    public bool finished {get; set;}
     public string grade {get; set;}
-    public string option_1 {get; set;}
-    public string option_2 {get; set;}
-    public string option_3 {get; set;}
-    public string option_4 {get; set;}
-    public string option_5 {get; set;}
+    public bool KBP {get; set;}
+    public bool OSATS {get; set;}
+    public bool Beoordeling_360 {get; set;}
+    public bool CAT_CAL {get; set;}
+    public bool Examen {get; set;}
     public string option_6 {get; set;}
     public string option_7 {get; set;}
     }
