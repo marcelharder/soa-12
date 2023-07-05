@@ -83,7 +83,7 @@ namespace api.Extensions
             services.AddScoped<SpecialMaps>();
             services.AddScoped<SpecialReportMaps>();
             services.AddScoped<LogUserActivity>();
-
+           
             services.AddTransient<IUsers, Users>();
             
 

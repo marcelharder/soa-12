@@ -1,10 +1,16 @@
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using api.DTOs;
 using api.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
@@ -109,12 +115,15 @@ namespace api.Controllers
         #endregion
 
         #region <!--courses-->
+
+        #endregion
+        #region <!--documents-->
         [HttpGet("getListDocuments/{userId}")]
         public async Task<IActionResult> getDocumentList(int userId)
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "Epa/Epas/" + userId;
+            var st = "pdf/files/" + userId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -125,11 +134,11 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-        #endregion
-        #region <!--documents-->
-         [HttpGet("createDocument/{userId}")]
-         public async Task<IActionResult> createDocument(int userId){
-             var help = "";
+
+        [HttpGet("createDocument/{userId}")]
+        public async Task<IActionResult> createDocument(int userId)
+        {
+            var help = "";
             var comaddress = _com.Value.trainingURL;
             var st = "Pdf/create-document/" + userId;
             comaddress = comaddress + st;
@@ -141,8 +150,52 @@ namespace api.Controllers
                 }
             }
             return Ok(help);
-         }
+        }
+
+        [HttpPost("uploadPdf/{documentId}")]
+        public async Task<IActionResult> uploadPdf(int documentId,IFormFile file)
+        {
+
+           var content = new MultipartFormDataContent();
+           foreach (var prop in file.GetType().GetProperties()){
+            var value = prop.GetValue(file);
+            if(value is FormFile){
+                var f = value as FormFile;
+                content.Add(new StreamContent(file.OpenReadStream()), prop.Name, f.FileName);
+                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = prop.Name, FileName = f.FileName };
+            }
+           }
+
+
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "pdf/upload-pdf/" + documentId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #endregion
+
 
 
 
