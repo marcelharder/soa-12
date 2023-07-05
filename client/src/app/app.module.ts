@@ -164,6 +164,7 @@ import { CmeComponent } from './training/cme/cme.component';
 import { DocumentsComponent } from './training/documents/documents.component';
 import { TrainingComponent } from './training/training/training.component';
 import { CoursesComponent } from './training/courses/courses.component';
+import { EpadetailsComponent } from './training/epa/epadetails/epadetails.component';
 
 @NgModule({
   declarations: [				
@@ -254,6 +255,7 @@ import { CoursesComponent } from './training/courses/courses.component';
     HardresetPwdComponent,
     InstitutionalReportComponent,
     EpaComponent,
+    EpadetailsComponent,
     CmeComponent,
     DocumentsComponent,
     TrainingComponent,

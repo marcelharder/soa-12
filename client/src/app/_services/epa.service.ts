@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Course } from '../_models/Course';
-import { Epa } from '../_models/Epa';
+import { Epa_model } from '../_models/Epa_model';
+import { dropItem } from '../_models/dropItem';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,14 @@ export class EpaService {
   OnInit() {
    
   }
-  //  get the courses that this aio attended
-  getEpas(id: number): Observable<Epa[]> { return this.http.get<Epa[]>(this.baseUrl + 'Aio/Epas/' + id); }
-  
-  // get the details of this course
-  getSpecificEpa(id: number): Observable<Epa> { return this.http.get<Epa>(this.baseUrl + 'Aio/EpaDetails/' + id); }
-
+  public getDescriptions(): Observable<dropItem[]> {
+    return this.http.get<dropItem[]>(this.baseUrl + 'training/getEpaDefinition');
+  }
+  public getEpas(userId: number): Observable<Epa_model[]>{
+    return this.http.get<Epa_model[]>(this.baseUrl + 'training/getListEpaas/' + userId);
+  }
+  public updateEpa(se: Epa_model){
+    return this.http.put<number>(this.baseUrl + 'training/updateEpa', se, { responseType: 'text' as 'json'});
+  }
 
 }
