@@ -157,7 +157,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/update-document/";
+            var st = "pdf/update-document/" + docId;
             comaddress = comaddress + st;
             var json = JsonConvert.SerializeObject(up, Formatting.None);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
