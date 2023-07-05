@@ -135,12 +135,64 @@ namespace api.Controllers
             return Ok(help);
         }
 
+        [HttpGet("getSpecificFile/{docId}")]
+        public async Task<IActionResult> getSpecDocument(int docId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "pdf/specificfile/" + docId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpPut("updateDocument/{docId}")]
+        public async Task<IActionResult> updateSpecDocument(int docId, [FromBody] PdfForCreationDto up)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "pdf/update-document/";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(up, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
         [HttpGet("createDocument/{userId}")]
         public async Task<IActionResult> createDocument(int userId)
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "Pdf/create-document/" + userId;
+            var st = "pdf/create-document/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+        [HttpGet("listDocument/{userId}")]
+        public async Task<IActionResult> listDocument(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "pdf/files/" + userId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -153,19 +205,11 @@ namespace api.Controllers
         }
 
         [HttpPost("uploadPdf/{documentId}")]
-        public async Task<IActionResult> uploadPdf(int documentId,IFormFile file)
+        public async Task<IActionResult> uploadPdf(int documentId, IFormFile file)
         {
-
-           var content = new MultipartFormDataContent();
-           foreach (var prop in file.GetType().GetProperties()){
-            var value = prop.GetValue(file);
-            if(value is FormFile){
-                var f = value as FormFile;
-                content.Add(new StreamContent(file.OpenReadStream()), prop.Name, f.FileName);
-                content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = prop.Name, FileName = f.FileName };
-            }
-           }
-
+            var content = new MultipartFormDataContent();
+            content.Add(new StreamContent(file.OpenReadStream()), file.Name, file.FileName);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = file.Name, FileName = file.FileName };
 
             var help = "";
             var comaddress = _com.Value.trainingURL;
@@ -178,6 +222,7 @@ namespace api.Controllers
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
+
             return Ok();
         }
 
