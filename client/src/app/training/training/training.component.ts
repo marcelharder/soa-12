@@ -9,17 +9,19 @@ import { ToastrService } from 'ngx-toastr';
 export class TrainingComponent implements OnInit {
 
   epa = 0;
+  doc = 0;
 
   constructor(private alertify: ToastrService) { }
 
   ngOnInit() {
   }
 
-  showDocuments(){this.alertify.info("Documents are showing now")}
+  showDocuments(){this.epa = 0;this.doc = 1;}
   showCourses(){this.alertify.info("Courses are showing now")}
-  showEpa(){this.alertify.info("Epa are showing now"); this.epa = 1;}
+  showEpa(){this.epa = 1;this.doc = 0;}
   showCME(){this.alertify.info("CME are showing now")}
 
   showEpaPanel(){if(this.epa === 1){return true;} else {return false;}}
+  showDocPanel(){if(this.doc === 1){return true;} else {return false;}}
 
 }

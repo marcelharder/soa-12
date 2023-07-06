@@ -2,7 +2,7 @@
 <div class="card" *ngIf="showDetailsPage()">
   <div class="card-header"><h4><span class="badge bg-secondary" style="color: white;">{{epa_no_description}}</span></h4></div>
   <div class="card-body">
-    <app-epa_details [selectedEpa] = "selected_epa" (up)="getBackFromDetails($event)"></app-epa_details>
+    <app-epadetails [selectedEpa] = "selected_epa" (up)="getBackFromDetails($event)"></app-epadetails>
   </div>
   <div class="card-footer"></div>
 </div>
