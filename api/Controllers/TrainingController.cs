@@ -135,7 +135,7 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpGet("getSpecificFile/{docId}")]
+        [HttpGet("getSpecificFile/{docId}", Name = "GSP")]
         public async Task<IActionResult> getSpecDocument(int docId)
         {
             var help = "";
@@ -222,8 +222,7 @@ namespace api.Controllers
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
-
-            return Ok();
+            return Ok(help); 
         }
         #endregion
 

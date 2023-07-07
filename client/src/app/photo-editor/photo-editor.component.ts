@@ -13,7 +13,7 @@ export class PhotoEditorComponent implements OnInit {
     @Input() userId: number;
     @Input() refId: number;
     @Input() hospitalId: number;
-    @Input() documentId: number;
+    @Input() docId: number;
     @Output() getMemberPhotoChange = new EventEmitter<string>();
     uploader: FileUploader;
     token ='';
@@ -45,8 +45,8 @@ export class PhotoEditorComponent implements OnInit {
                     test = this.baseUrl + 'RefPhys/addPhoto/' + this.refId
                 }
                 else {
-                    if (this.documentId !== 0) {
-                        test = this.baseUrl + 'training/addPhoto/' + this.documentId
+                    if (this.docId !== 0) {
+                        test = this.baseUrl + 'training/uploadPdf/' + this.docId
                     } 
                 }
             }
@@ -69,6 +69,9 @@ export class PhotoEditorComponent implements OnInit {
             this.alertify.success('Photo uploaded ...');
         };
 
+        
+        
+        
         this.uploader.onSuccessItem = (item, response, status, headers) => {
             if (response) {
                 const res: any = JSON.parse(response);
@@ -76,7 +79,7 @@ export class PhotoEditorComponent implements OnInit {
                 if (this.hospitalId !== 0) { this.getMemberPhotoChange.emit(res.ImageUrl); }
                 if (this.userId !== 0) { this.getMemberPhotoChange.emit(res.PhotoUrl); }
                 if (this.refId !== 0) { this.getMemberPhotoChange.emit(res.image); }
-                if (this.documentId !== 0) { this.getMemberPhotoChange.emit(res.document_url); }
+                if (this.docId !== 0) { this.getMemberPhotoChange.emit(res); }
             }
         };
     }

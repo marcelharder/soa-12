@@ -1,11 +1,16 @@
-<div class="card-header"><h4><span class="badge badge-secondary">List of documents {{userId}}</span></h4></div>
+<div class="card-header">
+  <h4><span class="badge badge-secondary">List of documents {{userId}}</span></h4>
+</div>
 <div class="card-body">
-   <table class="table table-striped table-hover table-bordered">
+
+
+
+  <table class="table table-striped table-hover table-bordered" *ngIf="!showDetailsPanel()">
     <thead>
       <tr>
         <th>documentId</th>
         <th>description</th>
-       
+
         <th></th>
       </tr>
     </thead>
@@ -13,10 +18,50 @@
       <tr *ngFor="let item of listOfDocuments">
         <td>{{item.documentId}}</td>
         <td>{{item.description}}</td>
-        <td><button class="btn btn-warning btn-sm" (click)="showDetails(item.documentId-1)">details</button></td>  
+        <td><button class="btn btn-warning btn-sm" (click)="showDetails(item.documentId)">details</button></td>
       </tr>
-     
-      
+
+
     </tbody>
-  </table> 
+  </table>
+
+  <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updateDocument()" *ngIf="showDetailsPanel()" >
+    <div class="row">
+      <div class="col-sm-6">
+
+
+
+
+
+        <div class="row">
+          <div class="col-sm-6 mb-1">
+              <h5><span class="badge badge-secondary">Finished:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+              <ui-switch formControlName='finished'></ui-switch>
+          </div>
+      </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <img src="https://res.cloudinary.com/marcelcloud/image/upload/v1573222848/home-479629_1280-2.jpg" width="375px" height="500px" />
+        </div>
+        <div class="row">
+          <app-photo-editor [docId]="documentId" [refId]="0" [userId]="0" [hospitalId]="0" (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6"><button type="submit" class="btn btn-success btn-sm">Submit</button></div>
+      <div class="col-sm-6"></div>
+
+    </div>
+
+  </form>
+
+
+
+
+
+
 </div>

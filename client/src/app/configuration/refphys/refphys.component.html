@@ -143,7 +143,7 @@
                   <div class="col-sm-12"><img src="{{pd.image}}" alt="ref photo" height="250"></div>
                 </div>
                 <div class="row mt-2">
-                  <app-photo-editor [refId]="selectedRef" [userId]="0" [hospitalId]="0" (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>
+                  <app-photo-editor [docId]="0" [refId]="selectedRef" [userId]="0" [hospitalId]="0" (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>
                 </div>
               </div>
             </div>
