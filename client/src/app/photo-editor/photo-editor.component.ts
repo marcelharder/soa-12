@@ -13,6 +13,7 @@ export class PhotoEditorComponent implements OnInit {
     @Input() userId: number;
     @Input() refId: number;
     @Input() hospitalId: number;
+    @Input() documentId: number;
     @Output() getMemberPhotoChange = new EventEmitter<string>();
     uploader: FileUploader;
     token ='';
@@ -26,19 +27,11 @@ export class PhotoEditorComponent implements OnInit {
 
     ngOnInit() {
     this.account.currentUser$.subscribe((next)=>{this.token = next.Token});
-    //let help = JSON.parse(localStorage.getItem('user'));
-    //this.token = help.Token;
-
-        this.initializeUploader();
+     this.initializeUploader();
     }
 
     initializeUploader() {
         let test = '';
-
-        // if (this.employeeId !== 0) {
-        //    test = this.baseUrl + 'addEmployeePhoto/' + this.employeeId
-        // }
-        // else {
 
        if (this.userId !== 0) {
             test = this.baseUrl + 'users/addUserPhoto/' + this.userId
@@ -50,6 +43,11 @@ export class PhotoEditorComponent implements OnInit {
             else {
                 if (this.refId !== 0) {
                     test = this.baseUrl + 'RefPhys/addPhoto/' + this.refId
+                }
+                else {
+                    if (this.documentId !== 0) {
+                        test = this.baseUrl + 'training/addPhoto/' + this.documentId
+                    } 
                 }
             }
 
@@ -78,6 +76,7 @@ export class PhotoEditorComponent implements OnInit {
                 if (this.hospitalId !== 0) { this.getMemberPhotoChange.emit(res.ImageUrl); }
                 if (this.userId !== 0) { this.getMemberPhotoChange.emit(res.PhotoUrl); }
                 if (this.refId !== 0) { this.getMemberPhotoChange.emit(res.image); }
+                if (this.documentId !== 0) { this.getMemberPhotoChange.emit(res.document_url); }
             }
         };
     }

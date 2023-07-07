@@ -204,12 +204,12 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpPost("uploadPdf/{documentId}")]
-        public async Task<IActionResult> uploadPdf(int documentId, IFormFile file)
+        [HttpPost("uploadPdf/{documentId}")] 
+        public async Task<IActionResult> uploadPdf(int documentId, [FromForm]PhotoForCreationDto photoDto)
         {
             var content = new MultipartFormDataContent();
-            content.Add(new StreamContent(file.OpenReadStream()), file.Name, file.FileName);
-            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = file.Name, FileName = file.FileName };
+            content.Add(new StreamContent(photoDto.file.OpenReadStream()), photoDto.file.Name, photoDto.file.FileName);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.file.Name, FileName = photoDto.file.FileName };
 
             var help = "";
             var comaddress = _com.Value.trainingURL;
@@ -225,20 +225,6 @@ namespace api.Controllers
 
             return Ok();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #endregion
 
 

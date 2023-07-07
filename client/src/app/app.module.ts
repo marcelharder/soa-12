@@ -165,6 +165,7 @@ import { DocumentsComponent } from './training/documents/documents.component';
 import { TrainingComponent } from './training/training/training.component';
 import { CoursesComponent } from './training/courses/courses.component';
 import { EpadetailsComponent } from './training/epa/epadetails/epadetails.component';
+import { DocumentService } from './_services/document.service';
 
 @NgModule({
   declarations: [				
@@ -295,6 +296,7 @@ import { EpadetailsComponent } from './training/epa/epadetails/epadetails.compon
    GraphService,
    DischargeService,
    JwtHelperService, 
+   DocumentService,
   //  resolvers
    ProcedureListResolver,
    ProcedureDetailsResolver,
