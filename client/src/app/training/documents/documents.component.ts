@@ -13,7 +13,7 @@ export class DocumentsComponent implements OnInit {
 @Input() userId:number;
 detailsForm: FormGroup | undefined;
 details = 0;
-selectedDocument:Document_model = {
+selectedDocument:Partial<Document_model> = {
   documentId: 0,
   description: '',
   dateAdded: new Date,
@@ -52,7 +52,7 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
 
   showDetails(id: number){
    this.documentId = id;
-   this.selectedDocument = this.listOfDocuments[this.documentId - 1];
+   this.selectedDocument = this.listOfDocuments.find(x => x.documentId == id);
    this.details = 1;
    
 
@@ -60,17 +60,20 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
   updateDocument(){this.alertify.info("updating document")}
   uploadPhoto(){
     this.alertify.info("uploading photo");
-    
-    // don't forget to reload the doucument_model
+   
   
   
   
   }
   updatePhoto(photoUrl: string) { 
-    
-    this.selectedDocument.document_url = photoUrl;
     debugger;
-    this.ds.updateDocument(this.selectedDocument).subscribe((next)=>{});
+    this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
+    this.selectedDocument.document_url = photoUrl;
+  
+  
+  
+    // debugger;
+   // this.ds.updateDocument(this.selectedDocument).subscribe((next)=>{});
   
   
   

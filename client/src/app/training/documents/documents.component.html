@@ -44,7 +44,7 @@
       </div>
       <div class="col-sm-6">
         <div class="row">
-          <img src="https://res.cloudinary.com/marcelcloud/image/upload/v1573222848/home-479629_1280-2.jpg" width="375px" height="500px" />
+          <img src="{{selectedDocument?.document_url}}" width="375px" height="500px" />
         </div>
         <div class="row">
           <app-photo-editor [docId]="documentId" [refId]="0" [userId]="0" [hospitalId]="0" (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>

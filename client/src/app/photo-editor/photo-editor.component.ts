@@ -16,7 +16,7 @@ export class PhotoEditorComponent implements OnInit {
     @Input() docId: number;
     @Output() getMemberPhotoChange = new EventEmitter<string>();
     uploader: FileUploader;
-    token ='';
+    token = '';
     hasBaseDropZoneOver = false;
     baseUrl = environment.apiUrl;
 
@@ -26,14 +26,14 @@ export class PhotoEditorComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-    this.account.currentUser$.subscribe((next)=>{this.token = next.Token});
-     this.initializeUploader();
+        this.account.currentUser$.subscribe((next) => { this.token = next.Token });
+        this.initializeUploader();
     }
 
     initializeUploader() {
         let test = '';
 
-       if (this.userId !== 0) {
+        if (this.userId !== 0) {
             test = this.baseUrl + 'users/addUserPhoto/' + this.userId
         }
         else {
@@ -46,8 +46,8 @@ export class PhotoEditorComponent implements OnInit {
                 }
                 else {
                     if (this.docId !== 0) {
-                        test = this.baseUrl + 'training/uploadPdf/' + this.docId
-                    } 
+                        test = this.baseUrl + 'Training/uploadPdf/' + this.docId
+                    }
                 }
             }
 
@@ -69,17 +69,20 @@ export class PhotoEditorComponent implements OnInit {
             this.alertify.success('Photo uploaded ...');
         };
 
-        
-        
-        
-        this.uploader.onSuccessItem = (item, response, status, headers) => {
-            if (response) {
-                const res: any = JSON.parse(response);
 
-                if (this.hospitalId !== 0) { this.getMemberPhotoChange.emit(res.ImageUrl); }
-                if (this.userId !== 0) { this.getMemberPhotoChange.emit(res.PhotoUrl); }
-                if (this.refId !== 0) { this.getMemberPhotoChange.emit(res.image); }
-                if (this.docId !== 0) { this.getMemberPhotoChange.emit(res); }
+
+
+        this.uploader.onSuccessItem = (item, response, status, headers) => {
+            if (this.docId !== 0) { this.getMemberPhotoChange.emit(response); }
+            else {
+                if (response) {
+                    const res: any = JSON.parse(response);
+
+                    if (this.hospitalId !== 0) { this.getMemberPhotoChange.emit(res.ImageUrl); }
+                    if (this.userId !== 0) { this.getMemberPhotoChange.emit(res.PhotoUrl); }
+                    if (this.refId !== 0) { this.getMemberPhotoChange.emit(res.image); }
+
+                }
             }
         };
     }
