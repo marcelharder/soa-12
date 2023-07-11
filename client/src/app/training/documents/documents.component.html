@@ -27,12 +27,7 @@
 
   <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updateDocument()" *ngIf="showDetailsPanel()" >
     <div class="row">
-      <div class="col-sm-6">
-
-
-
-
-
+      <div class="col-sm-4">
         <div class="row">
           <div class="col-sm-6 mb-1">
               <h5><span class="badge badge-secondary">Finished:</span></h5>
@@ -42,9 +37,18 @@
           </div>
       </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-8">
         <div class="row">
-          <img src="{{selectedDocument?.document_url}}" width="375px" height="500px" />
+         <app-pdfviewer [pdfLocation]="selectedDocument?.document_url"></app-pdfviewer>
+                 
+         
+         
+          <!-- <embed 
+          src="{{selectedDocument?.document_url}}" 
+          width="375px" 
+          height="500px" 
+          name="plugin"
+          type="application/pdf" /> -->
         </div>
         <div class="row">
           <app-photo-editor [docId]="documentId" [refId]="0" [userId]="0" [hospitalId]="0" (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>

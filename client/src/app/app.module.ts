@@ -166,9 +166,10 @@ import { TrainingComponent } from './training/training/training.component';
 import { CoursesComponent } from './training/courses/courses.component';
 import { EpadetailsComponent } from './training/epa/epadetails/epadetails.component';
 import { DocumentService } from './_services/document.service';
+import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
 
 @NgModule({
-  declarations: [				
+  declarations: [					
     AppComponent,
     NavComponent,
     HomeComponent,
@@ -260,7 +261,8 @@ import { DocumentService } from './_services/document.service';
     CmeComponent,
     DocumentsComponent,
     TrainingComponent,
-    CoursesComponent
+    CoursesComponent,
+    PdfviewerComponent
    ],
   imports: [
     FileUploadModule,

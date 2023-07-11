@@ -25,6 +25,7 @@ selectedDocument:Partial<Document_model> = {
 }
 documentId = 0;
 
+
 listOfDocuments: Document_model[] = [];
   
 constructor(private ds: DocumentService, private alertify: ToastrService, private fb: FormBuilder,) { }
@@ -65,16 +66,10 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
   
   
   }
-  updatePhoto(photoUrl: string) { 
-    debugger;
+  updatePhoto(photoUrl: string) {
+
     this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
     this.selectedDocument.document_url = photoUrl;
-  
-  
-  
-    // debugger;
-   // this.ds.updateDocument(this.selectedDocument).subscribe((next)=>{});
-  
   
   
   }

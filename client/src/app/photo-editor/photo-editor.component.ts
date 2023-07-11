@@ -57,7 +57,7 @@ export class PhotoEditorComponent implements OnInit {
             url: test,
             authToken: 'Bearer ' + this.token,
             isHTML5: true,
-            allowedFileType: ['image'],
+            allowedMimeType: ['image','application/pdf'],
             removeAfterUpload: true,
             autoUpload: true,
             maxFileSize: 10 * 1024 * 1024
