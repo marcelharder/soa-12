@@ -42,6 +42,7 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
   initializeForm() {
     this.detailsForm = this.fb.group({
       documentId: ['', ],
+      userId: ['', ],
       finished: [false, ],
       description: ['', ],
       dateAdded: ['', ],
@@ -57,6 +58,7 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
    this.details = 1;
  
    this.detailsForm.controls.documentId.setValue(this.selectedDocument.documentId);
+   this.detailsForm.controls.userId.setValue(this.userId);
    this.detailsForm.controls.finished.setValue(this.selectedDocument.finished);
    this.detailsForm.controls.description.setValue(this.selectedDocument.description);
    this.detailsForm.controls.dateAdded.setValue(this.selectedDocument.dateAdded);
@@ -66,7 +68,7 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
   }
   updateDocument(){
     
-    
+    this.ds.updateDocument(this.detailsForm.value, this.documentId).subscribe((next)=>{})
     this.alertify.info("updating document")}
   
   
@@ -77,11 +79,12 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
   
   
   }
-  updatePhoto(photoUrl: string) {
+  updatePhoto(photoUrl: string, publicId: string) {
 
     this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
     this.selectedDocument.document_url = photoUrl;
-  
+    this.detailsForm.controls.publicId.setValue(publicId);
+ 
   
   }
 

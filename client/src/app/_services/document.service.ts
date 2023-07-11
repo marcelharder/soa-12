@@ -21,8 +21,8 @@ export class DocumentService {
     return this.http.get<Document_model>(this.baseUrl + 'training/getSpecificFile/' + docId);
   }
 
-  public updateDocument(doc: Document_model): Observable<Document_model> {
-    return this.http.put<Document_model>(this.baseUrl + 'training/updateDocument',doc, { responseType: 'text' as 'json'});
+  public updateDocument(doc: Document_model, docId: number): Observable<Document_model> {
+    return this.http.put<Document_model>(this.baseUrl + 'pdf/updateDocument/' + docId,doc, { responseType: 'text' as 'json'});
   }
 
   public postDocument(help: Document_model): Observable<boolean> {

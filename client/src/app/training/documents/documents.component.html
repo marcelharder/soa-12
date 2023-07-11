@@ -36,7 +36,7 @@
           </div>
           <div class="col-sm-6">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["documentId"]' class="form-control">
+              <input [formControl]='detailsForm.controls["documentId"]' class="form-control" readonly>
             </div>
           </div>
         </div>
@@ -48,6 +48,16 @@
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
               <input [formControl]='detailsForm.controls["description"]' class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Type:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["type"]' class="form-control">
             </div>
           </div>
         </div>
