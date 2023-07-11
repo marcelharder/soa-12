@@ -59,11 +59,18 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
    this.detailsForm.controls.documentId.setValue(this.selectedDocument.documentId);
    this.detailsForm.controls.finished.setValue(this.selectedDocument.finished);
    this.detailsForm.controls.description.setValue(this.selectedDocument.description);
-  
+   this.detailsForm.controls.dateAdded.setValue(this.selectedDocument.dateAdded);
+   this.detailsForm.controls.type.setValue(this.selectedDocument.type);
+ 
 
   }
-  updateDocument(){this.alertify.info("updating document")}
-  uploadPhoto(){
+  updateDocument(){
+    
+    
+    this.alertify.info("updating document")}
+  
+  
+    uploadPhoto(){
     this.alertify.info("uploading photo");
    
   
