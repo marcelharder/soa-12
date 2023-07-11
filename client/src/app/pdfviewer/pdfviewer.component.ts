@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pdfviewer',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pdfviewer.component.css']
 })
 export class PdfviewerComponent implements OnInit {
-
+@Input() pdfSrc: string;
   constructor() { }
 
   ngOnInit() {

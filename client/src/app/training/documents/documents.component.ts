@@ -55,7 +55,11 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
    this.documentId = id;
    this.selectedDocument = this.listOfDocuments.find(x => x.documentId == id);
    this.details = 1;
-   
+ 
+   this.detailsForm.controls.documentId.setValue(this.selectedDocument.documentId);
+   this.detailsForm.controls.finished.setValue(this.selectedDocument.finished);
+   this.detailsForm.controls.description.setValue(this.selectedDocument.description);
+  
 
   }
   updateDocument(){this.alertify.info("updating document")}
@@ -72,6 +76,10 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
     this.selectedDocument.document_url = photoUrl;
   
   
+  }
+
+  showPdf(){
+    window.open(this.selectedDocument.document_url);
   }
 
 }

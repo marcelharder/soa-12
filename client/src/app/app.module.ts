@@ -167,6 +167,7 @@ import { CoursesComponent } from './training/courses/courses.component';
 import { EpadetailsComponent } from './training/epa/epadetails/epadetails.component';
 import { DocumentService } from './_services/document.service';
 import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [					
@@ -266,6 +267,7 @@ import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
    ],
   imports: [
     FileUploadModule,
+    PdfViewerModule,
     TabsModule.forRoot(),
     UiSwitchModule,
     ButtonsModule,
