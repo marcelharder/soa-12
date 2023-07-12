@@ -86,6 +86,17 @@ constructor(private ds: DocumentService,
   
   
   }
+  addDocument(){
+    this.ds.createDocument(this.userId).subscribe((next)=>{
+      this.documentId = next.documentId;
+    }, 
+    (error)=>{this.alertify.error(error)},
+    ()=>{
+      this.ds.getDocuments(this.userId).subscribe((next)=>{this.listOfDocuments = next;});
+      this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
+    });
+  }
+
   updatePhoto(photoUrl: string) {
     this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
     this.selectedDocument.document_url = photoUrl;
@@ -99,7 +110,8 @@ constructor(private ds: DocumentService,
     this.ds.deleteDocument(id).subscribe((next)=>{
       this.ds.getDocuments(this.userId).subscribe((next)=>{this.listOfDocuments = next;})
       this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
-    })
+    }, (error)=>{this.alertify.error(error)},
+    ()=>{this.details = 0;})
   }
 
   Cancel(){this.details = 0;}

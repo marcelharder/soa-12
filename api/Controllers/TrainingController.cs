@@ -173,7 +173,7 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpGet("createDocument/{userId}")]
+        [HttpPost("createDocument/{userId}")]
         public async Task<IActionResult> createDocument(int userId)
         {
             var help = "";
@@ -189,6 +189,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+       
         [HttpGet("listDocument/{userId}")]
         public async Task<IActionResult> listDocument(int userId)
         {
@@ -238,7 +239,7 @@ namespace api.Controllers
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                using (var response = await httpClient.DeleteAsync(comaddress))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }

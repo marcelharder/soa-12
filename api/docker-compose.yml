@@ -32,7 +32,7 @@ services:
      - internal-container-network 
 
   training:
-    image: training:v3
+    image: training:v4
     networks:
       - internal-container-network
     depends_on:

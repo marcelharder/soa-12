@@ -21,21 +21,16 @@ export class DocumentService {
     return this.http.get<Document_model>(this.baseUrl + 'training/getSpecificFile/' + docId);
   }
 
-  public deleteDocument(docId: number): Observable<number> {
-    return this.http.delete<number>(this.baseUrl + 'training/deleteFile/' + docId);
+  public deleteDocument(docId: number): Observable<string> {
+    return this.http.delete<string>(this.baseUrl + 'training/deleteDocument/' + docId, { responseType: 'text' as 'json'});
   }
 
   public updateDocument(doc: Document_model, docId: number): Observable<Document_model> {
     return this.http.put<Document_model>(this.baseUrl + 'training/updateDocument/' + docId,doc, { responseType: 'text' as 'json'});
   }
 
-  public postDocument(help: Document_model): Observable<boolean> {
-    const formData = new FormData();
-    for (const prop in help) {
-      if (!help.hasOwnProperty(prop)) { continue; }
-      formData.append(prop , help[prop]);
-    }
-    return this.http.post(this.baseUrl + 'training/upload-pdf', formData).pipe(map(x => true));
+  public createDocument(userId: number): Observable<Document_model> {
+    return this.http.post<Document_model>(this.baseUrl + 'training/createDocument/' + userId, null);
   }
 
 }
