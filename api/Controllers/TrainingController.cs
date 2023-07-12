@@ -178,7 +178,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/create-document/" + userId;
+            var st = "pdf/create_document/" + userId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
