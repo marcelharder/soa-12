@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Document_model } from 'src/app/_models/Document_model';
 import { DocumentService } from 'src/app/_services/document.service';
@@ -28,7 +29,10 @@ documentId = 0;
 
 listOfDocuments: Document_model[] = [];
   
-constructor(private ds: DocumentService, private alertify: ToastrService, private fb: FormBuilder,) { }
+constructor(private ds: DocumentService, 
+  private alertify: ToastrService, 
+  private router: Router,
+  private fb: FormBuilder,) { }
 
   ngOnInit() {
     // get the list of documents
@@ -70,6 +74,8 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
     
     this.ds.updateDocument(this.detailsForm.value, this.documentId).subscribe((next)=>{})
     this.alertify.info("updating document")}
+
+    // re get the list of documents otherwise nothing changes
   
   
     uploadPhoto(){
@@ -91,5 +97,7 @@ constructor(private ds: DocumentService, private alertify: ToastrService, privat
   showPdf(){
     window.open(this.selectedDocument.document_url);
   }
+
+  Cancel(){this.details = 0;}
 
 }

@@ -32,9 +32,11 @@ services:
      - internal-container-network 
 
   training:
-    image: training:v2
+    image: training:v3
     networks:
-      - internal-container-network 
+      - internal-container-network
+    depends_on:
+      - db 
 
   onlinevalve_md:
     image: inventory_md:v26

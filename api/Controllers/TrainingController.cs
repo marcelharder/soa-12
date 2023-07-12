@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using api.DTOs;
@@ -211,7 +212,7 @@ namespace api.Controllers
             content.Add(new StreamContent(photoDto.file.OpenReadStream()), photoDto.file.Name, photoDto.file.FileName);
             content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.file.Name, FileName = photoDto.file.FileName };
 
-            var help = "";
+            var help = new photoResult();
             var comaddress = _com.Value.trainingURL;
             var st = "pdf/upload-pdf/" + documentId;
             comaddress = comaddress + st;
@@ -219,17 +220,22 @@ namespace api.Controllers
             {
                 using (var response = await httpClient.PostAsync(comaddress, content))
                 {
-                    help = await response.Content.ReadAsStringAsync();
+                   // var ger = await response.Content.ReadAsStringAsync();
+                    help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help); 
+            return Ok(help.document_url); 
         }
         #endregion
+        
 
 
 
 
 
-
+    }
+    class photoResult{
+        public string document_url { get; set; }
+        public string publicId { get; set; }
     }
 }

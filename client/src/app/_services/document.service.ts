@@ -22,7 +22,7 @@ export class DocumentService {
   }
 
   public updateDocument(doc: Document_model, docId: number): Observable<Document_model> {
-    return this.http.put<Document_model>(this.baseUrl + 'pdf/updateDocument/' + docId,doc, { responseType: 'text' as 'json'});
+    return this.http.put<Document_model>(this.baseUrl + 'training/updateDocument/' + docId,doc, { responseType: 'text' as 'json'});
   }
 
   public postDocument(help: Document_model): Observable<boolean> {
