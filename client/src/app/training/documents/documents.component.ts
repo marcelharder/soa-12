@@ -36,11 +36,7 @@ constructor(private ds: DocumentService,
 
   ngOnInit() {
     // get the list of documents
-    this.ds.getDocuments(this.userId).subscribe((next)=>{
-      
-      this.listOfDocuments = next;
-     
-    })
+    this.ds.getDocuments(this.userId).subscribe((next)=>{this.listOfDocuments = next;})
     this.initializeForm();
   }
   initializeForm() {
@@ -71,12 +67,17 @@ constructor(private ds: DocumentService,
 
   }
   updateDocument(){
-    
-    this.ds.updateDocument(this.detailsForm.value, this.documentId).subscribe((next)=>{})
-    this.alertify.info("updating document")}
-
-    // re get the list of documents otherwise nothing changes
-  
+    this.listOfDocuments = [];
+    this.ds.updateDocument(this.detailsForm.value, this.documentId).subscribe(
+      (next)=>{
+      this.ds.getDocuments(this.userId).subscribe((next)=>{this.listOfDocuments = next;})
+      this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
+    },
+    (error)=>{this.alertify.error(error)},
+    ()=>{this.details = 0;});
+   
+   
+  }
   
     uploadPhoto(){
     this.alertify.info("uploading photo");
@@ -85,17 +86,20 @@ constructor(private ds: DocumentService,
   
   
   }
-  updatePhoto(photoUrl: string, publicId: string) {
-
+  updatePhoto(photoUrl: string) {
     this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
     this.selectedDocument.document_url = photoUrl;
-    this.detailsForm.controls.publicId.setValue(publicId);
- 
-  
   }
 
   showPdf(){
     window.open(this.selectedDocument.document_url);
+  }
+  deleteModel(id: number){
+    this.listOfDocuments = [];
+    this.ds.deleteDocument(id).subscribe((next)=>{
+      this.ds.getDocuments(this.userId).subscribe((next)=>{this.listOfDocuments = next;})
+      this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
+    })
   }
 
   Cancel(){this.details = 0;}

@@ -118,6 +118,7 @@ namespace api.Controllers
         #region <!--courses-->
 
         #endregion
+      
         #region <!--documents-->
         [HttpGet("getListDocuments/{userId}")]
         public async Task<IActionResult> getDocumentList(int userId)
@@ -226,13 +227,31 @@ namespace api.Controllers
             }
             return Ok(help.document_url); 
         }
-        #endregion
         
+        
+        [HttpDelete("deleteDocument/{docId}")]
+        public async Task<IActionResult> deleteItem(int docId){
 
+             var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "pdf/delete-file/" + docId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
 
-
-
-
+            
+        }
+        
+        
+        
+        #endregion
+     
     }
     class photoResult{
         public string document_url { get; set; }

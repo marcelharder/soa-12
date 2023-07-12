@@ -18,7 +18,10 @@
       <tr *ngFor="let item of listOfDocuments">
         <td>{{item.documentId}}</td>
         <td>{{item.description}}</td>
-        <td><button class="btn btn-warning btn-sm" (click)="showDetails(item.documentId)">details</button></td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="showDetails(item.documentId)">details</button>
+          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.documentId)">delete</button>
+        </td>
       </tr>
 
 

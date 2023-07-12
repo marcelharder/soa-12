@@ -21,6 +21,10 @@ export class DocumentService {
     return this.http.get<Document_model>(this.baseUrl + 'training/getSpecificFile/' + docId);
   }
 
+  public deleteDocument(docId: number): Observable<number> {
+    return this.http.delete<number>(this.baseUrl + 'training/deleteFile/' + docId);
+  }
+
   public updateDocument(doc: Document_model, docId: number): Observable<Document_model> {
     return this.http.put<Document_model>(this.baseUrl + 'training/updateDocument/' + docId,doc, { responseType: 'text' as 'json'});
   }
