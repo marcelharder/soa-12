@@ -44,13 +44,14 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+      
         [HttpGet("getListEpaas/{userId}")]
         public async Task<IActionResult> getEpaList(int userId)
         {
 
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "Epa/Epas/" + userId;
+            var st = "Epa/dapper/Epas/" + userId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -61,12 +62,13 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+      
         [HttpGet("getEpaDetails/{id}")]
         public async Task<IActionResult> getEpaDetails(int Id)
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "Epa/EpaDetails/" + Id;
+            var st = "Epa/dapper/EpaDetails/" + Id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -77,12 +79,13 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+     
         [HttpPut("updateEpa")]
         public async Task<IActionResult> Update([FromBody] EpaDetailsDto ep)
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "Epa/UpdateEpa";
+            var st = "Epa/dapper/UpdateEpa";
             comaddress = comaddress + st;
             var json = JsonConvert.SerializeObject(ep, Formatting.None);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -96,13 +99,14 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+      
         [HttpGet("deleteEpa/{id}")]
         public async Task<IActionResult> deleteEpaDetails(int Id)
         {
 
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "Epa/DeleteEpa/" + Id;
+            var st = "Epa/dapper/DeleteEpa/" + Id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -125,7 +129,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/files/" + userId;
+            var st = "pdf/dapper/files/" + userId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -142,7 +146,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/specificfile/" + docId;
+            var st = "pdf/dapper/specificfile/" + docId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -154,12 +158,12 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpPut("updateDocument/{docId}")]
+        [HttpPut("updateDocument")]
         public async Task<IActionResult> updateSpecDocument(int docId, [FromBody] PdfForCreationDto up)
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/update-document/" + docId;
+            var st = "pdf/dapper/update_document";
             comaddress = comaddress + st;
             var json = JsonConvert.SerializeObject(up, Formatting.None);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -178,11 +182,11 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/create_document/" + userId;
+            var st = "pdf/dapper/create_document/" + userId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                using (var response = await httpClient.PostAsync(comaddress, null))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
@@ -195,7 +199,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/files/" + userId;
+            var st = "pdf/dapper/files/" + userId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -216,7 +220,7 @@ namespace api.Controllers
 
             var help = new photoResult();
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/upload-pdf/" + documentId;
+            var st = "pdf/dapper/upload-pdf/" + documentId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -235,7 +239,7 @@ namespace api.Controllers
 
              var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "pdf/delete-file/" + docId;
+            var st = "pdf/dapper/delete_document/" + docId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {

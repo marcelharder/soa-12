@@ -32,9 +32,11 @@ services:
      - internal-container-network 
 
   training:
-    image: training:v4
+    image: training:v6
     networks:
       - internal-container-network
+    ports:
+     - 80:80
     depends_on:
       - db 
 

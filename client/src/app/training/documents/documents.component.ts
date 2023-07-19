@@ -67,8 +67,9 @@ constructor(private ds: DocumentService,
 
   }
   updateDocument(){
+
     this.listOfDocuments = [];
-    this.ds.updateDocument(this.detailsForm.value, this.documentId).subscribe(
+    this.ds.updateDocument(this.detailsForm.value).subscribe(
       (next)=>{
       this.ds.getDocuments(this.userId).subscribe((next)=>{this.listOfDocuments = next;})
       this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
@@ -89,6 +90,7 @@ constructor(private ds: DocumentService,
   addDocument(){
     this.ds.createDocument(this.userId).subscribe((next)=>{
       this.documentId = next.documentId;
+      // push it to the list
     }, 
     (error)=>{this.alertify.error(error)},
     ()=>{

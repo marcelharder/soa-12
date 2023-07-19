@@ -25,8 +25,8 @@ export class DocumentService {
     return this.http.delete<string>(this.baseUrl + 'training/deleteDocument/' + docId, { responseType: 'text' as 'json'});
   }
 
-  public updateDocument(doc: Document_model, docId: number): Observable<Document_model> {
-    return this.http.put<Document_model>(this.baseUrl + 'training/updateDocument/' + docId,doc, { responseType: 'text' as 'json'});
+  public updateDocument(doc: Document_model): Observable<Document_model> {
+    return this.http.put<Document_model>(this.baseUrl + 'training/updateDocument', doc);
   }
 
   public createDocument(userId: number): Observable<Document_model> {
