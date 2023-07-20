@@ -5,7 +5,7 @@ namespace api.DTOs
     public class CourseDetailsDto
     {
         public int CourseId { get; set; }
-        public string active { get; set; }
+        public Boolean active { get; set; }
         public int level { get; set; }
         public string description { get; set; }
         public string title { get; set; }

@@ -136,12 +136,12 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-        [HttpGet("getSpecificFile/{CourseId}", Name = "GSC")]
+        [HttpGet("getSpecificCourse/{CourseId}", Name = "GSC")]
         public async Task<IActionResult> getSpecCourse(int CourseId)
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "Course/dapper/specificfile/" + CourseId;
+            var st = "Course/dapper/specificCourse/" + CourseId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -152,6 +152,63 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+       
+        [HttpPost("createCourse/{userId}")]
+        public async Task<IActionResult> createCourse(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Course/dapper/create_course/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync(comaddress, null))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+   
+        [HttpPut("updateCourse")]
+        public async Task<IActionResult> updateSpecCourse(int docId, [FromBody] CourseDetailsDto up)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Course/dapper/update_course";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(up, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpDelete("deleteCourse/{CourseId}")]
+        public async Task<IActionResult> deleteItem(int CourseId){
+
+             var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Course/dapper/delete_course/" + CourseId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+
+            
+        }
+        
+      
 
         #endregion
       
@@ -267,7 +324,7 @@ namespace api.Controllers
         
         
         [HttpDelete("deleteDocument/{docId}")]
-        public async Task<IActionResult> deleteItem(int docId){
+        public async Task<IActionResult> deleteDocument(int docId){
 
              var help = "";
             var comaddress = _com.Value.trainingURL;
