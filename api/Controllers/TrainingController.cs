@@ -120,6 +120,38 @@ namespace api.Controllers
         #endregion
 
         #region <!--courses-->
+        [HttpGet("getListCourses/{userId}")]
+        public async Task<IActionResult> getCourseList(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Course/dapper/files/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+        [HttpGet("getSpecificFile/{CourseId}", Name = "GSC")]
+        public async Task<IActionResult> getSpecCourse(int CourseId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Course/dapper/specificfile/" + CourseId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
 
         #endregion
       

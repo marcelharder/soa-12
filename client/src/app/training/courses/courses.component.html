@@ -1,26 +1,164 @@
-<div class="card-header"><h4><span class="badge badge-secondary">List of courses</span></h4></div>
+<div class="card-header">
+  <div class="row">
+    <div class="col-sm-6"><h4><span class="badge badge-secondary">List of courses</span></h4></div>
+    <div class="col-sm-6"><button class="btn btn-secondary btn-sm" style="float: right;" (click)="addCourse()">Add Course</button></div>
+  </div>
+  
+
+</div>
 <div class="card-body">
-  <!-- <table class="table table-striped table-hover table-bordered">
+
+  <table class="table table-striped table-hover table-bordered" *ngIf="!showDetailsPanel()">
     <thead>
       <tr>
-        <th></th>
-        <th></th>
-        <th>KPB</th>
-        <th>OSATS</th>
-        <th>360</th>
-        <th>CAT/CAL</th>
-        <th>Examen</th>
+        <th>Id</th>
+        <th>description</th>
+
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of description">
-        <td>{{item.Id}}</td>
-        <td>{{item.Definition}}</td>
-        <td><button class="btn btn-warning btn-sm" (click)="showDetails(item.Id-1)">details</button></td>  
+      <tr *ngFor="let item of listOfDocuments">
+        <td>{{item.CourseId}}</td>
+        <td>{{item.description}}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="showDetails(item.CourseId)">details</button>
+          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.CourseId)">delete</button>
+        </td>
       </tr>
-     
-      
+
+
     </tbody>
-  </table> -->
+  </table>
+  <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updateCourse()" *ngIf="showDetailsPanel()">
+    
+    <div class="row">
+      <div class="col-sm-4">
+
+        <div class="row">
+          <div class="col-sm-6">
+            <h5><span class="badge badge-secondary">CourseId:</span></h5>
+          </div>
+          <div class="col-sm-6">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["CourseId"]' class="form-control" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Level:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["level"]' class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Description:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["description"]' class="form-control">
+            </div>
+          </div>
+        </div>
+     
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Title:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["title"]' class="form-control">
+            </div>
+          </div>
+        </div>
+      
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">location:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["location"]' class="form-control">
+            </div>
+          </div>
+        </div>
+     
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Diploma:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["diploma"]' class="form-control">
+            </div>
+          </div>
+        </div>
+     
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Course Date:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["endDate"]' class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">End Date:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["endDate"]' class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Price:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["price"]' class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Active:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <ui-switch formControlName='active'></ui-switch>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-sm-8">
+        picture van else komt hier
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-6">
+        
+        <button type="button" class="btn btn-warning btn-sm" (click)="Cancel()">Cancel</button>
+        <button type="submit" class="btn btn-success btn-sm">Submit</button>
+      </div>
+      <div class="col-sm-6"></div>
+
+    </div>
+
+  </form>
+
 </div>

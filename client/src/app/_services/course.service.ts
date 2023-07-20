@@ -16,11 +16,9 @@ export class CourseService {
   OnInit() {
    
   }
-  //  get the courses that this aio attended
-  getCourses(id: number): Observable<Course[]> { return this.http.get<Course[]>(this.baseUrl + 'aio/Courses/' + id); }
-    // get the details of this course
-  getCourse(id: number): Observable<Course> { return this.http.get<Course>(this.baseUrl + 'aio/CourseDetails/' + id); }
-  createCourse(item: Course){ return this.http.post<Course>(this.baseUrl + 'aio/AddCourse',item);}
-  removeCourse(id: number){return this.http.delete<string>(this.baseUrl + 'aio/DeleteCourse/' + id,{ responseType: 'text' as 'json' }); }
-  updateCourse(item: Course){return this.http.put<string>(this.baseUrl + 'aio/UpdateCourse',item);}
+  getCourses(id: number): Observable<Course[]> { return this.http.get<Course[]>(this.baseUrl + 'training/Courses/' + id); }
+  getCourse(id: number): Observable<Course> { return this.http.get<Course>(this.baseUrl + 'training/CourseDetails/' + id); }
+  createCourse(id: number){ return this.http.post<Course>(this.baseUrl + 'training/AddCourse/' + id, null);}
+  removeCourse(id: number){return this.http.delete<string>(this.baseUrl + 'training/DeleteCourse/' + id,{ responseType: 'text' as 'json' }); }
+  updateCourse(item: Course){return this.http.put<string>(this.baseUrl + 'training/UpdateCourse',item);}
 }

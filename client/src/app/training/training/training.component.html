@@ -24,7 +24,7 @@
   <div class="card-body">
     <div *ngIf="showEpaPanel()"><app-epa></app-epa></div>
     <div *ngIf="showDocPanel()"><app-documents [userId]="currentUserId"></app-documents></div>
-    <div *ngIf="showCoursesPanel()"><app-courses></app-courses></div>
+    <div *ngIf="showCoursesPanel()"><app-courses [userId]="currentUserId"></app-courses></div>
     <div *ngIf="showCMEPanel()"><app-cme></app-cme></div>
 
   </div>

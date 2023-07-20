@@ -52,7 +52,7 @@ namespace api.Controllers
         public async Task<IActionResult> AddCourseDetails(CourseDetailsDto cd)
         {
             var currentUserId = _spec.getCurrentUserId();
-            cd.Id = currentUserId;
+            cd.CourseId = currentUserId;
 
             var currentUser = await _manager.Users.SingleOrDefaultAsync(x => x.Id == currentUserId);
             var course = _spec.mapToCourse(cd, new Class_Course());

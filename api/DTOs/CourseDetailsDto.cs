@@ -14,6 +14,6 @@ namespace api.DTOs
         public DateTime courseDate { get; set; }
         public DateTime endDate { get; set; }
         public float price { get; set; }
-        public int Id { get; set; }
+        public int userId { get; set; }
     }
 }
