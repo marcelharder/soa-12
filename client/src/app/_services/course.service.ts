@@ -13,12 +13,11 @@ export class CourseService {
 
   constructor(private http: HttpClient) { }
 
-  OnInit() {
-   
-  }
-  getCourses(id: number): Observable<Course[]> { return this.http.get<Course[]>(this.baseUrl + 'training/Courses/' + id); }
-  getCourse(id: number): Observable<Course> { return this.http.get<Course>(this.baseUrl + 'training/CourseDetails/' + id); }
-  createCourse(id: number){ return this.http.post<Course>(this.baseUrl + 'training/AddCourse/' + id, null);}
-  removeCourse(id: number){return this.http.delete<string>(this.baseUrl + 'training/DeleteCourse/' + id,{ responseType: 'text' as 'json' }); }
-  updateCourse(item: Course){return this.http.put<string>(this.baseUrl + 'training/UpdateCourse',item);}
+  OnInit() {}
+
+  getCourses(id: number): Observable<Course[]> { return this.http.get<Course[]>(this.baseUrl + 'training/getListCourses/' + id); }
+  getCourse(id: number): Observable<Course> { return this.http.get<Course>(this.baseUrl + 'training/getSpecificCourse/' + id); }
+  createCourse(id: number){ return this.http.post<Course>(this.baseUrl + 'training/createCourse/' + id, null);}
+  removeCourse(id: number){return this.http.delete<string>(this.baseUrl + 'training/deleteCourse/' + id,{ responseType: 'text' as 'json' }); }
+  updateCourse(item: Course){return this.http.put<string>(this.baseUrl + 'training/updateCourse',item);}
 }

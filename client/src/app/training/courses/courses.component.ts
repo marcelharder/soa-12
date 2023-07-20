@@ -13,7 +13,7 @@ export class CoursesComponent implements OnInit {
   @Input() userId:number;
   detailsForm: FormGroup | undefined;
   courseId = 0;
-  course = 0;
+  courseP = 0;
   scm: Course = {
     CourseId: 0,
     active: '',
@@ -21,7 +21,7 @@ export class CoursesComponent implements OnInit {
     description: '',
     title: '',
     diploma: '',
-    location: '',
+    venue_location: '',
     courseDate: undefined,
     endDate: undefined,
     price: 0,
@@ -32,7 +32,11 @@ export class CoursesComponent implements OnInit {
   constructor(private cs: CourseService, private alertify: ToastrService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    this.cs.getCourses(this.userId).subscribe((next)=>{this.listOfCourses = next;})
+    this.cs.getCourses(this.userId).subscribe((next)=>{
+      
+      this.listOfCourses = next;
+      this.initializeForm();
+    })
   
   }
 
@@ -44,7 +48,7 @@ export class CoursesComponent implements OnInit {
       description: ['', ],
       title: ['', ],
       diploma: ['', ],
-      location: ['', ],
+      venue_location: ['', ],
       courseDate: ['', ],
       endDate: ['', ],
       price: ['', ],
@@ -62,13 +66,13 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  showDetailsPanel(){if(this.course == 1){return true} else {return false}}
+  showDetailsPanel(){if(this.courseP == 1){return true} else {return false}}
 
   showDetails(id: number){
-    this.course = 1;
+    this.courseP = 1;
     this.courseId = id;
     this.scm = this.listOfCourses.find(x => x.CourseId == id);
-   
+    debugger;
     this.detailsForm.controls.CourseId.setValue(this.scm.CourseId);
     this.detailsForm.controls.userId.setValue(this.userId);
     this.detailsForm.controls.active.setValue(this.scm.active);
@@ -78,7 +82,7 @@ export class CoursesComponent implements OnInit {
     this.detailsForm.controls.title.setValue(this.scm.title);
     this.detailsForm.controls.level.setValue(this.scm.level);
     this.detailsForm.controls.diploma.setValue(this.scm.diploma);
-    this.detailsForm.controls.location.setValue(this.scm.location);
+    this.detailsForm.controls.venue_location.setValue(this.scm.venue_location);
     this.detailsForm.controls.price.setValue(this.scm.price);
     //this.cs.getCourse(id).subscribe((next)=>{this.course_model = next;})
   }
@@ -96,11 +100,11 @@ export class CoursesComponent implements OnInit {
       this.scm = this.listOfCourses.find(x => x.CourseId == this.courseId);
     },
     (error)=>{this.alertify.error(error)},
-    ()=>{this.course = 0;});
+    ()=>{this.courseP = 0;});
   
   }
 
-  Cancel(){this.course = 0;}
+  Cancel(){this.courseP = 0;}
 
 }
 

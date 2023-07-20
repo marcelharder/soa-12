@@ -1,6 +1,15 @@
 <div class="card-header">
   <div class="row">
-    <div class="col-sm-6"><h4><span class="badge badge-secondary">List of courses</span></h4></div>
+    <div class="col-sm-6">
+      <h4 *ngIf="!showDetailsPanel()"><span class="badge badge-secondary">List of courses</span></h4>
+      <h4 *ngIf="showDetailsPanel()"><span class="badge badge-secondary">Course details</span></h4>
+    </div>
+   
+   
+   
+   
+   
+   
     <div class="col-sm-6"><button class="btn btn-secondary btn-sm" style="float: right;" (click)="addCourse()">Add Course</button></div>
   </div>
   
@@ -18,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of listOfDocuments">
+      <tr *ngFor="let item of listOfCourses">
         <td>{{item.CourseId}}</td>
         <td>{{item.description}}</td>
         <td>
@@ -33,7 +42,7 @@
   <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updateCourse()" *ngIf="showDetailsPanel()">
     
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-8">
 
         <div class="row">
           <div class="col-sm-6">
@@ -80,11 +89,11 @@
       
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
-            <h5><span class="badge badge-secondary">location:</span></h5>
+            <h5><span class="badge badge-secondary">Venue location:</span></h5>
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["location"]' class="form-control">
+              <input [formControl]='detailsForm.controls["venue_location"]' class="form-control">
             </div>
           </div>
         </div>
@@ -144,7 +153,7 @@
 
 
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-4">
         picture van else komt hier
       </div>
     </div>

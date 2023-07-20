@@ -46,7 +46,8 @@ constructor(private ds: DocumentService,
       finished: [false, ],
       description: ['', ],
       dateAdded: ['', ],
-      type: ['', ]
+      type: ['', ],
+      document_url: ['', ]
     });
   }
 
@@ -63,6 +64,7 @@ constructor(private ds: DocumentService,
    this.detailsForm.controls.description.setValue(this.selectedDocument.description);
    this.detailsForm.controls.dateAdded.setValue(this.selectedDocument.dateAdded);
    this.detailsForm.controls.type.setValue(this.selectedDocument.type);
+   this.detailsForm.controls.document_url.setValue(this.selectedDocument.document_url);
  
 
   }
@@ -100,8 +102,9 @@ constructor(private ds: DocumentService,
   }
 
   updatePhoto(photoUrl: string) {
-    this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
-    this.selectedDocument.document_url = photoUrl;
+    //this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
+    //this.selectedDocument.document_url = photoUrl;
+    this.detailsForm.controls.document_url.setValue(photoUrl);
   }
 
   showPdf(){

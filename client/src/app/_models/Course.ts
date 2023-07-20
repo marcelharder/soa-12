@@ -5,7 +5,7 @@ export interface Course {
     description: string;
     title: string;
     diploma: string;
-    location: string;
+    venue_location: string;
     courseDate: Date;
     endDate: Date;
     price: number;
