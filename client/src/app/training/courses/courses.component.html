@@ -4,15 +4,16 @@
       <h4 *ngIf="!showDetailsPanel()"><span class="badge badge-secondary">List of courses</span></h4>
       <h4 *ngIf="showDetailsPanel()"><span class="badge badge-secondary">Course details</span></h4>
     </div>
-   
-   
-   
-   
-   
-   
-    <div class="col-sm-6"><button class="btn btn-secondary btn-sm" style="float: right;" (click)="addCourse()">Add Course</button></div>
+
+
+
+
+
+
+    <div class="col-sm-6"><button *ngIf="!showDetailsPanel()" class="btn btn-secondary btn-sm" style="float: right;"
+        (click)="addCourse()">Add Course</button></div>
   </div>
-  
+
 
 </div>
 <div class="card-body">
@@ -40,7 +41,7 @@
     </tbody>
   </table>
   <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updateCourse()" *ngIf="showDetailsPanel()">
-    
+
     <div class="row">
       <div class="col-sm-8">
 
@@ -75,7 +76,7 @@
             </div>
           </div>
         </div>
-     
+
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
             <h5><span class="badge badge-secondary">Title:</span></h5>
@@ -86,7 +87,7 @@
             </div>
           </div>
         </div>
-      
+
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
             <h5><span class="badge badge-secondary">Venue location:</span></h5>
@@ -97,7 +98,7 @@
             </div>
           </div>
         </div>
-     
+
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
             <h5><span class="badge badge-secondary">Diploma:</span></h5>
@@ -108,14 +109,16 @@
             </div>
           </div>
         </div>
-     
+
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
             <h5><span class="badge badge-secondary">Course Date:</span></h5>
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["endDate"]' class="form-control">
+              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                [formControl]='detailsForm.controls["courseDate"]' [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                name="datum1" />
             </div>
           </div>
         </div>
@@ -126,7 +129,9 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["endDate"]' class="form-control">
+              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+                [formControl]='detailsForm.controls["endDate"]' [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                name="datum1" />
             </div>
           </div>
         </div>
@@ -157,10 +162,10 @@
         picture van else komt hier
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-sm-6">
-        
+
         <button type="button" class="btn btn-warning btn-sm" (click)="Cancel()">Cancel</button>
         <button type="submit" class="btn btn-success btn-sm">Submit</button>
       </div>

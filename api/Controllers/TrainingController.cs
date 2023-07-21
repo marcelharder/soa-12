@@ -326,7 +326,7 @@ namespace api.Controllers
         [HttpDelete("deleteDocument/{docId}")]
         public async Task<IActionResult> deleteDocument(int docId){
 
-             var help = "";
+            var help = "";
             var comaddress = _com.Value.trainingURL;
             var st = "pdf/dapper/delete_document/" + docId;
             comaddress = comaddress + st;

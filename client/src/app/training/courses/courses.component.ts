@@ -88,7 +88,13 @@ export class CoursesComponent implements OnInit {
   }
 
   deleteModel(id: number){
-    this.cs.removeCourse(id).subscribe((next)=>{this.alertify.show("Record deleted ..")})
+
+    this.cs.removeCourse(id).subscribe((next)=>{this.alertify.show("Record deleted ..")});
+    this.cs.getCourses(this.userId).subscribe((next)=>{this.listOfCourses = next; })
+
+
+
+
   }
 
   updateCourse(){

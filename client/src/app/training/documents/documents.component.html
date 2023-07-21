@@ -1,7 +1,12 @@
 <div class="card-header">
   <div class="row">
-    <div class="col-sm-6"><h4><span class="badge badge-secondary">List of documents</span></h4></div>
-    <div class="col-sm-6"><button class="btn btn-secondary btn-sm" style="float: right;" (click)="addDocument()">Add document</button></div>
+    <div class="col-sm-6">
+      <h4 *ngIf="!showDetailsPanel()"><span class="badge badge-secondary">List of documents</span></h4>
+      <h4 *ngIf="showDetailsPanel()"><span class="badge badge-secondary">details</span></h4>
+    
+    </div>
+    <div class="col-sm-6">
+      <button *ngIf="!showDetailsPanel()" class="btn btn-secondary btn-sm" style="float: right;" (click)="addDocument()">Add document</button></div>
   </div>
   
   
@@ -77,8 +82,9 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["dateAdded"]' class="form-control">
-            </div>
+              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker [formControl]='detailsForm.controls["dateAdded"]'
+               [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }" name="datum1" />
+             </div>
           </div>
         </div>
 

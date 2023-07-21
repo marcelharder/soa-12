@@ -102,8 +102,8 @@ constructor(private ds: DocumentService,
   }
 
   updatePhoto(photoUrl: string) {
-    //this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
-    //this.selectedDocument.document_url = photoUrl;
+    this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
+    this.selectedDocument.document_url = photoUrl;
     this.detailsForm.controls.document_url.setValue(photoUrl);
   }
 
@@ -111,7 +111,9 @@ constructor(private ds: DocumentService,
     window.open(this.selectedDocument.document_url);
   }
   deleteModel(id: number){
+   
     this.listOfDocuments = [];
+
     this.ds.deleteDocument(id).subscribe((next)=>{
       this.ds.getDocuments(this.userId).subscribe((next)=>{this.listOfDocuments = next;})
       this.selectedDocument = this.listOfDocuments.find(x => x.documentId == this.documentId);
