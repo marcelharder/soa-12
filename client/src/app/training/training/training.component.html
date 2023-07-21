@@ -15,7 +15,7 @@
       </div>
       <div class="mt-3 ml-3"><button class="btn-outline-primary btn-sm" (click)="showDocuments()">Documents</button></div>
       <div class="mt-3 ml-3"><button class="btn-outline-primary btn-sm" (click)="showCourses()">Courses</button></div>
-      <div class="mt-3 ml-3"><button class="btn-outline-primary btn-sm" (click)="showEpa()">Entrusted Professional Activities</button></div>
+      <div class="mt-3 ml-3"><button  *ngIf="showEpaButton()" class="btn-outline-primary btn-sm" (click)="showEpa()">Entrusted Professional Activities</button></div>
       <div class="mt-3 ml-3"><button class="btn-outline-primary btn-sm" (click)="showCME()">CME</button></div>
     </div>
 
