@@ -248,7 +248,7 @@ namespace api.Controllers
         }
 
         [HttpPut("updateDocument")]
-        public async Task<IActionResult> updateSpecDocument(int docId, [FromBody] PdfForCreationDto up)
+        public async Task<IActionResult> updateSpecDocument([FromBody] PdfForCreationDto up)
         {
             var help = "";
             var comaddress = _com.Value.trainingURL;
