@@ -12,10 +12,20 @@
               <div class="card">
                 <div class="card-header">Procedures done as primary surgeon</div>
                 <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-8"></div>
-                    <div class="col-sm-4"></div>
-                  </div>
+                  <table class="table table-striped">
+                    <tr>
+                      <th>ID</th>
+                      <th>description</th>
+                      <th>Date</th>
+                      <th></th>
+                    </tr>
+                    <tr *ngFor="let pro of procedures">
+                      <td>{{pro.procedureId}}</td>
+                      <td>{{pro.description}}</td>
+                      <td>{{pro.dateOfSurgery | date : 'shortDate'}}</td>
+                      <td><a (click)="testNav(pro)" style='color:crimson'>Details</a></td> 
+                    </tr>
+                  </table>
                 </div>
               </div>
             </tab>

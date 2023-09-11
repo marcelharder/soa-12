@@ -168,6 +168,7 @@ import { EpadetailsComponent } from './training/epa/epadetails/epadetails.compon
 import { DocumentService } from './_services/document.service';
 import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { TrainingService } from './_services/training.service';
 
 @NgModule({
   declarations: [					
@@ -301,6 +302,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
    DischargeService,
    JwtHelperService, 
    DocumentService,
+   TrainingService,
   //  resolvers
    ProcedureListResolver,
    ProcedureDetailsResolver,

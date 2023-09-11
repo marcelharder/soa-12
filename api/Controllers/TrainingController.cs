@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using api.DTOs;
 using api.Helpers;
+using api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,11 @@ namespace api.Controllers
     public class TrainingController : BaseApiController
     {
         private IOptions<ComSettings> _com;
-        public TrainingController(IOptions<ComSettings> com)
+         private IUserRepository _rep;
+        public TrainingController(IOptions<ComSettings> com, IUserRepository rep)
         {
             _com = com;
+            _rep = rep;
         }
         #region <!--epa -->
         [HttpGet("getEpaDefinition")]
@@ -346,6 +349,48 @@ namespace api.Controllers
         
         #endregion
      
+
+        #region <!--procedures-->
+
+        [HttpGet("getProcedures/{surgeonId}")]
+        public async Task<IActionResult> getProcedureList(int surgeonId)
+        {
+            // get the loggedin surgeon so we can get the hospital number
+            var logged_in_surgeon = await _rep.GetUser(surgeonId);
+
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Procedure/procedures/" + surgeonId + "/" + logged_in_surgeon.hospital_id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+      
+        [HttpGet("getProcedureDetails/{id}")]
+        public async Task<IActionResult> getProcedureDetails(int Id)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Procedure/procedureDetails/" + Id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+     
+
+        #endregion
     }
     class photoResult{
         public string document_url { get; set; }

@@ -72,7 +72,6 @@ namespace api.Controllers
             return result;
         }
 
-
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(UserForRegisterDto registerDto)
         {
