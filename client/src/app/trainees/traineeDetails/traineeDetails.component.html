@@ -12,6 +12,8 @@
               <div class="card">
                 <div class="card-header">Procedures done as primary surgeon</div>
                 <div class="card-body">
+
+                  <span *ngIf="showProcedures()">
                   <table class="table table-striped">
                     <tr>
                       <th>ID</th>
@@ -26,6 +28,10 @@
                       <td><a (click)="testNav(pro)" style='color:crimson'>Details</a></td> 
                     </tr>
                   </table>
+                </span>
+                <span *ngIf="!showProcedures()">
+                  no procedures found
+                </span>
                 </div>
               </div>
             </tab>

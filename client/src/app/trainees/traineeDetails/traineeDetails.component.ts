@@ -11,7 +11,7 @@ import { TrainingService } from 'src/app/_services/training.service';
   styleUrls: ['./traineeDetails.component.css']
 })
 export class TraineeDetailsComponent implements OnInit {
-
+  procedures_found = 0;
   user: User;
   procedures: Array<Partial<Procedure>> = [];
 
@@ -20,13 +20,19 @@ export class TraineeDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: { user: User }) => { this.user = data.user; });
     // get the list of procedures done by this resident
-    this.train.getProcedures(this.user.Id).subscribe((next)=>
-    {
-      if(next === 'no procedure found'){ this.alertify.info("No procedure found");} else {this.procedures = next;}
-       }
-       
-       )
+    this.train.getProcedures(this.user.Id).subscribe((next) => {
+      if (next === 'no procedure found') {
+        this.procedures_found = 0;
+      } else {
+        this.procedures_found = 1;
+        this.procedures = next;
+      }
+    }
+
+    )
 
   }
+
+  showProcedures(){if(this.procedures_found != 0){return true;}}
 
 }
