@@ -21,18 +21,14 @@ export class TraineeDetailsComponent implements OnInit {
     this.route.data.subscribe((data: { user: User }) => { this.user = data.user; });
     // get the list of procedures done by this resident
     this.train.getProcedures(this.user.Id).subscribe((next) => {
-      if (next === 'no procedure found') {
-        this.procedures_found = 0;
-      } else {
+      if (next === 'no procedure found') { this.procedures_found = 0; } else {
         this.procedures_found = 1;
-        this.procedures = next;
+        this.train.getProcedureArray(this.user.Id).subscribe((res) => { this.procedures = res; })
       }
     }
-
     )
-
   }
 
-  showProcedures(){if(this.procedures_found != 0){return true;}}
+  showProcedures() { if (this.procedures_found != 0) { return true; } }
 
 }

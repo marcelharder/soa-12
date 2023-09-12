@@ -130,6 +130,20 @@ export class ProceduredetailsComponent implements OnInit {
         this.destinationUrl = 'valverepair';
         break;
       };
+      case 'previewReport': {
+        // check to see if this user has paid or not
+        this.auth.currentServiceLevel$.pipe(take(1)).subscribe((n) => {
+           if (n === 1) {
+            // this means user is okay to go
+            this.destinationUrl = 'previewReport';
+          } else {
+            this.alertify.error('You need a subscription to use reporting');
+            this.destinationUrl = 'detailsMain';
+          }
+        });
+        break;
+      }
+    
       default: { this.destinationUrl = d; break; }
     }
     this.router.navigate(['/procedureDetails', { outlets: { details: [this.destinationUrl, this.currentProcedureId] } }]);

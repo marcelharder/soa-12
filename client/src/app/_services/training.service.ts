@@ -17,6 +17,9 @@ export class TrainingService {
   getProcedures(id: number): Observable<any> {
      return this.http.get<Partial<any>>(this.baseUrl + 'Training/getProcedures/'+ id, { responseType: 'text' as 'json'}); 
   }
+  getProcedureArray(id: number): Observable<any> {
+    return this.http.get<Partial<any>>(this.baseUrl + 'Training/getProcedures/'+ id); 
+ }
 
   getProcedureDetails(id: number): Observable<Partial<Procedure>> { 
     return this.http.get<Partial<Procedure>>(this.baseUrl + 'Training/getProcedureDetails/' + id); }

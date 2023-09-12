@@ -95,8 +95,8 @@ export class PreviewreportComponent implements OnInit {
 
   ngOnInit() {
 
+   
     this.auth.currentServiceLevel$.pipe(take(1)).subscribe((n) => {
-      if (n === 1) {
         this.auth.currentUser$.pipe(take(1)).subscribe((u) => {this.currentUserName = u.UserName;});
         this.auth.HospitalName.subscribe((n)=>{this.currentHospitalName = n;});
         this.route.data.subscribe(data => {
@@ -113,17 +113,8 @@ export class PreviewreportComponent implements OnInit {
           });
         });
         this.preview.getReportHeader(this.procedureId).subscribe((next) => { this.reportHeader = next; });
-      } else {
-        this.router.navigate(['/']);
-        this.alertify.error("You need a premium subscription ...")
-      }
     });
-
-
-
   }
-
-
 
   acceptMessage(id: number) {// get the button actions from the header component
     switch (id) {
@@ -133,9 +124,7 @@ export class PreviewreportComponent implements OnInit {
     }
   };
 
-  cancelEmailRef($event: any) {
-    this.refEmail = '0';
-  }
+  cancelEmailRef($event: any) {this.refEmail = '0';}
 
   composeAndSendMailMessage() {
     // check if the report is saved
@@ -182,9 +171,9 @@ export class PreviewreportComponent implements OnInit {
       complete: () => {
         this.preview.isFinalReportPresentable(this.prev.procedure_id).subscribe((next)=>{
           switch(next){
-            case 1:  window.location.href = `${this.baseUrl}finalOperativeReport/${this.prev.procedure_id}`;break;
+            case 1: window.location.href = `${this.baseUrl}finalOperativeReport/${this.prev.procedure_id}`;break;
             case 2: this.alertify.error("pls fill the cabg details before printing the final report");break;
-            case 3:  window.location.href = `${this.baseUrl}finalOperativeReport/${this.prev.procedure_id}`;break;
+            case 3: window.location.href = `${this.baseUrl}finalOperativeReport/${this.prev.procedure_id}`;break;
             case 4: this.alertify.error("pls fill the valve details before printing the final report");break;
           }
         })

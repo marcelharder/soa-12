@@ -32,8 +32,9 @@ export class CoursesComponent implements OnInit {
   constructor(private cs: CourseService, private alertify: ToastrService, private fb: FormBuilder) { }
 
   ngOnInit() {
+
+
     this.cs.getCourses(this.userId).subscribe((next)=>{
-      
       this.listOfCourses = next;
       this.initializeForm();
     })

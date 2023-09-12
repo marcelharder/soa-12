@@ -33,9 +33,9 @@ export class TraineesComponent implements OnInit {
   }
 
   //show details van de employee, gets the id from the @output
+  toEmployeeDetails(id: number){this.router.navigate(['/editTrainee/' + id]);
 
-  toEmployeeDetails(id: number){
-    this.router.navigate(['/editTrainee/' + id]);
+
   }
 
 }

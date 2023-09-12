@@ -65,9 +65,6 @@ export class AccountService {
     )
   }
 
-
-
-
   setCurrentUser(user: User) {
     // find out if this is a premium client
     const currentDate = new Date();

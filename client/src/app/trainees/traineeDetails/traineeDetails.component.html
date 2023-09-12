@@ -22,9 +22,9 @@
                       <th></th>
                     </tr>
                     <tr *ngFor="let pro of procedures">
-                      <td>{{pro.procedureId}}</td>
-                      <td>{{pro.description}}</td>
-                      <td>{{pro.dateOfSurgery | date : 'shortDate'}}</td>
+                      <td>{{pro.ProcedureId}}</td>
+                      <td>{{pro.Description}}</td>
+                      <td>{{pro.DateOfSurgery | date : 'shortDate'}}</td>
                       <td><a (click)="testNav(pro)" style='color:crimson'>Details</a></td> 
                     </tr>
                   </table>
@@ -47,7 +47,7 @@
               <div class="card">
                 <div class="card-header">Attended Courses</div>
                 <div class="card-body">
-                  <app-courses></app-courses>
+                  <app-courses [userId]="user.Id"></app-courses>
                 </div>
               </div>
             </tab>
