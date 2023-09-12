@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Epa_model } from 'src/app/_models/Epa_model';
 import { AccountService } from 'src/app/_services/account.service';
@@ -10,6 +10,8 @@ import { EpaService } from 'src/app/_services/epa.service';
   styleUrls: ['./epa.component.css']
 })
 export class EpaComponent implements OnInit {
+  @Input() userId:number;
+  @Input() origin:string;
   d = 0;
   epa_no_description = "";
   description: any = [];
@@ -34,20 +36,28 @@ export class EpaComponent implements OnInit {
     option_6: false,
     option_7: false
   }
-  userId = 0;
+  
   
     constructor(private epa: EpaService, private account: AccountService, private alertify:ToastrService) { }
   
     ngOnInit() {
       // get the descriptions
       this.epa.getDescriptions().subscribe((response)=>{ this.description = response;});
+      
+      // if this is opnened by the chef then use that userId else get current user
+      if(this.origin === '1'){
+        this.epa.getEpas(this.userId).subscribe((next)=>{this.values = next;});}
+      else {
       // get the values for this patient
       this.account.currentUser$.subscribe((next)=>{this.userId = next.UserId;});
-      if(this.userId !== undefined){
-        debugger;
-        this.epa.getEpas(this.userId).subscribe((next)=>{this.values = next;});
+      if(this.userId !== undefined){this.epa.getEpas(this.userId).subscribe((next)=>{this.values = next;});
+      };
       }
-      else {};
+      
+      
+      
+     
+      
      
   
     }
