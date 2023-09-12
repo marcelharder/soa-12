@@ -11,7 +11,7 @@ import { EpaService } from 'src/app/_services/epa.service';
 })
 export class EpaComponent implements OnInit {
   @Input() userId:number;
-  @Input() origin:string;
+  @Input() origin:number;
   d = 0;
   epa_no_description = "";
   description: any = [];
@@ -43,23 +43,22 @@ export class EpaComponent implements OnInit {
     ngOnInit() {
       // get the descriptions
       this.epa.getDescriptions().subscribe((response)=>{ this.description = response;});
-      
       // if this is opnened by the chef then use that userId else get current user
-      if(this.origin === '1'){
-        this.epa.getEpas(this.userId).subscribe((next)=>{this.values = next;});}
-      else {
-      // get the values for this patient
-      this.account.currentUser$.subscribe((next)=>{this.userId = next.UserId;});
-      if(this.userId !== undefined){this.epa.getEpas(this.userId).subscribe((next)=>{this.values = next;});
-      };
+      if (this.origin === 1) {
+        this.epa.getEpas(this.userId).subscribe((next) => {
+          this.values = next;
+        });
+      } else {
+        this.account.currentUser$.subscribe((next) => {
+          this.userId = next.UserId;
+          if (this.userId!== undefined) {
+            this.epa.getEpas(this.userId).subscribe((next) => {
+              this.values = next;
+            });
+          }
+        });
       }
-      
-      
-      
-     
-      
-     
-  
+   
     }
     showDetailsPage(){if(this.d === 1)return true; else return false;}
   
