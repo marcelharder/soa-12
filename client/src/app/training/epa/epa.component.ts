@@ -11,7 +11,7 @@ import { EpaService } from 'src/app/_services/epa.service';
 })
 export class EpaComponent implements OnInit {
   @Input() userId:number;
-  @Input() origin:string;
+  @Input() origin:number;
   d = 0;
   epa_no_description = "";
   description: any = [];
