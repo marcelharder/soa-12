@@ -12,7 +12,8 @@ namespace api.DTOs
     public string image {get; set;}
     public int Id {get; set;}
     public int userId {get; set;}
-    public DateTime started {get; set;}
+    public DateTime date_started {get; set;}
+    public DateTime date_finished {get; set;}
     public bool finished {get; set;}
     public string grade {get; set;}
     public bool KBP {get; set;}

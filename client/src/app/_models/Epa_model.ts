@@ -7,7 +7,8 @@ export interface Epa_model {
     image: string;
     Id: number;
     userId: number;
-    started:Date;
+    date_started:Date;
+    date_finished:Date;
     finished: Boolean;
     grade: number;
     KBP:Boolean;

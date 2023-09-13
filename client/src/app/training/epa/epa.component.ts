@@ -25,7 +25,8 @@ export class EpaComponent implements OnInit {
     image: '',
     Id: 0,
     userId: 0,
-    started: new Date,
+    date_started: new Date,
+    date_finished: new Date,
     finished: false,
     grade: 0,
     KBP: false,
@@ -43,22 +44,9 @@ export class EpaComponent implements OnInit {
     ngOnInit() {
       // get the descriptions
       this.epa.getDescriptions().subscribe((response)=>{ this.description = response;});
-      
-      // if this is opnened by the chef then use that userId else get current user
-      if(this.origin === '1'){
-        this.epa.getEpas(this.userId).subscribe((next)=>{this.values = next;});}
-      else {
-      // get the values for this patient
-      this.account.currentUser$.subscribe((next)=>{this.userId = next.UserId;});
       if(this.userId !== undefined){this.epa.getEpas(this.userId).subscribe((next)=>{this.values = next;});
-      };
-      }
-      
-      
-      
-     
-      
-     
+    }
+         
   
     }
     showDetailsPage(){if(this.d === 1)return true; else return false;}

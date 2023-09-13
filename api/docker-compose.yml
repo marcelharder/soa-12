@@ -32,7 +32,7 @@ services:
      - internal-container-network 
 
   training:
-    image: training:v12
+    image: training:v13
     networks:
       - internal-container-network
     depends_on:
@@ -50,7 +50,7 @@ services:
      - db
 
 #  tracPersonal:
-#    image: sql_app:v87
+#    image: sql_app:v88
 #    ports:
 #     - 8086:80
 #    networks: 
