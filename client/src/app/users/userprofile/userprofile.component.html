@@ -106,12 +106,14 @@
               </form>
             </tab>
             <tab heading="Upload Photo">
-              <app-photo-editor 
+              <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
+                                               (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+              <!-- <app-photo-editor 
               [docId]="0"
               [userId]="currentUserId" 
               [refId]="0" 
               [hospitalId]="0"
-              (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>
+              (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor> -->
             </tab>
             <tab heading="Hospitals">
               <app-worked-in 

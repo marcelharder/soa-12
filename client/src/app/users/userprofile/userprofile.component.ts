@@ -20,6 +20,7 @@ import { changePassword } from 'src/app/_models/changePassword';
 
 export class UserProfileComponent implements OnInit {
     @ViewChild('editForm') editForm: NgForm;
+    targetUrl: string;
     changePasswordForm: FormGroup;
     cpwd:changePassword = {
         password: '',
@@ -88,6 +89,13 @@ export class UserProfileComponent implements OnInit {
           return control?.value === control?.parent?.controls[matchTo].value ? null : { isMatching: true }
         }
       }
+
+      IsLoaded() {
+        if (this.currentUserId !== 0) {
+            this.targetUrl = this.baseUrl + 'users/addUserPhoto/' + this.currentUserId;
+            return true;
+        } else { return false; }
+    }
     
      requiresOneDigit(): ValidatorFn {
       return (control: AbstractControl) => {
