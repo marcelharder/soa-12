@@ -40,8 +40,7 @@ export class UserProfileComponent implements OnInit {
     password_02 = '';
     password_03 = '';
     premium = 0;
-    targetUrl = "";
-
+   
 
     @HostListener('window:beforeunload', ['$event'])
     unloadNotification($event: any) { if (this.editForm.dirty) { $event.returnValue = true; } }
@@ -122,13 +121,7 @@ export class UserProfileComponent implements OnInit {
         }
     }
     updatePhoto(photoUrl: string) { this.user.PhotoUrl = photoUrl; }
-    
-    IsLoaded() {
-        if (this.currentUserId !== 0) {
-            this.targetUrl = this.baseUrl + 'users/addUserPhoto/' + this.currentUserId;
-            return true;
-        } else { return false; }
-    }
+   
     updateUser() {
         this.userService.updateUser(this.currentUserId, this.user).subscribe(next => {
             this.editForm.reset(this.user);
