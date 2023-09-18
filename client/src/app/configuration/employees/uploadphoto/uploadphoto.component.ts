@@ -39,12 +39,21 @@ export class UploadphotoComponent implements OnInit {
           this.alertify.success('Photo uploaded ...');
       };
 
-      this.uploader.onSuccessItem = (item, response, status, headers) => {
-          if (response) {
-              const res: any = JSON.parse(response);
-              this.getMemberPhotoChange.emit(res.image);
-          }
+      const parseResponse = (response) => {
+        const res = JSON.parse(response);
+        const image = res.image || res.PhotoUrl || res.Image;
+        if (image) {
+          this.getMemberPhotoChange.emit(image);
+        }
       };
+      
+      this.uploader.onSuccessItem = (item, response, status, headers) => {
+        if (response) {
+          parseResponse(response);
+        }
+      };
+
+     
   }
 }
 

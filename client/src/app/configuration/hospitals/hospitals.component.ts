@@ -12,6 +12,7 @@ import { AccountService } from 'src/app/_services/account.service';
 import { DropdownService } from 'src/app/_services/dropdown.service';
 import { HospitalService } from 'src/app/_services/hospital.service';
 import { ValveService } from 'src/app/_services/valve.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-hospitals',
@@ -21,6 +22,8 @@ import { ValveService } from 'src/app/_services/valve.service';
 export class HospitalsComponent implements OnInit  {
   @ViewChild("hospitalForm") hospitalForm: NgForm;
   pd: Hospital;
+  targetUrl="";
+  baseUrl = environment.apiUrl;
   hv: hospitalValve = {
     codeId: 0,
     code: "",
@@ -239,7 +242,14 @@ export class HospitalsComponent implements OnInit  {
       this.listCountries = JSON.parse(localStorage.getItem("optionCountries"));
     }
   }
-  updatePhoto(photoUrl: string) { this.pd.imageUrl = photoUrl;}
+  updatePhoto(photoUrl: string) {this.pd.imageUrl = photoUrl;}
+  
+  IsLoaded() {
+    if (+this.pd.hospitalNo !== 0) {
+        this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.hospitalNo;
+        return true;
+    } else { return false; }
+}
   saveHospital() {
     this.hospitalService.saveHospital(this.pd).subscribe(() => {
       this.router.navigate(["/config"]);
