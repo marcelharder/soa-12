@@ -27,7 +27,7 @@ export class UploadphotoComponent implements OnInit {
           url: this.targetUrl,
           authToken: 'Bearer ' + this.token,
           isHTML5: true,
-          allowedFileType: ['image'],
+          allowedFileType: ['image','application/pdf'],
           removeAfterUpload: true,
           autoUpload: true,
           maxFileSize: 10 * 1024 * 1024

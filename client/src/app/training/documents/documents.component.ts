@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Document_model } from 'src/app/_models/Document_model';
 import { DocumentService } from 'src/app/_services/document.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-documents',
@@ -14,6 +15,7 @@ export class DocumentsComponent implements OnInit {
 @Input() userId:number;
 detailsForm: FormGroup | undefined;
 details = 0;
+
 selectedDocument:Partial<Document_model> = {
   documentId: 0,
   description: '',
@@ -81,6 +83,8 @@ constructor(private ds: DocumentService,
    
    
   }
+
+ 
   
     uploadPhoto(){
     this.alertify.info("uploading photo");

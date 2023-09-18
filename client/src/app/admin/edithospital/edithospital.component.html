@@ -136,8 +136,7 @@
                 <img class="card-img-top img-thumbnail" src="{{ pd.imageUrl }}" alt="test"  />
               </div>
               <div class="footer mt-2">
-                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
-                (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
              <!--    <app-photo-editor [docId]="0" [hospitalId]="pd.hospitalNo" [userId]="0" [refId]="0" (getMemberPhotoChange)="updatePhoto($event)">
                 </app-photo-editor>
               --> 

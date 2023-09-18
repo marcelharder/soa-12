@@ -40,11 +40,7 @@ export class EdithospitalComponent implements OnInit {
   editInstitutionalReport(){this.showInstitutionalReport = true;}
 
   Cancel() { this.cancelThis.emit(1); }
-  Save(){
-  this.hospitalservice.saveHospital(this.pd).subscribe((next)=>{
-    this.cancelThis.emit(1);
-  })
-  }
+  Save(){this.hospitalservice.saveHospital(this.pd).subscribe((next)=>{this.cancelThis.emit(1); })}
   IsLoaded() {
     if (+this.pd.hospitalNo !== 0) {
         this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.hospitalNo;

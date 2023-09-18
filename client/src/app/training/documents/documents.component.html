@@ -104,8 +104,12 @@
           <app-pdfviewer [pdfSrc]="selectedDocument?.document_url"></app-pdfviewer>
         </div>
         <div class="row mt-2">
-          <div class="col-sm-6 ml-auto"><app-photo-editor [docId]="documentId" [refId]="0" [userId]="0" [hospitalId]="0"
-              (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor>
+          <div class="col-sm-6 ml-auto">
+          
+
+            
+             <app-photo-editor [docId]="documentId" [refId]="0" [userId]="0" [hospitalId]="0"
+              (getMemberPhotoChange)="updatePhoto($event)"></app-photo-editor> 
           </div>
           <div class="col-sm-6 mr-auto"><button class="btn btn-secondary" (click)="showPdf()">View in dedicated
               window</button></div>
