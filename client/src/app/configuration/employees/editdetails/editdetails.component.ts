@@ -27,9 +27,6 @@ export class EditdetailsComponent implements OnInit {
 
   ngOnInit(): void {
       this.loadDrops();
-
-
-      //this.targetUrl = this.baseUrl + 'addEmployeePhoto/' + this.emp.Id;
   }
 
    IsLoaded() {
@@ -50,9 +47,7 @@ export class EditdetailsComponent implements OnInit {
       }
   }
 
-  updatePhoto(photoUrl: string) {
-      this.savePhoto.emit(photoUrl);
-  }
+  updatePhoto(photoUrl: string) {this.savePhoto.emit(photoUrl);}
 
 
   cancel() { }
