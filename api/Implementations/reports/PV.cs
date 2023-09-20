@@ -1,12 +1,7 @@
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-using api.DTOs;
 using api.Entities;
 using api.Helpers;
 using api.interfaces.reports;
@@ -14,9 +9,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Crypto.Operators;
+using api.Data;
 
-namespace api.Data
+namespace api.Implementations.reports
 {
     public class PV : IPV
     {
@@ -46,6 +41,8 @@ namespace api.Data
 
         public async Task<Class_Preview_Operative_report> getPreViewAsync(int id)
         {
+
+
             // check if there is a record for this preview procedure in the database
             if (await _context.Previews.AnyAsync(u => u.procedure_id == id))
             {
@@ -53,6 +50,7 @@ namespace api.Data
             }
             else
             {
+               
                 var result = new Class_Preview_Operative_report();
                 result.procedure_id = id;
                 var currentProcedure = await _context.Procedures.Where(x => x.ProcedureId == id).FirstOrDefaultAsync();
@@ -93,7 +91,13 @@ namespace api.Data
                     else
                     {
                         // get the institutional text from the xml file
-                        var text = await _text.getText(await _sm.getCurrentHospitalIdAsync(), currentProcedure.fdType.ToString(), id);
+                        var currentHospitalId = await _sm.getCurrentHospitalIdAsync();
+                        
+                        // check to see if there is an XML file for this hospital
+                        await _text.addRecordInXML(currentHospitalId);
+                        
+
+                        var text = await _text.getText(currentHospitalId, currentProcedure.fdType.ToString(), id);
 
                         result.regel_1 = text[0]; result.regel_2 = text[1]; result.regel_3 = text[2]; result.regel_4 = text[3]; result.regel_5 = text[4];
                         result.regel_6 = text[5]; result.regel_7 = text[6]; result.regel_8 = text[7]; result.regel_9 = text[8]; result.regel_10 = text[9];
@@ -116,6 +120,7 @@ namespace api.Data
             }
 
         }
+
 
         private Class_Preview_Operative_report addExtraLines(Class_Preview_Operative_report help, int reportCode)
         {
