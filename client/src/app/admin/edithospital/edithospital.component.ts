@@ -41,12 +41,13 @@ export class EdithospitalComponent implements OnInit {
 
   Cancel() { this.cancelThis.emit(1); }
   Save(){this.hospitalservice.saveHospital(this.pd).subscribe((next)=>{this.cancelThis.emit(1); })}
-  IsLoaded() {
+  
+   IsLoaded() {
     if (+this.pd.hospitalNo !== 0) {
         this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.hospitalNo;
         return true;
     } else { return false; }
-}
+} 
   updatePhoto(photoUrl: string) { this.pd.imageUrl = photoUrl;}
 
   receiveDone(no: number){

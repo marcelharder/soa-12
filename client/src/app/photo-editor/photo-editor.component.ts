@@ -32,7 +32,6 @@ export class PhotoEditorComponent implements OnInit {
 
     initializeUploader() {
         let test = '';
-debugger;
         if (this.userId !== 0) {
             test = this.baseUrl + 'users/addUserPhoto/' + this.userId
         }
@@ -52,6 +51,7 @@ debugger;
             }
 
         }
+    
 
         this.uploader = new FileUploader({
             url: test,

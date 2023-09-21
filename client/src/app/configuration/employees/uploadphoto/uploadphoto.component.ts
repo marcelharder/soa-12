@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-uploadphoto',
@@ -13,12 +14,13 @@ export class UploadphotoComponent implements OnInit {
   token = '';
   uploader: FileUploader;
 
-  constructor(private alertify: ToastrService) {
+  constructor(private alertify: ToastrService, private account:AccountService) {
 
   }
   ngOnInit() {
-    let help = JSON.parse(localStorage.getItem('user'));
-    this.token = help.Token;
+    this.account.currentUser$.subscribe((next) => { this.token = next.Token });
+   /*  let help = JSON.parse(localStorage.getItem('user'));
+    this.token = help.Token; */
     this.initializeUploader();
   }
 
