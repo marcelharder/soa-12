@@ -61,7 +61,7 @@ export class ReportHeaderComponent {
         if (username === "demo") { result = false; }
         return result;
     }
-    showEmailButton(){if(this.refPhysNo === "9999"){return false;} else {return true;}}
+    showEmailButton(){if(this.refPhysNo === "99"){return false;} else {return true;}}
 
 
 

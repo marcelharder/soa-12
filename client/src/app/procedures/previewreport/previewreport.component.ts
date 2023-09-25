@@ -104,7 +104,8 @@ export class PreviewreportComponent implements OnInit {
           this.procedureId = this.prev.procedure_id;
           this.procedureservice.getProcedure(this.procedureId).subscribe((next) => {
             this.proc = next;
-            if(this.proc.refPhys != "9999"){this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => { this.ref = ne; })}
+            if(this.proc.refPhys != "99")
+                {this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => { this.ref = ne; })}
             
             this.preview.getReportCode(this.proc.fdType).subscribe((nex) => {
               this.reportCode = nex;
@@ -128,7 +129,7 @@ export class PreviewreportComponent implements OnInit {
 
   composeAndSendMailMessage() {
     // check if the report is saved
-    // only works when the emailbutton is shown, when refPhys !== '9999'
+    // only works when the emailbutton is shown, when refPhys !== '99'
     if (this.finalReportCompiled) {
       
       this.procedureservice.getRefPhysEmailHash(this.proc.procedureId)
@@ -170,6 +171,7 @@ export class PreviewreportComponent implements OnInit {
       error: () => { },
       complete: () => {
         this.preview.isFinalReportPresentable(this.prev.procedure_id).subscribe((next)=>{
+          debugger;
           switch(next){
             case 1: window.location.href = `${this.baseUrl}finalOperativeReport/${this.prev.procedure_id}`;break;
             case 2: this.alertify.error("pls fill the cabg details before printing the final report");break;

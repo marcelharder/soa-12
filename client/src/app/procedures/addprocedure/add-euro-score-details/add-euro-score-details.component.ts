@@ -176,7 +176,7 @@ export class AddEuroScoreDetailsComponent implements OnInit {
                     if(this.required_RefPhys){
                         this.sendRef.emit(this.selectedRef); // send the refId to the parent
                     }
-                    else{this.sendRef.emit(9999); } // no refphys required, so no emails etc
+                    else{this.sendRef.emit(99); } // no refphys required, so no emails etc
                           
                     this.showPanel = false;
                 },
