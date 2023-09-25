@@ -105,7 +105,9 @@ export class PreviewreportComponent implements OnInit {
           this.procedureservice.getProcedure(this.procedureId).subscribe((next) => {
             this.proc = next;
             if(this.proc.refPhys != "99")
-                {this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => { this.ref = ne; })}
+                {this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => {
+                  
+                  this.ref = ne; })}
             
             this.preview.getReportCode(this.proc.fdType).subscribe((nex) => {
               this.reportCode = nex;
@@ -147,6 +149,7 @@ export class PreviewreportComponent implements OnInit {
           this.email.to = this.ref.email;
           this.email.phone = this.ref.tel;
           this.email.soort = '1';
+          this.email.body = "here is the body";
           this.email.callback = this.locationURL + 'FinalOperativeReport/getRefReport/' + hash;
 
         });

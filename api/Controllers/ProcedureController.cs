@@ -49,7 +49,7 @@ namespace api.Controllers
              r.id = id;
              r.publishTime = DateTime.Now;
              r.fileLocation = "";
-             _imrep.addToExpiredReports(r);
+            // _imrep.addToExpiredReports(r);
 
              // now calculate the hash which is the way the ref phys can find the report
              var p = await _rep.refPhysEmailHash(id);
