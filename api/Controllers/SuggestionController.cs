@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using api.Entities;
 using api.Helpers;
 using api.interfaces.reports;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace api.Controllers
 {
@@ -14,27 +16,50 @@ namespace api.Controllers
     public class SuggestionController : BaseApiController
     {
         private ISuggestion _repo;
+        private IOptions<ComSettings> _com;
         private IPV _previewReport;
         
         private SpecialMaps _sp;
-        public SuggestionController(ISuggestion repo, SpecialMaps sp, IPV previewReport)
+        public SuggestionController(
+            ISuggestion repo, 
+            SpecialMaps sp, 
+            IPV previewReport, 
+            IOptions<ComSettings> com)
         {
             _repo = repo;
             _sp = sp;
             _previewReport = previewReport;
+            _com = com;
            
         }
 
         [HttpGet] // get all recorded suggestions for this user as class_items
         public async Task<IActionResult> Get()
         { 
-            var p = await _repo.GetAllIndividualSuggestions();
-            return Ok(p);
+            var help = "";
+            var currentUserId = _sp.getCurrentUserId();
+            var comaddress = _com.Value.reportURL;
+            var st = "api/Suggestion/" + currentUserId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+           // var p = await _repo.GetAllIndividualSuggestions();
+           // return Ok(p);
         }
        
         [HttpGet("{id}", Name = "GetSuggestion")] // gets recorded suggestion for this user by the soort
         public async Task<IActionResult> GetA(int id)
         {
+           
+
+
+
             var p = await _repo.GetIndividualSuggestion(id);
 
             return Ok(p);
