@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using api.Entities;
 using api.Helpers;
@@ -7,6 +8,7 @@ using api.interfaces.reports;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace api.Controllers
 {
@@ -39,7 +41,7 @@ namespace api.Controllers
             var help = "";
             var currentUserId = _sp.getCurrentUserId();
             var comaddress = _com.Value.reportURL;
-            var st = "api/Suggestion/" + currentUserId;
+            var st = "Suggestion/" + currentUserId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -53,22 +55,50 @@ namespace api.Controllers
            // return Ok(p);
         }
        
-        [HttpGet("{id}", Name = "GetSuggestion")] // gets recorded suggestion for this user by the soort
-        public async Task<IActionResult> GetA(int id)
+        [HttpGet("{soort}", Name = "GetSuggestion")] // gets recorded suggestion for this user by the soort
+        public async Task<IActionResult> GetA(int soort)
         {
            
+            var help = "";
+            var currentUserId = _sp.getCurrentUserId();
+            var comaddress = _com.Value.reportURL;
+            var st = "Suggestion/" + currentUserId + "/" + soort;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+           // var p = await _repo.GetIndividualSuggestion(id);
 
-
-
-            var p = await _repo.GetIndividualSuggestion(id);
-
-            return Ok(p);
+            return Ok(help);
         }
 
-        [HttpPut("{soort}")]
-        public async Task<IActionResult> Put(Class_Preview_Operative_report cp, int soort) {
+        [HttpPut]
+        public async Task<IActionResult> Put(Class_Preview_Operative_report cp) {
 
-            // Save the preview report first
+            var help = "";
+            var currentUserId = _sp.getCurrentUserId();
+            var comaddress = _com.Value.reportURL;
+            var st = "Suggestion";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(cp, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+
+
+
+           /*  // Save the preview report first
             int pvr_result = await _previewReport.updatePVR(cp);
 
             // get the current suggestion, if not available a new one is generated for this user and soort                     
@@ -77,7 +107,7 @@ namespace api.Controllers
             Class_Suggestion c = _sp.mapToSuggestionFromPreview(current_suggestion, cp, soort);
             
             var result = await _repo.updateSuggestion(c);
-            return Ok(result);
+            return Ok(result); */
         }
 
         [HttpPost]
