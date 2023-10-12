@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using api.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Net.Http;
 
 namespace api.Controllers
 {
@@ -18,8 +20,9 @@ namespace api.Controllers
     {
 
         private IPV _repo;
+        private IOptions<ComSettings> _com;
         private IValveRepository _valve;
-         private ICABGRepository _cabg;
+        private ICABGRepository _cabg;
         private IUserRepository _ur;
         private IHospitalRepository _hos;
         private IProcedureRepository _proc;
@@ -29,6 +32,7 @@ namespace api.Controllers
         private IOperativeReportPdf _ioprep;
 
         public PreviewReportController(IPV repo,
+            IOptions<ComSettings> com,
             IUserRepository ur,
             DataContext context,
             IOperativeReportPdf ioprep,
@@ -49,15 +53,37 @@ namespace api.Controllers
             _valve = valve;
             _ioprep = ioprep;
             _context = context;
+            _com = com;
 
         }
 
 
         [HttpGet("{id}", Name = "GetPreview")]
-        public async Task<IActionResult> Get(int id) { return Ok(await _repo.getPreViewAsync(id)); }
+        public async Task<IActionResult> Get(int id)
+        {
+            var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "PreViewReport/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
 
         [HttpGet("reset/{id}", Name = "ResetView")]
-        public async Task<IActionResult> Reset(int id) { return Ok(await _repo.resetPreViewAsync(id)); }
+        public async Task<IActionResult> Reset(int id) {
+            
+            
+            
+            
+            
+            
+             return Ok(await _repo.resetPreViewAsync(id)); }
 
         [HttpGet("isFinalReportReady/{id}")]
         public async Task<int> IsReportReady(int id)
@@ -65,8 +91,8 @@ namespace api.Controllers
             var result = 0;
             var procedure = await _proc.GetProcedure(id); if (procedure == null) { return result; }
             var reportcode = Convert.ToInt32(_sprm.getReportCode(procedure.fdType));
-            
-            
+
+
             if (reportcode == 1 || reportcode == 2) // these are the cabg procedures
             {
                 var selectedCabg = await _cabg.GetSpecificCABG(id);
@@ -88,8 +114,13 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(PreviewForReturnDTO pvfr)
         { // this comes from the save and print button
+
+
+
+
+
             try
-            {  
+            {
                 Class_privacy_model pm = _sprm.mapToClassPrivacyModel(pvfr);
                 Class_Preview_Operative_report pv = await _repo.getPreViewAsync(pvfr.procedure_id);
                 pv = _sprm.mapToClassPreviewOperativeReport(pvfr, pv);
@@ -102,30 +133,30 @@ namespace api.Controllers
 
                 // generate PDF and store for 3 days
                 // first get the procedure so that we can get the fdtype and subsequent report_code
-               try
-               {
-                     var current_procedure = await _context.Procedures.FirstOrDefaultAsync(x => x.ProcedureId == pvfr.procedure_id);
-                     var report_code = Convert.ToInt32(_sprm.getReportCode(current_procedure.fdType));
-                     await _ioprep.getPdf(report_code,classFR);
-               }
-               catch (Exception a)
-               {
-                   Console.WriteLine(a.InnerException); 
-                   return BadRequest("Error creating the pdf");
-               } 
-               return Ok(result);
+                try
+                {
+                    var current_procedure = await _context.Procedures.FirstOrDefaultAsync(x => x.ProcedureId == pvfr.procedure_id);
+                    var report_code = Convert.ToInt32(_sprm.getReportCode(current_procedure.fdType));
+                    await _ioprep.getPdf(report_code, classFR);
+                }
+                catch (Exception a)
+                {
+                    Console.WriteLine(a.InnerException);
+                    return BadRequest("Error creating the pdf");
+                }
+                return Ok(result);
             }
             catch (Exception e) { Console.WriteLine(e.InnerException); }
             return BadRequest("Error saving the preview report");
 
         }
 
-       
-       
-       
-       
-        
-        
+
+
+
+
+
+
 
 
     }
