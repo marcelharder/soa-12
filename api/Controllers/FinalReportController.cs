@@ -1,9 +1,5 @@
-using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using api.Data;
-using api.Entities;
 using api.interfaces.reports;
 using api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
