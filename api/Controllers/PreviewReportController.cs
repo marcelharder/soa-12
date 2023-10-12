@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using api.DTOs;
-using api.Entities;
 using api.Helpers;
 using api.interfaces.reports;
 using api.Interfaces;
@@ -9,9 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using api.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace api.Controllers
 {
@@ -19,46 +19,28 @@ namespace api.Controllers
     public class PreviewReportController : BaseApiController
     {
 
-        private IPV _repo;
         private IOptions<ComSettings> _com;
         private IValveRepository _valve;
         private ICABGRepository _cabg;
-        private IUserRepository _ur;
-        private IHospitalRepository _hos;
         private IProcedureRepository _proc;
-        private DataContext _context;
-        private SpecialMaps _sm;
         private SpecialReportMaps _sprm;
-        private IOperativeReportPdf _ioprep;
-
-        public PreviewReportController(IPV repo,
+     
+        public PreviewReportController(
             IOptions<ComSettings> com,
-            IUserRepository ur,
-            DataContext context,
-            IOperativeReportPdf ioprep,
-            IHospitalRepository hos,
-            SpecialMaps sm,
             ICABGRepository cabg,
             IValveRepository valve,
             SpecialReportMaps sprm,
             IProcedureRepository proc)
         {
-            _repo = repo;
-            _sm = sm;
             _proc = proc;
-            _ur = ur;
-            _hos = hos;
             _sprm = sprm;
             _cabg = cabg;
             _valve = valve;
-            _ioprep = ioprep;
-            _context = context;
             _com = com;
-
         }
 
 
-        [HttpGet("{id}", Name = "GetPreview")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var help = "";
@@ -75,15 +57,22 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpGet("reset/{id}", Name = "ResetView")]
-        public async Task<IActionResult> Reset(int id) {
-            
-            
-            
-            
-            
-            
-             return Ok(await _repo.resetPreViewAsync(id)); }
+        [HttpGet("reset/{id}")]
+        public async Task<IActionResult> Reset(int id)
+        {
+            var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "PreViewReport/reset/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
 
         [HttpGet("isFinalReportReady/{id}")]
         public async Task<int> IsReportReady(int id)
@@ -115,49 +104,20 @@ namespace api.Controllers
         public async Task<IActionResult> Post(PreviewForReturnDTO pvfr)
         { // this comes from the save and print button
 
-
-
-
-
-            try
+            var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "PreViewReport";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(pvfr, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
             {
-                Class_privacy_model pm = _sprm.mapToClassPrivacyModel(pvfr);
-                Class_Preview_Operative_report pv = await _repo.getPreViewAsync(pvfr.procedure_id);
-                pv = _sprm.mapToClassPreviewOperativeReport(pvfr, pv);
-
-                // save the Class_Preview_Operative_report to the database first
-                var result = await _repo.updatePVR(pv);
-
-                // generate final operative report Class
-                var classFR = await _sprm.updateFinalReportAsync(pm, pv.procedure_id);
-
-                // generate PDF and store for 3 days
-                // first get the procedure so that we can get the fdtype and subsequent report_code
-                try
+                using (var response = await httpClient.PostAsync(comaddress,content))
                 {
-                    var current_procedure = await _context.Procedures.FirstOrDefaultAsync(x => x.ProcedureId == pvfr.procedure_id);
-                    var report_code = Convert.ToInt32(_sprm.getReportCode(current_procedure.fdType));
-                    await _ioprep.getPdf(report_code, classFR);
+                    help = await response.Content.ReadAsStringAsync();
                 }
-                catch (Exception a)
-                {
-                    Console.WriteLine(a.InnerException);
-                    return BadRequest("Error creating the pdf");
-                }
-                return Ok(result);
             }
-            catch (Exception e) { Console.WriteLine(e.InnerException); }
-            return BadRequest("Error saving the preview report");
-
+            return Ok(help);
         }
-
-
-
-
-
-
-
-
-
     }
 }
