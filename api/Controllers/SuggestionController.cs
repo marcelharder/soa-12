@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.Entities;
 using api.Helpers;
 using api.interfaces.reports;
+using api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -18,11 +19,15 @@ namespace api.Controllers
     public class SuggestionController : BaseApiController
     {
         private ISuggestion _repo;
+        private IProcedureRepository _proc;
+        private SpecialReportMaps _sprep;
         private IOptions<ComSettings> _com;
         private IPV _previewReport;
         
         private SpecialMaps _sp;
         public SuggestionController(
+            SpecialReportMaps sprep,
+            IProcedureRepository proc,
             ISuggestion repo, 
             SpecialMaps sp, 
             IPV previewReport, 
@@ -32,6 +37,8 @@ namespace api.Controllers
             _sp = sp;
             _previewReport = previewReport;
             _com = com;
+            _proc = proc;
+            _sprep = sprep;
            
         }
 
@@ -51,14 +58,11 @@ namespace api.Controllers
                 }
             }
             return Ok(help);
-           // var p = await _repo.GetAllIndividualSuggestions();
-           // return Ok(p);
         }
        
-        [HttpGet("{soort}", Name = "GetSuggestion")] // gets recorded suggestion for this user by the soort
-        public async Task<IActionResult> GetA(int soort)
+        [HttpGet("{soort}")] // gets recorded suggestion for this user by the soort
+        public async Task<IActionResult> GetSuggestion(int soort)
         {
-           
             var help = "";
             var currentUserId = _sp.getCurrentUserId();
             var comaddress = _com.Value.reportURL;
@@ -71,18 +75,16 @@ namespace api.Controllers
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
-           // var p = await _repo.GetIndividualSuggestion(id);
-
             return Ok(help);
         }
 
         [HttpPut]
         public async Task<IActionResult> Put(Class_Preview_Operative_report cp) {
-
+            var currentprocedure = await _proc.GetProcedure(cp.procedure_id);
             var help = "";
             var currentUserId = _sp.getCurrentUserId();
             var comaddress = _com.Value.reportURL;
-            var st = "Suggestion";
+            var st = "Suggestion/" + currentUserId + "/" + currentprocedure.fdType;
             comaddress = comaddress + st;
             var json = JsonConvert.SerializeObject(cp, Formatting.None);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -95,31 +97,24 @@ namespace api.Controllers
                 }
             }
             return Ok(help);
-
-
-
-           /*  // Save the preview report first
-            int pvr_result = await _previewReport.updatePVR(cp);
-
-            // get the current suggestion, if not available a new one is generated for this user and soort                     
-            var current_suggestion = await _repo.GetIndividualSuggestion(soort );
-            
-            Class_Suggestion c = _sp.mapToSuggestionFromPreview(current_suggestion, cp, soort);
-            
-            var result = await _repo.updateSuggestion(c);
-            return Ok(result); */
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(Class_Suggestion c)
         {
-             var p = await _repo.AddIndividualSuggestion(c);
-             if (await _repo.SaveAll())
+            var help = "";
+            var comaddress = _com.Value.reportURL;
+            comaddress = comaddress + "Suggestion";
+            var json = JsonConvert.SerializeObject(c, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
             {
-               return CreatedAtRoute("GetSuggestion", new { id = c.user }, p);
+                using (var response = await httpClient.PostAsync(comaddress,content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
             }
-            else { throw new Exception($"Adding suggestion {c.user} failed on save"); };
-
+            return Ok();
         }
 
     }
