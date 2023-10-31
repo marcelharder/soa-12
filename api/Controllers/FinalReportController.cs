@@ -32,7 +32,7 @@ namespace api.Controllers
         public async Task<IActionResult> getPdfForRefPhys(string hash)
         {
            var comaddress = _com.Value.reportURL;
-           var st = "getRefReport/" + hash;
+           var st = "FinalReport/getRefReport/" + hash;
            comaddress = comaddress + st;
            return Redirect(comaddress);
           
