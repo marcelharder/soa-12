@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -26,16 +27,19 @@ namespace api.Controllers
         private Cloudinary _cloudinary;
         private SpecialMaps _map;
         private UserManager<AppUser> _manager;
+        private IOptions<ComSettings> _com;
 
 
 
         public HospitalController(
-        IHospitalRepository hos, 
+        IHospitalRepository hos,
+        IOptions<ComSettings> com, 
         UserManager<AppUser> manager,
         SpecialMaps map, 
         IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _hos = hos;
+            _com = com;
             _map = map;
             _manager = manager;
 
@@ -164,16 +168,29 @@ namespace api.Controllers
         }
 
         #region <!-- InstitutionalReports stuff -->
+       
         [HttpGet("InstitutionalReport/{id}/{soort}")]
-        public IActionResult getIRep(string id, int soort){
-          var help = _hos.getInstitutionalReport(Convert.ToInt32(id), soort);
-          return Ok(help);
+        public async Task<IActionResult> getIRepAsync(string id, int soort){
+            var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "InstitutionalReport/" + id + "/" + soort + "/" + procedureId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
+       
         [HttpPut("InstitutionalReport/{id}/{soort}")]
         public IActionResult updateIRep([FromBody] InstitutionalDTO rep, string id, int soort){
              var help = _hos.updateInstitutionalReport(rep,soort,Convert.ToInt32(id));
           return Ok(help);
         }
+       
         [HttpPost("InstitutionalReport/{id}")]
         public IActionResult createIRep(string id){
              var help = _hos.createInstitutionalReport(Convert.ToInt32(id));
