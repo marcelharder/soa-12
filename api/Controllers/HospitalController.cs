@@ -173,7 +173,7 @@ namespace api.Controllers
         public async Task<IActionResult> getIRepAsync(string id, int soort){
             var help = "";
             var comaddress = _com.Value.reportURL;
-            var st = "InstitutionalReport/" + id + "/" + soort + "/" + procedureId;
+            var st = "InstitutionalReport/" + id + "/" + soort + "/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {

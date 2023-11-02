@@ -52,9 +52,12 @@ namespace api.Controllers
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);
+            
+            
                 }
             }
-            return Ok(help);
+            
         }
 
         [HttpGet("reset/{id}")]
