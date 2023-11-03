@@ -38,7 +38,7 @@ services:
     depends_on:
       - db 
   reports:
-    image: reports:v12
+    image: reports:v16
     ports:
      - 8086:80
     networks:
