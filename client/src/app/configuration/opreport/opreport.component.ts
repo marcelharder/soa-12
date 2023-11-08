@@ -82,7 +82,7 @@ export class OpreportComponent {
       this.edit = '1';
       this.preview.getSuggestionBySoort(this.selectedSoort).subscribe((next) => {
           this.sug = next;
-          this.transform();
+         // this.transform();
           // this.preview.getReportCode(this.selectedSoort).subscribe((next) => { this.reportCode = next; });
         });
       }
@@ -90,13 +90,11 @@ export class OpreportComponent {
 
   saveChanges()
   {
-      this.preview.saveSuggestion(this.pre, this.selectedSoort).subscribe((next) =>
+      this.preview.saveSuggestion(this.sug).subscribe((next) =>
       {this.edit = '0'; }, (error) => { this.alertify.error('Report was not saved ...' + error); });
   }
   cancelChanges(){this.edit = '0';  }
-  showCabg() { if (this.reportCode === 1) { return true; } }
-  showValveBlok1() { if (this.reportCode === 1) { return false; }}
-  showValveBlok2() { if (this.reportCode === 1) { return false; } }
+ 
 
   showEditDetails() {if (this.edit === '1') { return true; } else { return false; } }
 

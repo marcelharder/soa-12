@@ -195,7 +195,7 @@ export class PreviewreportComponent implements OnInit {
 
   saveAsSuggestion() {
     // save the current preview report details which get transformed to a suggestion on the server
-    this.preview.saveSuggestion(this.prev, this.proc.fdType).subscribe((next) => {
+    this.preview.savePreViewSuggestion(this.prev).subscribe((next) => {
       this.alertify.show('Saved as custom suggestion');
     }, (error) => { this.alertify.error(error); });
 

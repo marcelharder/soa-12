@@ -1,65 +1,185 @@
 <div class="card">
-    <div class="card-header">
-      <h3>Procedure Reports</h3>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="row">
-            <div class="col-sm-8"><h5><span class="badge badge-secondary">Choose your personalized report: </span></h5></div>
-            <div class="col-sm-4">
-              <h6><button 
-                (click)="openModal(CustomReportTemplate)" 
-                *ngIf="!showEditDetails()"
-                class="badge badge-success btn-xs">How does this work</button></h6></div>
+  <div class="card-header">
+    <h3>Procedure Reports</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-8">
+            <h5><span class="badge badge-secondary">Choose your personalized report: </span></h5>
           </div>
-        </div>
-        <div class="col-sm-4">
-          <select [(ngModel)]="selectedSoort" name="cab" class="form-control" *ngIf="!showEditDetails()">
-            <option *ngFor="let an of procedures" [value]=an.value>{{ an.description }}</option>
-          </select>
-        </div>
-        <div class="col-sm-4">
-          <div class="btn-group" role="group">
-            <button class="btn btn-secondary" (click)="editReport()" *ngIf="!showEditDetails()"> Edit </button>
-            <button class="btn btn-danger"    (click)="cancelChanges()" *ngIf="showEditDetails()"> Cancel </button>
-            <button class="btn btn-warning"   (click)="saveChanges()" *ngIf="showEditDetails()"> Save Changes </button>
+          <div class="col-sm-4">
+            <h6><button (click)="openModal(CustomReportTemplate)" *ngIf="!showEditDetails()"
+                class="badge badge-success btn-xs">How does this work</button></h6>
           </div>
         </div>
       </div>
-    </div>
-    <div class="wrapper" *ngIf="showEditDetails()">
-      <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-          <app-blok1 [pre]="pre"></app-blok1>
-
-          <div class="row" *ngIf="showCabg()">
-            <div class="col-sm-12">cabg data</div>
-          </div>
-          <div class="row" *ngIf="showValveBlok1()">
-            <div class="col-sm-12">valve data</div>
-          </div>
-
-          <app-blok2 [pre]="pre"></app-blok2>
-
-          <div class="row" *ngIf="showValveBlok2()">
-            <div class="col-sm-12">valve data blok 2</div>
-          </div>
-
-
+      <div class="col-sm-4">
+        <select [(ngModel)]="selectedSoort" name="cab" class="form-control" *ngIf="!showEditDetails()">
+          <option *ngFor="let an of procedures" [value]=an.value>{{ an.description }}</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <div class="btn-group" role="group">
+          <button class="btn btn-secondary" (click)="editReport()" *ngIf="!showEditDetails()"> Edit </button>
+          <button class="btn btn-danger" (click)="cancelChanges()" *ngIf="showEditDetails()"> Cancel </button>
+          <button class="btn btn-warning" (click)="saveChanges()" *ngIf="showEditDetails()"> Save Changes </button>
         </div>
-        <div class="col-sm-2"></div>
       </div>
     </div>
- </div>
+  </div>
+  <div class="wrapper" *ngIf="showEditDetails()">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
 
-  <ng-template #CustomReportTemplate>
-    Here you can review and eventually edit your personalized procedure report templates.
-    Select the report you want to change,
-    Press the Edit button and you can do your changes,
-    Do not forget to save your changes by clicking on the Save Changes button
-  </ng-template>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line1" [(ngModel)]="sug.regel_1_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line2" [(ngModel)]="sug.regel_2_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line3" [(ngModel)]="sug.regel_3_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line4" [(ngModel)]="sug.regel_4_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line5" [(ngModel)]="sug.regel_5_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line6" [(ngModel)]="sug.regel_6_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line7" [(ngModel)]="sug.regel_7_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line8" [(ngModel)]="sug.regel_8_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line9" [(ngModel)]="sug.regel_9_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line10" [(ngModel)]="sug.regel_10_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line11" [(ngModel)]="sug.regel_11_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line12" [(ngModel)]="sug.regel_12_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line13" [(ngModel)]="sug.regel_13_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line14" [(ngModel)]="sug.regel_14_a" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line15" [(ngModel)]="sug.regel_15" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line16" [(ngModel)]="sug.regel_16" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line17" [(ngModel)]="sug.regel_17" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line18" [(ngModel)]="sug.regel_18" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <input type="text" maxlength="130" style="width: 100%; background-color: lightgreen" class="form-control"
+              name="line19" [(ngModel)]="sug.regel_19" />
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mb-2">        
+      </div>
+    
+     
+     
+     
+     
+      
 
 
 
+
+
+     
+
+
+
+
+
+
+
+
+   
+  </div>
+</div>
+</div>
+
+<ng-template #CustomReportTemplate>
+  Here you can review and eventually edit your personalized procedure report templates.
+  Select the report you want to change,
+  Press the Edit button and you can do your changes,
+  Do not forget to save your changes by clicking on the Save Changes button
+</ng-template>

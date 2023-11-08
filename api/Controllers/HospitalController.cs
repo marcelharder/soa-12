@@ -166,14 +166,13 @@ namespace api.Controllers
         public async Task<IActionResult> getOVI(string id){
             return Ok(await _hos.HospitalImplementsOVI(id));
         }
-
         #region <!-- InstitutionalReports stuff -->
        
-        [HttpGet("InstitutionalReport/{id}/{soort}")]
-        public async Task<IActionResult> getIRepAsync(string id, int soort){
+        [HttpGet("InstitutionalReport/{hospitalId}/{soort}")]
+        public async Task<IActionResult> getIRepAsync(string hospitalId, int soort){
             var help = "";
             var comaddress = _com.Value.reportURL;
-            var st = "InstitutionalReport/" + id + "/" + soort + "/" + id;
+            var st = "InstitutionalReport/" + hospitalId + "/" + soort;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -185,17 +184,17 @@ namespace api.Controllers
             return Ok(help);
         }
        
-        [HttpPut("InstitutionalReport/{id}/{soort}")]
-        public IActionResult updateIRep([FromBody] InstitutionalDTO rep, string id, int soort){
-             var help = _hos.updateInstitutionalReport(rep,soort,Convert.ToInt32(id));
+        [HttpPut("InstitutionalReport/{hospitalId}/{soort}")]
+        public IActionResult updateIRep([FromBody] InstitutionalDTO rep, string hospitalId, int soort){
+             var help = _hos.updateInstitutionalReport(rep,soort,Convert.ToInt32(hospitalId));
           return Ok(help);
         }
        
-        [HttpPost("InstitutionalReport/{id}")]
+       /*  [HttpPost("InstitutionalReport/{id}")]
         public IActionResult createIRep(string id){
              var help = _hos.createInstitutionalReport(Convert.ToInt32(id));
           return Ok(help);
-        }
+        } */
 
         [HttpGet("AdditionalReportItems/{id}/{which}")]
         public IActionResult getARI(string id, int which){
