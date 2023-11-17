@@ -16,7 +16,7 @@ export class CoursesComponent implements OnInit {
   courseId = 0;
   courseP = 0;
   scm: Course = {
-    CourseId: 0,
+    courseId: 0,
     active: '',
     level: 0,
     description: '',
@@ -62,11 +62,11 @@ export class CoursesComponent implements OnInit {
 
   addCourse() {
     this.cs.createCourse(this.userId).subscribe(
-      (next) => { this.courseId = next.CourseId; },
+      (next) => { this.courseId = next.courseId; },
       (error) => { this.alertify.error(error) },
       () => {
         this.cs.getCourses(this.userId).subscribe((next) => { this.listOfCourses = next; });
-        this.scm = this.listOfCourses.find(x => x.CourseId == this.courseId);
+        this.scm = this.listOfCourses.find(x => x.courseId == this.courseId);
       });
   }
 
@@ -75,9 +75,8 @@ export class CoursesComponent implements OnInit {
   showDetails(id: number) {
     this.courseP = 1;
     this.courseId = id;
-    this.scm = this.listOfCourses.find(x => x.CourseId == id);
-    debugger;
-    this.detailsForm.controls.CourseId.setValue(this.scm.CourseId);
+    this.scm = this.listOfCourses.find(x => x.courseId == id);
+    this.detailsForm.controls.CourseId.setValue(this.scm.courseId);
     this.detailsForm.controls.userId.setValue(this.userId);
     this.detailsForm.controls.active.setValue(this.scm.active);
     this.detailsForm.controls.description.setValue(this.scm.description);
@@ -107,7 +106,7 @@ export class CoursesComponent implements OnInit {
     this.cs.updateCourse(this.detailsForm.value).subscribe(
       (next) => {
         this.cs.getCourses(this.userId).subscribe((next) => { this.listOfCourses = next; })
-        this.scm = this.listOfCourses.find(x => x.CourseId == this.courseId);
+        this.scm = this.listOfCourses.find(x => x.courseId == this.courseId);
       },
       (error) => { this.alertify.error(error) },
       () => { this.courseP = 0; });

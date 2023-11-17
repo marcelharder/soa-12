@@ -31,7 +31,9 @@ export class PreViewReportService {
 
     getSuggestionBySoort(id: number) { return this.http.get<Suggestion>(this.baseUrl + 'Suggestion/' + id); }
 
-    saveSuggestion(sug: previewReport, soort: number) { return this.http.put<number>(this.baseUrl + 'Suggestion/' + soort, sug); }
+    saveSuggestion(sug: Suggestion) { return this.http.put<number>(this.baseUrl + 'Suggestion/personalizedSuggestion', sug); }
+    
+    savePreViewSuggestion(sug: previewReport) { return this.http.put<number>(this.baseUrl + 'Suggestion', sug); }
 
     getReportCode(id: number) { return this.http.get<number>(this.baseUrl + 'General/loadReportCode/' + id);}
 

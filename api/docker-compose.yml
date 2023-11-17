@@ -33,15 +33,21 @@ services:
 
   training:
     image: training:v16
+    ports:
+     - 8087:80
     networks:
       - internal-container-network
     depends_on:
       - db 
 
   reports:
-    image: reports:v21
+    image: reports:v16
+    ports:
+     - 8086:80
     networks:
       - internal-container-network
+    volumes:
+      - pdf-data:/App/assets/pdf
     depends_on:
       - db
 
@@ -56,22 +62,23 @@ services:
     depends_on: 
      - db
 
-  tracPersonal:
-    image: sql_app:v92
-    ports:
-     - 8086:80
-    networks: 
-     - internal-container-network
-    volumes:
-     - sqldata:/root/.aspnet/DataProtection-Keys
-    depends_on: 
-     - db
-     - comservice
-     - onlinevalve_md
+  #tracPersonal:
+  #  image: sql_app:v90
+  #  ports:
+  #   - 8086:80
+  #  networks: 
+  #   - internal-container-network
+  #  volumes:
+  #   - sqldata:/root/.aspnet/DataProtection-Keys
+  #  depends_on: 
+  #   - db
+  #   - comservice
+  #   - onlinevalve_md
 
 volumes:
  mariadb-data:
  sqldata:
+ pdf-data:
 networks:
  internal-container-network:
   driver: bridge

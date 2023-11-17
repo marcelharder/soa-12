@@ -14,6 +14,7 @@ import { PreViewReportService } from 'src/app/_services/pre-view-report.service'
 })
 export class InstitutionalReportComponent implements OnInit {
   @Input() hospitalNo: number;
+  
   @Output() done = new EventEmitter<number>(); 
   pre: Partial<mainTextModel> = { };
   additional:additionalReportModel = {
@@ -61,6 +62,10 @@ export class InstitutionalReportComponent implements OnInit {
   }
 
   Save(){
+    if(this.addRepToBeSaved == 1){this.saveAdditionalReport(1);}
+    if(this.addRepToBeSaved == 2){this.saveAdditionalReport(2);}
+    if(this.addRepToBeSaved == 3){this.saveAdditionalReport(3);}
+
     // update the changed report to the api
     this.hos.updateInstitutionalReport(this.hospitalNo, this.selectedProcedure, this.pre )
     .subscribe(()=>{this.alertify.success("report changed")}, (error)=>{this.alertify.error(error)});

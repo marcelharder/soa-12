@@ -237,6 +237,7 @@ namespace api.Implementations
             return result;
 
         }
+       
         #region <!--institutional report suggestions -->
 
 
@@ -548,81 +549,81 @@ namespace api.Implementations
         }
         private InstitutionalDTO getIDTO(InstitutionalDTO it, XElement el)
         {
-            it.Regel1A = el.Element("regel_1_a").Value;
-            it.Regel1B = el.Element("regel_1_b").Value;
-            it.Regel1C = el.Element("regel_1_c").Value;
+            it.regel1A = el.Element("regel_1_a").Value;
+            it.regel1B = el.Element("regel_1_b").Value;
+            it.regel1C = el.Element("regel_1_c").Value;
 
-            it.Regel2A = el.Element("regel_2_a").Value;
-            it.Regel2B = el.Element("regel_2_b").Value;
-            it.Regel2C = el.Element("regel_2_c").Value;
+            it.regel2A = el.Element("regel_2_a").Value;
+            it.regel2B = el.Element("regel_2_b").Value;
+            it.regel2C = el.Element("regel_2_c").Value;
 
-            it.Regel3A = el.Element("regel_3_a").Value;
-            it.Regel3B = el.Element("regel_3_b").Value;
-            it.Regel3C = el.Element("regel_3_c").Value;
+            it.regel3A = el.Element("regel_3_a").Value;
+            it.regel3B = el.Element("regel_3_b").Value;
+            it.regel3C = el.Element("regel_3_c").Value;
 
-            it.Regel4A = el.Element("regel_4_a").Value;
-            it.Regel4B = el.Element("regel_4_b").Value;
-            it.Regel4C = el.Element("regel_4_c").Value;
+            it.regel4A = el.Element("regel_4_a").Value;
+            it.regel4B = el.Element("regel_4_b").Value;
+            it.regel4C = el.Element("regel_4_c").Value;
 
-            it.Regel5A = el.Element("regel_5_a").Value;
-            it.Regel5B = el.Element("regel_5_b").Value;
-            it.Regel5C = el.Element("regel_5_c").Value;
+            it.regel5A = el.Element("regel_5_a").Value;
+            it.regel5B = el.Element("regel_5_b").Value;
+            it.regel5C = el.Element("regel_5_c").Value;
 
-            it.Regel6A = el.Element("regel_6_a").Value;
-            it.Regel6B = el.Element("regel_6_b").Value;
-            it.Regel6C = el.Element("regel_6_c").Value;
+            it.regel6A = el.Element("regel_6_a").Value;
+            it.regel6B = el.Element("regel_6_b").Value;
+            it.regel6C = el.Element("regel_6_c").Value;
 
-            it.Regel7A = el.Element("regel_7_a").Value;
-            it.Regel7B = el.Element("regel_7_b").Value;
-            it.Regel7C = el.Element("regel_7_c").Value;
+            it.regel7A = el.Element("regel_7_a").Value;
+            it.regel7B = el.Element("regel_7_b").Value;
+            it.regel7C = el.Element("regel_7_c").Value;
 
-            it.Regel8A = el.Element("regel_8_a").Value;
-            it.Regel8B = el.Element("regel_8_b").Value;
-            it.Regel8C = el.Element("regel_8_c").Value;
+            it.regel8A = el.Element("regel_8_a").Value;
+            it.regel8B = el.Element("regel_8_b").Value;
+            it.regel8C = el.Element("regel_8_c").Value;
 
-            it.Regel9A = el.Element("regel_9_a").Value;
-            it.Regel9B = el.Element("regel_9_b").Value;
-            it.Regel9C = el.Element("regel_9_c").Value;
+            it.regel9A = el.Element("regel_9_a").Value;
+            it.regel9B = el.Element("regel_9_b").Value;
+            it.regel9C = el.Element("regel_9_c").Value;
 
-            it.Regel10A = el.Element("regel_10_a").Value;
-            it.Regel10B = el.Element("regel_10_b").Value;
-            it.Regel10C = el.Element("regel_10_c").Value;
+            it.regel10A = el.Element("regel_10_a").Value;
+            it.regel10B = el.Element("regel_10_b").Value;
+            it.regel10C = el.Element("regel_10_c").Value;
 
-            it.Regel11A = el.Element("regel_11_a").Value;
-            it.Regel11B = el.Element("regel_11_b").Value;
-            it.Regel11C = el.Element("regel_11_c").Value;
+            it.regel11A = el.Element("regel_11_a").Value;
+            it.regel11B = el.Element("regel_11_b").Value;
+            it.regel11C = el.Element("regel_11_c").Value;
 
-            it.Regel12A = el.Element("regel_12_a").Value;
-            it.Regel12B = el.Element("regel_12_b").Value;
-            it.Regel12C = el.Element("regel_12_c").Value;
+            it.regel12A = el.Element("regel_12_a").Value;
+            it.regel12B = el.Element("regel_12_b").Value;
+            it.regel12C = el.Element("regel_12_c").Value;
 
-            it.Regel13A = el.Element("regel_13_a").Value;
-            it.Regel13B = el.Element("regel_13_b").Value;
-            it.Regel13C = el.Element("regel_13_c").Value;
+            it.regel13A = el.Element("regel_13_a").Value;
+            it.regel13B = el.Element("regel_13_b").Value;
+            it.regel13C = el.Element("regel_13_c").Value;
 
-            it.Regel14A = el.Element("regel_14_a").Value;
-            it.Regel14B = el.Element("regel_14_b").Value;
-            it.Regel14C = el.Element("regel_14_c").Value;
+            it.regel14A = el.Element("regel_14_a").Value;
+            it.regel14B = el.Element("regel_14_b").Value;
+            it.regel14C = el.Element("regel_14_c").Value;
 
-            it.Regel15 = el.Element("regel_15").Value;
-            it.Regel16 = el.Element("regel_16").Value;
-            it.Regel17 = el.Element("regel_17").Value;
-            it.Regel18 = el.Element("regel_18").Value;
-            it.Regel19 = el.Element("regel_19").Value;
-            it.Regel20 = el.Element("regel_20").Value;
-            it.Regel21 = el.Element("regel_21").Value;
-            it.Regel22 = el.Element("regel_22").Value;
-            it.Regel23 = el.Element("regel_23").Value;
-            it.Regel24 = el.Element("regel_24").Value;
-            it.Regel25 = el.Element("regel_25").Value;
-            it.Regel26 = el.Element("regel_26").Value;
-            it.Regel27 = el.Element("regel_27").Value;
-            it.Regel28 = el.Element("regel_28").Value;
-            it.Regel29 = el.Element("regel_29").Value;
-            it.Regel30 = el.Element("regel_30").Value;
-            it.Regel31 = el.Element("regel_31").Value;
-            it.Regel32 = el.Element("regel_32").Value;
-            it.Regel33 = el.Element("regel_33").Value;
+            it.regel15 = el.Element("regel_15").Value;
+            it.regel16 = el.Element("regel_16").Value;
+            it.regel17 = el.Element("regel_17").Value;
+            it.regel18 = el.Element("regel_18").Value;
+            it.regel19 = el.Element("regel_19").Value;
+            it.regel20 = el.Element("regel_20").Value;
+            it.regel21 = el.Element("regel_21").Value;
+            it.regel22 = el.Element("regel_22").Value;
+            it.regel23 = el.Element("regel_23").Value;
+            it.regel24 = el.Element("regel_24").Value;
+            it.regel25 = el.Element("regel_25").Value;
+            it.regel26 = el.Element("regel_26").Value;
+            it.regel27 = el.Element("regel_27").Value;
+            it.regel28 = el.Element("regel_28").Value;
+            it.regel29 = el.Element("regel_29").Value;
+            it.regel30 = el.Element("regel_30").Value;
+            it.regel31 = el.Element("regel_31").Value;
+            it.regel32 = el.Element("regel_32").Value;
+            it.regel33 = el.Element("regel_33").Value;
 
 
 
@@ -640,82 +641,82 @@ namespace api.Implementations
         {
             rep = checkForNullValues(rep);
 
-            el.Element("regel_1_a").SetValue(rep.Regel1A);
-            el.Element("regel_1_b").SetValue(rep.Regel1B);
-            el.Element("regel_1_c").SetValue(rep.Regel1C);
+            el.Element("regel_1_a").SetValue(rep.regel1A);
+            el.Element("regel_1_b").SetValue(rep.regel1B);
+            el.Element("regel_1_c").SetValue(rep.regel1C);
 
-            el.Element("regel_2_a").SetValue(rep.Regel2A);
-            el.Element("regel_2_b").SetValue(rep.Regel2B);
-            el.Element("regel_2_c").SetValue(rep.Regel2C);
+            el.Element("regel_2_a").SetValue(rep.regel2A);
+            el.Element("regel_2_b").SetValue(rep.regel2B);
+            el.Element("regel_2_c").SetValue(rep.regel2C);
 
-            el.Element("regel_3_a").SetValue(rep.Regel3A);
-            el.Element("regel_3_b").SetValue(rep.Regel3B);
-            el.Element("regel_3_c").SetValue(rep.Regel3C);
+            el.Element("regel_3_a").SetValue(rep.regel3A);
+            el.Element("regel_3_b").SetValue(rep.regel3B);
+            el.Element("regel_3_c").SetValue(rep.regel3C);
 
-            el.Element("regel_4_a").SetValue(rep.Regel4A);
-            el.Element("regel_4_b").SetValue(rep.Regel4B);
-            el.Element("regel_4_c").SetValue(rep.Regel4C);
+            el.Element("regel_4_a").SetValue(rep.regel4A);
+            el.Element("regel_4_b").SetValue(rep.regel4B);
+            el.Element("regel_4_c").SetValue(rep.regel4C);
 
-            el.Element("regel_5_a").SetValue(rep.Regel5A);
-            el.Element("regel_5_b").SetValue(rep.Regel5B);
-            el.Element("regel_5_c").SetValue(rep.Regel5C);
+            el.Element("regel_5_a").SetValue(rep.regel5A);
+            el.Element("regel_5_b").SetValue(rep.regel5B);
+            el.Element("regel_5_c").SetValue(rep.regel5C);
 
-            el.Element("regel_6_a").SetValue(rep.Regel6A);
-            el.Element("regel_6_b").SetValue(rep.Regel6B);
-            el.Element("regel_6_c").SetValue(rep.Regel6C);
+            el.Element("regel_6_a").SetValue(rep.regel6A);
+            el.Element("regel_6_b").SetValue(rep.regel6B);
+            el.Element("regel_6_c").SetValue(rep.regel6C);
 
-            el.Element("regel_7_a").SetValue(rep.Regel7A);
-            el.Element("regel_7_b").SetValue(rep.Regel7B);
-            el.Element("regel_7_c").SetValue(rep.Regel7C);
+            el.Element("regel_7_a").SetValue(rep.regel7A);
+            el.Element("regel_7_b").SetValue(rep.regel7B);
+            el.Element("regel_7_c").SetValue(rep.regel7C);
 
-            el.Element("regel_8_a").SetValue(rep.Regel8A);
-            el.Element("regel_8_b").SetValue(rep.Regel8B);
-            el.Element("regel_8_c").SetValue(rep.Regel8C);
+            el.Element("regel_8_a").SetValue(rep.regel8A);
+            el.Element("regel_8_b").SetValue(rep.regel8B);
+            el.Element("regel_8_c").SetValue(rep.regel8C);
 
-            el.Element("regel_9_a").SetValue(rep.Regel9A);
-            el.Element("regel_9_b").SetValue(rep.Regel9B);
-            el.Element("regel_9_c").SetValue(rep.Regel9C);
+            el.Element("regel_9_a").SetValue(rep.regel9A);
+            el.Element("regel_9_b").SetValue(rep.regel9B);
+            el.Element("regel_9_c").SetValue(rep.regel9C);
 
-            el.Element("regel_10_a").SetValue(rep.Regel10A);
-            el.Element("regel_10_b").SetValue(rep.Regel10B);
-            el.Element("regel_10_c").SetValue(rep.Regel10C);
+            el.Element("regel_10_a").SetValue(rep.regel10A);
+            el.Element("regel_10_b").SetValue(rep.regel10B);
+            el.Element("regel_10_c").SetValue(rep.regel10C);
 
-            el.Element("regel_11_a").SetValue(rep.Regel11A);
-            el.Element("regel_11_b").SetValue(rep.Regel11B);
-            el.Element("regel_11_c").SetValue(rep.Regel11C);
+            el.Element("regel_11_a").SetValue(rep.regel11A);
+            el.Element("regel_11_b").SetValue(rep.regel11B);
+            el.Element("regel_11_c").SetValue(rep.regel11C);
 
-            el.Element("regel_12_a").SetValue(rep.Regel12A);
-            el.Element("regel_12_b").SetValue(rep.Regel12B);
-            el.Element("regel_12_c").SetValue(rep.Regel12C);
+            el.Element("regel_12_a").SetValue(rep.regel12A);
+            el.Element("regel_12_b").SetValue(rep.regel12B);
+            el.Element("regel_12_c").SetValue(rep.regel12C);
 
-            el.Element("regel_13_a").SetValue(rep.Regel13A);
-            el.Element("regel_13_b").SetValue(rep.Regel13B);
-            el.Element("regel_13_c").SetValue(rep.Regel13C);
+            el.Element("regel_13_a").SetValue(rep.regel13A);
+            el.Element("regel_13_b").SetValue(rep.regel13B);
+            el.Element("regel_13_c").SetValue(rep.regel13C);
 
-            el.Element("regel_14_a").SetValue(rep.Regel14A);
-            el.Element("regel_14_b").SetValue(rep.Regel14B);
-            el.Element("regel_14_c").SetValue(rep.Regel14C);
+            el.Element("regel_14_a").SetValue(rep.regel14A);
+            el.Element("regel_14_b").SetValue(rep.regel14B);
+            el.Element("regel_14_c").SetValue(rep.regel14C);
 
-            el.Element("regel_15").SetValue(rep.Regel15);
-            el.Element("regel_16").SetValue(rep.Regel16);
-            el.Element("regel_17").SetValue(rep.Regel17);
-            el.Element("regel_18").SetValue(rep.Regel18);
-            el.Element("regel_19").SetValue(rep.Regel19);
+            el.Element("regel_15").SetValue(rep.regel15);
+            el.Element("regel_16").SetValue(rep.regel16);
+            el.Element("regel_17").SetValue(rep.regel17);
+            el.Element("regel_18").SetValue(rep.regel18);
+            el.Element("regel_19").SetValue(rep.regel19);
 
-            el.Element("regel_20").SetValue(rep.Regel20);
-            el.Element("regel_21").SetValue(rep.Regel21);
-            el.Element("regel_22").SetValue(rep.Regel22);
-            el.Element("regel_23").SetValue(rep.Regel23);
-            el.Element("regel_24").SetValue(rep.Regel24);
-            el.Element("regel_25").SetValue(rep.Regel25);
-            el.Element("regel_26").SetValue(rep.Regel26);
-            el.Element("regel_27").SetValue(rep.Regel27);
-            el.Element("regel_28").SetValue(rep.Regel28);
-            el.Element("regel_29").SetValue(rep.Regel29);
-            el.Element("regel_30").SetValue(rep.Regel30);
-            el.Element("regel_31").SetValue(rep.Regel31);
-            el.Element("regel_32").SetValue(rep.Regel32);
-            el.Element("regel_33").SetValue(rep.Regel33);
+            el.Element("regel_20").SetValue(rep.regel20);
+            el.Element("regel_21").SetValue(rep.regel21);
+            el.Element("regel_22").SetValue(rep.regel22);
+            el.Element("regel_23").SetValue(rep.regel23);
+            el.Element("regel_24").SetValue(rep.regel24);
+            el.Element("regel_25").SetValue(rep.regel25);
+            el.Element("regel_26").SetValue(rep.regel26);
+            el.Element("regel_27").SetValue(rep.regel27);
+            el.Element("regel_28").SetValue(rep.regel28);
+            el.Element("regel_29").SetValue(rep.regel29);
+            el.Element("regel_30").SetValue(rep.regel30);
+            el.Element("regel_31").SetValue(rep.regel31);
+            el.Element("regel_32").SetValue(rep.regel32);
+            el.Element("regel_33").SetValue(rep.regel33);
 
 
 
@@ -727,82 +728,82 @@ namespace api.Implementations
         }
         private InstitutionalDTO checkForNullValues(InstitutionalDTO test)
         {
-            test.Regel1A = test.Regel1A == null ? "" : test.Regel1A;
-            test.Regel1B = test.Regel1B == null ? "" : test.Regel1B;
-            test.Regel1C = test.Regel1C == null ? "" : test.Regel1C;
+            test.regel1A = test.regel1A == null ? "" : test.regel1A;
+            test.regel1B = test.regel1B == null ? "" : test.regel1B;
+            test.regel1C = test.regel1C == null ? "" : test.regel1C;
 
-            test.Regel2A = test.Regel2A == null ? "" : test.Regel2A;
-            test.Regel2B = test.Regel2B == null ? "" : test.Regel2B;
-            test.Regel2C = test.Regel2C == null ? "" : test.Regel2C;
+            test.regel2A = test.regel2A == null ? "" : test.regel2A;
+            test.regel2B = test.regel2B == null ? "" : test.regel2B;
+            test.regel2C = test.regel2C == null ? "" : test.regel2C;
 
-            test.Regel3A = test.Regel3A == null ? "" : test.Regel3A;
-            test.Regel3B = test.Regel3B == null ? "" : test.Regel3B;
-            test.Regel3C = test.Regel3C == null ? "" : test.Regel3C;
+            test.regel3A = test.regel3A == null ? "" : test.regel3A;
+            test.regel3B = test.regel3B == null ? "" : test.regel3B;
+            test.regel3C = test.regel3C == null ? "" : test.regel3C;
 
-            test.Regel4A = test.Regel4A == null ? "" : test.Regel4A;
-            test.Regel4B = test.Regel4B == null ? "" : test.Regel4B;
-            test.Regel4C = test.Regel4C == null ? "" : test.Regel4C;
+            test.regel4A = test.regel4A == null ? "" : test.regel4A;
+            test.regel4B = test.regel4B == null ? "" : test.regel4B;
+            test.regel4C = test.regel4C == null ? "" : test.regel4C;
 
-            test.Regel5A = test.Regel5A == null ? "" : test.Regel5A;
-            test.Regel5B = test.Regel5B == null ? "" : test.Regel5B;
-            test.Regel5C = test.Regel5C == null ? "" : test.Regel5C;
+            test.regel5A = test.regel5A == null ? "" : test.regel5A;
+            test.regel5B = test.regel5B == null ? "" : test.regel5B;
+            test.regel5C = test.regel5C == null ? "" : test.regel5C;
 
-            test.Regel6A = test.Regel6A == null ? "" : test.Regel6A;
-            test.Regel6B = test.Regel6B == null ? "" : test.Regel6B;
-            test.Regel6C = test.Regel6C == null ? "" : test.Regel6C;
+            test.regel6A = test.regel6A == null ? "" : test.regel6A;
+            test.regel6B = test.regel6B == null ? "" : test.regel6B;
+            test.regel6C = test.regel6C == null ? "" : test.regel6C;
 
-            test.Regel7A = test.Regel7A == null ? "" : test.Regel7A;
-            test.Regel7B = test.Regel7B == null ? "" : test.Regel7B;
-            test.Regel7C = test.Regel7C == null ? "" : test.Regel7C;
+            test.regel7A = test.regel7A == null ? "" : test.regel7A;
+            test.regel7B = test.regel7B == null ? "" : test.regel7B;
+            test.regel7C = test.regel7C == null ? "" : test.regel7C;
 
-            test.Regel8A = test.Regel8A == null ? "" : test.Regel8A;
-            test.Regel8B = test.Regel8B == null ? "" : test.Regel8B;
-            test.Regel8C = test.Regel8C == null ? "" : test.Regel8C;
+            test.regel8A = test.regel8A == null ? "" : test.regel8A;
+            test.regel8B = test.regel8B == null ? "" : test.regel8B;
+            test.regel8C = test.regel8C == null ? "" : test.regel8C;
 
-            test.Regel9A = test.Regel9A == null ? "" : test.Regel9A;
-            test.Regel9B = test.Regel9B == null ? "" : test.Regel9B;
-            test.Regel9C = test.Regel9C == null ? "" : test.Regel9C;
+            test.regel9A = test.regel9A == null ? "" : test.regel9A;
+            test.regel9B = test.regel9B == null ? "" : test.regel9B;
+            test.regel9C = test.regel9C == null ? "" : test.regel9C;
 
-            test.Regel10A = test.Regel10A == null ? "" : test.Regel10A;
-            test.Regel10B = test.Regel10B == null ? "" : test.Regel10B;
-            test.Regel10C = test.Regel10C == null ? "" : test.Regel10C;
+            test.regel10A = test.regel10A == null ? "" : test.regel10A;
+            test.regel10B = test.regel10B == null ? "" : test.regel10B;
+            test.regel10C = test.regel10C == null ? "" : test.regel10C;
 
-            test.Regel11A = test.Regel11A == null ? "" : test.Regel11A;
-            test.Regel11B = test.Regel11B == null ? "" : test.Regel11B;
-            test.Regel11C = test.Regel11C == null ? "" : test.Regel11C;
+            test.regel11A = test.regel11A == null ? "" : test.regel11A;
+            test.regel11B = test.regel11B == null ? "" : test.regel11B;
+            test.regel11C = test.regel11C == null ? "" : test.regel11C;
 
-            test.Regel12A = test.Regel12A == null ? "" : test.Regel12A;
-            test.Regel12B = test.Regel12B == null ? "" : test.Regel12B;
-            test.Regel12C = test.Regel12C == null ? "" : test.Regel12C;
+            test.regel12A = test.regel12A == null ? "" : test.regel12A;
+            test.regel12B = test.regel12B == null ? "" : test.regel12B;
+            test.regel12C = test.regel12C == null ? "" : test.regel12C;
 
-            test.Regel13A = test.Regel13A == null ? "" : test.Regel13A;
-            test.Regel13B = test.Regel13B == null ? "" : test.Regel13B;
-            test.Regel13C = test.Regel13C == null ? "" : test.Regel13C;
+            test.regel13A = test.regel13A == null ? "" : test.regel13A;
+            test.regel13B = test.regel13B == null ? "" : test.regel13B;
+            test.regel13C = test.regel13C == null ? "" : test.regel13C;
 
-            test.Regel14A = test.Regel14A == null ? "" : test.Regel14A;
-            test.Regel14B = test.Regel14B == null ? "" : test.Regel14B;
-            test.Regel14C = test.Regel14C == null ? "" : test.Regel14C;
+            test.regel14A = test.regel14A == null ? "" : test.regel14A;
+            test.regel14B = test.regel14B == null ? "" : test.regel14B;
+            test.regel14C = test.regel14C == null ? "" : test.regel14C;
 
-            test.Regel15 = test.Regel15 == null ? "" : test.Regel15;
-            test.Regel16 = test.Regel16 == null ? "" : test.Regel16;
-            test.Regel17 = test.Regel17 == null ? "" : test.Regel17;
-            test.Regel18 = test.Regel18 == null ? "" : test.Regel18;
-            test.Regel19 = test.Regel19 == null ? "" : test.Regel19;
-            test.Regel20 = test.Regel20 == null ? "" : test.Regel20;
+            test.regel15 = test.regel15 == null ? "" : test.regel15;
+            test.regel16 = test.regel16 == null ? "" : test.regel16;
+            test.regel17 = test.regel17 == null ? "" : test.regel17;
+            test.regel18 = test.regel18 == null ? "" : test.regel18;
+            test.regel19 = test.regel19 == null ? "" : test.regel19;
+            test.regel20 = test.regel20 == null ? "" : test.regel20;
 
-            test.Regel21 = test.Regel21 == null ? "" : test.Regel21;
-            test.Regel22 = test.Regel22 == null ? "" : test.Regel22;
-            test.Regel23 = test.Regel23 == null ? "" : test.Regel23;
-            test.Regel24 = test.Regel24 == null ? "" : test.Regel24;
-            test.Regel25 = test.Regel25 == null ? "" : test.Regel25;
-            test.Regel26 = test.Regel26 == null ? "" : test.Regel26;
-            test.Regel27 = test.Regel27 == null ? "" : test.Regel27;
-            test.Regel28 = test.Regel28 == null ? "" : test.Regel28;
-            test.Regel29 = test.Regel29 == null ? "" : test.Regel29;
-            test.Regel30 = test.Regel30 == null ? "" : test.Regel30;
-            test.Regel31 = test.Regel31 == null ? "" : test.Regel31;
-            test.Regel32 = test.Regel32 == null ? "" : test.Regel32;
-            test.Regel33 = test.Regel33 == null ? "" : test.Regel33;
+            test.regel21 = test.regel21 == null ? "" : test.regel21;
+            test.regel22 = test.regel22 == null ? "" : test.regel22;
+            test.regel23 = test.regel23 == null ? "" : test.regel23;
+            test.regel24 = test.regel24 == null ? "" : test.regel24;
+            test.regel25 = test.regel25 == null ? "" : test.regel25;
+            test.regel26 = test.regel26 == null ? "" : test.regel26;
+            test.regel27 = test.regel27 == null ? "" : test.regel27;
+            test.regel28 = test.regel28 == null ? "" : test.regel28;
+            test.regel29 = test.regel29 == null ? "" : test.regel29;
+            test.regel30 = test.regel30 == null ? "" : test.regel30;
+            test.regel31 = test.regel31 == null ? "" : test.regel31;
+            test.regel32 = test.regel32 == null ? "" : test.regel32;
+            test.regel33 = test.regel33 == null ? "" : test.regel33;
 
 
             return test;

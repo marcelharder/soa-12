@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace api.Controllers
@@ -166,14 +168,13 @@ namespace api.Controllers
         public async Task<IActionResult> getOVI(string id){
             return Ok(await _hos.HospitalImplementsOVI(id));
         }
-
         #region <!-- InstitutionalReports stuff -->
        
-        [HttpGet("InstitutionalReport/{id}/{soort}")]
-        public async Task<IActionResult> getIRepAsync(string id, int soort){
+        [HttpGet("InstitutionalReport/{hospitalId}/{soort}")]
+        public async Task<IActionResult> getIRepAsync(string hospitalId, int soort){
             var help = "";
             var comaddress = _com.Value.reportURL;
-            var st = "InstitutionalReport/" + id + "/" + soort + "/" + id;
+            var st = "InstitutionalReport/" + hospitalId + "/" + soort;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -185,29 +186,58 @@ namespace api.Controllers
             return Ok(help);
         }
        
-        [HttpPut("InstitutionalReport/{id}/{soort}")]
-        public IActionResult updateIRep([FromBody] InstitutionalDTO rep, string id, int soort){
-             var help = _hos.updateInstitutionalReport(rep,soort,Convert.ToInt32(id));
-          return Ok(help);
+        [HttpPut("InstitutionalReport/{hospitalId}/{soort}")]
+        public async Task<IActionResult> updateIRepAsync([FromBody] InstitutionalDTO cp,string hospitalId, int soort){
+            var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "InstitutionalReport/" + hospitalId + "/" + soort;
+            comaddress = comaddress + st;
+             var json = JsonConvert.SerializeObject(cp, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress,content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
        
-        [HttpPost("InstitutionalReport/{id}")]
-        public IActionResult createIRep(string id){
-             var help = _hos.createInstitutionalReport(Convert.ToInt32(id));
-          return Ok(help);
+      
+        [HttpGet("AdditionalReportItems/{hospitalId}/{which}")]
+        public async Task<IActionResult> getARIAsync(string hospitalId, int which){
+          var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "InstitutionalReport/AdditionalReportitems/" + hospitalId + "/" + which;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
-        [HttpGet("AdditionalReportItems/{id}/{which}")]
-        public IActionResult getARI(string id, int which){
-          var help = _hos.getAdditionalReportItems(Convert.ToInt32(id),which);
-          return Ok(help);
-        }
-
-        [HttpPut("UpdateAdditionalReportItems/{id}/{which}")]
-        public IActionResult getARk([FromBody] AdditionalReportDTO l,string id,int which){
-          var help = _hos.updateAdditionalReportItem(l,Convert.ToInt32(id),which);
-          return Ok(help);
-        }
+        [HttpPut("UpdateAdditionalReportItems/{hospitalId}/{which}")]
+          public async Task<IActionResult> updateIRepAsync([FromBody] AdditionalReportDTO cp,string hospitalId, int which){
+            var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "InstitutionalReport/AdditionalReportitems/" + hospitalId + "/" + which;
+            comaddress = comaddress + st;
+             var json = JsonConvert.SerializeObject(cp, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress,content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        } 
 
         #endregion
 

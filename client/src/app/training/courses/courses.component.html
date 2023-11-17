@@ -29,18 +29,18 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of listOfCourses">
-        <td>{{item.CourseId}}</td>
+        <td>{{item.courseId}}</td>
         <td>{{item.description}}</td>
         <td>
-          <button class="btn btn-info btn-sm" (click)="showDetails(item.CourseId)">details</button>
-          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.CourseId)">delete</button>
+          <button class="btn btn-info btn-sm" (click)="showDetails(item.courseId)">details</button>
+          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.courseId)">delete</button>
         </td>
       </tr>
 
 
     </tbody>
   </table>
-  <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updateCourse()" *ngIf="showDetailsPanel()">
+  <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updateCourse()" *ngIf="showDetailsPanel()"  name="form-01" >
 
     <div class="row">
       <div class="col-sm-8">
@@ -51,7 +51,7 @@
           </div>
           <div class="col-sm-6">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["CourseId"]' class="form-control" readonly>
+              <input [formControl]='detailsForm.controls["CourseId"]' class="form-control" name="CourseId" readonly>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["level"]' class="form-control">
+              <input [formControl]='detailsForm.controls["level"]' class="form-control"  name="cid-02" >
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["description"]' class="form-control">
+              <input [formControl]='detailsForm.controls["description"]' class="form-control"  name="cid-03" >
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["title"]' class="form-control">
+              <input [formControl]='detailsForm.controls["title"]' class="form-control" name="cid-04" >
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["venue_location"]' class="form-control">
+              <input [formControl]='detailsForm.controls["venue_location"]' class="form-control" name="cid-05" >
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["diploma"]' class="form-control">
+              <input [formControl]='detailsForm.controls["diploma"]' class="form-control" name="cid-06" >
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@
             <div [formGroup]="detailsForm">
               <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
                 [formControl]='detailsForm.controls["endDate"]' [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
-                name="datum1" />
+                name="datum2" />
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["price"]' class="form-control">
+              <input [formControl]='detailsForm.controls["price"]' class="form-control" name="cid-07" >
             </div>
           </div>
         </div>
