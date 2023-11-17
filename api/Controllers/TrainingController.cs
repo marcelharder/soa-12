@@ -36,7 +36,7 @@ namespace api.Controllers
 
             var help = "";
             var comaddress = _com.Value.trainingURL;
-            var st = "drop/epadefinition";
+            var st = "Drop/epadefinition";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {

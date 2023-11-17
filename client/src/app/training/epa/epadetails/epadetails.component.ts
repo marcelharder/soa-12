@@ -8,7 +8,7 @@ import { Epa_model } from 'src/app/_models/Epa_model';
 })
 export class EpadetailsComponent implements OnInit {
 
-  @Input() selectedEpa: Epa_model = {
+ /*  @Input() selectedEpa: Epa_model = {
     EpaId: 0,
     name: '',
     category: 0,
@@ -28,7 +28,9 @@ export class EpadetailsComponent implements OnInit {
     Examen: new Boolean,
     option_6: new Boolean,
     option_7: new Boolean
-  };
+  }; */
+  @Input() selectedEpa: Epa_model;
+  @Input() description: string;
   @Output() up = new EventEmitter<Epa_model>();
   
  
@@ -38,7 +40,9 @@ export class EpadetailsComponent implements OnInit {
      
    }
  
-  saveEpa(){this.up.emit(this.selectedEpa);}
+  saveEpa(){
+    
+    this.up.emit(this.selectedEpa);}
  
 
 }
