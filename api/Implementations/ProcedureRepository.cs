@@ -10,7 +10,6 @@ using api.Data;
 using api.DTOs;
 using api.Entities;
 using api.Helpers;
-using api.interfaces.reports;
 using api.Interfaces;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +21,6 @@ namespace api.Implementations
     {
         private DataContext _context;
         private IValveRepository _valve;
-        private IPV _rep;
         private IAorticSurgery _cas;
 
         private IMinInv _inv;
@@ -40,12 +38,11 @@ namespace api.Implementations
             ILtxRepository ltx,
             DataContext context,
             IValveRepository valve,
-            IPV rep, IAorticSurgery cas,
+            IAorticSurgery cas,
             IMinInv inv)
         {
             _context = context;
             _valve = valve;
-            _rep = rep;
             _cas = cas;
             _inv = inv;
             _ltx=ltx;
@@ -123,11 +120,6 @@ namespace api.Implementations
 
         private async Task<int> checkAndDeleteCollateralTables(int id)
         {
-            while (await _context.Previews.AnyAsync(u => u.procedure_id == id))
-            {
-                var help = await _rep.getPreViewAsync(id);
-                var result = await _rep.DeleteAsync(help);
-            }
             while (await _context.AorticSurgeries.AnyAsync(u => u.procedure_id == id))
             {
                 var help = await _cas.getSpecificCAS(id);

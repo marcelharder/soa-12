@@ -32,6 +32,6 @@ namespace api.Interfaces
         string updateInstitutionalReport(InstitutionalDTO rep, int hospitalNo, int soort);
         AdditionalReportDTO getAdditionalReportItems(int hospitalNo,int which);
         int updateAdditionalReportItem(AdditionalReportDTO l, int id, int which);
-        
+        Task addCountry(CountryDto country);
     }
 }

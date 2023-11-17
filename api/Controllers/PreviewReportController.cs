@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using api.DTOs;
 using api.Helpers;
-using api.interfaces.reports;
 using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +11,10 @@ using Microsoft.Extensions.Options;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using System.Xml.Linq;
+using System.Collections.Generic;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace api.Controllers
 {
@@ -23,20 +26,19 @@ namespace api.Controllers
         private IValveRepository _valve;
         private ICABGRepository _cabg;
         private IProcedureRepository _proc;
-        private SpecialReportMaps _sprm;
-     
+        private IWebHostEnvironment _env;
+
         public PreviewReportController(
             IOptions<ComSettings> com,
             ICABGRepository cabg,
             IValveRepository valve,
-            SpecialReportMaps sprm,
-            IProcedureRepository proc)
+           IProcedureRepository proc, IWebHostEnvironment env)
         {
             _proc = proc;
-            _sprm = sprm;
             _cabg = cabg;
             _valve = valve;
             _com = com;
+            _env = env;
         }
 
 
@@ -53,11 +55,11 @@ namespace api.Controllers
                 {
                     help = await response.Content.ReadAsStringAsync();
                     return Ok(help);
-            
-            
+
+
                 }
             }
-            
+
         }
 
         [HttpGet("reset/{id}")]
@@ -82,7 +84,7 @@ namespace api.Controllers
         {
             var result = 0;
             var procedure = await _proc.GetProcedure(id); if (procedure == null) { return result; }
-            var reportcode = Convert.ToInt32(_sprm.getReportCode(procedure.fdType));
+            var reportcode = Convert.ToInt32(getReportCode(procedure.fdType));
 
 
             if (reportcode == 1 || reportcode == 2) // these are the cabg procedures
@@ -115,12 +117,24 @@ namespace api.Controllers
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.PostAsync(comaddress,content))
+                using (var response = await httpClient.PostAsync(comaddress, content))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
             return Ok(help);
+        }
+        private string getReportCode(int fdType)
+        {
+            var result = "";
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/procedure.xml");
+            XDocument order = XDocument.Load(filename);
+            IEnumerable<XElement> help = from d in order.Descendants("Code")
+                                         where d.Element("ID").Value == fdType.ToString()
+                                         select d;
+            foreach (XElement x in help) { result = x.Element("report_code").Value; }
+            return result;
         }
     }
 }

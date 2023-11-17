@@ -6,7 +6,6 @@ using api.Data;
 using api.DTOs;
 using api.Entities;
 using api.Helpers;
-using api.interfaces.reports;
 using api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,34 +22,23 @@ namespace api.Controllers
     {
         private IProcedureRepository _rep;
 
-        private IManageFinalReport _imrep;
-        private UserManager<AppUser> _manager;
+         private UserManager<AppUser> _manager;
         private IPatientRepository _pat;
         private SpecialMaps _special;
         
         public ProcedureController(IProcedureRepository rep, 
             UserManager<AppUser> manager,
-            IManageFinalReport imrep, 
-            SpecialMaps special,
+             SpecialMaps special,
             IPatientRepository pat)
         {
             _rep = rep;
             _manager = manager;
             _pat = pat;
-            _imrep = imrep;
             _special = special;
         }
 
         [HttpGet("refPhysEmailHash/{id}")]
         public async Task<IActionResult> gethashAsync(int id){
-
-             // add item to timingsRefReport this happens when the report sms is send
-             ReportTiming r = new ReportTiming();
-             r.id = id;
-             r.publishTime = DateTime.Now;
-             r.fileLocation = "";
-             _imrep.addToExpiredReports(r);
-
              // now calculate the hash which is the way the ref phys can find the report
              var p = await _rep.refPhysEmailHash(id);
              if(p != ""){return Ok(p);}

@@ -25,13 +25,11 @@ namespace api.Controllers
         SpecialMaps _sp;
         private readonly IOptions<ComSettings> _com;
 
-        SpecialReportMaps _sprm;
-
+      
         private ICABGRepository _cabg;
         public GeneralController(IUserRepository user,
             SpecialMaps sp,
             IOptions<ComSettings> com,
-            SpecialReportMaps sprm,
             IValveRepository valve,
             IProcedureRepository proc,
             ICABGRepository cabg,
@@ -41,7 +39,6 @@ namespace api.Controllers
             _repo = user;
             _com = com;
             _sp = sp;
-            _sprm = sprm;
             _rep = rep;
             _proc = proc;
             _hos = hos;
@@ -84,16 +81,6 @@ namespace api.Controllers
             var p = await _sp.IsThisProcedureComplete(id);
             return Ok(p);
         }
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("loadReportCode/{id}")]
-        public IActionResult GetRC(int id)
-        {// get the correct report code for this procedure type, used in preview reports
-            var result = _sprm.getReportCode(id);
-            return Ok(result);
-        }
-
 
         #region <!-- Cabg stuff -->
 

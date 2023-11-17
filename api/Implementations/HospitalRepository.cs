@@ -15,6 +15,7 @@ using api.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -53,6 +54,22 @@ namespace api.Implementations
             if (await SaveAll()) { return p.hospitalId; } else { return 99; };
         }
 
+        public async Task addCountry(CountryDto country)
+        {
+           
+            
+            var help =  new XElement("Country",
+            new XElement(country.value,country.description));
+           
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/countries.xml");
+            XDocument order = XDocument.Load(filename);
+            order.Element("root")
+            .Elements("Country")
+            .Elements("ID")
+            .Where(item => item.Element("ID").Value == "49").FirstOrDefault()
+            .AddAfterSelf(help);
+        }
         public async Task<int> DeleteAsync<T>(T entity) where T : class
         {
             _context.Entry(entity).State = EntityState.Deleted;
@@ -808,6 +825,8 @@ namespace api.Implementations
 
             return test;
         }
+
+       
         #endregion
 
     }

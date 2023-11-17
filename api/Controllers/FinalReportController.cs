@@ -26,7 +26,8 @@ namespace api.Controllers
         [AllowAnonymous]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
-        {
+        {   // This will only work, when in a container, because the assets/pdf folder is connected to a volume
+            // and the report container pushes the newly made pdf to this volume
             var id_string = id.ToString();
             return File(this.GetStream(id_string), "application/pdf", id_string + ".pdf");
         }

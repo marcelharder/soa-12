@@ -9,6 +9,7 @@ import { AccountService } from './account.service';
 import { previewReport } from '../_models/previewReport';
 import { additionalReportModel } from '../_models/InstitutionalReportModels/additionalReportModel';
 import { mainTextModel } from '../_models/InstitutionalReportModels/mainTextModel';
+import { countryItem } from '../_models/countryItem';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,8 @@ export class HospitalService {
   getAdditionalInstitutionalReport(id: number, which: number)
   {return this.http.get<additionalReportModel>(this.baseUrl + 'hospital/AdditionalReportItems/' + id + '/' + which);}
  
-  
+  addCountry(country: countryItem)
+  {return this.http.post<string>(this.baseUrl + 'hospital/addCountry/' + country, null);}
   
   
   updateInstitutionalReport(id: number,soort: number, model: Partial<mainTextModel>)

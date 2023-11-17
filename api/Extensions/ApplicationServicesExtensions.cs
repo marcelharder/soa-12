@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using api.Implementations;
-using api.interfaces.reports;
-using api.Implementations.reports;
 using api.Interfaces.statistics;
 using api.Implementations.statistics;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
@@ -59,7 +57,6 @@ namespace api.Extensions
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<ILtxRepository, LtxRepository>();
 
-            services.AddScoped<IPV, PV>();
             services.AddScoped<IAorticSurgery, AorticSurgery>();
             services.AddScoped<IMinInv, MinInv>();
             services.AddScoped<ICABGRepository, CABGRepository>();
@@ -68,20 +65,15 @@ namespace api.Extensions
             services.AddScoped<IDischarge, Discharge>();
             services.AddScoped<IMinInv, MinInv>();
             services.AddScoped<IRefPhys, RefPhys>();
-            services.AddScoped<ISuggestion, Suggestion>();
-            services.AddScoped<IManageFinalReport, ManageFinalReport>();
             services.AddScoped<IUserOnline, UserOnline>();
-            services.AddScoped<IOperativeReportPdf, OperativeReportPdf>();
-
+           
 
             services.AddScoped<IStatistics, Statistics>();
             services.AddScoped<IElementaryStatistics, ElementaryStatistics>();
-            services.AddScoped<IInstitutionalText, InstitutionalText>();
             services.AddScoped<IAioRepo, AioRepo>();
 
             services.AddScoped<OperatieDrops>();
             services.AddScoped<SpecialMaps>();
-            services.AddScoped<SpecialReportMaps>();
             services.AddScoped<LogUserActivity>();
            
             services.AddTransient<IUsers, Users>();

@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading.Tasks;
 using api.Entities;
 using api.Helpers;
-using api.interfaces.reports;
 using api.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,27 +17,18 @@ namespace api.Controllers
 
     public class SuggestionController : BaseApiController
     {
-        private ISuggestion _repo;
         private IProcedureRepository _proc;
-        private SpecialReportMaps _sprep;
         private IOptions<ComSettings> _com;
-        private IPV _previewReport;
 
         private SpecialMaps _sp;
         public SuggestionController(
-            SpecialReportMaps sprep,
-            IProcedureRepository proc,
-            ISuggestion repo,
+           IProcedureRepository proc,
             SpecialMaps sp,
-            IPV previewReport,
             IOptions<ComSettings> com)
         {
-            _repo = repo;
             _sp = sp;
-            _previewReport = previewReport;
             _com = com;
             _proc = proc;
-            _sprep = sprep;
 
         }
 

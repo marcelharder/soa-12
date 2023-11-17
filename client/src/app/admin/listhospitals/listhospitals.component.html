@@ -1,64 +1,104 @@
 <div class="card m-5">
+
     <div class="card-header">
         <div class="row">
-            <div class="col-sm-6"> <h5><span class="badge badge-info">List of hospitals</span></h5></div>
+            <div class="col-sm-6">
+                <h5><span class="badge badge-info">List of hospitals</span></h5>
+            </div>
             <div class="col-sm-6">
                 <div *ngIf="showList()">
                     <div class="row">
-                        <div class="col-sm-4"><h5><span class="badge badge-secondary">Select by country</span></h5></div>
-                        <div class="col-sm-4"><select [(ngModel)]="selectedCountry" name="test1" class="form-control">
-                            <option *ngFor="let an of optionCountries" [value]=an.value>{{ an.description }}</option>
-                          </select>
+                        <div class="col-sm-4">
+                            <div class="d-flex flex-row bd-highlight mb-3">
+                                <div class="p-2 bd-highlight">
+                                    <h5><span class="badge badge-secondary">Select by country</span></h5>
+                                </div>
+                                <div class="p-2 bd-highlight"><button class="btn-sml"
+                                        (click)="addCountry(patienttemplate)">Add</button></div>
+                            </div>
                         </div>
-                        <div class="col-sm-4"><button class="btn bth-primary btn-xs" (click)="filterCountry()">Go</button></div>
+                        <div class="col-sm-4"><select [(ngModel)]="selectedCountry" name="test1" class="form-control">
+                                <option *ngFor="let an of optionCountries" [value]=an.value>{{ an.description }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4"><button class="btn bth-primary btn-xs"
+                                (click)="filterCountry()">Go</button></div>
                     </div>
                 </div>
-                
-                </div>
+
+            </div>
         </div>
-       
+
     </div>
+
     <div class="card-body">
+
+        <ng-template #patienttemplate>
+            <div class="container">
+                <div class="m-3" style="background-color: antiquewhite;">
+                    <div class="row mt-3 mb-3">
+                        <div class="col-sm-12"><span class="badge badge-primary"><h5>Add a country</h5></span></div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-sm-4"><span class="badge badge-secondary">ISO Code, bv 'NL'</span></div>
+                        <div class="col-sm-8"><span><input type="text" [(ngModel)]="model.value" name="country-value"
+                                    class="form-control" /></span></div>
+                    </div>
+                    <div class="row m-2">
+                        <div class="col-sm-4"><span class="badge badge-secondary">Description</span></div>
+                        <div class="col-sm-8"><span> <input type="text" [(ngModel)]="model.description"
+                                    name="country-description" class="form-control" /></span></div>
+                    </div>
+                    <button type="button m-1" class="btn btn-warning" (click)="close()">Cancel</button>
+                    <button type="button mt-1 mb-1" class="btn btn-success" (click)="confirm()">Yes</button>
+                </div>
+
+            </div>
+        </ng-template>
         <div class="container">
             <div *ngIf="showList()">
-            <div class="row">
-                <table class="table">
-                    <tr>
-                        <th style="width: 30%;">Id</th>
-                        <th style="width: 40%;">Name</th>
-                        <th style="width: 15%;"></th>
-                        <th style="width: 15%;"></th>
-                    </tr>
-                    <tr *ngFor="let hos of hospitals">
-                      <td class="fa-fa-person">
-                          {{hos.hospitalNo}}
-                      </td>
-                      <td>
-                        {{hos.hospitalName}}
-                    </td>
-                    <td>
-                        <button class="btn btn-info" (click)="editHospital(hos.hospitalNo)">Edit Hospital</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-info" (click)="deleteHospital(hos.hospitalNo)">Delete Hospital</button>
-                    </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button type="button" class="btn btn-danger" (click)="Cancel()">Cancel</button>
-                        <button type="button" class="btn btn-success"  (click)="addHospital()">Add</button>
-                      </div>
+                <div class="row">
+                    <table class="table">
+                        <tr>
+                            <th style="width: 30%;">Id</th>
+                            <th style="width: 40%;">Name</th>
+                            <th style="width: 15%;"></th>
+                            <th style="width: 15%;"></th>
+                        </tr>
+                        <tr *ngFor="let hos of hospitals">
+                            <td class="fa-fa-person">
+                                {{hos.hospitalNo}}
+                            </td>
+                            <td>
+                                {{hos.hospitalName}}
+                            </td>
+                            <td>
+                                <button class="btn btn-info" (click)="editHospital(hos.hospitalNo)">Edit
+                                    Hospital</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-info" (click)="deleteHospital(hos.hospitalNo)">Delete
+                                    Hospital</button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="col-sm-6"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-danger" (click)="Cancel()">Cancel</button>
+                            <button type="button" class="btn btn-success" (click)="addHospital()">Add</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"></div>
+                </div>
             </div>
         </div>
-        </div>
-        <div *ngIf="showAdd()" ><app-addhospital [alreadySelected]="hospitals" [selectedCountry]="selectedCountry" (pushHospital)="receiveHospital($event)"  (cancelThis)="backFromAdd($event)"></app-addhospital></div>
-        <div *ngIf="showEdit()"><app-edithospital [pd]="selectedHospital" (cancelThis)="backFromEdit($event)"></app-edithospital></div>
+        <div *ngIf="showAdd()"><app-addhospital [alreadySelected]="hospitals" [selectedCountry]="selectedCountry"
+                (pushHospital)="receiveHospital($event)" (cancelThis)="backFromAdd($event)"></app-addhospital></div>
+        <div *ngIf="showEdit()"><app-edithospital [pd]="selectedHospital"
+                (cancelThis)="backFromEdit($event)"></app-edithospital></div>
     </div>
     <div class="card-footer"></div>
 </div>
-
