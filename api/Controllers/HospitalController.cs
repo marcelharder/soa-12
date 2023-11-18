@@ -158,19 +158,30 @@ namespace api.Controllers
             return BadRequest("Could not add the photo ...");
         }
 
-
-        [HttpGet("addCountry/{value}/{description}")]
-        public async Task<IActionResult> AddCountryNow(string value, string description)
+/* 
+        [HttpGet("addCountryNow/{Value}/{Description}")]
+        public async Task<IActionResult> AddCountryNow(string Value, string Description)
         {
             var model = new CountryDto();
-            model.value = value;
-            model.description = description;
-
-            await Task.Run(()=>{
-               _hos.addCountry(model);
+            model.Value = Value;
+            model.Description = Description;
+            await Task.Run(() =>
+            {
+                _hos.addCountry(model);
             });
-           return Ok();
-        }
+            return Ok();
+        } */
+
+        
+        [HttpPost("addCountryNow")]
+        public async Task<IActionResult> AddCountryNow(CountryDto model)
+        {
+            await Task.Run(() =>
+            {
+                _hos.addCountry(model);
+            });
+            return Ok();
+        } 
 
         [HttpGet("hospitalByUser/{id}")]
         public async Task<IActionResult> getCurrentHospitalForUser(int id)

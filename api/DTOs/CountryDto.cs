@@ -1,11 +1,10 @@
-using System;
-
 namespace api.DTOs
 {
     public class CountryDto
     {
-        public string value {get; set;}
-        public string description {get; set;}
+        public string Value {get; set;}
+         public string Tel_Code {get; set;}
+        public string Description {get; set;}
     }
     
-    }
+}

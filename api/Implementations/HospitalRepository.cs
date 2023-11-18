@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -56,19 +57,28 @@ namespace api.Implementations
 
         public async Task addCountry(CountryDto country)
         {
-           
-            
-            var help =  new XElement("Country",
-            new XElement(country.value,country.description));
-           
+            var iso_list = new List<string>();
+            var help = new XElement("Country",
+            new XElement("ID", country.Tel_Code),
+            new XElement("ISO", country.Value),
+            new XElement("Description", country.Description));
+
+
             var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/countries.xml");
-            XDocument order = XDocument.Load(filename);
-            order.Element("root")
-            .Elements("Country")
-            .Elements("ID")
-            .Where(item => item.Element("ID").Value == "49").FirstOrDefault()
-            .AddAfterSelf(help);
+            var fileName = Path.Combine(contentRoot, "conf/countries.xml");
+            XDocument doc = XDocument.Load(fileName);
+            IEnumerable<XElement> h = from d in doc.Descendants("Country") select d;
+
+            foreach (XElement d in h)
+            {
+                iso_list.Add(d.Element("ISO").Value);
+            }
+            // see if this country is already on  the list
+            if(!iso_list.Contains(country.Value)){
+                 doc.Element("root").Add(help);
+            doc.Save(fileName);
+            }
+          
         }
         public async Task<int> DeleteAsync<T>(T entity) where T : class
         {
@@ -254,7 +264,7 @@ namespace api.Implementations
             return result;
 
         }
-       
+
         #region <!--institutional report suggestions -->
 
 
@@ -356,7 +366,7 @@ namespace api.Implementations
         #region <!--additionalReport stuff-->
         public AdditionalReportDTO getAdditionalReportItems(int hospitalNo, int which)
         {
-            
+
             var ar = new AdditionalReportDTO();
             var contentRoot = _env.ContentRootPath;
             var filename = Path.Combine(contentRoot, "assets/json/additionalReportItems.json");
@@ -364,12 +374,13 @@ namespace api.Implementations
             var oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
             var selectedARep = oldjson.Find(x => x.hospitalNo == hospitalNo);
 
-            if(selectedARep == null){
+            if (selectedARep == null)
+            {
                 this.createAdditionalReport(hospitalNo);
                 jsonData = System.IO.File.ReadAllText(filename);
                 oldjson = System.Text.Json.JsonSerializer.Deserialize<List<Data.Root>>(jsonData);
                 selectedARep = oldjson.Find(x => x.hospitalNo == hospitalNo);
-               }
+            }
 
 
             switch (which)
@@ -826,7 +837,7 @@ namespace api.Implementations
             return test;
         }
 
-       
+
         #endregion
 
     }
