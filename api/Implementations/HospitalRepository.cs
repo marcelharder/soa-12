@@ -74,11 +74,12 @@ namespace api.Implementations
                 iso_list.Add(d.Element("ISO").Value);
             }
             // see if this country is already on  the list
-            if(!iso_list.Contains(country.Value)){
-                 doc.Element("root").Add(help);
-            doc.Save(fileName);
+            if (!iso_list.Contains(country.Value))
+            {
+                doc.Element("root").Add(help);
+                doc.Save(fileName);
             }
-          
+
         }
         public async Task<int> DeleteAsync<T>(T entity) where T : class
         {
