@@ -73,4 +73,9 @@
     <ISO>BR</ISO>
     <Description>Brazil</Description>
   </Country>
+  <Country>
+    <ID>123</ID>
+    <ISO>CZ </ISO>
+    <Description>China</Description>
+  </Country>
 </root>

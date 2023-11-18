@@ -46,7 +46,7 @@ export class HospitalService {
   {return this.http.get<additionalReportModel>(this.baseUrl + 'hospital/AdditionalReportItems/' + id + '/' + which);}
  
   addCountry(country: countryItem)
-  {return this.http.post<string>(this.baseUrl + 'hospital/addCountry/' + country, null);}
+  {return this.http.post<string>(this.baseUrl + 'hospital/addCountryNow',country);}
   
   
   updateInstitutionalReport(id: number,soort: number, model: Partial<mainTextModel>)

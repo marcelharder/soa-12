@@ -23,7 +23,7 @@ export class ListhospitalsComponent implements OnInit {
   editFlag = 0;
   addFlag = 0;
   listFlag = 1;
-  model: countryItem = { value: '', description: '' };
+  model: countryItem = { Value: '', Description: '',Tel_Code:"" };
 
   constructor(
     private modalService: BsModalService,
@@ -44,6 +44,7 @@ export class ListhospitalsComponent implements OnInit {
   confirm(): void {
     
     // save the newly entered country to the xml
+    this.model.Tel_Code = "123";
     this.hospitalService.addCountry(this.model).subscribe((next) => 
     {
       this.alertify.info("saving country");
@@ -61,7 +62,7 @@ export class ListhospitalsComponent implements OnInit {
     if (d == null || d.length === 0) {
       this.drops.getAllCountries().subscribe((response) => {
         this.optionCountries = response;
-        this.optionCountries.unshift({ value: "", description: "Choose" });
+        this.optionCountries.unshift({ Value: "", Description: "Choose",Tel_Code:"" });
         localStorage.setItem('optionCountries', JSON.stringify(response));
       });
     } else {
