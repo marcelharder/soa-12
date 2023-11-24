@@ -25,7 +25,7 @@ namespace api.Controllers
     [Authorize]
     public class HospitalController : BaseApiController
     {
-        public IHospitalRepository _hos;
+       
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
         private SpecialMaps _map;
@@ -35,13 +35,13 @@ namespace api.Controllers
 
 
         public HospitalController(
-        IHospitalRepository hos,
+        
         IOptions<ComSettings> com,
         UserManager<AppUser> manager,
         SpecialMaps map,
         IOptions<CloudinarySettings> cloudinaryConfig)
         {
-            _hos = hos;
+            _
             _com = com;
             _map = map;
             _manager = manager;
@@ -62,10 +62,22 @@ namespace api.Controllers
         [HttpGet("allFullHospitals")]
         public async Task<IActionResult> getAllHospitals()
         {
-            var ret = new List<HospitalForReturnDTO>();
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/allFullHospitals";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+           /*  var ret = new List<HospitalForReturnDTO>();
             var result = await _hos.getAllFullHospitals();
             foreach (Class_Hospital ch in result) { ret.Add(_map.mapToHospitalForReturn(ch)); }
-            return Ok(ret);
+            return Ok(ret); */
         }
 
         [HttpGet("allFullHospitalsPerCountry/{id}")]
