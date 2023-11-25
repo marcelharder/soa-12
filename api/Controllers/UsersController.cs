@@ -136,7 +136,7 @@ namespace api.Controllers
 
             if (ufr.country == null || ufr.country == "")
             {
-                var ch = await GetSpecificHospital(ufr.currentHospital);
+                var ch = await GetSpecificHospitalAsync(ufr.currentHospital);
                 ufr.country = ch;
             }
             user = new AppUser
@@ -169,11 +169,11 @@ namespace api.Controllers
             return CreatedAtRoute("GetUser", new { id = user.Id }, ufre);
         }
 
-        private async Task<string> GetSpecificHospital(string currentHospital)
+        private async Task<string> GetSpecificHospitalAsync(string currentHospital)
         {
             var test = "";
             var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById";
+            var st = "Hospital/getHospitalNameFromId";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -182,7 +182,7 @@ namespace api.Controllers
                     test = await response.Content.ReadAsStringAsync();
                 }
             }
-            return Ok(test);
+            return test;
         }
 
         // GET api/values/5

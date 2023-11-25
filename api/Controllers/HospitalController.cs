@@ -41,7 +41,6 @@ namespace api.Controllers
         SpecialMaps map,
         IOptions<CloudinarySettings> cloudinaryConfig)
         {
-            _
             _com = com;
             _map = map;
             _manager = manager;
@@ -83,118 +82,190 @@ namespace api.Controllers
         [HttpGet("allFullHospitalsPerCountry/{id}")]
         public async Task<IActionResult> getHospitalsperCountry(string id)
         {
-            // id is now bv 31 en moet NL worden
-            // var iso_land = _map.getCountryFromCode(id);
-
-            var ret = new List<HospitalForReturnDTO>();
-            var result = await _hos.getAllFullHospitalsPerCountry(id);
-            foreach (Class_Hospital ch in result) { ret.Add(_map.mapToHospitalForReturn(ch)); }
-            return Ok(ret);
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/allFullHospitalsPerCountry/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
         [HttpGet("{id}", Name = "GetHospital")]// get specific hospital details
         public async Task<IActionResult> GetHospital(int id)
         {
-            var result = await _hos.GetSpecificHospital(id.ToString().makeSureTwoChar());
-            return Ok(result);
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
         [HttpGet("hospitalFromInventory/{id}")]// get specific hospital details from inventory
         public async Task<IActionResult> getHospitalNameFromInventory(int id)
         {
-            var result = await _hos.GetSpecificHospitalFromInventory(id.ToString().makeSureTwoChar());
-            return Ok(result);
+             var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
         [HttpGet("getHospitalNameFromId/{id}")]// get specific hospital details
         public async Task<IActionResult> GetHospitalName(int id)
         {
-            var result = await _hos.GetSpecificHospital(id.ToString().makeSureTwoChar());
-            return Ok(result.hospitalName);
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
         [HttpPut]
         public async Task<IActionResult> PutHospitalAsync([FromBody] HospitalForReturnDTO hr)
         {
-            var h = await _hos.getClassHospital(hr.hospitalNo);
-
-            Class_Hospital ch = _map.mapToHospital(hr, h);
-            return Ok(await _hos.updateHospital(ch));
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
         [HttpPost("{id}/{no}")]
         public async Task<IActionResult> PostHospitalAsync(string id, int no)
         {
-            Class_Hospital ch = new Class_Hospital();
-            ch.Country = id;
-            ch.HospitalNo = no.ToString().makeSureTwoChar();
-            var new_hospital_number = await _hos.addHospital(ch);
-            return CreatedAtRoute("GetHospital", new { id = new_hospital_number }, ch);
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> deleteHospitalAsync(string id)
         {
-            var h = await _hos.getClassHospital(id);
-            if (h != null) { return Ok(await _hos.DeleteAsync(h)); }
-            return BadRequest("Hospital not found");
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
 
         }
 
         [HttpPost("addHospitalPhoto/{id}")]
         public async Task<IActionResult> AddPhotoForHospital(int id, [FromForm] PhotoForCreationDto photoDto)
         {
-            var h = await _hos.getClassHospital(id.ToString().makeSureTwoChar());
-
-            var file = photoDto.file;
-            var uploadResult = new ImageUploadResult();
-            if (file.Length > 0)
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
             {
-                using (var stream = file.OpenReadStream())
+                using (var response = await httpClient.GetAsync(comaddress))
                 {
-                    var uploadParams = new ImageUploadParams()
-                    {
-                        File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
-                    };
-                    uploadResult = _cloudinary.Upload(uploadParams);
-                }
-                h.ImageUrl = uploadResult?.SecureUrl?.AbsoluteUri;
-                // automap it to class-hospital before save
-                var no = await _hos.updateHospital(h);
-                if (no == 1)
-                {
-                    return CreatedAtRoute("GetHospital", new { id = h.hospitalId }, h);
+                    help = await response.Content.ReadAsStringAsync();
                 }
             }
-            return BadRequest("Could not add the photo ...");
+            return Ok(help);
         }
 
       
         [HttpPost("addCountryNow")]
         public async Task<IActionResult> AddCountryNow(CountryDto model)
         {
-            await Task.Run(() =>
+             var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
             {
-                _hos.addCountry(model);
-            });
-            return Ok();
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         } 
 
         [HttpGet("hospitalByUser/{id}")]
         public async Task<IActionResult> getCurrentHospitalForUser(int id)
         {
-            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
-            // get the hospitalId from the user
-            var us = await _manager.Users.SingleOrDefaultAsync(x => x.Id == id);
-            var result = await _hos.GetSpecificHospital(us.hospital_id.ToString().makeSureTwoChar());
-            return Ok(result.hospitalName);
+            var help = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
 
         [HttpGet("IsThisHospitalImplementingOVI/{id}")]
         public async Task<IActionResult> getOVI(string id)
         {
-            return Ok(await _hos.HospitalImplementsOVI(id));
+             var help = "";
+            var comaddress = _com.Value.reportURL;
+            var st = "Hospital/isusigOVI/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
         }
         #region <!-- InstitutionalReports stuff -->
 

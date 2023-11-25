@@ -232,11 +232,11 @@ namespace api.Controllers
         }
 
 
-        private async Task<string> checkHospitalExists(string test)
+        private async Task<string> checkHospitalExists(string id)
         {
             var result = "0";
             var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/allFullHospitals";
+            var st = "Hospital/checkIfHospitalExists/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
