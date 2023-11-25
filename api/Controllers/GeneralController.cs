@@ -21,8 +21,7 @@ namespace api.Controllers
         private IPatientRepository _rep;
         private IValveRepository _valve;
         private IProcedureRepository _proc;
-        private IHospitalRepository _hos;
-        SpecialMaps _sp;
+               SpecialMaps _sp;
         private readonly IOptions<ComSettings> _com;
 
       
@@ -33,15 +32,13 @@ namespace api.Controllers
             IValveRepository valve,
             IProcedureRepository proc,
             ICABGRepository cabg,
-            IPatientRepository rep,
-            IHospitalRepository hos)
+            IPatientRepository rep)
         {
             _repo = user;
             _com = com;
             _sp = sp;
             _rep = rep;
             _proc = proc;
-            _hos = hos;
             _cabg = cabg;
             _valve = valve;
         }

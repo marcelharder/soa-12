@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using api.Data;
@@ -22,25 +23,25 @@ namespace api.Controllers
 {
 
     [ServiceFilter(typeof(LogUserActivity))] // this records the last user activity
-     [Authorize]
+    [Authorize]
 
     public class UsersController : BaseApiController
     {
+        private readonly IOptions<ComSettings> _com;
 
         private IUserRepository _rep;
         private IUserOnline _online;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
         private SpecialMaps _mapper;
-        private IHospitalRepository _hos;
         private readonly UserManager<AppUser> _manager;
 
 
         public UsersController(
+            IOptions<ComSettings> com,
             UserManager<AppUser> manager,
             IUserOnline online,
             IUserRepository rep,
-            IHospitalRepository hos,
             SpecialMaps map,
             DataContext context,
             IOptions<CloudinarySettings> cloudinaryConfig)
@@ -49,8 +50,8 @@ namespace api.Controllers
             _mapper = map;
             _online = online;
             _cloudinaryConfig = cloudinaryConfig;
-            _hos = hos;
             _manager = manager;
+            _com = com;
 
 
 
@@ -133,12 +134,14 @@ namespace api.Controllers
             var user = await _manager.Users.SingleOrDefaultAsync(x => x.UserName == ufr.UserName.ToLower());
             if (user != null) { return BadRequest("User already exists ..."); }
 
-             if(ufr.country == null || ufr.country == ""){
-               var ch = await _hos.GetSpecificHospital(ufr.currentHospital);
-               ufr.country = ch.country;
+            if (ufr.country == null || ufr.country == "")
+            {
+                var ch = await GetSpecificHospital(ufr.currentHospital);
+                ufr.country = ch;
             }
-             user = new AppUser { 
-                
+            user = new AppUser
+            {
+
                 UserName = ufr.UserName.ToLower(),
                 Country = ufr.country,
                 City = ufr.city,
@@ -154,16 +157,32 @@ namespace api.Controllers
                 active = ufr.active,
                 ltk = ufr.ltk,
                 PhotoUrl = "https://randomuser.me/api/portraits/men/75.jpg"
-                };
-          
+            };
+
             var result = await _manager.CreateAsync(user, ufr.password);
             if (!result.Succeeded) { return BadRequest(result.Errors); }
 
             var roleResult = await _manager.AddToRoleAsync(user, "Surgery");
-            if(!roleResult.Succeeded){return BadRequest(roleResult.Errors); }
+            if (!roleResult.Succeeded) { return BadRequest(roleResult.Errors); }
 
             UserForReturnDto ufre = _mapper.mapToUserForReturn(user);
             return CreatedAtRoute("GetUser", new { id = user.Id }, ufre);
+        }
+
+        private async Task<string> GetSpecificHospital(string currentHospital)
+        {
+            var test = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalById";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    test = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(test);
         }
 
         // GET api/values/5

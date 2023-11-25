@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using api.Data;
 using api.DTOs;
@@ -15,24 +16,22 @@ namespace api.Controllers
 
     public class DropDownController : BaseApiController
     {
-       // private IUserRepository _repo;
-        private IHospitalRepository _hos;
+        private readonly Microsoft.Extensions.Options.IOptions<ComSettings> _com;
+      
         private IEmployeeRepository _emp;
         private SpecialMaps _sp;
         List<Class_Item> _result = new List<Class_Item>();
 
         private OperatieDrops _copd;
         public DropDownController(
-          //  IUserRepository repo,
+          Microsoft.Extensions.Options.IOptions<ComSettings> com,
             SpecialMaps sp,
             IEmployeeRepository emp,
-            IHospitalRepository hos,
-            OperatieDrops copd)
+             OperatieDrops copd)
         {
-         //   _repo = repo;
+         _com = com;
             _emp = emp;
             _copd = copd;
-            _hos = hos;
             _sp = sp;
         }
 
@@ -53,21 +52,22 @@ namespace api.Controllers
 
         [Route("allHospitals")]
         [HttpGet]
-        public IActionResult getHO()
+        public async Task<IActionResult> getHO()
         {
             var help = new List<Class_Item>();
-            
-            var test = _hos.GetAllHospitals(); 
-            foreach(HospitalForReturnDTO h in test){
-                var ci = new Class_Item();
-                ci.description = h.hospitalName;
-                ci.value = Convert.ToInt32(h.hospitalNo);
-                help.Add(ci);
-               
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/allFullHospitals";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    var test = await response.Content.ReadAsStringAsync();
+                }
             }
 
             return Ok(help);
-        }
+           }
 
         [Route("allHospitalOptionsPerCountry/{country}")]
         [HttpGet]
@@ -83,24 +83,54 @@ namespace api.Controllers
         #region <!--cities-->
         [Route("countriesDrops")]// get all the countries with possibe hospitals
         [HttpGet]
-        public IActionResult getThing02()
+        public async Task<IActionResult> getThing02()
         {
-            var result = _hos.GetAllCountries();
-            return Ok(result);
+            var test = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Coutry/all";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    test = await response.Content.ReadAsStringAsync();
+                }
+            }
+             return Ok(test);
         }
         [Route("citiesDrops")]
         [HttpGet]
-        public IActionResult getThing12()
+        public async Task<IActionResult> getThing12()
         {
-            var result = _hos.GetAllCities();
-            return Ok(result);
+             var test = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Coutry/allCities";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    test = await response.Content.ReadAsStringAsync();
+                }
+            }
+             return Ok(test);
         }
         [Route("citiesPerCountry/{id}")]
         [HttpGet]
-        public IActionResult getThing122(string id)
+        public async Task<IActionResult> getThing122(string id)
         {
-            var result = _hos.GetAllCitiesPerCountry(id);
-            return Ok(result);
+            var test = "";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Coutry/citiesPerCountry/" + id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    test = await response.Content.ReadAsStringAsync();
+                }
+            }
+             return Ok(test);
         }
         #endregion
         #region <!--cpb -->

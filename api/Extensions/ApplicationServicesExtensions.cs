@@ -51,7 +51,6 @@ namespace api.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IValveRepository, ValveRepository>();
             services.AddScoped<IProcedureRepository, ProcedureRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();

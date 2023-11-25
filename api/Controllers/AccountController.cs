@@ -27,7 +27,6 @@ namespace api.Controllers
 
         private readonly ITokenService _ts;
         private IMapper _mapper;
-        private IHospitalRepository _hos;
 
         private static readonly HttpClient client = new HttpClient();
 
@@ -40,7 +39,6 @@ namespace api.Controllers
 
         public AccountController(
             Microsoft.Extensions.Options.IOptions<ComSettings> com,
-            IHospitalRepository hos,
             ITokenService ts,
             IMapper mapper,
             IConfiguration config,
@@ -50,7 +48,6 @@ namespace api.Controllers
             SignInManager<AppUser> signIn)
         {
             _config = config;
-            _hos = hos;
             _manager = manager;
             _signIn = signIn;
             _mapper = mapper;
@@ -59,7 +56,7 @@ namespace api.Controllers
             _users = users;
             _hostEnvironment = hostEnvironment;
 
-            
+
 
         }
 
@@ -81,7 +78,7 @@ namespace api.Controllers
             if (user != null) { return BadRequest("User already exists ..."); }
 
 
-            var help = await _hos.checkHospitalExists(registerDto.currentHospital);
+            var help = checkHospitalExists(registerDto.currentHospital);
             // if help == 1 then a new hospital is added ....
 
             user = new AppUser
@@ -166,7 +163,7 @@ namespace api.Controllers
             var token1 = await _manager.GeneratePasswordResetTokenAsync(user);
             var token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token1));
 
-            var param = new Dictionary<string, string>{ {"token", token}, {"email", forgotPasswordDto.Email }};
+            var param = new Dictionary<string, string> { { "token", token }, { "email", forgotPasswordDto.Email } };
             var callback = RequestUriUtil.GetUriWithQueryString(forgotPasswordDto.ClientURI, param);
 
             var values = new Dictionary<string, string>
@@ -174,12 +171,12 @@ namespace api.Controllers
              {"to",user.Email},
              {"callback",callback}
             };
-           
-           /*  var comaddress = _com.Value.emailHtmlURL;
-            var content = new FormUrlEncodedContent(values);
-            var response = await client.PostAsync(comaddress, content);
-            var responseString = await response.Content.ReadAsStringAsync();
- */
+
+            /*  var comaddress = _com.Value.emailHtmlURL;
+             var content = new FormUrlEncodedContent(values);
+             var response = await client.PostAsync(comaddress, content);
+             var responseString = await response.Content.ReadAsStringAsync();
+  */
 
             var comaddress = _com.Value.emailHtmlURL;
             string result = "";
@@ -192,7 +189,7 @@ namespace api.Controllers
                 {
                     result = await response.Content.ReadAsStringAsync();
                 }
-            } 
+            }
             return Ok(result);
         }
 
@@ -234,6 +231,23 @@ namespace api.Controllers
             return Ok(new { message = "password changed" });
         }
 
+
+        private async Task<string> checkHospitalExists(string test)
+        {
+            var result = "0";
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/allFullHospitals";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    result = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return result;
+        }
+
     }
     public class RequestUriUtil
     {
@@ -261,5 +275,6 @@ namespace api.Controllers
 
 
     }
+
 
 }

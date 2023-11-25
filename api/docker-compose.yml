@@ -51,7 +51,7 @@ services:
       - db 
  
   reports:
-    image: reports:v21
+    image: reports:v23
     ports:
      - 8089:80
     networks:
@@ -73,7 +73,7 @@ services:
      - db
 
   #tracPersonal:
-  #  image: sql_app:v92
+  #  image: sql_app:v94
   #  ports:
   #   - 8086:80
   #  networks: 
