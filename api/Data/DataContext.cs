@@ -18,7 +18,6 @@ namespace api.Data
     >
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
-        public DbSet<Class_Hospital> Hospitals { get; set; }
         public DbSet<Class_Employee> Employees { get; set; }
         public DbSet<Class_Patient> Patients { get; set; }
         public DbSet<Class_Procedure> Procedures { get; set; }
@@ -29,9 +28,7 @@ namespace api.Data
         public DbSet<Class_CPB> CPBS { get; set; }
         public DbSet<Class_PostOp> PostOps { get; set; }
         public DbSet<Class_Ref_Phys> RefPhys { get; set; }
-        public DbSet<Class_Suggestion> Suggestions { get; set; }
         public DbSet<Class_Preview_Operative_report> Previews { get; set; }
-        public DbSet<Class_Final_operative_report> finalReports { get; set; }
         public DbSet<Class_Aortic_Surgery> AorticSurgeries { get; set; }
         public DbSet<Class_minInv> MinInvs { get; set; }
         public DbSet<ClassTableVlad> Vlads { get; set; }

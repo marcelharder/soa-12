@@ -11,7 +11,7 @@ namespace api.Entities
         public string description { get; set; }
         public string position { get; set; }
         public string type { get; set; }
-        public Class_Hospital hospital { get; set; }
+      //  public Class_Hospital hospital { get; set; }
         public int hospitalId { get; set;}
         
 

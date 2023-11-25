@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using api.DTOs;
 using api.Entities;
 using api.Helpers;
 using api.Interfaces;
@@ -70,7 +71,7 @@ namespace api.Controllers
 
 
         [HttpPut("personalizedSuggestion")]
-        public async Task<IActionResult> Put(Class_Suggestion cp)
+        public async Task<IActionResult> Put(SuggestionForUploadDTO cp)
         {
             var help = "";
             var comaddress = _com.Value.reportURL;
@@ -114,7 +115,7 @@ namespace api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Post(Class_Suggestion c)
+        public async Task<IActionResult> Post(SuggestionForUploadDTO c)
         {
             var help = "";
             var comaddress = _com.Value.reportURL;

@@ -37,19 +37,20 @@ namespace api.Controllers
 
         #region <!--hospitalStuff -->
 
-        [Route("hospitalOptions/{id}")]
+       /*  [Route("hospitalOptions/{id}")]
         [HttpGet]
         public async Task<IActionResult> getHO(int id)
         {
             _result = await _copd.getHospitalOptions(id); return Ok(_result);
         }
+       
         [Route("availableHospitalOptions/{country}")]
         [HttpGet]
         public async Task<IActionResult> getAHO(string country)
         {
             _result = await _copd.getAvailableHospitalOptions(country); return Ok(_result);
         }
-
+ */
         [Route("allHospitals")]
         [HttpGet]
         public async Task<IActionResult> getHO()

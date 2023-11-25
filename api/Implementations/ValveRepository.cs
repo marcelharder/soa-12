@@ -220,7 +220,7 @@ namespace api.Implementations
             return null;
 
         }
-        public async Task<int> deleteValveInHospital(int codeId)
+      /*   public async Task<int> deleteValveInHospital(int codeId)
         {
             var deleteResult = 0;
             var currentUserId = _special.getCurrentUserId();
@@ -237,7 +237,16 @@ namespace api.Implementations
 
             if (await SaveAll()) { deleteResult = 1; }
             return deleteResult;
-        }
+        } */
+
+public async Task<int> deleteValveInHospital(int codeId){
+            await Task.Run(()=>{ return 1;});
+            return 0;
+   
+}
+
+
+
         public async Task<string> getValveDescriptionFromModel(string code)
         {
             valveDTO vf = new valveDTO();

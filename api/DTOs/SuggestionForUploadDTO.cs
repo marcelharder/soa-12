@@ -1,6 +1,6 @@
-namespace api.Entities
+namespace api.DTOs
 {
-    public class Class_Suggestion
+    public class SuggestionForUploadDTO
     {
     public virtual int Id { get; set; }
     public int soort { get; set; }
@@ -66,6 +66,6 @@ namespace api.Entities
     public string regel_31 { get; set; }
     public string regel_32 { get; set; }
     public string regel_33 { get; set; }
-  
     }
+
 }

@@ -65,16 +65,7 @@ namespace api.Seeding
             }
             await context.SaveChangesAsync();
         }
-        public static async Task SeedHospitals(DataContext context)
-        {
-            if (await context.Hospitals.AnyAsync()) return;
-
-            var userData = await System.IO.File.ReadAllTextAsync("Seeding/hospitalSeedData.json");
-            var emp = JsonSerializer.Deserialize<List<Class_Hospital>>(userData);
-            foreach (var item in emp) { context.Hospitals.Add(item); }
-            await context.SaveChangesAsync();
-
-        }
+       
         public static async Task SeedPatients(DataContext context)
         {
             if (await context.Patients.AnyAsync()) return;

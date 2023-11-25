@@ -64,61 +64,7 @@ namespace api.Helpers
         public FullPatientDTO mapToFullPatientDto(Class_Patient test) { return _map.Map<Class_Patient, FullPatientDTO>(test); }
         #endregion
         #region <!-- suggestion -->
-        public Class_Suggestion mapToSuggestionFromPreview(Class_Suggestion help, Class_Preview_Operative_report c, int soort)
-        {
-
-            help.regel_1_a = c.regel_1;
-            help.regel_2_a = c.regel_2;
-            help.regel_3_a = c.regel_3;
-            help.regel_4_a = c.regel_4;
-            help.regel_5_a = c.regel_5;
-            help.regel_6_a = c.regel_6;
-            help.regel_7_a = c.regel_7;
-            help.regel_8_a = c.regel_8;
-            help.regel_9_a = c.regel_9;
-            help.regel_10_a = c.regel_10;
-            help.regel_11_a = c.regel_11;
-            help.regel_12_a = c.regel_12;
-            help.regel_13_a = c.regel_13;
-            help.regel_14_a = c.regel_14;
-            help.regel_15 = c.regel_15;
-            help.regel_16 = c.regel_16;
-            help.regel_17 = c.regel_17;
-            help.regel_18 = c.regel_18;
-            help.regel_19 = c.regel_19;
-            help.regel_20 = c.regel_20;
-            help.regel_21 = c.regel_21;
-            help.regel_22 = c.regel_22;
-            help.regel_23 = c.regel_23;
-            help.regel_24 = c.regel_24;
-            help.regel_25 = c.regel_25;
-            help.regel_26 = c.regel_26;
-            help.regel_27 = c.regel_27;
-            help.regel_28 = c.regel_28;
-            help.regel_29 = c.regel_29;
-            help.regel_30 = c.regel_30;
-            help.regel_31 = c.regel_31;
-            help.regel_32 = c.regel_32;
-            help.regel_33 = c.regel_33;
-
-            help.regel_1_b = ""; help.regel_1_c = "";
-            help.regel_2_b = ""; help.regel_2_c = "";
-            help.regel_3_b = ""; help.regel_3_c = "";
-            help.regel_4_b = ""; help.regel_4_c = "";
-            help.regel_5_b = ""; help.regel_5_c = "";
-            help.regel_6_b = ""; help.regel_6_c = "";
-            help.regel_7_b = ""; help.regel_7_c = "";
-            help.regel_8_b = ""; help.regel_8_c = "";
-            help.regel_9_b = ""; help.regel_9_c = "";
-            help.regel_10_b = ""; help.regel_10_c = "";
-            help.regel_11_b = ""; help.regel_11_c = "";
-            help.regel_12_b = ""; help.regel_12_c = "";
-            help.regel_13_b = ""; help.regel_13_c = "";
-            help.regel_14_b = ""; help.regel_14_c = "";
-
-            return help;
-        }
-
+      
         public EpaDetailsDto mapToEpaDetailsDto(Class_Epa help)
         {
             var h = new EpaDetailsDto();
@@ -226,10 +172,7 @@ namespace api.Helpers
             return old;
         }
         #endregion
-        #region <!-- hospital -->
-        public HospitalForReturnDTO mapToHospitalForReturn(Class_Hospital x) { return _map.Map<Class_Hospital, HospitalForReturnDTO>(x); }
-        public Class_Hospital mapToHospital(HospitalForReturnDTO x, Class_Hospital h) { h = _map.Map<HospitalForReturnDTO, Class_Hospital>(x, h); return h; }
-        #endregion
+       
         #region <!-- procedure -->
         public ProcedureDTO mapToDTOFromClassProcedure(Class_Procedure p) { return _map.Map<Class_Procedure, ProcedureDTO>(p); }
         public Class_Procedure mapToClassProcedureFromDTO(ProcedureDTO up, Class_Procedure h) { h = _map.Map<ProcedureDTO, Class_Procedure>(up, h); return h; }

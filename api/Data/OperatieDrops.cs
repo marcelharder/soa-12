@@ -1153,7 +1153,7 @@ namespace api.Data
         #region <!--HospitalStuff -->
 
 
-        public async Task<List<Class_Item>> getHospitalOptions(int userId)
+       /*  public async Task<List<Class_Item>> getHospitalOptions(int userId)
         {
             var cl = new List<Class_Item>();
             Class_Item ci;
@@ -1171,7 +1171,7 @@ namespace api.Data
                 cl.Add(ci);
             }
             return cl;
-        }
+        } */
 
         public async Task<List<Class_Item>> getAvailableHospitalOptions(string country)
         {
@@ -1236,7 +1236,7 @@ namespace api.Data
 
 
 
-         public async Task<List<Class_Item>> getAllHospitalsPerCountry(string country)
+       /*   public async Task<List<Class_Item>> getAllHospitalsPerCountry(string country)
         {
 
             var cl = new List<Class_Item>();
@@ -1252,7 +1252,7 @@ namespace api.Data
                 cl.Add(ci);
             }
             return cl;
-        } 
+        }  */
         public async Task<List<Class_Item>> getCareerItems()
         {
             await Task.Run(() =>
