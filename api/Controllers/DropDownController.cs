@@ -121,7 +121,7 @@ namespace api.Controllers
         {
             var test = "";
             var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Coutry/citiesPerCountry/" + id;
+            var st = "Country/allCitiesPerCountry/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
