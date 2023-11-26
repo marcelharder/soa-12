@@ -12,7 +12,6 @@ import { CourseService } from 'src/app/_services/course.service';
 })
 export class CoursesComponent implements OnInit {
   @Input() userId: number;
-  @Input() origin: number;
   detailsForm: FormGroup | undefined;
   courseId = 0;
   courseP = 0;
@@ -38,21 +37,11 @@ export class CoursesComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit() {
-    // if this is opnened by the chef then use that userId from the @Input else get current user
-    if (this.origin === 1) {
-      this.cs.getCourses(this.userId).subscribe((next) => {
-        this.listOfCourses = next;
-        this.initializeForm();
-      })
-    } else {
-      this.account.currentUser$.subscribe((next) => {
-        this.userId = next.UserId;
-        this.cs.getCourses(this.userId).subscribe((next) => {
-          this.listOfCourses = next;
-          this.initializeForm();
-        })
-      });
-    }
+    this.cs.getCourses(this.userId).subscribe((next) => {
+      this.listOfCourses = next;
+      this.initializeForm();
+    })
+
   }
 
   initializeForm() {

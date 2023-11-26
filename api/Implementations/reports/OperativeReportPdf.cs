@@ -179,7 +179,8 @@ namespace api.Implementations.reports
 
                 try
                 {
-                    test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1668181198/zbzftf4medwmdyqnuobi.jpg"));
+                    test = Image.GetInstance(new Uri("https://res.cloudinary.com/marcelcloud/image/upload/v1559818775/user.png.jpg"));
+
 
                 }
                 catch (System.Exception)

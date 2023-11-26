@@ -107,7 +107,7 @@
             </tab>
             <tab heading="Upload Photo">
               <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
-                                               (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+              (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
               <!-- <app-photo-editor 
               [docId]="0"
               [userId]="currentUserId" 

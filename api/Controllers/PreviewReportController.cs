@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using api.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace api.Controllers
 {

@@ -30,8 +30,6 @@ namespace api.Controllers
             _env = env;
             _impdf = impdf;
             _proc = proc;
-
-
         }
 
         [AllowAnonymous]
@@ -40,6 +38,7 @@ namespace api.Controllers
         {
            return File(this.GetStream(id.ToString()), "application/pdf", $"{id}.pdf");
         }
+
         [AllowAnonymous]
         [HttpGet("getRefReport/{hash}")]
         public async Task<IActionResult> getPdfForRefPhys(string hash)

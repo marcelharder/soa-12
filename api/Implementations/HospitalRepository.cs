@@ -338,6 +338,7 @@ namespace api.Implementations
         #region <!--additionalReport stuff-->
         public AdditionalReportDTO getAdditionalReportItems(int hospitalNo, int which)
         {
+            
             var ar = new AdditionalReportDTO();
             var contentRoot = _env.ContentRootPath;
             var filename = Path.Combine(contentRoot, "assets/json/additionalReportItems.json");
@@ -427,6 +428,7 @@ namespace api.Implementations
         }
         public int updateAdditionalReportItem(AdditionalReportDTO up, int hospitalNo, int which)
         {
+
             up = checkforNullInAdditionalReport(up);
             var contentRoot = _env.ContentRootPath;
             var filename = Path.Combine(contentRoot, "assets/json/additionalReportItems.json");
@@ -439,7 +441,7 @@ namespace api.Implementations
             {
 
                 case 1:
-                    selectedARep.circulation_support.items.RemoveAll(item => item.content != "");
+                    selectedARep.circulation_support.items.Clear();
                     selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_1 });
                     selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_2 });
                     selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_3 });
@@ -447,7 +449,7 @@ namespace api.Implementations
                     selectedARep.circulation_support.items.Add(new Data.Item { content = up.line_5 });
                     break;
                 case 2:
-                    selectedARep.iabp.items.RemoveAll(item => item.content != "");
+                    selectedARep.iabp.items.Clear();
                     selectedARep.iabp.items.Add(new Data.Item { content = up.line_1 });
                     selectedARep.iabp.items.Add(new Data.Item { content = up.line_2 });
                     selectedARep.iabp.items.Add(new Data.Item { content = up.line_3 });
@@ -455,7 +457,7 @@ namespace api.Implementations
                     selectedARep.iabp.items.Add(new Data.Item { content = up.line_5 });
                     break;
                 case 3:
-                    selectedARep.pmwires.items.RemoveAll(item => item.content != "");
+                    selectedARep.pmwires.items.Clear();
                     selectedARep.pmwires.items.Add(new Data.Item { content = up.line_1 });
                     selectedARep.pmwires.items.Add(new Data.Item { content = up.line_2 });
                     selectedARep.pmwires.items.Add(new Data.Item { content = up.line_3 });

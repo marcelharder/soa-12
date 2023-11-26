@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-uploadphoto',
@@ -13,12 +14,13 @@ export class UploadphotoComponent implements OnInit {
   token = '';
   uploader: FileUploader;
 
-  constructor(private alertify: ToastrService) {
+  constructor(private alertify: ToastrService, private account:AccountService) {
 
   }
   ngOnInit() {
-    let help = JSON.parse(localStorage.getItem('user'));
-    this.token = help.Token;
+    this.account.currentUser$.subscribe((next) => { this.token = next.Token });
+   /*  let help = JSON.parse(localStorage.getItem('user'));
+    this.token = help.Token; */
     this.initializeUploader();
   }
 
@@ -27,7 +29,7 @@ export class UploadphotoComponent implements OnInit {
           url: this.targetUrl,
           authToken: 'Bearer ' + this.token,
           isHTML5: true,
-          allowedFileType: ['image'],
+          allowedFileType: ['image','application/pdf'],
           removeAfterUpload: true,
           autoUpload: true,
           maxFileSize: 10 * 1024 * 1024
@@ -39,19 +41,21 @@ export class UploadphotoComponent implements OnInit {
           this.alertify.success('Photo uploaded ...');
       };
 
-      this.uploader.onSuccessItem = (item, response, status, headers) => {
-          if (response) {
-              const res: any = JSON.parse(response);
-
-         if(res.image != null){this.getMemberPhotoChange.emit(res.image)}
-         else {
-          if(res.PhotoUrl != null){this.getMemberPhotoChange.emit(res.PhotoUrl)} 
-          else {
-            if(res.ImageUrl != null){this.getMemberPhotoChange.emit(res.ImageUrl)}
-          }
-         }
-          }
+      const parseResponse = (response) => {
+        const res = JSON.parse(response);
+        const image = res.image || res.PhotoUrl || res.Image;
+        if (image) {
+          this.getMemberPhotoChange.emit(image);
+        }
       };
+      
+      this.uploader.onSuccessItem = (item, response, status, headers) => {
+        if (response) {
+          parseResponse(response);
+        }
+      };
+
+     
   }
 }
 

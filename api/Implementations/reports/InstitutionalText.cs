@@ -16,22 +16,17 @@ namespace api.Implementations.reports
     public class InstitutionalText : IInstitutionalText
     {
         private XDocument _doc;
-
-
         private XElement _element;
-
         private SpecialReportMaps _sm;
-
-
         private OperatieDrops _drop;
         private IWebHostEnvironment _env;
-
         private DataContext _context;
 
         private List<Class_Item> dropRadial = new List<Class_Item>();
         private List<Class_Item> dropLeg = new List<Class_Item>();
 
-        public InstitutionalText(IWebHostEnvironment env,
+        public InstitutionalText(
+        IWebHostEnvironment env,
         DataContext context,
         OperatieDrops drop,
         SpecialReportMaps sm)
@@ -133,7 +128,6 @@ namespace api.Implementations.reports
             if (cpb != null) { }
             return help;
         }
-
         private async Task<string> getCirculationSupportAsync(int procedure_id, IEnumerable<XElement> test)
         {
             var help = "";
@@ -185,10 +179,6 @@ namespace api.Implementations.reports
             }
             return help;
         }
-
-
-
-
         private List<string> getEmptyRecord(string description)
         {
             var result = new List<string>();
@@ -239,5 +229,44 @@ namespace api.Implementations.reports
             result.Add(ad.Element("regel_33").Value);
             return result;
         }
+        public async Task addRecordInXML(string id)
+        {
+            // find out if there is a record with this id
+            if (IsNotInXML(id)) // add a node to the xml with hospital_id attribute
+            {
+                await Task.Run(() =>
+            {
+                var nodes = _doc.Root.Descendants("hospital");
+                IEnumerable<XElement> op = from el in _doc.Descendants("hospital")
+                                           where (string)el.Attribute("id") == "01"
+                                           select el;
+                foreach (XElement el in op)
+                {
+                  XElement nxl = new XElement(el);
+                  nxl.Attribute("id").SetValue(id);
+                  _doc.Element("root").Add(nxl);
+                }
+                 var content = _env.ContentRootPath;
+                 var filename = "conf/InstitutionalReports.xml";
+                 var test = Path.Combine(content, filename);
+                //_doc.Add(op);
+                _doc.Save($"{test}");
+            }
+            );
+            }
+        }
+        private Boolean IsNotInXML(string hospital)
+        {
+            IEnumerable<XElement> op = from el in _doc.Descendants("hospital")
+                                       where (string)el.Attribute("id") == hospital
+                                       select el;
+            if (op.Count() == 0) { return true; }
+            else { return false; }
+
+        }
+
+
+
+
     }
 }

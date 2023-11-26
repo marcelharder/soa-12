@@ -42,7 +42,7 @@ export class InstitutionalReportComponent implements OnInit {
   ngOnInit() {
   // get the first additionalReport for circulatorysupport
   this.hos.getAdditionalInstitutionalReport(this.hospitalNo, 1).subscribe((next)=>{this.additional = next;})
-  this.addRepToBeSaved = 1;
+  this.addRepToBeSaved = 0;
   }
 
   findnewreport(){
@@ -73,24 +73,11 @@ export class InstitutionalReportComponent implements OnInit {
     this.saveAdditionalReport(this.addRepToBeSaved);
 
     let value  = data.heading;
-    if(value === 'Main text'){
-      //this.alertify.info("Main selected");
-    }
-    if(value === 'Circulation Support'){
-      //this.alertify.info("Support selected");
-      this.addRepToBeSaved = 1;
-      this.getAdditionalReport(1);
-    }
-    if(value === 'IABP'){
-      //this.alertify.info("IABP selected");
-      this.addRepToBeSaved = 2;
-      this.getAdditionalReport(2);
-    }
-    if(value === 'PMWires'){
-      //this.alertify.info("PMWires selected");
-      this.addRepToBeSaved = 3;
-      this.getAdditionalReport(3);
-    }
+    if(value === 'Main text')          {this.addRepToBeSaved = 0;}
+    if(value === 'Circulation Support'){this.addRepToBeSaved = 1;this.getAdditionalReport(1);}
+    if(value === 'IABP')               {this.addRepToBeSaved = 2;this.getAdditionalReport(2);}
+    if(value === 'PMWires')            {this.addRepToBeSaved = 3;this.getAdditionalReport(3);}
+
   }
 
   activateTextInserts(soort: string){
@@ -115,7 +102,8 @@ export class InstitutionalReportComponent implements OnInit {
   }
 
   saveAdditionalReport(id: number){
-    if(this.additional.line_1 !== null){
+
+    if(this.additional.line_1 !== null && this.addRepToBeSaved !== 0){
     this.hos.updateAdditionalReports(this.hospitalNo, id, this.additional).subscribe(
       ()=>{}, (error)=>{this.alertify.error(error)})
   }}

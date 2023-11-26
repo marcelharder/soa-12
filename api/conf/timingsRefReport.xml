@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ArrayOfReportTiming xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ReportTiming>
+    <id>23</id>
+    <publishTime>2023-09-25T12:56:55.8796987+02:00</publishTime>
+    <fileLocation />
+  </ReportTiming>
+  <ReportTiming>
+    <id>12</id>
+    <publishTime>2023-09-25T12:58:20.1640514+02:00</publishTime>
+    <fileLocation />
+  </ReportTiming>
+</ArrayOfReportTiming>

@@ -11,6 +11,7 @@ import { AccountService } from 'src/app/_services/account.service';
 import { DropdownService } from 'src/app/_services/dropdown.service';
 import { RefPhysService } from 'src/app/_services/refPhys.service';
 import { UserService } from 'src/app/_services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-refphys',
@@ -29,6 +30,8 @@ export class RefphysComponent implements OnInit {
   edit = '0';
   mail = false;
   active = false;
+  targetUrl="";
+  baseUrl = environment.apiUrl;
   pd: RefPhysModel = {
     Id: 0,
     hospital_id: 0,
@@ -120,6 +123,12 @@ export class RefphysComponent implements OnInit {
     //    }
     // });
   }
+  IsLoaded() {
+    if (this.pd.Id !== 0) {
+        this.targetUrl = this.baseUrl + 'RefPhys/addPhoto/' + this.pd.Id;
+        return true;
+    } else { return false; }
+}
   updatePhoto(photoUrl: string) {
     this.pd.image = photoUrl;
   }
