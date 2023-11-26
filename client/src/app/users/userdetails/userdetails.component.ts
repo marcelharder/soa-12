@@ -72,7 +72,7 @@ export class UserdetailsComponent implements OnInit {
 
   changeCountry() {
 
-    this.drops.getAllHospitalsPerCountry(this.selectedCountry).subscribe(
+    this.drops.getAvailableHospitals(this.selectedCountry).subscribe(
         (next) => {
             this.hospitals = next;
             this.user.hospital_id = this.hospitals[0].value;

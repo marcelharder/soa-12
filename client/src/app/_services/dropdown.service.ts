@@ -89,8 +89,7 @@ export class DropdownService {
     getAvailableHospitals(countryId: string) {return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/availableHospitalOptions/' + countryId);}
     getAllHospitals() { return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/allHospitals'); }
     getHospitals(userId: number) {return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/hospitalOptions/' + userId);}
-    getAllHospitalsPerCountry(country: string) {return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/allHospitalOptionsPerCountry/' + country); }
-
+   
      //#region <!-- cpb -->
     getMyocardialPreservationTechnique() { return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/myocardialPreservationTechnique'); }
     getAC() { return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/art_choice'); }

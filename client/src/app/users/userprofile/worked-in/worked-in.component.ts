@@ -52,7 +52,7 @@ export class WorkedInComponent implements OnInit {
             this.OptionCountries = next;
             this.selectedCountry = this.user.country;
             // get all hospitals per country
-            this.drop.getAllHospitalsPerCountry(this.selectedCountry).subscribe((nex) => {
+            this.drop.getAvailableHospitals(this.selectedCountry).subscribe((nex) => {
                 this.OptionHospitals = nex;
             });
         });
@@ -70,7 +70,7 @@ export class WorkedInComponent implements OnInit {
         }
     }
     changeCountry() {
-        this.drop.getAllHospitalsPerCountry(this.selectedCountry).subscribe(
+        this.drop.getAvailableHospitals(this.selectedCountry).subscribe(
             (next) => {
                 this.OptionHospitals = next;
                 this.selectedHospital = this.OptionHospitals[0].value;

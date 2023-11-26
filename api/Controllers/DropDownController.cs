@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using api.Data;
 using api.DTOs;
@@ -37,7 +38,7 @@ namespace api.Controllers
 
         #region <!--hospitalStuff -->
 
-       /*  [Route("hospitalOptions/{id}")]
+        [Route("hospitalOptions/{id}")]
         [HttpGet]
         public async Task<IActionResult> getHO(int id)
         {
@@ -50,7 +51,7 @@ namespace api.Controllers
         {
             _result = await _copd.getAvailableHospitalOptions(country); return Ok(_result);
         }
- */
+ 
         [Route("allHospitals")]
         [HttpGet]
         public async Task<IActionResult> getHO()
@@ -64,21 +65,14 @@ namespace api.Controllers
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     var test = await response.Content.ReadAsStringAsync();
+                    help = JsonSerializer.Deserialize<List<Class_Item>>(test);
                 }
             }
 
             return Ok(help);
            }
 
-        [Route("allHospitalOptionsPerCountry/{country}")]
-        [HttpGet]
-        public async Task<IActionResult> getHp(string country)
-        {
-            //var countryCode = _sp.getCountryFromCode(id);
-            _result = await _copd.getAllHospitalsPerCountry(country);
-            return Ok(_result);
-        }
-
+       
         #endregion
         
         #region <!--cities-->
@@ -88,7 +82,7 @@ namespace api.Controllers
         {
             var test = "";
             var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Coutry/all";
+            var st = "Country/all";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {

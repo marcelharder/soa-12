@@ -1153,53 +1153,66 @@ namespace api.Data
         #region <!--HospitalStuff -->
 
 
-       /*  public async Task<List<Class_Item>> getHospitalOptions(int userId)
+        public async Task<List<Class_Item>> getHospitalOptions(int userId)
         {
             var cl = new List<Class_Item>();
-            Class_Item ci;
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
             var csv = user.worked_in;
-            List<string> list_of_hospitals = csv.Split(',').ToList<string>();
 
+            // List<string> list_of_hospitals = csv.Split(',').ToList<string>();
 
-            foreach (string hos in list_of_hospitals)
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalsWhereUserWorked/ " + csv;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
             {
-                var help = await _context.Hospitals.FirstOrDefaultAsync(h => h.HospitalNo == hos.makeSureTwoChar());
-                ci = new Class_Item();
-                ci.description = help.HospitalName;
-                ci.value = Convert.ToInt32(help.HospitalNo);
-                cl.Add(ci);
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    var test = await response.Content.ReadAsStringAsync();
+                    cl = JsonSerializer.Deserialize<List<Class_Item>>(test);
+                }
             }
             return cl;
-        } */
+       }
 
         public async Task<List<Class_Item>> getAvailableHospitalOptions(string country)
         {
             var cl = new List<Class_Item>();
-            var hospitalsInInventory = new List<Class_Item>();
-            var hospitalsInTrac = new List<Class_Item>();
             var code = _sp.getCountryCode(country);
-
-
-            // get all the hospitals known to valveinventory 
-            var invaddress = _com.Value.valveURL;
-            var test = invaddress + "getHospitalsInCountry/" + code;
-
+            var comaddress = _com.Value.hospitalDetailsURL;
+            var st = "Hospital/getHospitalsPerCountry/ " + code;
+            comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
-                var request = new HttpRequestMessage
+                using (var response = await httpClient.GetAsync(comaddress))
                 {
-                    Method = HttpMethod.Get,
-                    RequestUri = new Uri(test),
-                    Content = new StringContent("your json", Encoding.UTF8, "application/json"),
-                };
-
-                using (var response = await httpClient.SendAsync(request))
-                {
-                    var apiResponse = await response.Content.ReadAsStringAsync();
-                    hospitalsInInventory = JsonSerializer.Deserialize<List<Class_Item>>(apiResponse);
+                    var test = await response.Content.ReadAsStringAsync();
+                    cl = JsonSerializer.Deserialize<List<Class_Item>>(test);
                 }
             }
+            return cl;
+
+
+
+            /*  // get all the hospitals known to valveinventory 
+             var invaddress = _com.Value.valveURL;
+             var test = invaddress + "getHospitalsInCountry/" + code;
+
+             using (var httpClient = new HttpClient())
+             {
+                 var request = new HttpRequestMessage
+                 {
+                     Method = HttpMethod.Get,
+                     RequestUri = new Uri(test),
+                     Content = new StringContent("your json", Encoding.UTF8, "application/json"),
+                 };
+
+                 using (var response = await httpClient.SendAsync(request))
+                 {
+                     var apiResponse = await response.Content.ReadAsStringAsync();
+                     hospitalsInInventory = JsonSerializer.Deserialize<List<Class_Item>>(apiResponse);
+                 }
+             } */
 
             // now get the list from here
             // hospitalsInTrac = await getAllHospitalsPerCountry(country);
@@ -1207,7 +1220,7 @@ namespace api.Data
             // remove all the local hospitals from the hospitalsInInventory
             // var help = compareList(hospitalsInTrac, hospitalsInInventory);
 
-            return hospitalsInInventory;
+            //return hospitalsInInventory;
 
         }
         #endregion
@@ -1236,23 +1249,7 @@ namespace api.Data
 
 
 
-       /*   public async Task<List<Class_Item>> getAllHospitalsPerCountry(string country)
-        {
-
-            var cl = new List<Class_Item>();
-            Class_Item ci;
-            var all_hospitals = await _context.Hospitals.ToListAsync();
-            all_hospitals = all_hospitals.Where(h => h.Country == country).ToList();
-
-            foreach (Class_Hospital hos in all_hospitals)
-            {
-                ci = new Class_Item();
-                ci.description = hos.HospitalName;
-                ci.value = Convert.ToInt32(hos.HospitalNo);
-                cl.Add(ci);
-            }
-            return cl;
-        }  */
+       
         public async Task<List<Class_Item>> getCareerItems()
         {
             await Task.Run(() =>
