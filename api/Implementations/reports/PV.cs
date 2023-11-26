@@ -69,6 +69,7 @@ namespace api.Data
                                         .FirstOrDefaultAsync();
                     result = _map.Map<Class_Suggestion, Class_Preview_Operative_report>(special_procedure_suggestion);
                     result.procedure_id = id;
+                    
                     _context.Previews.Add(result);
                     if (await SaveAll())
                     {
