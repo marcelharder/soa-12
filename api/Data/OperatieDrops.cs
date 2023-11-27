@@ -1179,9 +1179,8 @@ namespace api.Data
         public async Task<List<Class_Item>> getAvailableHospitalOptions(string country)
         {
             var cl = new List<Class_Item>();
-            var code = _sp.getCountryCode(country);
             var comaddress = _com.Value.hospitalURL;
-            var st = "Hospital/getHospitalsPerCountry/ " + code;
+            var st = "Hospital/getHospitalsPerCountry/ " + country;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
