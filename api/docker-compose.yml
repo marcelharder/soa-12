@@ -33,7 +33,7 @@ services:
      - internal-container-network 
   
   hospital:
-    image: hospital_app:v1
+    image: hospital_app:v2
     ports:
      - 8103:80
     networks:

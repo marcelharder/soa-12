@@ -42,7 +42,12 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> getHO(int id)
         {
-            _result = await _copd.getHospitalOptions(id); return Ok(_result);
+            _result = await _copd.getHospitalOptions(id); 
+            
+            if(_result != null){return Ok(_result);}
+            
+            
+            return BadRequest("user not found");
         }
        
         [Route("availableHospitalOptions/{country}")]
@@ -57,7 +62,7 @@ namespace api.Controllers
         public async Task<IActionResult> getHO()
         {
             var help = new List<Class_Item>();
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/allFullHospitals";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -81,7 +86,7 @@ namespace api.Controllers
         public async Task<IActionResult> getThing02()
         {
             var test = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Country/all";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -98,7 +103,7 @@ namespace api.Controllers
         public async Task<IActionResult> getThing12()
         {
              var test = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Coutry/allCities";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -115,7 +120,7 @@ namespace api.Controllers
         public async Task<IActionResult> getThing122(string id)
         {
             var test = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Country/allCitiesPerCountry/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())

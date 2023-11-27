@@ -1157,29 +1157,30 @@ namespace api.Data
         {
             var cl = new List<Class_Item>();
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
-            var csv = user.worked_in;
-
-            // List<string> list_of_hospitals = csv.Split(',').ToList<string>();
-
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalsWhereUserWorked/ " + csv;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
+            if (user != null)
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                var comaddress = _com.Value.hospitalURL;
+                var st = "Hospital/getHospitalsWhereUserWorked/" + user.worked_in;
+                comaddress = comaddress + st;
+                using (var httpClient = new HttpClient())
                 {
-                    var test = await response.Content.ReadAsStringAsync();
-                    cl = JsonSerializer.Deserialize<List<Class_Item>>(test);
+                    using (var response = await httpClient.GetAsync(comaddress))
+                    {
+                        var test = await response.Content.ReadAsStringAsync();
+                        cl = JsonSerializer.Deserialize<List<Class_Item>>(test);
+                    }
                 }
+                return cl;
+
             }
-            return cl;
-       }
+            return null;
+              }
 
         public async Task<List<Class_Item>> getAvailableHospitalOptions(string country)
         {
             var cl = new List<Class_Item>();
             var code = _sp.getCountryCode(country);
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/getHospitalsPerCountry/ " + code;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -1247,9 +1248,6 @@ namespace api.Data
             return result;
         }
 
-
-
-       
         public async Task<List<Class_Item>> getCareerItems()
         {
             await Task.Run(() =>

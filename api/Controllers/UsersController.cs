@@ -172,7 +172,7 @@ namespace api.Controllers
         private async Task<string> GetSpecificHospitalAsync(string currentHospital)
         {
             var test = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/getHospitalNameFromId";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())

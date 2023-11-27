@@ -10,7 +10,7 @@ namespace api.Helpers
         public string valveURL { get; set; }
         public string trainingURL { get; set; }
         public string reportURL { get; set; }
-        public string hospitalDetailsURL { get; set; }
+        public string hospitalURL { get; set; }
                public string valveIdURL { get; set; }
         public string registeredPhone {get; set;}
 

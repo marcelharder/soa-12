@@ -25,7 +25,7 @@ namespace api.Controllers
     [Authorize]
     public class HospitalController : BaseApiController
     {
-       
+
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
         private SpecialMaps _map;
@@ -35,7 +35,7 @@ namespace api.Controllers
 
 
         public HospitalController(
-        
+
         IOptions<ComSettings> com,
         UserManager<AppUser> manager,
         SpecialMaps map,
@@ -58,11 +58,15 @@ namespace api.Controllers
 
         }
 
+
+        #region <!--Hospitals-->
+
+
         [HttpGet("allFullHospitals")]
         public async Task<IActionResult> getAllHospitals()
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/allFullHospitals";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -73,17 +77,17 @@ namespace api.Controllers
                 }
             }
             return Ok(help);
-           /*  var ret = new List<HospitalForReturnDTO>();
-            var result = await _hos.getAllFullHospitals();
-            foreach (Class_Hospital ch in result) { ret.Add(_map.mapToHospitalForReturn(ch)); }
-            return Ok(ret); */
+            /*  var ret = new List<HospitalForReturnDTO>();
+             var result = await _hos.getAllFullHospitals();
+             foreach (Class_Hospital ch in result) { ret.Add(_map.mapToHospitalForReturn(ch)); }
+             return Ok(ret); */
         }
 
         [HttpGet("allFullHospitalsPerCountry/{id}")]
         public async Task<IActionResult> getHospitalsperCountry(string id)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/allFullHospitalsPerCountry/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -100,8 +104,8 @@ namespace api.Controllers
         public async Task<IActionResult> GetHospital(int id)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById/" + id;
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/getHospital/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -113,11 +117,11 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpGet("hospitalFromInventory/{id}")]// get specific hospital details from inventory
+       /*  [HttpGet("hospitalFromInventory/{id}")]// get specific hospital details from inventory
         public async Task<IActionResult> getHospitalNameFromInventory(int id)
         {
-             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var help = "";
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/getHospitalById/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -129,13 +133,14 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-
+ */
+       
         [HttpGet("getHospitalNameFromId/{id}")]// get specific hospital details
-        public async Task<IActionResult> GetHospitalName(int id)
+        public async Task<IActionResult> GetHospitalName(string id)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById/" + id;
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/getHospitalName/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -151,12 +156,14 @@ namespace api.Controllers
         public async Task<IActionResult> PutHospitalAsync([FromBody] HospitalForReturnDTO hr)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById/";
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital";
             comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(hr, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                using (var response = await httpClient.PutAsync(comaddress, content))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
@@ -164,16 +171,17 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpPost("{id}/{no}")]
-        public async Task<IActionResult> PostHospitalAsync(string id, int no)
+        [HttpPost("{country}/{no}")]
+        public async Task<IActionResult> PostHospitalAsync(string country, int no)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById/" + id;
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/" + country + "/" + no;
             comaddress = comaddress + st;
+
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                using (var response = await httpClient.PostAsync(comaddress, null))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
@@ -185,12 +193,12 @@ namespace api.Controllers
         public async Task<IActionResult> deleteHospitalAsync(string id)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById/" + id;
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                using (var response = await httpClient.DeleteAsync(comaddress))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
@@ -203,8 +211,31 @@ namespace api.Controllers
         public async Task<IActionResult> AddPhotoForHospital(int id, [FromForm] PhotoForCreationDto photoDto)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById/" + id;
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/addHospitalPhoto/" + id;
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(photoDto, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        #endregion
+
+        #region <!--Country -->
+
+        [HttpPost("addCountryNow")]
+        public async Task<IActionResult> AddCountryNow(CountryDto model)
+        {
+            var help = "";
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/getHospitalById/";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -216,29 +247,11 @@ namespace api.Controllers
             return Ok(help);
         }
 
-      
-        [HttpPost("addCountryNow")]
-        public async Task<IActionResult> AddCountryNow(CountryDto model)
-        {
-             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
-            var st = "Hospital/getHospitalById/";
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    help = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(help);
-        } 
-
         [HttpGet("hospitalByUser/{id}")]
         public async Task<IActionResult> getCurrentHospitalForUser(int id)
         {
             var help = "";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/getHospitalById/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -254,7 +267,7 @@ namespace api.Controllers
         [HttpGet("IsThisHospitalImplementingOVI/{id}")]
         public async Task<IActionResult> getOVI(string id)
         {
-             var help = "";
+            var help = "";
             var comaddress = _com.Value.reportURL;
             var st = "Hospital/isusigOVI/" + id;
             comaddress = comaddress + st;
@@ -267,6 +280,10 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+
+        #endregion
+
+
         #region <!-- InstitutionalReports stuff -->
 
         [HttpGet("InstitutionalReport/{hospitalId}/{soort}")]

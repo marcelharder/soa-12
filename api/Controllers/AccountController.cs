@@ -235,7 +235,7 @@ namespace api.Controllers
         private async Task<string> checkHospitalExists(string id)
         {
             var result = "0";
-            var comaddress = _com.Value.hospitalDetailsURL;
+            var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/checkIfHospitalExists/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())

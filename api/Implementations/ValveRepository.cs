@@ -13,15 +13,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Implementations
 {
-    public class ValveRepository: IValveRepository
+    public class ValveRepository : IValveRepository
     {
         private DataContext _context;
         private UserManager<AppUser> _usermanager;
         private SpecialMaps _special;
         public ValveRepository(
-            IWebHostEnvironment env, 
-            DataContext context, 
-            SpecialMaps special, 
+            IWebHostEnvironment env,
+            DataContext context,
+            SpecialMaps special,
             UserManager<AppUser> usermanager)
         {
             _context = context;
@@ -42,7 +42,8 @@ namespace api.Implementations
         public async Task<Class_Valve> GetSpecificValve(string serial, int procedure_id)
         {
             var result = await _context.Valves.FirstOrDefaultAsync(u => u.SERIAL_IMP == serial);
-            if(result != null){
+            if (result != null)
+            {
                 return result;
             }
             return null;
@@ -52,22 +53,25 @@ namespace api.Implementations
             // check if this serial already exists, if it does then return that file
 
             var test = await _context.Valves.AnyAsync(x => x.SERIAL_IMP == serial);
-            if(!test){
-            var result = new Class_Valve();
-            var selectedProcedure = await _context.Procedures.Include(c => c.ValvesUsed).FirstOrDefaultAsync(x => x.ProcedureId == procedure_id);
-            var valve = new Class_Valve();
-            // put some standard initializations here.
-            valve.SERIAL_IMP = serial;
-            valve.ProcedureId = procedure_id;
-
-            selectedProcedure.ValvesUsed.Add(valve);
-            _context.Update(selectedProcedure);
-            if (await SaveAll())
+            if (!test)
             {
-                result = selectedProcedure.ValvesUsed.Where(a => a.SERIAL_IMP == serial).FirstOrDefault();
-                return result;
+                var result = new Class_Valve();
+                var selectedProcedure = await _context.Procedures.Include(c => c.ValvesUsed).FirstOrDefaultAsync(x => x.ProcedureId == procedure_id);
+                var valve = new Class_Valve();
+                // put some standard initializations here.
+                valve.SERIAL_IMP = serial;
+                valve.ProcedureId = procedure_id;
+
+                selectedProcedure.ValvesUsed.Add(valve);
+                _context.Update(selectedProcedure);
+                if (await SaveAll())
+                {
+                    result = selectedProcedure.ValvesUsed.Where(a => a.SERIAL_IMP == serial).FirstOrDefault();
+                    return result;
+                }
             }
-            } else {
+            else
+            {
                 return await _context.Valves.FirstOrDefaultAsync(x => x.SERIAL_IMP == serial);
             }
             return null;
@@ -94,13 +98,11 @@ namespace api.Implementations
 
             var currentUserId = _special.getCurrentUserId();
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
+            var currentHospitalId = currentUser.hospital_id;
 
-            var selectedHospital = await _context.Hospitals
-                                     .Include(vs => vs.valvecodes)
-                                     .FirstOrDefaultAsync(a => a.HospitalNo == currentHospitalId);
+            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
 
-            foreach (Class_Valve_Code el in selectedHospital.valvecodes)
+            foreach (Class_Valve_Code el in valvesInThisHospital)
             {
                 counter++;
                 var cl = new Class_Item();
@@ -117,23 +119,19 @@ namespace api.Implementations
 
             var currentUserId = _special.getCurrentUserId();
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
+            var currentHospitalId = currentUser.hospital_id;
+            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
 
-            var selectedHospital = await _context.Hospitals
-                                     .Include(vs => vs.valvecodes)
-                                     .FirstOrDefaultAsync(a => a.HospitalNo == currentHospitalId);
-
-            foreach (Class_Valve_Code el in selectedHospital.valvecodes)
+            foreach (Class_Valve_Code el in valvesInThisHospital)
             {
                 if (el.type == type && el.position == position)
                 {
                     productCodes.Add(_special.mapClassValveToDTO(el));
                 }
-
             }
             return productCodes;
         }
-       
+
 
 
 
@@ -141,15 +139,14 @@ namespace api.Implementations
         {
             var currentUserId = _special.getCurrentUserId();
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
+            var currentHospitalId = currentUser.hospital_id;
 
+            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
 
-            var selectedHospital = await _context.Hospitals
-                                     .Include(vs => vs.valvecodes)
-                                     .FirstOrDefaultAsync(a => a.HospitalNo == currentHospitalId);
-                                     
             var listOfValvesForThisHospital = new List<Class_Valve_Code>();
-            listOfValvesForThisHospital = selectedHospital.valvecodes.ToList();
+            listOfValvesForThisHospital = valvesInThisHospital.ToList();
+
+
             // check to see if this valve already exists in the valvecodes of this hospital
             if (listOfValvesForThisHospital.Exists(x => x.valveTypeId == tes.valveTypeId)) { return null; }
             else
@@ -162,8 +159,8 @@ namespace api.Implementations
                 valve.soort = tes.soort;
                 valve.type = tes.type;
 
-                selectedHospital.valvecodes.Add(valve);
-                _context.Update(selectedHospital);
+                listOfValvesForThisHospital.Add(valve);
+                _context.Add(valve);
                 if (await SaveAll())
                 {
                     tes.codeId = valve.codeId;
@@ -178,13 +175,9 @@ namespace api.Implementations
             valveDTO vd = new valveDTO();
             var currentUserId = _special.getCurrentUserId();
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
-
-            var selectedHospital = await _context.Hospitals
-                                     .Include(vs => vs.valvecodes)
-                                     .FirstOrDefaultAsync(a => a.HospitalNo == currentHospitalId);
-
-            foreach (Class_Valve_Code el in selectedHospital.valvecodes)
+            var currentHospitalId = currentUser.hospital_id;
+            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
+            foreach (Class_Valve_Code el in valvesInThisHospital)
             {
                 if (el.code == code)
                 {
@@ -200,16 +193,25 @@ namespace api.Implementations
             };
             return vd;
         }
-        public async Task<valveDTO> updateValveInHospital(valveDTO tes)
+
+          public Task<valveDTO> updateValveInHospital(valveDTO code)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /* public async Task<valveDTO> updateValveInHospital(valveDTO tes)
         {
             var currentUserId = _special.getCurrentUserId();
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
+            var currentHospitalId = currentUser.hospital_id;
+            var valvesInThisHospital = _context.Valves.AsQueryable();
+  
 
-            var selectedHospital = await _context.Hospitals
-                                     .Include(vs => vs.valvecodes)
-                                     .FirstOrDefaultAsync(a => a.HospitalNo == currentHospitalId);
-            var el = selectedHospital.valvecodes.Where(a => a.codeId == tes.codeId).ToList();
+
+
+
+
+            var el = valvesInThisHospital.Where(a => a.codeId == tes.codeId).ToList();
             el[0].code = tes.code;
             el[0].type = tes.type;
             el[0].position = tes.implant_Position;
@@ -219,31 +221,32 @@ namespace api.Implementations
             if (await SaveAll()) { return await readValveInHospital(tes.code); }
             return null;
 
-        }
-      /*   public async Task<int> deleteValveInHospital(int codeId)
-        {
-            var deleteResult = 0;
-            var currentUserId = _special.getCurrentUserId();
-            var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
-
-            var selectedHospital = await _context.Hospitals
-                                     .Include(vs => vs.valvecodes)
-                                     .FirstOrDefaultAsync(a => a.HospitalNo == currentHospitalId);
-
-            var el = selectedHospital.valvecodes.Where(a => a.codeId == codeId).ToList();
-            selectedHospital.valvecodes.Remove(el[0]);
-            _context.Update(selectedHospital);
-
-            if (await SaveAll()) { deleteResult = 1; }
-            return deleteResult;
         } */
+        /*   public async Task<int> deleteValveInHospital(int codeId)
+          {
+              var deleteResult = 0;
+              var currentUserId = _special.getCurrentUserId();
+              var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
+              var currentHospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
 
-public async Task<int> deleteValveInHospital(int codeId){
-            await Task.Run(()=>{ return 1;});
+              var selectedHospital = await _context.Hospitals
+                                       .Include(vs => vs.valvecodes)
+                                       .FirstOrDefaultAsync(a => a.HospitalNo == currentHospitalId);
+
+              var el = selectedHospital.valvecodes.Where(a => a.codeId == codeId).ToList();
+              selectedHospital.valvecodes.Remove(el[0]);
+              _context.Update(selectedHospital);
+
+              if (await SaveAll()) { deleteResult = 1; }
+              return deleteResult;
+          } */
+
+        public async Task<int> deleteValveInHospital(int codeId)
+        {
+            await Task.Run(() => { return 1; });
             return 0;
-   
-}
+
+        }
 
 
 
@@ -345,7 +348,9 @@ public async Task<int> deleteValveInHospital(int codeId){
             return null;
         }
 
-       
+      
+
+
 
         #endregion
     }

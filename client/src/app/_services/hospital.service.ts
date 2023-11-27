@@ -24,19 +24,18 @@ export class HospitalService {
 
 
   getSpecificHospital(id: number) { return this.http.get<Hospital>(this.baseUrl + 'hospital/' + id); }
-
   getSpecificHospitalFromInventory(id: number){return this.http.get<Hospital>(this.baseUrl + 'hospital/hospitalFromInventory/' + id);}
-  
   saveHospital(item: Hospital) { return this.http.put<Hospital>(this.baseUrl + 'hospital', item); }
   IsThisHospitalUsingOVI(id: number) { return this.http.get<boolean>(this.baseUrl + 'hospital/IsThisHospitalImplementingOVI/' + id) }
   getListOfCities(id: string) { return this.http.get<dropItem[]>(this.baseUrl + 'citiesPerCountry/' + id); }
-  getAllThisUserWorkedInHospitals(userId: number) { return this.http.get<Hospital[]>(this.baseUrl + 'hospital_worked_in/' + userId); }
-
+ 
   allHospitals(): Observable<Hospital[]> { return this.http.get<Hospital[]>(this.baseUrl + 'Hospital/allFullHospitals'); }
   getHospitalsInCountry(id: string): Observable<Hospital[]> { return this.http.get<Hospital[]>(this.baseUrl + 'Hospital/allFullHospitalsPerCountry/' + id); }
- 
   addHospital(country: string, no: number) { return this.http.post<Hospital>(this.baseUrl + 'hospital/' + country + '/' + no, null); }
   deleteHospital(id: string) { return this.http.delete<number>(this.baseUrl + 'hospital/' + id); }
+
+
+
 
  
   updateAdditionalReports(id: number,which: number, model: additionalReportModel)
