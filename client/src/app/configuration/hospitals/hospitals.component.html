@@ -3,7 +3,7 @@
       <div class="col-sm-6">
         <div class="card">
           <div class="card-header">
-            <h3><span class="badge badge-secondary">Configuring {{pd.hospitalName}}</span></h3>
+            <h3><span class="badge badge-secondary">Configuring {{pd.HospitalName}}</span></h3>
           </div>
           <div class="card-body">
             <div class="tab-panel">
@@ -17,7 +17,7 @@
                           <h4><span class="badge badge-secondary">Name:</span></h4>
                         </div>
                         <div class="col-sm-8">
-                          <input type="text" [(ngModel)]="pd.hospitalName" name="naam" class="form-control" disabled />
+                          <input type="text" [(ngModel)]="pd.HospitalName" name="naam" class="form-control" disabled />
                         </div>
                       </div>
                       <div class="row">
@@ -25,7 +25,7 @@
                           <h4><span class="badge badge-secondary">Address:</span></h4>
                         </div>
                         <div class="col-sm-8">
-                          <input type="text" [(ngModel)]="pd.address" name="adres" class="form-control" disabled />
+                          <input type="text" [(ngModel)]="pd.Address" name="adres" class="form-control" disabled />
                         </div>
                       </div>
                       <div class="row">
@@ -33,7 +33,7 @@
                           <h4><span class="badge badge-secondary">Country:</span></h4>
                         </div>
                         <div class="col-sm-8">
-                          <input type="text" [(ngModel)]="pd.country" name="country" class="form-control" disabled />
+                          <input type="text" [(ngModel)]="pd.Country" name="country" class="form-control" disabled />
                         </div>
                       </div>
                       <div class="row">
@@ -41,7 +41,7 @@
                           <h4><span class="badge badge-secondary">Telephone:</span></h4>
                         </div>
                         <div class="col-sm-8">
-                          <input type="text" [(ngModel)]="pd.telephone" name="tel" class="form-control" disabled />
+                          <input type="text" [(ngModel)]="pd.Telephone" name="tel" class="form-control" disabled />
                         </div>
                       </div>
                     </div>
@@ -244,7 +244,7 @@
       </div>
       <div class="col-sm-6">
         <div class="card mt-5">
-          <img class="card-img-top img-thumbnail" src="{{ pd.imageUrl }}" alt="test" width="250" height="350" />
+          <img class="card-img-top img-thumbnail" src="{{ pd.ImageUrl }}" alt="test" width="250" height="350" />
         </div>
         <div class="footer mt-2">
           <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>

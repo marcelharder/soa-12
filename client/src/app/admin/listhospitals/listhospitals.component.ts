@@ -23,7 +23,7 @@ export class ListhospitalsComponent implements OnInit {
   editFlag = 0;
   addFlag = 0;
   listFlag = 1;
-  model: countryItem = { Value: '', Description: '', Tel_Code:'' };
+  model: countryItem = {  Id: "", Description: "Choose",TelCode:"", IsoCode:"",Cities:"" };
 
   constructor(
     private modalService: BsModalService,
@@ -37,15 +37,11 @@ export class ListhospitalsComponent implements OnInit {
     this.filterCountry();
   }
 
-  addCountry(patienttemplate: TemplateRef<any>) {
-    
-    this.modalRef = this.modalService.show(patienttemplate, { class: 'modal-dialog-centered' });
-
-  }
+  
   confirm(): void {
     localStorage.setItem("optionCountries",null);
     
-    this.model.Tel_Code = "123"; // save the newly entered country to the xml
+    this.model.TelCode = "123"; // save the newly entered country to the xml
     this.hospitalService.addCountry(this.model).subscribe((next) => 
     {
       this.alertify.info("saving country");
@@ -62,7 +58,7 @@ export class ListhospitalsComponent implements OnInit {
     if (d == null || d.length === 0) {
       this.drops.getAllCountries().subscribe((response) => {
         this.optionCountries = response;
-        this.optionCountries.unshift({ Value: "", Description: "Choose",Tel_Code:"" });
+        this.optionCountries.unshift({ Id: "", Description: "Choose",TelCode:"",IsoCode:"", Cities:"" });
         localStorage.setItem('optionCountries', JSON.stringify(response));
       });
     } else {

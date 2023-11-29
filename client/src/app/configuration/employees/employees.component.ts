@@ -85,8 +85,8 @@ export class EmployeesComponent implements OnInit {
             this.getTheEmployees(this.currentHospital.toString());
             // get the hospital image
             this.hospitalservice.getSpecificHospital(this.currentHospital).subscribe((res) => {
-                this.hospitalName = res.hospitalName;
-                this.hospitalImage = res.imageUrl;
+                this.hospitalName = res.HospitalName;
+                this.hospitalImage = res.ImageUrl;
             })
 
         });

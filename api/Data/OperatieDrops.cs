@@ -1180,7 +1180,7 @@ namespace api.Data
         {
             var cl = new List<Class_Item>();
             var comaddress = _com.Value.hospitalURL;
-            var st = "Hospital/getHospitalsPerCountry/ " + country;
+            var st = "Hospital/getHospitalItemsPerCountryFromIso/" + country;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -1191,37 +1191,6 @@ namespace api.Data
                 }
             }
             return cl;
-
-
-
-            /*  // get all the hospitals known to valveinventory 
-             var invaddress = _com.Value.valveURL;
-             var test = invaddress + "getHospitalsInCountry/" + code;
-
-             using (var httpClient = new HttpClient())
-             {
-                 var request = new HttpRequestMessage
-                 {
-                     Method = HttpMethod.Get,
-                     RequestUri = new Uri(test),
-                     Content = new StringContent("your json", Encoding.UTF8, "application/json"),
-                 };
-
-                 using (var response = await httpClient.SendAsync(request))
-                 {
-                     var apiResponse = await response.Content.ReadAsStringAsync();
-                     hospitalsInInventory = JsonSerializer.Deserialize<List<Class_Item>>(apiResponse);
-                 }
-             } */
-
-            // now get the list from here
-            // hospitalsInTrac = await getAllHospitalsPerCountry(country);
-
-            // remove all the local hospitals from the hospitalsInInventory
-            // var help = compareList(hospitalsInTrac, hospitalsInInventory);
-
-            //return hospitalsInInventory;
-
         }
         #endregion
 

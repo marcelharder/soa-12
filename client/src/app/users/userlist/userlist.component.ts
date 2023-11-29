@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
+import { countryItem } from 'src/app/_models/countryItem';
 import { dropItem } from 'src/app/_models/dropItem';
 import { User } from 'src/app/_models/User';
 import { AccountService } from 'src/app/_services/account.service';
@@ -34,7 +35,8 @@ export class UserlistComponent implements OnInit {
   currentCountry = "";
   
   hospitals: Array<dropItem> = [];
-  value?: string = 'User management';
+  countries: Array<countryItem> = [];
+ value?: string = 'User management';
   editFlag = 0;
   addFlag = 0;
   constructor(
@@ -47,15 +49,25 @@ export class UserlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.currentUser$.pipe(take(1)).subscribe((u) => { this.currentUserId = u.UserId; });
-    this.drop.getAllHospitals().subscribe(response => {
-      this.hospitals = response;
-      this.currentHospital = response[0].value
-    }, (error) => { console.log(error); });
+    this.drop.getAllCountries().subscribe((next)=>{
+      this.countries = next;
+    });
+
+   
 
     this.loadDrops();
     this.getUsers();
   }
   loadDrops() {}
+
+  selectCountry(){
+    debugger;
+    this.drop.getAvailableHospitals(this.currentCountry).subscribe(response => {
+      debugger;
+      this.hospitals = response;
+      this.currentHospital = response[0].value
+    }, (error) => { console.log(error); });
+  }
 
   LookUpUserId(){
     if(this.lookupId !== 0){ 

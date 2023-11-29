@@ -233,8 +233,8 @@ namespace api.Controllers
         [HttpPost("addCountryNow")]
         public async Task<IActionResult> AddCountryNow(CountryDto model)
         {
-            var help = "";
-            var comaddress = _com.Value.hospitalURL;
+            var help = "Not implemented anymore ...";
+            /* var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/getHospitalById/";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -243,16 +243,17 @@ namespace api.Controllers
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
-            }
+            } */
             return Ok(help);
         }
 
         [HttpGet("hospitalByUser/{id}")]
-        public async Task<IActionResult> getCurrentHospitalForUser(int id)
+        public async Task<IActionResult> getCurrentHospitalForUser(int id) // the id here id the hospitalNo
         {
             var help = "";
+            var currentUser = await _manager.Users.SingleOrDefaultAsync(x => x.Id == id);
             var comaddress = _com.Value.hospitalURL;
-            var st = "Hospital/getHospitalById/" + id;
+            var st = "Hospital/" + currentUser.hospital_id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -268,8 +269,8 @@ namespace api.Controllers
         public async Task<IActionResult> getOVI(string id)
         {
             var help = "";
-            var comaddress = _com.Value.reportURL;
-            var st = "Hospital/isusigOVI/" + id;
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/IsThisHospitalImplementingOVI/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -277,6 +278,7 @@ namespace api.Controllers
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
+           
             }
             return Ok(help);
         }

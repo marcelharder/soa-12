@@ -78,8 +78,8 @@ namespace api.Controllers
             if (user != null) { return BadRequest("User already exists ..."); }
 
 
-            var help = checkHospitalExists(registerDto.currentHospital);
-            // if help == 1 then a new hospital is added ....
+           /*  var help = checkHospitalExists(registerDto.currentHospital);
+            // if help == 1 then a new hospital is added .... */
 
             user = new AppUser
             {
@@ -232,7 +232,7 @@ namespace api.Controllers
         }
 
 
-        private async Task<string> checkHospitalExists(string id)
+       /*  private async Task<string> checkHospitalExists(string id)
         {
             var result = "0";
             var comaddress = _com.Value.hospitalURL;
@@ -246,7 +246,7 @@ namespace api.Controllers
                 }
             }
             return result;
-        }
+        } */
 
     }
     public class RequestUriUtil

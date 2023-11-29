@@ -59,7 +59,7 @@ export class NavComponent implements OnInit {
               this.userService.getUser(this.currentUserId).subscribe((next) => {
                 this.model.KnownAs = next.knownAs;
                 this.hospitalService.getSpecificHospital(next.hospital_id).subscribe((d) => {
-                  this.accountService.changeCurrentHospital(d.hospitalName); // save the name of this hospital
+                  this.accountService.changeCurrentHospital(d.HospitalName); // save the name of this hospital
                 });
               })
 
