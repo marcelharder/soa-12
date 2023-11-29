@@ -21,7 +21,7 @@ namespace api.Controllers
         private IPatientRepository _rep;
         private IValveRepository _valve;
         private IProcedureRepository _proc;
-               SpecialMaps _sp;
+        SpecialMaps _sp;
         private readonly IOptions<ComSettings> _com;
 
       
@@ -41,6 +41,14 @@ namespace api.Controllers
             _proc = proc;
             _cabg = cabg;
             _valve = valve;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("loadReportCode/{id}")]
+        public async Task<IActionResult> GetRCAsync(int id)
+        {// get the correct report code for this procedure type, used in preview reports
+            return Ok(_sp.getReportCode(id));
         }
 
         [HttpGet]
@@ -353,6 +361,6 @@ namespace api.Controllers
             public string Hospital { get; set; }
         }
 
-
+       
     }
 }

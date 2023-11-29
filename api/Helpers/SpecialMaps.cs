@@ -450,7 +450,18 @@ namespace api.Helpers
 
             return help;
         }
-
+        public string getReportCode(int fdType)
+        {
+            var result = "";
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/procedure.xml");
+            XDocument order = XDocument.Load(filename);
+            IEnumerable<XElement> help = from d in order.Descendants("Code")
+                                         where d.Element("ID").Value == fdType.ToString()
+                                         select d;
+            foreach (XElement x in help) { result = x.Element("report_code").Value; }
+            return result;
+        }
         
 
         #endregion
