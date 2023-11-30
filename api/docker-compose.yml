@@ -49,24 +49,9 @@ services:
       - internal-container-network
     depends_on:
       - db 
-<<<<<<< HEAD
  
-=======
-      
-  hospitalService:
-    image: hospital_app:v2
-    ports:
-     - 8103:80
-    networks:
-      - internal-container-network
-    depends_on:
-      - db
-
-
-
->>>>>>> removing_report_training_stuff
   reports:
-    image: reports:v23
+    image: reports:v24
     ports:
      - 8089:80
     networks:
