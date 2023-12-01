@@ -100,7 +100,7 @@
                   <label for="country">Country</label>
                   <select [(ngModel)]="user.country" name="q12" (change)="changeCountry()"
                     class="form-control ml-2 mr-2">
-                    <option *ngFor="let item of optionCountries" [value]=item.value>{{ item.description }}</option>
+                    <option *ngFor="let item of optionCountries" [value]=item.IsoCode>{{ item.Description }}</option>
                   </select>
                 </div>
               </form>

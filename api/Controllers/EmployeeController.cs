@@ -135,7 +135,7 @@ namespace api.Controllers
             // if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
             var employee = await _emp.getSpecificEmployee(id);
 
-            var file = photoDto.file;
+            var file = photoDto.File;
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
             {

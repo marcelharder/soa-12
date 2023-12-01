@@ -1,6 +1,6 @@
 export interface Hospital {
     HospitalName: string;
-    Selected_hospital_name: string;
+    SelectedHospitalName: string;
     HospitalNo:string;
     Description: string;
     ImageUrl: string;

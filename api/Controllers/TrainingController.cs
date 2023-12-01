@@ -307,8 +307,8 @@ namespace api.Controllers
         public async Task<IActionResult> uploadPdf(int documentId, [FromForm]PhotoForCreationDto photoDto)
         {
             var content = new MultipartFormDataContent();
-            content.Add(new StreamContent(photoDto.file.OpenReadStream()), photoDto.file.Name, photoDto.file.FileName);
-            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.file.Name, FileName = photoDto.file.FileName };
+            content.Add(new StreamContent(photoDto.File.OpenReadStream()), photoDto.File.Name, photoDto.File.FileName);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.File.Name, FileName = photoDto.File.FileName };
 
             var help = new photoResult();
             var comaddress = _com.Value.trainingURL;

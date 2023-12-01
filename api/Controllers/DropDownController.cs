@@ -67,7 +67,7 @@ namespace api.Controllers
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     var test = await response.Content.ReadAsStringAsync();
-                    help = JsonSerializer.Deserialize<List<Class_Item>>(test);
+                   // help = JsonSerializer.Deserialize<List<Class_Item>>(test);
                     return Ok(help);
                 }
             }
