@@ -17,8 +17,6 @@ services:
   db:
     image: mariadb:latest
     restart: always
-    ports:
-      - 3306:3306
     environment:
      MYSQL_ROOT_PASSWORD: example
     networks: 
@@ -36,6 +34,8 @@ services:
     image: hospital_app:v5
     networks:
       - internal-container-network
+    ports:
+      - 8103:80
     depends_on:
       - db 
   
@@ -45,7 +45,11 @@ services:
       - internal-container-network
     depends_on:
       - db 
+<<<<<<< HEAD
       
+=======
+ 
+>>>>>>> 3b5b10b436884e7b584c68c7b07c601800c6b934
   reports:
     image: reports:v25
     networks:

@@ -11,8 +11,8 @@ export interface Epa_model {
     date_finished:Date;
     finished: Boolean;
     grade: number;
-    KBP:Boolean;
-    OSATS:Boolean;
+    kbp:Boolean;
+    osats:Boolean;
     beoordeling_360:Boolean;
     caT_CAL:Boolean;
     examen:Boolean;

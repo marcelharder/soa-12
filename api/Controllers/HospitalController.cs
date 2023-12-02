@@ -15,6 +15,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -210,20 +212,23 @@ namespace api.Controllers
         [HttpPost("addHospitalPhoto/{id}")]
         public async Task<IActionResult> AddPhotoForHospital(int id, [FromForm] PhotoForCreationDto photoDto)
         {
-            var help = "";
+            var content = new MultipartFormDataContent();
+            content.Add(new StreamContent(photoDto.File.OpenReadStream()), photoDto.File.Name, photoDto.File.FileName);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.File.Name, FileName = photoDto.File.FileName };
+
+            var help = new photoResult();
             var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/addHospitalPhoto/" + id;
             comaddress = comaddress + st;
-            var json = JsonConvert.SerializeObject(photoDto, Formatting.None);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.PostAsync(comaddress, content))
                 {
-                    help = await response.Content.ReadAsStringAsync();
+                   // var ger = await response.Content.ReadAsStringAsync();
+                    help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help);
+            return Ok(help.image); 
         }
 
         #endregion

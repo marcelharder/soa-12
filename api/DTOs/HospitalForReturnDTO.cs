@@ -3,16 +3,16 @@ namespace api.DTOs
     public class HospitalForReturnDTO
     {
         public int id { get; set; }
-        public string hospitalName { get; set; }
-        public string selected_hospital_name { get; set; }
-        public string description { get; set; }
-        public string hospitalNo { get; set; }
-        public string address { get; set; }
-        public string telephone { get; set; }
-        public string country { get; set; }
-        public string imageUrl { get; set; }
-        public string city { get; set; }
-        public bool usesOnlineValveInventory { get; set; }
+        public string HospitalName { get; set; }
+        public string SelectedHospitalName { get; set; }
+        public string Description { get; set; }
+        public string HospitalNo { get; set; }
+        public string Address { get; set; }
+        public string Telephone { get; set; }
+        public string Country { get; set; }
+        public string ImageUrl { get; set; }
+        public string City { get; set; }
+        public bool UsesOnlineValveInventory { get; set; }
 
         public string OpReportDetails1 { get; set; }
         public string OpReportDetails2 { get; set; }

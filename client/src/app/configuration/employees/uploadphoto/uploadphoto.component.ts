@@ -43,14 +43,14 @@ export class UploadphotoComponent implements OnInit {
 
       const parseResponse = (response) => {
         const res = JSON.parse(response);
-        const image = res.image || res.PhotoUrl || res.Image;
+        const image = res.image || res.PhotoUrl || res.Image ;
         if (image) {
           this.getMemberPhotoChange.emit(image);
         }
       };
       
       this.uploader.onSuccessItem = (item, response, status, headers) => {
-        if (response) {
+        if (response) {          
           parseResponse(response);
         }
       };

@@ -223,7 +223,7 @@ namespace api.Controllers
         {
             var user = await _rep.GetUser(id);
 
-            var file = photoDto.file;
+            var file = photoDto.File;
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
             {

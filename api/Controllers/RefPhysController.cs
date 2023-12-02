@@ -119,7 +119,7 @@ namespace api.Controllers
         {
             // if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)) return Unauthorized();
             var p = await _ref.getSpecificRefPhys(id);
-            var file = photoDto.file;
+            var file = photoDto.File;
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
             {

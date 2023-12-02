@@ -150,7 +150,7 @@ export class PreviewreportComponent implements OnInit {
           this.email.phone = this.ref.tel;
           this.email.soort = '1';
           this.email.body = "here is the body";
-          this.email.callback = this.locationURL + 'FinalOperativeReport/getRefReport/' + hash;
+          this.email.callback = this.locationURL + 'FinalReport/getRefReport/' + hash;
 
         });
         this.refEmail = '1'; // show the email/sms page
