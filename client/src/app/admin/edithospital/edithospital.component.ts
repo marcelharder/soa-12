@@ -48,7 +48,8 @@ export class EdithospitalComponent implements OnInit {
         return true;
     } else { return false; }
 } 
-  updatePhoto(photoUrl: string) { this.pd.ImageUrl = photoUrl;}
+  updatePhoto(photoUrl: string) {
+     this.pd.ImageUrl = photoUrl;}
 
   receiveDone(no: number){
     this.cancelThis.emit(1);
