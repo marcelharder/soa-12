@@ -30,11 +30,11 @@
         <tr *ngFor="let item of description">
           <td>{{item.id}}</td>
           <td>{{item.definition}}</td>
-          <td><input type="checkbox" [ngModel]="values[item.id-1]?.KBP" name="kbp1" readonly></td>
-          <td><input type="checkbox" [ngModel]="values[item.id-1]?.OSATS" name="osat1" readonly></td>
-          <td><input type="checkbox" [ngModel]="values[item.id-1]?.beoordeling_360" name="beob1" readonly></td>
-          <td><input type="checkbox" [ngModel]="values[item.id-1]?.caT_CAL" name="cat" readonly></td>
-          <td><input type="checkbox" [ngModel]="values[item.id-1]?.examen" name="ex1" readonly></td>
+          <td><input type="checkbox" [ngModel]="values[item.id-1]?.kbp"      onclick="return false" name="kbp1"  readonly></td>
+          <td><input type="checkbox" [ngModel]="values[item.id-1]?.osats"    onclick="return false" name="osat1" readonly></td>
+          <td><input type="checkbox" [ngModel]="values[item.id-1]?.beoordeling_360" onclick="return false" name="beob1" readonly></td>
+          <td><input type="checkbox" [ngModel]="values[item.id-1]?.caT_CAL"  onclick="return false" name="cat" readonly></td>
+          <td><input type="checkbox" [ngModel]="values[item.id-1]?.examen"   onclick="return false" name="ex1" readonly></td>
           <td><button class="btn btn-warning btn-sm" (click)="showDetails(item.id-1)">details</button></td>  
         </tr>
        
