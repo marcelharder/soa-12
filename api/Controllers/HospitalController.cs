@@ -228,7 +228,7 @@ namespace api.Controllers
                     help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help.image); 
+            return Ok(help.document_url); 
         }
 
         #endregion

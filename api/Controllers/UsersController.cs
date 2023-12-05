@@ -134,19 +134,14 @@ namespace api.Controllers
             var user = await _manager.Users.SingleOrDefaultAsync(x => x.UserName == ufr.UserName.ToLower());
             if (user != null) { return BadRequest("User already exists ..."); }
 
-            if (ufr.country == null || ufr.country == "")
-            {
-                var ch = await GetSpecificHospitalAsync(ufr.currentHospital);
-                ufr.country = ch;
-            }
             user = new AppUser
             {
 
                 UserName = ufr.UserName.ToLower(),
                 Country = ufr.country,
                 City = ufr.city,
-                hospital_id = Convert.ToInt32(ufr.currentHospital),
-                worked_in = ufr.currentHospital,
+                hospital_id = Convert.ToInt32(ufr.hospital_id),
+                worked_in = ufr.hospital_id.ToString().makeSureTwoChar(),
                 KnownAs = ufr.knownAs,
                 Created = DateTime.Now,
                 LastActive = DateTime.Now,

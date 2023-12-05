@@ -67,7 +67,7 @@ services:
      - db
 
   tracPersonal:
-    image: sql_app:v95
+    image: sql_app:v97
     ports:
      - 8086:80
     networks: 

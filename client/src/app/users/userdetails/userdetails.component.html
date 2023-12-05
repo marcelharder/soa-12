@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-sm-6">
                             <select [(ngModel)]="user.hospital_id" name="selectHospital" class="form-control" id="sh">
-                                <option *ngFor="let item of optionHospitals" [value]=item.value>{{ item.description }}
+                                <option *ngFor="let item of hospitals" [value]=item.value>{{ item.description }}
                                 </option>
                             </select>
                         </div>

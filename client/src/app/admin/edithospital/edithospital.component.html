@@ -133,7 +133,7 @@
             </div>
             <div class="col-sm-4">
               <div class="card">
-                <img class="card-img-top img-thumbnail" src="{{ pd.imageUrl }}" alt="no photo available"  />
+                <img class="card-img-top img-thumbnail" src="{{ pd.ImageUrl }}" alt="no photo available"  />
               </div>
               <div class="footer mt-2">
                  <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>

@@ -98,12 +98,17 @@
            
         </div>
         <div *ngIf="showEdit()">
-            <app-userdetails (cancelThis)="cancelEdit($event)" [user]='user' (fromUserEdit)="returnFromUserEdit($event)"></app-userdetails>
+            <app-userdetails 
+            (cancelThis)="cancelEdit($event)" 
+            [user]='user' 
+            (fromUserEdit)="returnFromUserEdit($event)"></app-userdetails>
         </div>
         <div *ngIf="showAdd()">
-            <app-add-user (cancelThis)="cancelAdd($event)"
-             [selectedHospital]="currentHospital" 
-             ></app-add-user>
+            <app-add-user 
+            (cancelThis)="cancelAdd($event)" 
+            [selectedHospitalName]="currentHospitalName" 
+            [selectedCountry]="currentCountry"
+            (fromUserAdd)="returnFromAddUser($event)"></app-add-user>
         </div>
     </div>
     <div class="card-footer"></div>

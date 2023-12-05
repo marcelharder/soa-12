@@ -30,9 +30,8 @@ export class UserdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.selectedCountry = this.user.country;
 
-    this.drops.getAllHospitals().subscribe(response => {
+    this.drops.getAvailableHospitals(this.selectedCountry).subscribe(response => {
       this.hospitals = response;
-      this.hospitals.unshift({value:0,description:"Choose"});
     }, (error) => { console.log(error); });
   
   this.loadDrops();
