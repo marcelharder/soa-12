@@ -46,6 +46,7 @@ services:
     depends_on:
       - db 
  
+>>>>>>> 3b5b10b436884e7b584c68c7b07c601800c6b934
   reports:
     image: reports:v25
     networks:
