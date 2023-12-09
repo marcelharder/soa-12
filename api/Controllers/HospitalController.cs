@@ -15,6 +15,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -210,20 +212,23 @@ namespace api.Controllers
         [HttpPost("addHospitalPhoto/{id}")]
         public async Task<IActionResult> AddPhotoForHospital(int id, [FromForm] PhotoForCreationDto photoDto)
         {
-            var help = "";
+            var content = new MultipartFormDataContent();
+            content.Add(new StreamContent(photoDto.File.OpenReadStream()), photoDto.File.Name, photoDto.File.FileName);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.File.Name, FileName = photoDto.File.FileName };
+
+            var help = new photoResult();
             var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/addHospitalPhoto/" + id;
             comaddress = comaddress + st;
-            var json = JsonConvert.SerializeObject(photoDto, Formatting.None);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.PostAsync(comaddress, content))
                 {
-                    help = await response.Content.ReadAsStringAsync();
+                   // var ger = await response.Content.ReadAsStringAsync();
+                    help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help);
+            return Ok(help.document_url); 
         }
 
         #endregion
@@ -233,8 +238,8 @@ namespace api.Controllers
         [HttpPost("addCountryNow")]
         public async Task<IActionResult> AddCountryNow(CountryDto model)
         {
-            var help = "";
-            var comaddress = _com.Value.hospitalURL;
+            var help = "Not implemented anymore ...";
+            /* var comaddress = _com.Value.hospitalURL;
             var st = "Hospital/getHospitalById/";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -243,16 +248,17 @@ namespace api.Controllers
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
-            }
+            } */
             return Ok(help);
         }
 
         [HttpGet("hospitalByUser/{id}")]
-        public async Task<IActionResult> getCurrentHospitalForUser(int id)
+        public async Task<IActionResult> getCurrentHospitalForUser(int id) // the id here id the hospitalNo
         {
             var help = "";
+            var currentUser = await _manager.Users.SingleOrDefaultAsync(x => x.Id == id);
             var comaddress = _com.Value.hospitalURL;
-            var st = "Hospital/getHospitalById/" + id;
+            var st = "Hospital/" + currentUser.hospital_id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -268,8 +274,8 @@ namespace api.Controllers
         public async Task<IActionResult> getOVI(string id)
         {
             var help = "";
-            var comaddress = _com.Value.reportURL;
-            var st = "Hospital/isusigOVI/" + id;
+            var comaddress = _com.Value.hospitalURL;
+            var st = "Hospital/IsThisHospitalImplementingOVI/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -277,6 +283,7 @@ namespace api.Controllers
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
+           
             }
             return Ok(help);
         }

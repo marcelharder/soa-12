@@ -1,21 +1,34 @@
 <div class="card m-5">
     <div class="card-header">
         <div class="row">
-            <div class="col-sm-6"> <h5><span class="badge badge-info">Admin Panel</span></h5></div>
-            <div class="col-sm-6">
+            <div class="col-sm-4"> <h5><span class="badge badge-info">Admin Panel</span></h5></div>
+            <div class="col-sm-8">
                 <div class="row" *ngIf="!showEdit() && !showAdd()">
                     <div class="col-sm-12" *ngIf="showHospitalDrop()" >
                         <div class="d-flex flex-row">
                             <div class="p-2"><span class="badge badge-default badge-xs">Find user by ID</span></div>
                             <div class="p-2"><input class="form-control" [(ngModel)]="lookupId" id="lupid" /></div>
                             <div class="p-2"><button class="btn btn-secondary btn-xxs" (click)="LookUpUserId()">Go</button></div>
-                            <div class="p-2"><select  [(ngModel)]="currentHospital" 
+                            <div class="p-1">
+                                <select  [(ngModel)]="currentCountry" 
+                                name="selectCountry" 
+                                class="form-control"
+                                id="sk" 
+                                (change)="selectCountry()">
+                                <option *ngFor="let item of countries" [value]=item.IsoCode>{{ item.Description }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="p-1">
+                                <select  [(ngModel)]="currentHospital" 
                                 name="selectHospital" 
                                 class="form-control"
                                 id="sh" 
                                 (change)="selectUserPerHospital()">
                                 <option *ngFor="let item of hospitals" [value]=item.value>{{ item.description }}</option>
-                                </select></div>
+                                </select>
+                            
+                            </div>
                           </div>
                         
                 </div>
@@ -85,12 +98,17 @@
            
         </div>
         <div *ngIf="showEdit()">
-            <app-userdetails (cancelThis)="cancelEdit($event)" [user]='user' (fromUserEdit)="returnFromUserEdit($event)"></app-userdetails>
+            <app-userdetails 
+            (cancelThis)="cancelEdit($event)" 
+            [user]='user' 
+            (fromUserEdit)="returnFromUserEdit($event)"></app-userdetails>
         </div>
         <div *ngIf="showAdd()">
-            <app-add-user (cancelThis)="cancelAdd($event)"
-             [selectedHospital]="currentHospital" 
-             ></app-add-user>
+            <app-add-user 
+            (cancelThis)="cancelAdd($event)" 
+            [selectedHospitalName]="currentHospitalName" 
+            [selectedCountry]="currentCountry"
+            (fromUserAdd)="returnFromAddUser($event)"></app-add-user>
         </div>
     </div>
     <div class="card-footer"></div>

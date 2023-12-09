@@ -1,6 +1,6 @@
 <div class="card m-5" *ngIf="!displayIR()">
     <div class="card-header">
-        <h5><span class="badge badge-info">Edit {{pd.hospitalName}}</span>
+        <h5><span class="badge badge-info">Edit {{pd.HospitalName}}</span>
         <span class="btn btn-success float-right" (click)="editInstitutionalReport()">Institutional operative report</span></h5>
       </div>
     <div class="card-body">
@@ -14,7 +14,7 @@
                                 <h4><span class="badge badge-secondary">Name:</span></h4>
                             </div>
                             <div class="col-sm-8">
-                                <input type="text" [(ngModel)]="pd.hospitalName" name="naam" class="form-control"
+                                <input type="text" [(ngModel)]="pd.HospitalName" name="naam" class="form-control"
                                      />
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 <h4><span class="badge badge-secondary">Telephone:</span></h4>
                             </div>
                             <div class="col-sm-8">
-                                <input type="text" [(ngModel)]="pd.telephone" name="tel" class="form-control"
+                                <input type="text" [(ngModel)]="pd.Telephone" name="tel" class="form-control"
                                      />
                             </div>
                         </div>
@@ -133,14 +133,10 @@
             </div>
             <div class="col-sm-4">
               <div class="card">
-                <img class="card-img-top img-thumbnail" src="{{ pd.imageUrl }}" alt="no photo available"  />
+                <img class="card-img-top img-thumbnail" src="{{ pd.ImageUrl }}" alt="no photo available"  />
               </div>
               <div class="footer mt-2">
                  <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
-              <!--    <app-photo-editor [docId]="0" [hospitalId]="pd.hospitalNo" [userId]="0" [refId]="0" (getMemberPhotoChange)="updatePhoto($event)">
-                </app-photo-editor>
-               --> 
-              
               </div>
             </div>
         </div>
@@ -159,7 +155,7 @@
 </div>
 <div class="card m-5" *ngIf="displayIR()">
   <div class="card-header">
-    <h5><span class="badge badge-info">Institutional Operative Report - {{pd.hospitalName}}</span>
+    <h5><span class="badge badge-info">Institutional Operative Report - {{pd.HospitalName}}</span>
       <span class="btn btn-success float-right" (click)="backToEdit()">Hospital details</span>
     </h5>
   </div>

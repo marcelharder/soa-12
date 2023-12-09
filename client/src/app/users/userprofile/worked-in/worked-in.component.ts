@@ -62,7 +62,7 @@ export class WorkedInComponent implements OnInit {
         if (this.currentHospital !== 0) {
             this.hos.getSpecificHospital(this.currentHospital).subscribe(
                 (response) => {
-                    this.Auth.changeCurrentHospital(response.hospitalName);
+                    this.Auth.changeCurrentHospital(response.HospitalName);
                 });
             this.user.hospital_id = this.currentHospital; // change the current hospital of the current user
             // send the changed user up to the parent
@@ -79,8 +79,8 @@ export class WorkedInComponent implements OnInit {
     addToListOfHospitals() {
         const a: Array<number> = [];
         this.hos.getSpecificHospital(this.selectedHospital).subscribe((res) => {
-            const help: dropItem = { value: +res.hospitalNo, description: res.hospitalName }
-            if (!this.OptionActiveHospitals.find(e => e.value === +res.hospitalNo)) {
+            const help: dropItem = { value: +res.HospitalNo, description: res.HospitalName }
+            if (!this.OptionActiveHospitals.find(e => e.value === +res.HospitalNo)) {
                 this.OptionActiveHospitals.push(help);
                 for (const row of this.OptionActiveHospitals) { a.push(row.value); }
                 this.user.worked_in = a.join(',');

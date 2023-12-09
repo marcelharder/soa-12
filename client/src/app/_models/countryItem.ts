@@ -1,6 +1,8 @@
 export interface countryItem {
-    Value: string;
+    Id: string;
     Description: string;
-    Tel_Code: string;
+    IsoCode: string;
+    TelCode: string;
+    Cities: string;
 
 }

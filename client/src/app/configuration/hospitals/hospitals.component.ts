@@ -88,8 +88,9 @@ export class HospitalsComponent implements OnInit  {
       this.currentHospital = next;
     });
     this.route.data.subscribe((data) => {
+      debugger;
       this.pd = data.hos;
-      this.hospitalService.IsThisHospitalUsingOVI(+this.pd.hospitalNo).subscribe((next)=>{
+      this.hospitalService.IsThisHospitalUsingOVI(+this.pd.HospitalNo).subscribe((next)=>{
         if(next){this.showOVITab = true} else {this.showOVITab = false}
       })
       //this.getCorrectCities();
@@ -102,7 +103,7 @@ export class HospitalsComponent implements OnInit  {
   }
 
   getCorrectCities() {
-    this.hospitalService.getListOfCities(this.pd.country).subscribe((next) => {
+    this.hospitalService.getListOfCities(this.pd.Country).subscribe((next) => {
       this.listCities = next;
     });
   }
@@ -197,7 +198,7 @@ export class HospitalsComponent implements OnInit  {
     this.alertify.show("Getting the valves in the online valve inventory");
 
     let help: Partial<hospitalValve> = {};
-   help.hospitalNo = +this.pd.hospitalNo;
+   help.hospitalNo = +this.pd.HospitalNo;
     help.soort = +this.searchType;
     help.implant_Position = this.searchPosition;
 
@@ -242,11 +243,11 @@ export class HospitalsComponent implements OnInit  {
       this.listCountries = JSON.parse(localStorage.getItem("optionCountries"));
     }
   }
-  updatePhoto(photoUrl: string) {this.pd.imageUrl = photoUrl;}
+  updatePhoto(photoUrl: string) {this.pd.ImageUrl = photoUrl;}
   
   IsLoaded() {
-    if (+this.pd.hospitalNo !== 0) {
-        this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.hospitalNo;
+    if (+this.pd.HospitalNo !== 0) {
+        this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.HospitalNo;
         return true;
     } else { return false; }
 }

@@ -153,7 +153,6 @@ export class DropdownService {
     getAllCities() { return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/citiesDrops'); }
     getRoles() { return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/roles'); }
     getCareerTopics(){return this.http.get<dropItem[]>(this.baseUrl + 'DropDown/career');}
-    // tslint:disable-next-line: max-line-length
     //#endregion
 
      //#region <!-- aneurysm -->

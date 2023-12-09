@@ -39,8 +39,7 @@ export class ValveService {
     deleteValve(id: number) { return this.http.delete<string>(this.baseUrl + 'Valve/' + id, { responseType: 'text' as 'json' }); }
 
 
-    getValveModels(type: string, position: string) { return this.http.get<dropItem[]>(this.baseUrl + 'Valve/models/' + type + '/' + position); }
-    getHospitalValves(type: string, position: string) { return this.http.get<hospitalValve[]>(this.baseUrl + 'Valve/hospitalValves/' + type + '/' + position); }
+     getHospitalValves(type: string, position: string) { return this.http.get<hospitalValve[]>(this.baseUrl + 'Valve/hospitalValves/' + type + '/' + position); }
 
 
     getSpecificHospitalValve(code: string) { return this.http.get<hospitalValve>(this.baseUrl + 'Valve/readHospitalValve/' + code); }

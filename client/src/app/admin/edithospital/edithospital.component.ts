@@ -30,7 +30,7 @@ export class EdithospitalComponent implements OnInit {
   ngOnInit(): void { }
 
   manageUsers(){
-    this.account.setCurrentHospitalId(+this.pd.hospitalNo);//post the currenthospitalId to the accountservice
+    this.account.setCurrentHospitalId(+this.pd.HospitalNo);//post the currenthospitalId to the accountservice
      // go to the employee edit page
     this.router.navigate(['/editEmployee']);
   }
@@ -43,12 +43,13 @@ export class EdithospitalComponent implements OnInit {
   Save(){this.hospitalservice.saveHospital(this.pd).subscribe((next)=>{this.cancelThis.emit(1); })}
   
    IsLoaded() {
-    if (+this.pd.hospitalNo !== 0) {
-        this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.hospitalNo;
+    if (+this.pd.HospitalNo !== 0) {
+        this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.HospitalNo;
         return true;
     } else { return false; }
 } 
-  updatePhoto(photoUrl: string) { this.pd.imageUrl = photoUrl;}
+  updatePhoto(photoUrl: string) {
+     this.pd.ImageUrl = photoUrl;}
 
   receiveDone(no: number){
     this.cancelThis.emit(1);

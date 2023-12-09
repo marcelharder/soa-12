@@ -379,59 +379,7 @@ namespace api.Helpers
             l.Add("80"); l.Add("81"); l.Add("82"); l.Add("83"); l.Add("85"); l.Add("86"); l.Add("871"); l.Add("872");
             return l;
         }
-        internal int getCountryCode(string input)
-        {
-            var result = 0;
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/countries.xml");
-            XDocument order = XDocument.Load(filename);
-            IEnumerable<XElement> help = from d in order.Descendants("Country")
-                                         where d.Element("ISO").Value == input
-                                         select d;
-
-            foreach (XElement country in help) { result = Convert.ToInt32(country.Element("ID").Value); }
-            return result;
-        }
-        internal string getCountryFromCode(int input)
-        {
-            var result = "";
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/countries.xml");
-            XDocument order = XDocument.Load(filename);
-            IEnumerable<XElement> help = from d in order.Descendants("Country")
-                                         where d.Element("ID").Value == input.ToString()
-                                         select d;
-
-            foreach (XElement country in help) { result = country.Element("ISO").Value; }
-            return result;
-        }
-        internal string getCountryNameFromCode(int input)
-        {
-            var result = "";
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/countries.xml");
-            XDocument order = XDocument.Load(filename);
-            IEnumerable<XElement> help = from d in order.Descendants("Country")
-                                         where d.Element("ID").Value == input.ToString()
-                                         select d;
-
-            foreach (XElement country in help) { result = country.Element("Description").Value; }
-            return result;
-        }
-        internal string getCountryNameFromISO(string input)
-        {
-            var result = "";
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/countries.xml");
-            XDocument order = XDocument.Load(filename);
-            IEnumerable<XElement> help = from d in order.Descendants("Country")
-                                         where d.Element("ISO").Value == input
-                                         select d;
-
-            foreach (XElement country in help) { result = country.Element("Description").Value; }
-            return result;
-        }
-
+      
         public bool getEligibleForEuroscoreCalculation(int input)
         {
             var help = false;
@@ -502,7 +450,18 @@ namespace api.Helpers
 
             return help;
         }
-
+        public string getReportCode(int fdType)
+        {
+            var result = "";
+            var contentRoot = _env.ContentRootPath;
+            var filename = Path.Combine(contentRoot, "conf/procedure.xml");
+            XDocument order = XDocument.Load(filename);
+            IEnumerable<XElement> help = from d in order.Descendants("Code")
+                                         where d.Element("ID").Value == fdType.ToString()
+                                         select d;
+            foreach (XElement x in help) { result = x.Element("report_code").Value; }
+            return result;
+        }
         
 
         #endregion

@@ -11,6 +11,7 @@ import { AccountService } from 'src/app/_services/account.service';
 import { countryItem } from 'src/app/_models/countryItem';
 import { take } from 'rxjs/operators';
 import { changePassword } from 'src/app/_models/changePassword';
+import { dropItem } from 'src/app/_models/dropItem';
 
 
 @Component({
@@ -111,6 +112,7 @@ export class UserProfileComponent implements OnInit {
        }
 
     loadDrops() {
+        debugger;
         const d = JSON.parse(localStorage.getItem('optionCountries'));
         if (d == null || d.length === 0) {
             this.drops.getAllCountries().subscribe((response) => {
@@ -131,7 +133,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     changeCountry() {
-       let help = this.optionCountries.find(z => z.Value === this.user.country);
+       let help = this.optionCountries.find(z => z.IsoCode === this.user.country);
         this.countryWhereUserLives = help.Description;
     }
 

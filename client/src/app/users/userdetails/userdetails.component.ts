@@ -30,9 +30,8 @@ export class UserdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.selectedCountry = this.user.country;
 
-    this.drops.getAllHospitals().subscribe(response => {
+    this.drops.getAvailableHospitals(this.selectedCountry).subscribe(response => {
       this.hospitals = response;
-      this.hospitals.unshift({value:0,description:"Choose"});
     }, (error) => { console.log(error); });
   
   this.loadDrops();
@@ -61,7 +60,7 @@ export class UserdetailsComponent implements OnInit {
         if (d == null || d.length === 0) {
             this.drops.getAllCountries().subscribe((response) => {
                 this.optionCountries = response;
-                this.optionCountries.unshift({Value:"",Description:"Choose",Tel_Code:""}); 
+                this.optionCountries.unshift({Id:"",Description:"Choose",TelCode:"",IsoCode:"",Cities:""}); 
                 localStorage.setItem('optionCountries', JSON.stringify(response));
             });
         } else {

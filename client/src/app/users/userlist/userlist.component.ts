@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
+import { countryItem } from 'src/app/_models/countryItem';
 import { dropItem } from 'src/app/_models/dropItem';
 import { User } from 'src/app/_models/User';
 import { AccountService } from 'src/app/_services/account.service';
@@ -31,10 +32,12 @@ export class UserlistComponent implements OnInit {
   position = "";
   currentUserId = 0;
   currentHospital = 0;
+  currentHospitalName = "";
   currentCountry = "";
   
   hospitals: Array<dropItem> = [];
-  value?: string = 'User management';
+  countries: Array<countryItem> = [];
+ value?: string = 'User management';
   editFlag = 0;
   addFlag = 0;
   constructor(
@@ -47,15 +50,20 @@ export class UserlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.currentUser$.pipe(take(1)).subscribe((u) => { this.currentUserId = u.UserId; });
-    this.drop.getAllHospitals().subscribe(response => {
-      this.hospitals = response;
-      this.currentHospital = response[0].value
-    }, (error) => { console.log(error); });
-
+    this.drop.getAllCountries().subscribe((next)=>{
+      this.countries = next;
+    });
     this.loadDrops();
     this.getUsers();
   }
   loadDrops() {}
+
+  selectCountry(){
+    this.drop.getAvailableHospitals(this.currentCountry).subscribe(response => {
+      this.hospitals = response;
+      
+    }, (error) => { console.log(error); });
+  }
 
   LookUpUserId(){
     if(this.lookupId !== 0){ 
@@ -84,9 +92,14 @@ export class UserlistComponent implements OnInit {
   getPosition(ltk: boolean) { if (ltk) { return "Surgeon" } else { return "Resident" } }
 
   selectUserPerHospital() {
+   this.users = this.allUsers.filter(a => a.hospital_id == this.currentHospital);
    
-    
-    this.users = this.allUsers.filter(a => a.hospital_id == this.currentHospital);}
+   var help = this.hospitals.filter(a => a.value == this.currentHospital);
+   this.currentHospitalName = help[0].description;
+  
+  
+  
+  }
 
   editUser(id: number) {
     this.userService.getUser(id).subscribe((next)=>{
@@ -107,21 +120,29 @@ export class UserlistComponent implements OnInit {
 
 
   AddUser() {
-     this.editFlag = 0; this.addFlag = 1; }
+     if(this.hospitals.length !== 0){this.editFlag = 0; this.addFlag = 1; } else {this.alertify.warning("Select a hospital first")}
+     }
 
-  returnFromAddUser(newUserId: number){
-    this.userService.getUser(newUserId).subscribe((next)=>{
-      this.user = next;
-      this.user.hospital_id = this.currentHospital;
-      this.editFlag = 1; this.addFlag = 0;
-    }, (error)=> {this.alertify.error(error)});
+  returnFromAddUser(newUser: User){
+  
+  newUser.country = this.currentCountry;
+  newUser.hospital_id = this.currentHospital;
+  debugger;
+  if(this.currentCountry !== "" && this.currentHospital !== 0){
+    debugger
+    this.userService.addUser(newUser).subscribe((next) => {
+      this.alertify.success("New user added ...");},(error)=> {this.alertify.error(error)});
+  }
+  
+  
+  
   }
 
   cancelAdd(){this.editFlag = 0; this.addFlag = 0;};
   cancelEdit(){this.editFlag = 0; this.addFlag = 0;};
 
   showEdit() { if (this.editFlag === 1) return true; }
-  showAdd() { if (this.addFlag === 1) return true; }
+  showAdd() { if (this.addFlag === 1 ) return true; }
 
   deleteUser(id: number) {
     this.userService.deleteUser(id).subscribe((next)=>{

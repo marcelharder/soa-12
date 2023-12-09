@@ -12,6 +12,7 @@ namespace api.DTOs
         public string password { get; set; }
         public string country {get; set;}
         public string city {get; set;}
+        public int hospital_id {get; set;}
         [Required] public string currentHospital {get; set;}
         public string email {get; set;}
         public string gender {get; set;}

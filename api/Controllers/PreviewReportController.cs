@@ -15,6 +15,7 @@ using System.Xml.Linq;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using api.Entities;
 
 namespace api.Controllers
 {
@@ -23,22 +24,36 @@ namespace api.Controllers
     {
 
         private IOptions<ComSettings> _com;
-        private IValveRepository _valve;
-        private ICABGRepository _cabg;
         private IProcedureRepository _proc;
-        private IWebHostEnvironment _env;
-
+        private ICABGRepository _cabg;
+        private IValveRepository _valve;
+        private SpecialMaps _sp;
+        
         public PreviewReportController(
-            IOptions<ComSettings> com,
-            ICABGRepository cabg,
-            IValveRepository valve,
-           IProcedureRepository proc, IWebHostEnvironment env)
-        {
-            _proc = proc;
-            _cabg = cabg;
-            _valve = valve;
+            IOptions<ComSettings> com, IProcedureRepository proc, IValveRepository valve, ICABGRepository cabg, SpecialMaps sp)
+        {          
             _com = com;
-            _env = env;
+            _proc = proc;
+            _valve = valve;
+            _cabg = cabg;
+            _sp = sp;
+        }
+
+        [HttpGet("reportHeader/{procedure_id}")]
+        public async Task<IActionResult> GetAsync(int procedure_id)
+        {
+            var comaddress = _com.Value.reportURL;
+            var st = "PreViewReport/getReportHeader/" + procedure_id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    var hup = await response.Content.ReadAsStringAsync();
+                    return Ok(hup);
+                }
+            }
+            
         }
 
 
@@ -55,11 +70,8 @@ namespace api.Controllers
                 {
                     help = await response.Content.ReadAsStringAsync();
                     return Ok(help);
-
-
                 }
             }
-
         }
 
         [HttpGet("reset/{id}")]
@@ -84,7 +96,8 @@ namespace api.Controllers
         {
             var result = 0;
             var procedure = await _proc.GetProcedure(id); if (procedure == null) { return result; }
-            var reportcode = Convert.ToInt32(getReportCode(procedure.fdType));
+           // var reportcode = Convert.ToInt32(await getReportCode(procedure.fdType));
+            var reportcode = Convert.ToInt32(_sp.getReportCode(procedure.fdType));
 
 
             if (reportcode == 1 || reportcode == 2) // these are the cabg procedures
@@ -124,8 +137,28 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-        private string getReportCode(int fdType)
+       
+       
+       
+        private async Task<int> getReportCode(int fdType)
         {
+
+            var help = 0;
+            var comaddress = _com.Value.reportURL;
+            var st = "PreViewReport/getReportCode/" + fdType;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = Convert.ToInt32(await response.Content.ReadAsStringAsync());
+                }
+            }
+            return help;
+/* 
+
+
+
             var result = "";
             var contentRoot = _env.ContentRootPath;
             var filename = Path.Combine(contentRoot, "conf/procedure.xml");
@@ -134,7 +167,7 @@ namespace api.Controllers
                                          where d.Element("ID").Value == fdType.ToString()
                                          select d;
             foreach (XElement x in help) { result = x.Element("report_code").Value; }
-            return result;
+            return result; */
         }
     }
 }

@@ -1,14 +1,14 @@
 export interface Hospital {
-    hospitalName: string;
-    selected_hospital_name: string;
-    hospitalNo:string;
-    description: string;
-    imageUrl: string;
-    city: string;
-    address: string;
-    country: string;
-    telephone: string;
-    usesOnlineValveInventory: boolean;
+    HospitalName: string;
+    SelectedHospitalName: string;
+    HospitalNo:string;
+    Description: string;
+    ImageUrl: string;
+    City: string;
+    Address: string;
+    Country: string;
+    Telephone: string;
+    UsesOnlineValveInventory: boolean;
     OpReportDetails1: string;
     OpReportDetails2: string;
     OpReportDetails3: string;

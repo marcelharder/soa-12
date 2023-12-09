@@ -18,7 +18,7 @@ namespace api.Controllers
     public class DropDownController : BaseApiController
     {
         private readonly Microsoft.Extensions.Options.IOptions<ComSettings> _com;
-      
+
         private IEmployeeRepository _emp;
         private SpecialMaps _sp;
         List<Class_Item> _result = new List<Class_Item>();
@@ -30,7 +30,7 @@ namespace api.Controllers
             IEmployeeRepository emp,
              OperatieDrops copd)
         {
-         _com = com;
+            _com = com;
             _emp = emp;
             _copd = copd;
             _sp = sp;
@@ -42,45 +42,42 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> getHO(int id)
         {
-            _result = await _copd.getHospitalOptions(id); 
-            
-            if(_result != null){return Ok(_result);}
-            
-            
+            _result = await _copd.getHospitalOptions(id);
+            if (_result != null) { return Ok(_result); }
             return BadRequest("user not found");
         }
-       
-        [Route("availableHospitalOptions/{country}")]
+
+        [Route("availableHospitalOptions/{country}")] 
         [HttpGet]
         public async Task<IActionResult> getAHO(string country)
         {
             _result = await _copd.getAvailableHospitalOptions(country); return Ok(_result);
         }
- 
+
         [Route("allHospitals")]
         [HttpGet]
         public async Task<IActionResult> getHO()
         {
             var help = new List<Class_Item>();
             var comaddress = _com.Value.hospitalURL;
-            var st = "Hospital/allFullHospitals";
+            var st = "Hospital/allHospitalItems";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     var test = await response.Content.ReadAsStringAsync();
-                    help = JsonSerializer.Deserialize<List<Class_Item>>(test);
+                   // help = JsonSerializer.Deserialize<List<Class_Item>>(test);
+                    return Ok(help);
                 }
             }
+        }
 
-            return Ok(help);
-           }
 
-       
         #endregion
-        
+
         #region <!--cities-->
+
         [Route("countriesDrops")]// get all the countries with possibe hospitals
         [HttpGet]
         public async Task<IActionResult> getThing02()
@@ -94,27 +91,31 @@ namespace api.Controllers
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     test = await response.Content.ReadAsStringAsync();
+                    return Ok(test);
                 }
             }
-            return Ok(test);
+
         }
+
         [Route("citiesDrops")]
         [HttpGet]
         public async Task<IActionResult> getThing12()
         {
             var test = "";
             var comaddress = _com.Value.hospitalURL;
-            var st = "Coutry/allCities";
+            var st = "Country/allCities";
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     test = await response.Content.ReadAsStringAsync();
+                    return Ok(test);
                 }
             }
-            return Ok(test);
+
         }
+
         [Route("citiesPerCountry/{id}")]
         [HttpGet]
         public async Task<IActionResult> getThing122(string id)
@@ -128,13 +129,14 @@ namespace api.Controllers
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     test = await response.Content.ReadAsStringAsync();
+                    return Ok(test);
                 }
             }
-             return Ok(test);
+
         }
         #endregion
         #region <!--cpb -->
-        
+
         [Route("iabp_when")]
         [HttpGet]
         public async Task<IActionResult> getGeneral_073() { _result = await _copd.getCPB_iabp_timing(); return Ok(_result); }
@@ -376,7 +378,7 @@ namespace api.Controllers
             await Task.Run(() => { _result = _copd.getArray(id); }); return Ok(_result);
         }
 
- #endregion
+        #endregion
         #region <!--cabg -->
 
         [Route("cabg_quality")]
@@ -475,7 +477,7 @@ namespace api.Controllers
             return Ok(result);
         }
 
-      
+
         [Route("career")]
         [HttpGet]
         public async Task<IActionResult> getCareer()
@@ -629,6 +631,6 @@ namespace api.Controllers
         public async Task<IActionResult> getGeneral_072() { _result = await _copd.getFollow_3(); return Ok(_result); }
         #endregion
 
-       
+
     }
 }

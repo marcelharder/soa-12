@@ -32,7 +32,7 @@ export class AddhospitalComponent implements OnInit {
       // now substract all the hospitals that are in the already selected list
       for (let i of this.listOfHospitals) {
         for (let h of this.alreadySelected) {
-          if (h.hospitalNo == i.value.toString()) {
+          if (h.HospitalNo == i.value.toString()) {
             // this means that the hospital is already in my list
             // so remove this hospitalnumber from the list of hospitals array
             this.listOfHospitals = this.listOfHospitals.filter(item => item.value !== i.value);
@@ -45,11 +45,11 @@ export class AddhospitalComponent implements OnInit {
 
   Select() {
     this.hospitalService.getSpecificHospitalFromInventory(+this.selectedHospital).subscribe((next) => {
-      this.pd.hospitalNo = next.hospitalNo;
-      this.pd.hospitalName = next.hospitalName;
-      this.pd.address = next.address;
-      this.pd.country = next.country;
-      this.pd.telephone = next.telephone;
+      this.pd.HospitalNo = next.HospitalNo;
+      this.pd.HospitalName = next.HospitalName;
+      this.pd.Address = next.Address;
+      this.pd.Country = next.Country;
+      this.pd.Telephone = next.Telephone;
       //this.pd.imageUrl = next.imageUrl;
       this.pushHospital.emit(this.pd);
     })

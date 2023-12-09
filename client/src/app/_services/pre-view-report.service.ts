@@ -17,7 +17,7 @@ export class PreViewReportService {
 
     isFinalReportPresentable(procedureId:number){return this.http.get<number>(this.baseUrl + 'previewReport/isFinalReportReady/' + procedureId);}
 
-    getReportHeader(procedureId: number) { return this.http.get<reportHeader>(this.baseUrl + 'reportHeader/' + procedureId);}
+    getReportHeader(procedureId: number) { return this.http.get<reportHeader>(this.baseUrl + 'previewReport/reportHeader/' + procedureId);}
 
     getPreView(id: number) { return this.http.get<previewReport>(this.baseUrl + 'previewReport/' + id); }
     

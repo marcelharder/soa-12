@@ -14,7 +14,7 @@
                         <div class="col-sm-6">
                             <select [(ngModel)]="selectedCountry" (change)="changeCountry()" name="selectCountry"
                                 class="form-control" id="sh">
-                                <option *ngFor="let item of optionCountries" [value]=item.value>{{ item.description }}
+                                <option *ngFor="let item of optionCountries" [value]=item.IsoCode>{{ item.Description }}
                                 </option>
                             </select>
                         </div>
