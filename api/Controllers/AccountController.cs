@@ -111,6 +111,7 @@ namespace api.Controllers
                 UserName = user.UserName,
                 Token = await _ts.CreateToken(user),
                 UserId = user.Id,
+                KnownAs = user.KnownAs,
                 paidTill = user.PaidTill
             };
 
