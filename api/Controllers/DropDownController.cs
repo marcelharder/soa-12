@@ -96,13 +96,13 @@ namespace api.Controllers
                     test = await response.Content.ReadAsStringAsync();
                 }
             }
-             return Ok(test);
+            return Ok(test);
         }
         [Route("citiesDrops")]
         [HttpGet]
         public async Task<IActionResult> getThing12()
         {
-             var test = "";
+            var test = "";
             var comaddress = _com.Value.hospitalURL;
             var st = "Coutry/allCities";
             comaddress = comaddress + st;
@@ -113,7 +113,7 @@ namespace api.Controllers
                     test = await response.Content.ReadAsStringAsync();
                 }
             }
-             return Ok(test);
+            return Ok(test);
         }
         [Route("citiesPerCountry/{id}")]
         [HttpGet]
