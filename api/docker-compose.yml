@@ -33,7 +33,7 @@ services:
      - internal-container-network 
   
   hospital:
-    image: hospital_app:v1
+    image: hospital_app:v5
     ports:
      - 8103:80
     networks:
@@ -51,7 +51,7 @@ services:
       - db 
  
   reports:
-    image: reports:v23
+    image: reports:v25
     ports:
      - 8089:80
     networks:
@@ -72,19 +72,19 @@ services:
     depends_on: 
      - db
 
-  #tracPersonal:
-  #  image: sql_app:v94
-  #  ports:
-  #   - 8086:80
-  #  networks: 
-  #   - internal-container-network
-  #  volumes:
-  #   - sqldata:/root/.aspnet/DataProtection-Keys
-  #   - pdf-data:/App/assets/pdf
-  #  depends_on: 
-  #   - db
-  #   - comservice
-  #   - onlinevalve_md
+  tracPersonal:
+    image: sql_app:v99
+    ports:
+     - 8086:80
+    networks: 
+     - internal-container-network
+    volumes:
+     - sqldata:/root/.aspnet/DataProtection-Keys
+     - pdf-data:/App/assets/pdf
+    depends_on: 
+     - db
+     - comservice
+     - onlinevalve_md
 
 volumes:
  mariadb-data:
