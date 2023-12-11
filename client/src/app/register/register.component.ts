@@ -118,6 +118,7 @@ export class RegisterComponent implements OnInit {
 
   changeCountry() {
     let country = this.registerForm?.value.country;
+    if(country !== undefined){
     this.drops.getAvailableHospitals(country).subscribe(
       (next) => {
         this.hospitals = next;
@@ -127,7 +128,7 @@ export class RegisterComponent implements OnInit {
         }
         else { this.alertify.show("Congratulations, you found the error"); } */
       });
-  }
+  }}
 
   registerNewUser() {
     if (this.registerForm.status === "VALID") {
