@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { countryItem } from '../_models/countryItem';
 import { dropItem } from '../_models/dropItem';
 import { User } from '../_models/User';
@@ -48,7 +47,7 @@ export class RegisterComponent implements OnInit {
   initializeForm() {
     this.registerForm = this.fb.group({
       UserName: ['', [Validators.required, Validators.email]],
-      country: ['', [Validators.required]],
+      country: ['US', [Validators.required]],
       knownAs: ['', [Validators.required]],
       currentHospital: ['', [Validators.required]],
       city: ['', [Validators.required]],
