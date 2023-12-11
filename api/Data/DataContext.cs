@@ -21,8 +21,7 @@ namespace api.Data
         public DbSet<Class_Employee> Employees { get; set; }
         public DbSet<Class_Patient> Patients { get; set; }
         public DbSet<Class_Procedure> Procedures { get; set; }
-        
-        public DbSet<Class_Valve_Code> ValveCodes { get; set; }
+        public DbSet<Class_Valve_Code> Class_Valve_Code { get; set; }
         public DbSet<Class_Valve> Valves { get; set; }
         public DbSet<Class_CABG> CABGS { get; set; }
         public DbSet<Class_CPB> CPBS { get; set; }
