@@ -8,7 +8,7 @@ export interface valveType {
         model_code: string;
         implant_position: string;
         uk_code: string;
-        us_code: string;
+        code: string;
         image: string;
         valve_size: any[];
         description: string;

@@ -4,13 +4,13 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="card" *ngIf="showPanel_2()">
-            <div class="card-header">Choose a {{hv.implant_Position | lowercase}} valve from the valves in your hospital</div>
+            <div class="card-header">Choose a {{hv.Implant_position | lowercase}} valve from the valves in your hospital</div>
             <div class="card-body">
               <div class="row">
                 <div class="d-flex">
                   <div class="p-2"><span class="badge badge-secondary">Type of prosthesis</span></div>
                   <div class="p-2">
-                    <select [(ngModel)]="hv.type" name="aorticTypeImplant" class="form-control">
+                    <select [(ngModel)]="hv.Type" name="aorticTypeImplant" class="form-control">
                       <option *ngFor="let item of optionsTypes" [value]=item.description>{{ item.description }}</option>
                     </select>
                   </div>
@@ -46,7 +46,7 @@
           <div class="card" *ngIf="showPanel_3()">
            <app-add-valve  
            [svtid]="selectedValveTypeId" 
-           [implant_position]="hv.implant_Position"
+           [implant_position]="hv.Implant_position"
            (pushValve)="receiveNewValve($event)"
            ></app-add-valve> 
           </div>

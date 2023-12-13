@@ -35,7 +35,7 @@ namespace api.Helpers
             CreateMap<AppUser, UserForReturnDto>();
             CreateMap<UserForUpdateDto, AppUser>();
            
-           CreateMap<Class_Valve_Code, valveDTO>();
+           CreateMap<Class_Valve_Code, Valve_Code>();
 
             
             CreateMap<Class_Employee, EmployeeForReturnDTO>();

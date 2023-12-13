@@ -33,14 +33,20 @@ export class GamecardComponent implements OnInit {
   currentProcedureId = 0;
   currentHospitalName="";
   hv: hospitalValve = {
-    codeId: 0,
-    code: "",
-    valveTypeId: 0,
-    description: "",
-    implant_Position: "Aortic",
+    Implant_position: "Aortic",
+    ValveTypeId: 0,
+    hospitalId: '',
+    No: 0,
+    Vendor_description: '',
+    Vendor_code: 0,
+    Valve_size: undefined,
+    Model_code: '',
+    uk_code: '',
     soort: 1,
-    type: "",
-    hospitalNo: 0
+    image: '',
+    Description: '',
+    Type: '',
+    countries: ''
   };
   pd: Valve = {
     Id: 0, Hospitalno:0,Implant_Position: '', IMPLANT: '', EXPLANT: '', SIZE: '', TYPE: '', SIZE_EXP: '',
@@ -72,13 +78,12 @@ export class GamecardComponent implements OnInit {
     })
 
     //So the conduitType is chosen, now add a hospitalValve from the conduit type
-    const index = this.OAC.findIndex(a => a.valveTypeId === x);
+    const index = this.OAC.findIndex(a => a.ValveTypeId === x);
     this.hv = this.OAC[index];
     
     // show card to enter details mn serial no and save this ring
     this.pd.SERIAL_IMP = '';
-    this.pd.MODEL = this.hv.code;
-    this.pd.TYPE = this.hv.type;
+    this.pd.TYPE = this.hv.Type;
     this.vs.getValveCodeSizes(x).subscribe((next) => { this.optionConduitSizes = next; });
 
     this.cardClicked();
@@ -87,8 +92,7 @@ export class GamecardComponent implements OnInit {
   saveConduitDetails() {
 
 
-    this.pd.TYPE = this.hv.type;
-    this.pd.MODEL = this.hv.code;
+    this.pd.TYPE = this.hv.Type;
     
     this.vs.saveValvedConduit(this.pd).subscribe((next) => {
       this.tell.emit(this.pd);

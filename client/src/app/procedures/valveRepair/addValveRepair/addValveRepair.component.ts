@@ -131,18 +131,18 @@ export class AddValveRepairComponent implements OnInit {
           let help: Partial<hospitalValve> = {};
 
           if (this.displayOVIStatus()) {// get the rings from OVI
-            help.hospitalNo = this.currentHospitalNo;
+            help.hospitalId = this.currentHospitalNo.toString();
             help.soort = 4;
-            help.implant_Position = "2";
+            help.Implant_position = "2";
             this.alertify.info("Getting rings from the OVI")
             this.vs.getValvesFromOVI(help).subscribe((next) => {
               this.optionsAvailableMitralRingsFromOVI = next;
             })
           } else {// get the rings from the current hospital
             this.alertify.info("Getting rings from the hospital");
-            help.type = "Annuloplasty_Ring"
-            help.implant_Position = "Mitral";
-            this.vs.getHospitalValves(help.type, help.implant_Position).subscribe(
+            help.Type = "Annuloplasty_Ring"
+            help.Implant_position = "Mitral";
+            this.vs.getHospitalValves(help.Type, help.Implant_position).subscribe(
               (next) => { this.optionsAvailableMitralRings = next; },
               (error) => { this.alertify.warning(error) });
           }
@@ -158,20 +158,20 @@ export class AddValveRepairComponent implements OnInit {
                
         let help: Partial<hospitalValve> = {};
         if (this.displayOVIStatus()) {// get the rings from OVI
-          help.hospitalNo = this.currentHospitalNo;
+          help.hospitalId = this.currentHospitalNo.toString();
           help.soort = 4;
-          help.implant_Position = "4";
+          help.Implant_position = "4";
           this.alertify.info("Getting rings from the OVI")
           this.vs.getValvesFromOVI(help).subscribe((next) => {
             this.optionsAvailableTricuspidRingsFromOVI = next;
           })
         } else {// get the rings from the current hospital
           this.alertify.info("Getting rings from the hospital");
-          help.hospitalNo = this.currentHospitalNo;
+          help.hospitalId = this.currentHospitalNo.toString();
           help.soort = 4;
-          help.type = "Annuloplasty_Ring"
-          help.implant_Position = "Tricuspid";
-          this.vs.getHospitalValves(help.type, help.implant_Position).subscribe(
+          help.Type = "Annuloplasty_Ring"
+          help.Implant_position = "Tricuspid";
+          this.vs.getHospitalValves(help.Type, help.Implant_position).subscribe(
             (next) => {this.optionsAvailableTricuspidRings = next; },
             (error) => {this.alertify.warning(error) });
         }

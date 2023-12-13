@@ -49,7 +49,7 @@ export class ValvedetailsComponent implements OnInit {
     model_code: '',
     implant_position: '',
     uk_code: '',
-    us_code: '',
+    code: '',
     valve_size:[],
     image: '',
     description: '',
@@ -99,7 +99,7 @@ export class ValvedetailsComponent implements OnInit {
   
 
   getModelsInHospital() {
-    this.vs.getHospitalValves(this.hv.type, this.hv.implant_Position).subscribe(
+    this.vs.getHospitalValves(this.hv.Type, this.hv.Implant_position).subscribe(
       (next) => { this.hospitalValves = next }, (error) => { this.alertify.error(error) })
   }
 

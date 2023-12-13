@@ -45,7 +45,16 @@ services:
       - internal-container-network
     depends_on:
       - db 
- 
+  
+  product:
+    image: product_app:v1
+    networks:
+      - internal-container-network
+    depends_on:
+      - db
+    ports:
+     - 8104:80
+     
   reports:
     image: reports:v25
     networks:

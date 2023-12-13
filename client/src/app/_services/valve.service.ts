@@ -39,9 +39,7 @@ export class ValveService {
     deleteValve(id: number) { return this.http.delete<string>(this.baseUrl + 'Valve/' + id, { responseType: 'text' as 'json' }); }
 
 
-     getHospitalValves(type: string, position: string) { return this.http.get<hospitalValve[]>(this.baseUrl + 'Valve/hospitalValves/' + type + '/' + position); }
-
-
+    getHospitalValves(type: string, position: string) { return this.http.get<hospitalValve[]>(this.baseUrl + 'Valve/hospitalValves/' + type + '/' + position); }
     getSpecificHospitalValve(code: string) { return this.http.get<hospitalValve>(this.baseUrl + 'Valve/readHospitalValve/' + code); }
     deleteSpecificHospitalValve(codeId: number) { return this.http.delete<string>(this.baseUrl + 'Valve/deleteHospitalValve/' + codeId, { responseType: 'text' as 'json' }); }
     updateSpecificHospitalValve(hv: hospitalValve) { return this.http.put<string>(this.baseUrl + 'Valve/updateHospitalValve', hv, { responseType: 'text' as 'json' }); }
@@ -75,7 +73,7 @@ export class ValveService {
     }
 
     getValvesFromOVI(help: Partial<hospitalValve>) {
-        return this.http.get<OVIvalve[]>(this.baseUrl + 'Valve/valvesfromOVIforSOA/' + help.hospitalNo + "/" + help.soort + "/" + help.implant_Position)
+        return this.http.get<OVIvalve[]>(this.baseUrl + 'Valve/valvesfromOVIforSOA/' + help.hospitalId + "/" + help.Type + "/" + help.Implant_position)
     }
     markValve(serial: string, status: number, procedureId: number) {
         return this.http.get<string>(this.baseUrl + 'General/markValve/' + serial + "/" + status + "/" + procedureId, { responseType: 'text' as 'json' })

@@ -221,24 +221,7 @@ namespace api.Controllers
         #endregion
         #region <!-- valve stuff -->
 
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("products/{type}/{position}")]
-        public async Task<IActionResult> getValveById(string type, string position)
-        {
-            var result = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "products/" + type + '/' + position;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(result);
-        }
+        
 
         [HttpGet]
         [AllowAnonymous]
@@ -268,7 +251,7 @@ namespace api.Controllers
 
         }
 
-        [HttpGet]
+      /*   [HttpGet]
         [AllowAnonymous]
         [Route("productByValveTypeId/{id}")]
         public async Task<IActionResult> getVVID(int id)
@@ -325,6 +308,7 @@ namespace api.Controllers
             return Ok(result);
         }
 
+ */
         [HttpGet]
         [AllowAnonymous]
         [Route("markValve/{serial}/{status}/{procedureId}")]

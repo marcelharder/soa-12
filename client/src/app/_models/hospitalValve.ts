@@ -1,12 +1,20 @@
 export interface hospitalValve {
-    codeId: number;
-    code: string,
-    soort: number,
-    valveTypeId: number,
-    description: string,
-    implant_Position: string,
-    type: string,
-    hospitalNo: number
+
+    ValveTypeId:number;
+    hospitalId:string;
+    No:number;
+    Vendor_description:string;
+    Vendor_code:number;
+    Valve_size:any;
+    Model_code:string;
+    Implant_position:string;
+    uk_code:string;
+    soort:number;
+    image:string;
+    Description:string;
+    Type:string;
+    countries:string;
+    
     
 
 }

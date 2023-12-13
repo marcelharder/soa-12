@@ -61,7 +61,7 @@ export class AddValveComponent implements OnInit {
     implant_position: '',
     valve_size:[],
     uk_code: '',
-    us_code: '',
+    code: '',
     image: '',
     description: '',
     type: '',

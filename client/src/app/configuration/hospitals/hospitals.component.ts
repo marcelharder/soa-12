@@ -25,14 +25,20 @@ export class HospitalsComponent implements OnInit  {
   targetUrl="";
   baseUrl = environment.apiUrl;
   hv: hospitalValve = {
-    codeId: 0,
-    code: "",
-    valveTypeId: 0,
-    description: "",
-    implant_Position: "Aortic",
+    ValveTypeId: 0,
+    Description: "",
+    Implant_position: "Aortic",
+    Type: "",
+    hospitalId: "0",
+    Vendor_code: 0,
+    Vendor_description: "",
+    Valve_size: null,
+    No: 0,
+    Model_code: '',
+    uk_code: '',
     soort: 1,
-    type: "",
-    hospitalNo: 0
+    image: '',
+    countries: ''
   };
   vt: valveType = {
     no: 0,
@@ -42,7 +48,7 @@ export class HospitalsComponent implements OnInit  {
     model_code: "",
     implant_position: "",
     uk_code: "",
-    us_code: "",
+    code: "",
     valve_size:[],
     image: "",
     description: "",
@@ -62,7 +68,6 @@ export class HospitalsComponent implements OnInit  {
   TitleDetailsForm = "Details";
   currentHospital = "";
   selectedOnlineValve = "";
-  searchType = "";
   searchPosition = "";
   showOVITab = false;
 
@@ -113,7 +118,7 @@ export class HospitalsComponent implements OnInit  {
   SearchValve() {
     this.addbutton = 1;
     this.vs
-      .getHospitalValves(this.hv.type, this.hv.implant_Position)
+      .getHospitalValves(this.hv.Type, this.hv.Implant_position)
       .subscribe((next) => {
         this.hospitalValves = next;
       });
@@ -141,7 +146,7 @@ export class HospitalsComponent implements OnInit  {
   SearchHospitalValve() {
     this.onlineValves = [];
     // go out to online valve app and find the valveTypes[]
-    this.vs.searchHospitalValveOnline(this.hv.type, this.hv.implant_Position).subscribe((next) => { this.onlineValves = next; });
+    this.vs.searchHospitalValveOnline(this.hv.Type, this.hv.Implant_position).subscribe((next) => { this.onlineValves = next; });
     this.alertify.show("find product now ...");
   }
   deleteDetails(code:string){
@@ -170,11 +175,11 @@ export class HospitalsComponent implements OnInit  {
       .subscribe((next) => {
         this.vt = next;
         // then copy some of these details to the hospital valve
-        this.hv.code = this.vt.uk_code;
-        this.hv.valveTypeId = this.vt.valveTypeId;
-        this.hv.description = this.vt.description;
-        this.hv.implant_Position = this.vt.implant_position;
-        this.hv.type = this.vt.type;
+        this.hv.uk_code = this.vt.uk_code;
+        this.hv.ValveTypeId = this.vt.valveTypeId;
+        this.hv.Description = this.vt.description;
+        this.hv.Implant_position = this.vt.implant_position;
+        this.hv.Type = this.vt.type;
         // upload this valve to the current hospital
         this.vs.createSpecificHospitalValve(this.hv).subscribe(
           (next) => {
@@ -198,9 +203,8 @@ export class HospitalsComponent implements OnInit  {
     this.alertify.show("Getting the valves in the online valve inventory");
 
     let help: Partial<hospitalValve> = {};
-   help.hospitalNo = +this.pd.HospitalNo;
-    help.soort = +this.searchType;
-    help.implant_Position = this.searchPosition;
+    help.hospitalId = this.pd.HospitalNo;
+    help.Implant_position = this.searchPosition;
 
     this.vs.getValvesFromOVI(help).subscribe((next) => {
       this.OVIValves = next;

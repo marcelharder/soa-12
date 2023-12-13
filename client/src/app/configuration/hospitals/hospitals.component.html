@@ -99,7 +99,7 @@
                           <div class="col-sm-5">
                             <div class="row">
                               <div class="col-sm-4">Type:</div>
-                              <div class="col-sm-8"><select [(ngModel)]="hv.type" name="hv23" class="form-control">
+                              <div class="col-sm-8"><select [(ngModel)]="hv.Type" name="hv23" class="form-control">
                                   <option *ngFor="let an of valveTypes" [value]=an.description>{{ an.description }}
                                   </option>
                                 </select>
@@ -109,7 +109,7 @@
                           <div class="col-sm-5">
                             <div class="row">
                               <div class="col-sm-4">Position:</div>
-                              <div class="col-sm-8"><select [(ngModel)]="hv.implant_Position" name="pos" class="form-control">
+                              <div class="col-sm-8"><select [(ngModel)]="hv.Implant_position" name="pos" class="form-control">
                                   <option *ngFor="let an of valvePositions" [value]=an.description>{{ an.description }}
                                   </option>
                                 </select>

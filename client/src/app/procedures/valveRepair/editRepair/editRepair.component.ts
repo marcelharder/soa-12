@@ -159,17 +159,17 @@ export class EditRepairComponent implements OnInit {
   private getListOfProducts(ovi: boolean, location: number, help: Partial<hospitalValve>){
      if(ovi){ // look in the online registry
       if(location === 1){ // mitral position
-        help.hospitalNo = this.currentHospitalNo;
+        help.hospitalId = this.currentHospitalNo.toString();
         help.soort = 4;
-        help.implant_Position = "2";
+        help.Implant_position = "2";
         this.alertify.info("Getting rings from the OVI")
         this.valveService.getValvesFromOVI(help).subscribe((next) => {
           this.optionsAvailableMitralRingsFromOVI = next;
         })
       } else { // tricuspid position
-        help.hospitalNo = this.currentHospitalNo;
+        help.hospitalId = this.currentHospitalNo.toString();
         help.soort = 4;
-        help.implant_Position = "4";
+        help.Implant_position = "4";
         this.alertify.info("Getting rings from the OVI")
         this.valveService.getValvesFromOVI(help).subscribe((next) => {
           this.optionsAvailableTricuspidRingsFromOVI = next;
@@ -179,16 +179,16 @@ export class EditRepairComponent implements OnInit {
      } else { // look in the current hospital
       if(location === 1){ // mitral position
         this.alertify.info("Getting rings your hospital");
-        help.type = "Annuloplasty_Ring"
-        help.implant_Position = "Mitral";
-        this.valveService.getHospitalValves(help.type, help.implant_Position).subscribe(
+        help.Type = "Annuloplasty_Ring"
+        help.Implant_position = "Mitral";
+        this.valveService.getHospitalValves(help.Type, help.Implant_position).subscribe(
           (next) => { this.optionsAvailableMitralRings = next; },
           (error) => { this.alertify.warning(error) });
       } else { // tricuspid position
         this.alertify.info("Getting rings from your hospital");
-        help.type = "Annuloplasty_Ring"
-        help.implant_Position = "Tricuspid";
-        this.valveService.getHospitalValves(help.type, help.implant_Position).subscribe(
+        help.Type = "Annuloplasty_Ring"
+        help.Implant_position = "Tricuspid";
+        this.valveService.getHospitalValves(help.Type, help.Implant_position).subscribe(
           (next) => { this.optionsAvailableTricuspidRings = next; },
           (error) => { this.alertify.warning(error) });
       }
