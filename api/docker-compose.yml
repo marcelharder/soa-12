@@ -1,25 +1,25 @@
 version: '3'
-services: 
+services:
   #sqlserver:
-   # image: mcr.microsoft.com/mssql/server:2019-latest
-   # restart: always
-   # ports:
-   #   - 1433:1433
-   # environment:
-   #  MSSQL_SA_PASSWORD: example@123
-   #  MSSQL_PID: EXPRESS
-   #  ACCEPT_EULA: Y
-   # networks: 
-   #   - internal-container-network
-   # volumes:
-   #   - sqlserver-data:/var/opt/mssql
+    # image: mcr.microsoft.com/mssql/server:2019-latest
+    # restart: always
+    # ports:
+    #   - 1433:1433
+    # environment:
+    #  MSSQL_SA_PASSWORD: example@123
+    #  MSSQL_PID: EXPRESS
+    #  ACCEPT_EULA: Y
+    # networks:
+    #   - internal-container-network
+    # volumes:
+    #   - sqlserver-data:/var/opt/mssql
 
   db:
     image: mariadb:latest
     restart: always
     environment:
-     MYSQL_ROOT_PASSWORD: example
-    networks: 
+      MYSQL_ROOT_PASSWORD: example
+    networks:
       - internal-container-network
     volumes:
       - mariadb-data:/var/lib/mysql
@@ -27,8 +27,8 @@ services:
   comservice:
     image: comservice:v91
     restart: always
-    networks: 
-     - internal-container-network 
+    networks:
+      - internal-container-network
   
   hospital:
     image: hospital_app:v5
@@ -37,14 +37,14 @@ services:
     ports:
       - 8103:80
     depends_on:
-      - db 
+      - db
   
   training:
     image: training:v16
     networks:
       - internal-container-network
     depends_on:
-      - db 
+      - db
   
   product:
     image: product_app:v1
@@ -53,8 +53,8 @@ services:
     depends_on:
       - db
     ports:
-     - 8104:80
-     
+      - 8104:80
+      
   reports:
     image: reports:v25
     networks:
@@ -67,32 +67,32 @@ services:
   onlinevalve_md:
     image: inventory_md:v26
     networks:
-     - internal-container-network
+      - internal-container-network
     volumes:
-     - sqldata:/root/.aspnet/DataProtection-Keys
+      - sqldata:/root/.aspnet/DataProtection-Keys
     ports:
-     - 8045:80
-    depends_on: 
-     - db
+      - 8045:80
+    depends_on:
+      - db
 
   tracPersonal:
     image: sql_app:v99
     ports:
-     - 8086:80
+      - 8086:80
     networks: 
-     - internal-container-network
+      - internal-container-network
     volumes:
-     - sqldata:/root/.aspnet/DataProtection-Keys
-     - pdf-data:/App/assets/pdf
+      - sqldata:/root/.aspnet/DataProtection-Keys
+      - pdf-data:/App/assets/pdf
     depends_on: 
-     - db
-     - comservice
-     - onlinevalve_md
+      - db
+      - comservice
+      - onlinevalve_md
 
 volumes:
- mariadb-data:
- sqldata:
- pdf-data:
+  mariadb-data:
+  sqldata:
+  pdf-data:
 networks:
- internal-container-network:
+  internal-container-network:
   driver: bridge
