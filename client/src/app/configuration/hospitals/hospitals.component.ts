@@ -40,20 +40,20 @@ export class HospitalsComponent implements OnInit {
     image: '',
     countries: ''
   };
-  vt: valveType = {
-    no: 0,
-    valveTypeId: 0,
-    vendor_description: "",
-    vendor_code: "",
-    model_code: "",
-    implant_position: "",
-    uk_code: "",
-    code: "",
-    valve_size: [],
-    image: "",
-    description: "",
-    type: "",
-  };
+  /*  vt: valveType = {
+     no: 0,
+     valveTypeId: 0,
+     vendor_description: "",
+     vendor_code: "",
+     model_code: "",
+     implant_position: "",
+     uk_code: "",
+     code: "",
+     valve_size: [],
+     image: "",
+     description: "",
+     type: "",
+   }; */
 
   listCities: Array<dropItem> = [];
   listCountries: Array<countryItem> = [];
@@ -73,6 +73,7 @@ export class HospitalsComponent implements OnInit {
 
   don = 0;
   displayList = 1;
+  displayHospitalImage = 1;
   addbutton = 0;
   updatebutton = 0;
   savebutton = 0;
@@ -93,7 +94,6 @@ export class HospitalsComponent implements OnInit {
       this.currentHospital = next;
     });
     this.route.data.subscribe((data) => {
-      debugger;
       this.pd = data.hos;
       this.hospitalService.IsThisHospitalUsingOVI(+this.pd.HospitalNo).subscribe((next) => {
         if (next) { this.showOVITab = true } else { this.showOVITab = false }
@@ -130,6 +130,7 @@ export class HospitalsComponent implements OnInit {
   showAddButton() { if (this.addbutton == 1) { return true; } }
   showUpdateButton() { if (this.updatebutton == 1) { return true; } }
   showSaveButton() { if (this.savebutton == 1) { return true; } }
+  showHospitalImage() { if (this.displayHospitalImage == 1) { return true; } }
   doneWithOvi() {
     this.router.navigate(['/config']);
     this.alertify.show("Done with this");
@@ -184,7 +185,7 @@ export class HospitalsComponent implements OnInit {
       this.displayList = 1;
       this.don = 0;
     })
- }
+  }
 
   findValveInOVI() {
     this.alertify.show("Getting the valves in the online valve inventory");
@@ -248,6 +249,28 @@ export class HospitalsComponent implements OnInit {
     });
   }
   cancel() { this.router.navigate(["/config"]); }
+
+  AddOnlineValve() {
+    // hide the hospital image and show the dataentry form for the new hospitalValve
+    this.displayHospitalImage = 0;
+
+    this.alertify.info("Adding new ValveType now");
+  }
+
+  receiveAddValveType(result: number) {
+    
+    if(result == 10)
+    {
+      this.displayHospitalImage = 1;
+    }
+    if (result == 1)
+     {
+      this.displayHospitalImage = 1;
+      this.alertify.info("Valve added ...");
+    //  this.vs.createSpecificHospitalValve(this.hv).subscribe(() => { }, (error) => { })
+    }
+
+  }
 
   canDeactivate() {
     this.saveHospital();

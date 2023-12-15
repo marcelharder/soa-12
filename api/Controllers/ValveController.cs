@@ -137,10 +137,6 @@ namespace api.Controllers
         }
 
 
-
-
-
-
         [HttpGet("hospitalValves/{type}/{position}")]//gives the list of ValveCodes
         public async Task<IActionResult> GetMH(string type, string position)
         {

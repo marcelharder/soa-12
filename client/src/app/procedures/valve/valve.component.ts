@@ -238,6 +238,7 @@ export class ValveComponent implements OnInit {
 
 
   receiveFromSelect(v: Valve){
+    
     this.valveService.addValveInProcedure(v.SERIAL_IMP, v.procedure_id).subscribe((next)=>{
       next.Combined = this.procedureValve.Combined;
       next.ProcedureAetiology = this.procedureValve.ProcedureAetiology;

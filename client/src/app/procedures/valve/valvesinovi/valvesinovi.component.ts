@@ -64,13 +64,12 @@ export class ValvesinoviComponent implements OnInit  {
   ngOnInit() {
   this.auth.currentProcedure$.pipe(take(1)).subscribe((u) => { this.currentProcedureId = u; });
  
- 
 
   this.selectedSoort = 1;
-  this.model.soort = 1;
-  this.model.implant_Position = this.getImplantValue(this.implant);
-  
-  this.model.hospitalNo = this.hospitalId;
+
+  this.model.Type = 1;
+  this.model.Implant_position = this.getImplantValue(this.implant);
+  this.model.hospitalId = this.hospitalId;
   
   this.vs.getValvesFromOVI(this.model).subscribe((next)=>{
     this.optionsAvailableValves = next;
@@ -101,9 +100,10 @@ getThisOne(v: OVIvalve){
 
 
 findSelectedValves(){
-  this.model.soort = this.selectedSoort;
-  this.model.implant_Position = this.getImplantValue(this.implant);
-  this.model.hospitalNo = this.hospitalId;
+  this.model.Type = this.selectedSoort;
+  this.model.Implant_position = this.getImplantValue(this.implant);
+  this.model.hospitalId = this.hospitalId;
+  debugger;
   this.vs.getValvesFromOVI(this.model).subscribe((next)=>{this.optionsAvailableValves = next;})
 }
 
