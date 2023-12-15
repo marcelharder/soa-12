@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   isNotInDatabase = true;
   Registermodel: Partial<User> = { country: "NL", active: true, ltk: true, gender: "Male" };
   optionCountries: Array<countryItem> = [];
-  selectedCountry = "";
+  selectedCountry = "NL";
   optionsGender: Array<dropItem> = [];
   hospitals: Array<dropItem> = [];
 

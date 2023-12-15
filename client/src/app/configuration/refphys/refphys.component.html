@@ -67,7 +67,7 @@
                     <div class="row">
                       <div class="col-sm-6">
                         <select [(ngModel)]="pd.country" name="country" class="form-control">
-                          <option *ngFor="let p of countries" [value]=p.value>{{ p.description }}</option>
+                          <option *ngFor="let p of countries" [value]=p.Value>{{ p.Description }}</option>
                         </select>
                       </div>
                       <div class="col-sm-2" *ngIf="showState()">

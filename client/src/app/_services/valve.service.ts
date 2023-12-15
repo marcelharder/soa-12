@@ -55,7 +55,7 @@ export class ValveService {
         return this.http.get<string>(this.baseUrl + 'General/ppm', { observe: 'response', params, responseType: 'text' as 'json' });
     }
     searchHospitalValveOnline(type: string, position: string) {
-        return this.http.get<dropItem[]>(this.baseUrl + 'General/products/' + type + "/" + position);
+        return this.http.get<dropItem[]>(this.baseUrl + 'Valve/models/' + type + "/" + position);
     }
     getSpecificValveType(id: number) {
         return this.http.get<valveType>(this.baseUrl + 'General/productByValveTypeId/' + id)
