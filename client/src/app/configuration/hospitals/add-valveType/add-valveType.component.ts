@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { dropItem } from 'src/app/_models/dropItem';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
+import { ValveService } from 'src/app/_services/valve.service';
 
 @Component({
   selector: 'app-add-valveType',
@@ -9,6 +11,7 @@ import { hospitalValve } from 'src/app/_models/hospitalValve';
   styleUrls: ['./add-valveType.component.css']
 })
 export class AddValveTypeComponent implements OnInit {
+  optionsVendors: Array<dropItem> = [];
   @Input() hv: hospitalValve;
   @Output() sendupdate = new EventEmitter();
   addValveTypeForm: FormGroup | undefined;
@@ -16,9 +19,15 @@ export class AddValveTypeComponent implements OnInit {
 
   constructor( 
     private fb: FormBuilder,
+    private vs: ValveService,
     private alertify: ToastrService) { }
 
-  ngOnInit() {this.initializeForm }
+  ngOnInit() {
+    
+    this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
+    this.initializeForm;
+  
+  }
 
   cancel() { this.sendupdate.emit(10); }
   SaveNewValveType() { this.sendupdate.emit(1); }

@@ -176,6 +176,23 @@ namespace api.Controllers
             return Ok(help);
         }
 
+        [HttpGet("vendors")]
+        public async Task<IActionResult> getVendors()
+        {
+            var help = "";
+            var comaddress = _com.Value.valveURL;
+            var st = "vendors";
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
         [HttpGet("readHospitalValve/{code}")]
         public async Task<IActionResult> GetMHR(string code)
         {
