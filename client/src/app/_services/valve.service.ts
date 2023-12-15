@@ -35,12 +35,13 @@ export class ValveService {
     getValveFromSerial(serial: string, id: number) { return this.http.get<Valve>(this.baseUrl + 'Valve/' + serial + '/' + id); }
     addValveInProcedure(serial: string, id: number) { return this.http.post<Valve>(this.baseUrl + 'Valve/' + serial + '/' + id, {}); }
     updateValve(c: Valve) { return this.http.put<string>(this.baseUrl + 'Valve/updateProcedureValve', c, { responseType: 'text' as 'json' }); }
-
     deleteValve(id: number) { return this.http.delete<string>(this.baseUrl + 'Valve/' + id, { responseType: 'text' as 'json' }); }
 
 
     getHospitalValves(type: string, position: string) { return this.http.get<hospitalValve[]>(this.baseUrl + 'Valve/hospitalValves/' + type + '/' + position); }
     getSpecificHospitalValve(code: string) { return this.http.get<hospitalValve>(this.baseUrl + 'Valve/readHospitalValve/' + code); }
+    
+    
     deleteSpecificHospitalValve(codeId: number) { return this.http.delete<string>(this.baseUrl + 'Valve/deleteHospitalValve/' + codeId, { responseType: 'text' as 'json' }); }
     updateSpecificHospitalValve(hv: hospitalValve) { return this.http.put<string>(this.baseUrl + 'Valve/updateHospitalValve', hv, { responseType: 'text' as 'json' }); }
     createSpecificHospitalValve(hv: hospitalValve) { return this.http.post<string>(this.baseUrl + 'Valve/createHospitalValve', hv, { responseType: 'text' as 'json' }); }
@@ -57,11 +58,14 @@ export class ValveService {
     searchHospitalValveOnline(type: string, position: string) {
         return this.http.get<dropItem[]>(this.baseUrl + 'Valve/models/' + type + "/" + position);
     }
-    getSpecificValveType(id: number) {
-        return this.http.get<valveType>(this.baseUrl + 'General/productByValveTypeId/' + id)
+    getSpecificValveType(ValveTypeId: number) {
+        return this.http.get<valveType>(this.baseUrl + 'Valve/writeHospitalIdToValveCode/' + ValveTypeId)
+    }
+    removeSpecificValveType(ValveTypeId: number) {
+        return this.http.get<valveType>(this.baseUrl + 'Valve/removeHospitalIdFromValveCode/' + ValveTypeId)
     }
     getValveCodeSizes(model: string) {
-        return this.http.get<valveSize[]>(this.baseUrl + 'General/getValveCodeSizes/' + model)
+        return this.http.get<valveSize[]>(this.baseUrl + 'Valve/getValveCodeSizes/' + model)
     }
 
     getValveDescription(model: string) {

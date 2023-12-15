@@ -29,7 +29,7 @@ namespace api.Controllers
         }
 
         #region <!-- manage valves in procedures -->
-       
+
         [HttpGet("valvesFromProcedure/{id}")]
         public async Task<IActionResult> getValvesfromProcedure(int id)
         {
@@ -49,11 +49,11 @@ namespace api.Controllers
 
             var result = _special.mapToValveForReturn(p);
 
-           var help = "";
-           var comaddress = _com.Value.valveURL;
-           var st = "getValveDescriptionFromModel/" + result.MODEL;
-           comaddress = comaddress + st;
-           using (var httpClient = new HttpClient())
+            var help = "";
+            var comaddress = _com.Value.valveURL;
+            var st = "getValveDescriptionFromModel/" + result.MODEL;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
@@ -76,10 +76,10 @@ namespace api.Controllers
         {
             var p = await _valve.GetSpecificValve(v.SERIAL_IMP, v.Id);
 
-            var test = _special.mapToClassValve(v,p);
+            var test = _special.mapToClassValve(v, p);
             test.Id = v.Id;
             test.ProcedureId = v.procedure_id;
-            
+
 
             var x = await _valve.updateValve(test);
 
@@ -96,7 +96,7 @@ namespace api.Controllers
             return Ok(deleteResult);
         }
         #endregion
-      
+
         [HttpGet("models/{type}/{position}")] //gives the list of drop_items
         public async Task<IActionResult> GetM(string type, string position)
         {
@@ -112,12 +112,34 @@ namespace api.Controllers
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
-           //var result = await _valve.getValvesInHospital(type, position);
+            //var result = await _valve.getValvesInHospital(type, position);
             return Ok(help);
         }
 
 
         #region <!-- manage valves in hospital if OVI is not available -->
+
+        [HttpGet("getValveCodeSizes/{type}")]
+        public async Task<IActionResult> getCodeSizes(int type)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveSize/getSizesForValve/" + type;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+
+
+
+
 
         [HttpGet("hospitalValves/{type}/{position}")]//gives the list of ValveCodes
         public async Task<IActionResult> GetMH(string type, string position)
@@ -134,10 +156,10 @@ namespace api.Controllers
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
-           //var result = await _valve.getValvesInHospital(type, position);
+            //var result = await _valve.getValvesInHospital(type, position);
             return Ok(help);
         }
-    
+
         [HttpPost("createhospitalValve")]
         public async Task<IActionResult> GetMHC([FromBody] Valve_Code code)
         {
@@ -157,7 +179,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-     
+
         [HttpGet("readHospitalValve/{code}")]
         public async Task<IActionResult> GetMHR(string code)
         {
@@ -173,9 +195,9 @@ namespace api.Controllers
                 }
             }
             return Ok(help);
-            
-        } 
-     
+
+        }
+
         [HttpPut("updateHospitalValve")]
         public async Task<IActionResult> GetMHU([FromBody] Valve_Code code)
         {
@@ -195,7 +217,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-     
+
         [HttpDelete("deleteHospitalValve/{code}")]
         public async Task<IActionResult> GetMHD(int code)
         {
@@ -212,31 +234,64 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-        
+        [HttpGet("writeHospitalIdToValveCode/{code}")]
+        public async Task<IActionResult> WriteHosId(int code)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveCode/writeHospitalIdToValveCode/" + code + "/" + await _special.getCurrentHospitalIdAsync();
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+        [HttpGet("removeHospitalIdFromValveCode/{code}")]
+        public async Task<IActionResult> RemoveHosId(int code)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveCode/removeHospitalIdFromValveCode/" + code + "/" + await _special.getCurrentHospitalIdAsync();
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
         #endregion
 
         #region <!-- get valves from the OVI -->
 
         [HttpGet("valvesfromOVIforSOA/{hospitalNo}/{soort}/{implant_Position}")]
-        public async Task<IActionResult> getOVIValves(string hospitalNo,string soort, string implant_Position){
+        public async Task<IActionResult> getOVIValves(string hospitalNo, string soort, string implant_Position)
+        {
             string result = "";
             var help = "";
-           
-            help = _com.Value.valveURL + "valvesForSOA" + 
-            "?HospitalNo=" + hospitalNo + 
-            "&Soort=" +  soort +
+
+            help = _com.Value.valveURL + "valvesForSOA" +
+            "?HospitalNo=" + hospitalNo +
+            "&Soort=" + soort +
             "&Position=" + implant_Position;
-                       
-           
+
+
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(help))
                 {
                     result = await response.Content.ReadAsStringAsync();
                 }
-            } 
-          return Ok(result);
-          
+            }
+            return Ok(result);
+
         }
         #endregion
 

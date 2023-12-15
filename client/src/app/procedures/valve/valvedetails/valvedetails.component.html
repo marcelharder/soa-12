@@ -28,10 +28,10 @@
                       <th></th>
                     </tr>
                     <tr *ngFor="let hv of hospitalValves">
-                      <td>{{hv.code}}</td>
-                      <td>{{hv.description}}</td>
+                      <td>{{hv.Model_code}}</td>
+                      <td>{{hv.Description}}</td>
                       <td><button
-                        (click)="selectThisValve(hv.valveTypeId)"
+                        (click)="selectThisValve(hv.ValveTypeId)"
                         class="badge badge-warning">Select</button></td>
                      </tr>
                   </table>

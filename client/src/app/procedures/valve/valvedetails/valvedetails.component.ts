@@ -41,31 +41,28 @@ export class ValvedetailsComponent implements OnInit {
     TYPE_EXP: 0, ProcedureType: 0, ProcedureAetiology: 0, MODEL: '', MODEL_EXP: '', SERIAL_IMP: '',
     SERIAL_EXP: '', RING_USED: '', valveDescription:'',REPAIR_TYPE: '', Memo: '', Combined: 0, procedure_id: 0
   };
-  new_valve_type: valveType = {
-    no: 0,
-    valveTypeId: 0,
-    vendor_description: '',
-    vendor_code: '',
-    model_code: '',
-    implant_position: '',
+  new_valve_type: hospitalValve = {
+    ValveTypeId: 0,
+    hospitalId: '',
+    No: 0,
+    Vendor_description: '',
+    Vendor_code: 0,
+    Valve_size: undefined,
+    Model_code: '',
+    Implant_position: '',
     uk_code: '',
-    code: '',
-    valve_size:[],
+    soort: 0,
     image: '',
-    description: '',
-    type: '',
-  };
-
+    Description: '',
+    Type: '',
+    countries: ''
+  }
  
   panel2 = 0;
   panel3 = 0;
 
   selectedValveTypeId=0;
 
-  
-
-
-  
  
   valveDescription: string;
 
@@ -107,11 +104,6 @@ export class ValvedetailsComponent implements OnInit {
     this.pushValve.emit(nv);
   } 
 
- 
-
- 
-
- 
 
  
 

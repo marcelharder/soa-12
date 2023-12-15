@@ -19,10 +19,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './hospitals.component.html',
   styleUrls: ['./hospitals.component.css']
 })
-export class HospitalsComponent implements OnInit  {
+export class HospitalsComponent implements OnInit {
   @ViewChild("hospitalForm") hospitalForm: NgForm;
   pd: Hospital;
-  targetUrl="";
+  targetUrl = "";
   baseUrl = environment.apiUrl;
   hv: hospitalValve = {
     ValveTypeId: 0,
@@ -42,14 +42,14 @@ export class HospitalsComponent implements OnInit  {
   };
   vt: valveType = {
     no: 0,
-    valveTypeId:0,
+    valveTypeId: 0,
     vendor_description: "",
     vendor_code: "",
     model_code: "",
     implant_position: "",
     uk_code: "",
     code: "",
-    valve_size:[],
+    valve_size: [],
     image: "",
     description: "",
     type: "",
@@ -85,7 +85,7 @@ export class HospitalsComponent implements OnInit  {
     private vs: ValveService,
     private hospitalService: HospitalService,
     private alertify: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadDrops();
@@ -95,8 +95,8 @@ export class HospitalsComponent implements OnInit  {
     this.route.data.subscribe((data) => {
       debugger;
       this.pd = data.hos;
-      this.hospitalService.IsThisHospitalUsingOVI(+this.pd.HospitalNo).subscribe((next)=>{
-        if(next){this.showOVITab = true} else {this.showOVITab = false}
+      this.hospitalService.IsThisHospitalUsingOVI(+this.pd.HospitalNo).subscribe((next) => {
+        if (next) { this.showOVITab = true } else { this.showOVITab = false }
       })
       //this.getCorrectCities();
     });
@@ -127,13 +127,13 @@ export class HospitalsComponent implements OnInit  {
 
 
   showList() { if (this.displayList == 1) { return true; } }
-  showAddButton() { if (this.addbutton == 1) {  return true;  }  }
-  showUpdateButton() { if (this.updatebutton == 1) { return true; }  }
-  showSaveButton() {if (this.savebutton == 1) { return true; }  }
-  doneWithOvi(){
+  showAddButton() { if (this.addbutton == 1) { return true; } }
+  showUpdateButton() { if (this.updatebutton == 1) { return true; } }
+  showSaveButton() { if (this.savebutton == 1) { return true; } }
+  doneWithOvi() {
     this.router.navigate(['/config']);
-    this.alertify.show("Done with this"); 
-   }
+    this.alertify.show("Done with this");
+  }
 
   AddValve() {
     this.displayList = 0;
@@ -149,57 +149,44 @@ export class HospitalsComponent implements OnInit  {
     this.vs.searchHospitalValveOnline(this.hv.Type, this.hv.Implant_position).subscribe((next) => { this.onlineValves = next; });
     this.alertify.show("find product now ...");
   }
-  deleteDetails(code:string){
-     this.vs.deleteSpecificHospitalValve(+code).subscribe(
+  deleteDetails(code: string) {
+
+    this.alertify.show("Needs to be implemented");
+
+
+
+    /* this.vs.removeSpecificValveType(+code).subscribe(
       (next) => {
         this.alertify.show("Valve deleted ...");
       },
       (error) => {
         this.alertify.error(error);
-      },() => {
+      }, () => {
         this.SearchValve();
         this.displayList = 1;
 
       }
-    );
+    ); */
 
 
 
 
     this.alertify.show("delete now ..." + code);
   }
-  changeToHospitalValve() {
-    // get the valveTypeId and find the details online
-    this.vs
-      .getSpecificValveType(+this.selectedOnlineValve)
-      .subscribe((next) => {
-        this.vt = next;
-        // then copy some of these details to the hospital valve
-        this.hv.uk_code = this.vt.uk_code;
-        this.hv.ValveTypeId = this.vt.valveTypeId;
-        this.hv.Description = this.vt.description;
-        this.hv.Implant_position = this.vt.implant_position;
-        this.hv.Type = this.vt.type;
-        // upload this valve to the current hospital
-        this.vs.createSpecificHospitalValve(this.hv).subscribe(
-          (next) => {
-            this.alertify.show("Valve added ...");
-          },
-          (error) => {
-            this.alertify.error(error);
-          },() => {
-            this.SearchValve();
-            this.displayList = 1;
-            this.don = 0;
-          }
-        );
-        // get the valves from the hospital
+  changeToHospitalValve() { // write the hospitalId to the valvetype
+    this.alertify.info("hello");
+    this.vs.getSpecificValveType(+this.selectedOnlineValve).subscribe((next) => {
+      this.alertify.show("Valve added ...");
+    }, (error) => {
+      this.alertify.error(error);
+    }, () => {
+      this.SearchValve();
+      this.displayList = 1;
+      this.don = 0;
+    })
+ }
 
-
-      });
-  }
-
-  findValveInOVI(){
+  findValveInOVI() {
     this.alertify.show("Getting the valves in the online valve inventory");
 
     let help: Partial<hospitalValve> = {};
@@ -208,13 +195,13 @@ export class HospitalsComponent implements OnInit  {
 
     this.vs.getValvesFromOVI(help).subscribe((next) => {
       this.OVIValves = next;
-      this.OVIValves.sort((x, y) => x.size > y.size? 1 : x.size < y.size ? -1 : 0)
-   })
-  
-  }
-  
+      this.OVIValves.sort((x, y) => x.size > y.size ? 1 : x.size < y.size ? -1 : 0)
+    })
 
-  displayOnlineValves() { if (this.don === 1) { return true; }}
+  }
+
+
+  displayOnlineValves() { if (this.don === 1) { return true; } }
 
   loadDrops() {
     this.valveTypes.push({ value: 0, description: "Biological" });
@@ -247,20 +234,20 @@ export class HospitalsComponent implements OnInit  {
       this.listCountries = JSON.parse(localStorage.getItem("optionCountries"));
     }
   }
-  updatePhoto(photoUrl: string) {this.pd.ImageUrl = photoUrl;}
-  
+  updatePhoto(photoUrl: string) { this.pd.ImageUrl = photoUrl; }
+
   IsLoaded() {
     if (+this.pd.HospitalNo !== 0) {
-        this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.HospitalNo;
-        return true;
+      this.targetUrl = this.baseUrl + 'hospital/addHospitalPhoto/' + this.pd.HospitalNo;
+      return true;
     } else { return false; }
-}
+  }
   saveHospital() {
     this.hospitalService.saveHospital(this.pd).subscribe(() => {
       this.router.navigate(["/config"]);
     });
   }
-  cancel() {this.router.navigate(["/config"]);}
+  cancel() { this.router.navigate(["/config"]); }
 
   canDeactivate() {
     this.saveHospital();

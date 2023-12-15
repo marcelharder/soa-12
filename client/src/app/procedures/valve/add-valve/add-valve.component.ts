@@ -52,19 +52,21 @@ export class AddValveComponent implements OnInit {
     TYPE_EXP: 0, ProcedureType: 0, ProcedureAetiology: 0, MODEL: '', MODEL_EXP: '', SERIAL_IMP: '',
     SERIAL_EXP: '', RING_USED: '',  valveDescription:'',REPAIR_TYPE: '', Memo: '', Combined: 0, procedure_id: 0
   };
-  new_valve_type: valveType = {
-    no: 0,
-    valveTypeId: 0,
-    vendor_description: '',
-    vendor_code: '',
-    model_code: '',
-    implant_position: '',
-    valve_size:[],
+  new_valve_type: hospitalValve = {
+    ValveTypeId: 0,
+    hospitalId: '',
+    No: 0,
+    Vendor_description: '',
+    Vendor_code: 0,
+    Valve_size: undefined,
+    Model_code: '',
+    Implant_position: '',
     uk_code: '',
-    code: '',
+    soort: 0,
     image: '',
-    description: '',
-    type: '',
+    Description: '',
+    Type: '',
+    countries: ''
   };
 
   constructor(
@@ -90,13 +92,19 @@ export class AddValveComponent implements OnInit {
        });
 
      // lookup the details of this type of prosthesis
-     this.vs.getSpecificValveType(this.svtid).subscribe((next) => {
+     this.vs.getSpecificHospitalValve(this.svtid.toString()).subscribe((next) => {
      
       this.new_valve_type = next;
-      this.valveDescription = this.new_valve_type.description;
+      this.valveDescription = this.new_valve_type.Description;
       this.pd.MODEL = this.new_valve_type.uk_code; // needed for EOA measurement
       this.pd.SERIAL_IMP = '';
-      this.vs.getValveCodeSizes(this.new_valve_type.valveTypeId.toString()).subscribe((nex) => {this.optionSizes = nex; });
+      this.vs.getValveCodeSizes(this.svtid.toString()).subscribe((nex) => {
+        nex.forEach((item) => {
+          this.optionSizes.push({ Size: item.Size, EOA: item.EOA });
+        });
+
+
+            });
  
     })
   }
@@ -108,7 +116,7 @@ export class AddValveComponent implements OnInit {
         this.new_valve = nex;
         this.new_valve.SERIAL_IMP = this.pd.SERIAL_IMP;
         this.new_valve.MODEL = this.new_valve_type.uk_code;
-        this.new_valve.TYPE = this.new_valve_type.type;
+        this.new_valve.TYPE = this.new_valve_type.Type;
         this.new_valve.Implant_Position = this.implant_position;
         this.new_valve.SIZE = this.valveSize;
         this.new_valve.procedure_id = this.currentProcedureId;
@@ -117,7 +125,7 @@ export class AddValveComponent implements OnInit {
         this.new_valve.ProcedureAetiology = this.pd.ProcedureAetiology;
         this.new_valve.EXPLANT = this.pd.EXPLANT;
         this.pd.Implant_Position = this.new_valve.Implant_Position; // will hide panel2
-        this.pd.TYPE = this.new_valve_type.type;
+        this.pd.TYPE = this.new_valve_type.Type;
         this.pd.SIZE = this.valveSize;
         
         this.pushValve.emit(this.new_valve);
