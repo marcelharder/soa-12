@@ -31,7 +31,6 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private auth: AccountService,
     private alertify: ToastrService,
-    
     private drops: DropdownService) { }
 
   ngOnInit(): void {

@@ -82,7 +82,7 @@ export class ValveService {
     markValve(serial: string, status: number, procedureId: number) {
         return this.http.get<string>(this.baseUrl + 'General/markValve/' + serial + "/" + status + "/" + procedureId, { responseType: 'text' as 'json' })
     }
-    getVendors() {return this.http.get<dropItem[]>(this.baseUrl + 'Valve/vendors/')}
+    getVendors() {return this.http.get<dropItem[]>(this.baseUrl + 'Valve/vendors')}
 
 
 

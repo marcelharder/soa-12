@@ -1,46 +1,36 @@
-<form [formGroup]="addValveTypeForm" id="registerForm" ></form>
-<div class="card">
-  <div class="card-header"><h3><span class="badge badge-secondary">Adding a new Valve type </span></h3></div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-sm-8"></div>
-      <div class="col-sm-4">
-        <div class="row">
-          <div class="col-sm-12">
-              <div class="card">
-                  <img class="card-img-top img-thumbnail"
-                      src="{{ hv.image || '../../../../../assets/images/else-03.jpg' }}"
-                      alt="test" width="250" height="350" />
-              </div>
-          </div>
-      </div>
+<form [formGroup]="addValveTypeForm" id="addValveTypeForm" (ngSubmit)="SaveNewValveType()">
+  <div class="card">
+    <div class="card-header">
+      <h3><span class="badge badge-secondary">Adding a new Valve type </span></h3>
+    </div>
+    <div class="card-body">
+      
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
+    </div>
+    <div class="card-footer">
+      <div class="col-sm-6">
+        <div class="btn-group" role="group">
+          <button class="btn btn-warning" (click)="cancel()"> Cancel </button>
+          <button class="btn btn-success" type=submit form="registerForm"> Save Changes </button>
+        </div>
       </div>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    body
-  
-  
-  
-  
-  
-  
-  
   </div>
-  <div class="card-footer">
-    <div class="col-sm-6">
-      <div class="btn-group" role="group">
-        <button class="btn btn-warning"(click)="cancel()"> Cancel </button>
-        <button class="btn btn-success"(click)="SaveNewValveType()"> Save Changes </button>
-      </div>
-    </div> 
-  </div>
-</div>
+</form>

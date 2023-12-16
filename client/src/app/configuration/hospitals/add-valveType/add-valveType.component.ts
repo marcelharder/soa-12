@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { dropItem } from 'src/app/_models/dropItem';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
@@ -11,22 +11,40 @@ import { ValveService } from 'src/app/_services/valve.service';
   styleUrls: ['./add-valveType.component.css']
 })
 export class AddValveTypeComponent implements OnInit {
+  addValveTypeForm: FormGroup | undefined;
   optionsVendors: Array<dropItem> = [];
   @Input() hv: hospitalValve;
   @Output() sendupdate = new EventEmitter();
-  addValveTypeForm: FormGroup | undefined;
 
 
-  constructor( 
+
+  constructor(
     private fb: FormBuilder,
     private vs: ValveService,
     private alertify: ToastrService) { }
 
   ngOnInit() {
-    
+
+    this.addValveTypeForm = new FormGroup({
+      hospitalId: new FormControl(),
+      No: new FormControl(),
+      Vendor_description: new FormControl(),
+      Vendor_code: new FormControl(),
+      Valve_size: new FormControl(),
+      Model_code: new FormControl(),
+      Implant_position: new FormControl(),
+      uk_code: new FormControl(),
+      us_code: new FormControl(),
+      image: new FormControl(),
+      Description: new FormControl(),
+      Type: new FormControl(),
+      countries: new FormControl()
+    })
+
     this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
+
     this.initializeForm;
-  
+
   }
 
   cancel() { this.sendupdate.emit(10); }
@@ -34,15 +52,21 @@ export class AddValveTypeComponent implements OnInit {
 
   initializeForm() {
     this.addValveTypeForm = this.fb.group({
-      UserName: ['', [Validators.required, Validators.email]],
-      country: ['US', [Validators.required]],
-      knownAs: ['', [Validators.required]],
-      currentHospital: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      active: [false, [Validators.required]],
-      ltk: [false, [Validators.required]],
-      
+      hospitalId: ['', []],
+      No: ['', []],
+      Vendor_description: ['', []],
+      Vendor_code: ['', []],
+      Valve_size: ['', []],
+      Model_code: ['', []],
+      Implant_position: ['', []],
+      uk_code: ['', []],
+      us_code: ['', []],
+      image: ['', []],
+      Description: ['', []],
+      Type: ['', []],
+      countries: ['', []]
     });
   }
+
+  hideRestPage(h: any) { }
 }
