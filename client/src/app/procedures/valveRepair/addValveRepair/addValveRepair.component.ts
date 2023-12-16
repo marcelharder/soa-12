@@ -132,7 +132,7 @@ export class AddValveRepairComponent implements OnInit {
 
           if (this.displayOVIStatus()) {// get the rings from OVI
             help.hospitalId = this.currentHospitalNo.toString();
-            help.soort = 4;
+            help.Type = "4";
             help.Implant_position = "2";
             this.alertify.info("Getting rings from the OVI")
             this.vs.getValvesFromOVI(help).subscribe((next) => {
@@ -159,7 +159,7 @@ export class AddValveRepairComponent implements OnInit {
         let help: Partial<hospitalValve> = {};
         if (this.displayOVIStatus()) {// get the rings from OVI
           help.hospitalId = this.currentHospitalNo.toString();
-          help.soort = 4;
+          help.Type = "4";
           help.Implant_position = "4";
           this.alertify.info("Getting rings from the OVI")
           this.vs.getValvesFromOVI(help).subscribe((next) => {

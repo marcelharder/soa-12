@@ -284,15 +284,15 @@ namespace api.Controllers
 
         #region <!-- get valves from the OVI -->
 
-        [HttpGet("valvesfromOVIforSOA/{hospitalNo}/{soort}/{implant_Position}")]
-        public async Task<IActionResult> getOVIValves(string hospitalNo, string soort, string implant_Position)
+        [HttpGet("valvesfromOVIforSOA/{hospitalNo}/{Type}/{implant_Position}")]
+        public async Task<IActionResult> getOVIValves(string hospitalNo, string Type, string implant_Position)
         {
             string result = "";
             var help = "";
 
             help = _com.Value.valveURL + "valvesForSOA" +
             "?HospitalNo=" + hospitalNo +
-            "&Soort=" + soort +
+            "&Soort=" + Type +
             "&Position=" + implant_Position;
 
 

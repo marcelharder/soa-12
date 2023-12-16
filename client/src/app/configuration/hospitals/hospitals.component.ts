@@ -191,6 +191,7 @@ export class HospitalsComponent implements OnInit {
     this.alertify.show("Getting the valves in the online valve inventory");
 
     let help: Partial<hospitalValve> = {};
+    help.Type = "1";
     help.hospitalId = this.pd.HospitalNo;
     help.Implant_position = this.searchPosition;
 

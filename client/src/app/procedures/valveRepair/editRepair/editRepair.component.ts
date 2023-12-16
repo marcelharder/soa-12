@@ -160,7 +160,7 @@ export class EditRepairComponent implements OnInit {
      if(ovi){ // look in the online registry
       if(location === 1){ // mitral position
         help.hospitalId = this.currentHospitalNo.toString();
-        help.soort = 4;
+        help.Type = "4";
         help.Implant_position = "2";
         this.alertify.info("Getting rings from the OVI")
         this.valveService.getValvesFromOVI(help).subscribe((next) => {
@@ -168,7 +168,7 @@ export class EditRepairComponent implements OnInit {
         })
       } else { // tricuspid position
         help.hospitalId = this.currentHospitalNo.toString();
-        help.soort = 4;
+        help.Type = "4";
         help.Implant_position = "4";
         this.alertify.info("Getting rings from the OVI")
         this.valveService.getValvesFromOVI(help).subscribe((next) => {
