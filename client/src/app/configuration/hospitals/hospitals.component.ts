@@ -140,6 +140,7 @@ export class HospitalsComponent implements OnInit {
   deleteDetails(code: string) {
 
     this.alertify.show("Needs to be implemented");
+    
 
 
 

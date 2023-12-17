@@ -40,9 +40,43 @@ export class AddValveTypeComponent implements OnInit {
       Type: new FormControl(),
       countries: new FormControl()
     })
-
-    this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
-debugger;
+    this.optionsVendors =
+      [
+        {
+          "value": 9,
+          "description": "CryoLife"
+        },
+        {
+          "value": 7,
+          "description": "Atrium"
+        },
+        {
+          "value": 3,
+          "description": "LivaNova"
+        },
+        {
+          "value": 8,
+          "description": "Gore"
+        },
+        {
+          "value": 2,
+          "description": "Abbott"
+        },
+        {
+          "value": 6,
+          "description": "KFSRC"
+        },
+        {
+          "value": 5,
+          "description": "Medtronic"
+        },
+        {
+          "value": 4,
+          "description": "Edwards"
+        }
+      ];
+    // need to adjust the endpoint on the inventory container so that it will be anonymous
+    // this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
     this.initializeForm;
 
   }

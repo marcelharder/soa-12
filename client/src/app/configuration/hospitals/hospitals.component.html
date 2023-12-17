@@ -269,19 +269,12 @@
           <img class="card-img-top img-thumbnail" src="{{ pd.ImageUrl }}" alt="test" width="250" height="350" />
         </div>
         <div class="footer mt-2">
-          <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
-            (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+          <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
         </div>
       </div>
       <div *ngIf="!showHospitalImage()">
-       
-<app-add-valveType [hv]="hv" (sendupdate)="receiveAddValveType($event)" ></app-add-valveType>
-
-
+        <app-add-valveType [hv]="hv" (sendupdate)="receiveAddValveType($event)"></app-add-valveType>
       </div>
-
     </div>
   </div>
-
-
 </form>
