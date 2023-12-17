@@ -56,6 +56,7 @@ export class NavComponent implements OnInit {
             })
             // push the hospitalname to the behavior subject, if the loggedin person is not admin, want hospital_id of the admin  = 0
             if (!this.currentRoles.includes('Admin')) {
+
               this.userService.getUser(this.currentUserId).subscribe((next) => {
                 this.model.KnownAs = next.knownAs;
                 this.hospitalService.getSpecificHospital(next.hospital_id).subscribe((d) => {

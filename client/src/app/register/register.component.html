@@ -38,7 +38,7 @@
                     <div class="col-sm-6 mb-1 form-group">
                         
                         <select formControlName='country' (change)="changeCountry()" class="form-control">
-                            <option *ngFor="let item of optionCountries" [value]=item.value>{{ item.description }}
+                            <option *ngFor="let item of optionCountries" [value]=item.IsoCode>{{ item.Description }}
                             </option>
                         </select>
                     </div>

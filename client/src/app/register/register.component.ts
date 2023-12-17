@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { countryItem } from '../_models/countryItem';
 import { dropItem } from '../_models/dropItem';
 import { User } from '../_models/User';
@@ -48,7 +47,7 @@ export class RegisterComponent implements OnInit {
   initializeForm() {
     this.registerForm = this.fb.group({
       UserName: ['', [Validators.required, Validators.email]],
-      country: ['', [Validators.required]],
+      country: ['US', [Validators.required]],
       knownAs: ['', [Validators.required]],
       currentHospital: ['', [Validators.required]],
       city: ['', [Validators.required]],
@@ -118,6 +117,7 @@ export class RegisterComponent implements OnInit {
 
   changeCountry() {
     let country = this.registerForm?.value.country;
+    if(country !== undefined){
     this.drops.getAvailableHospitals(country).subscribe(
       (next) => {
         this.hospitals = next;
@@ -127,14 +127,14 @@ export class RegisterComponent implements OnInit {
         }
         else { this.alertify.show("Congratulations, you found the error"); } */
       });
-  }
+  }}
 
   registerNewUser() {
     if (this.registerForm.status === "VALID") {
       if (this.readytobeSentUp()) {
-        this.auth.register(this.registerForm.value).pipe(take(1)).subscribe((next) => {
-          this.alertify.show("Congratulations, you can now log in with your new credentials ...");
-          this.router.navigateByUrl('procedures');
+         this.auth.register(this.registerForm.value).pipe(take(1)).subscribe((next) => {
+           this.alertify.show("Congratulations, you can now login with your new credentials ...");
+          this.router.navigateByUrl('/');
         }, (error) => { this.alertify.error(error.description) });
       } else { this.alertify.error("Please select your country first") }
     } else { this.alertify.error("Please enter all fields") }

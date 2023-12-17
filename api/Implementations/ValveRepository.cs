@@ -100,8 +100,8 @@ namespace api.Implementations
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
             var currentHospitalId = currentUser.hospital_id;
 
-            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
-
+           var valvesInThisHospital = getValvesInHospital(currentHospitalId);
+           
             foreach (Class_Valve_Code el in valvesInThisHospital)
             {
                 counter++;
@@ -120,9 +120,11 @@ namespace api.Implementations
             var currentUserId = _special.getCurrentUserId();
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
             var currentHospitalId = currentUser.hospital_id;
-            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
 
-            foreach (Class_Valve_Code el in valvesInThisHospital)
+
+            if(getValvesInHospital(currentHospitalId) != null){
+                var valves = getValvesInHospital(currentHospitalId);
+                foreach (Class_Valve_Code el in valves)
             {
                 if (el.type == type && el.position == position)
                 {
@@ -130,10 +132,12 @@ namespace api.Implementations
                 }
             }
             return productCodes;
+            }
+            else return null;
+           
+
+           
         }
-
-
-
 
         public async Task<valveDTO> createValveInHospital(valveDTO tes)
         {
@@ -141,8 +145,8 @@ namespace api.Implementations
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
             var currentHospitalId = currentUser.hospital_id;
 
-            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
-
+            var valvesInThisHospital = getValvesInHospital(currentHospitalId);
+           
             var listOfValvesForThisHospital = new List<Class_Valve_Code>();
             listOfValvesForThisHospital = valvesInThisHospital.ToList();
 
@@ -160,7 +164,7 @@ namespace api.Implementations
                 valve.type = tes.type;
 
                 listOfValvesForThisHospital.Add(valve);
-                _context.Add(valve);
+                _context.Class_Valve_Code.Add(valve);
                 if (await SaveAll())
                 {
                     tes.codeId = valve.codeId;
@@ -176,7 +180,10 @@ namespace api.Implementations
             var currentUserId = _special.getCurrentUserId();
             var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
             var currentHospitalId = currentUser.hospital_id;
-            var valvesInThisHospital = _context.ValveCodes.OrderByDescending(u => u.hospitalId).AsQueryable();
+           
+            var valvesInThisHospital = getValvesInHospital(currentHospitalId);
+           
+           
             foreach (Class_Valve_Code el in valvesInThisHospital)
             {
                 if (el.code == code)
@@ -206,10 +213,6 @@ namespace api.Implementations
             var currentHospitalId = currentUser.hospital_id;
             var valvesInThisHospital = _context.Valves.AsQueryable();
   
-
-
-
-
 
             var el = valvesInThisHospital.Where(a => a.codeId == tes.codeId).ToList();
             el[0].code = tes.code;
@@ -247,8 +250,6 @@ namespace api.Implementations
             return 0;
 
         }
-
-
 
         public async Task<string> getValveDescriptionFromModel(string code)
         {
@@ -353,5 +354,14 @@ namespace api.Implementations
 
 
         #endregion
+   
+        private IEnumerable<Class_Valve_Code> getValvesInHospital(int hospitalId){
+        // get this from the valveinventory
+           var result = _context.Class_Valve_Code.OrderByDescending(u => u.hospitalId).AsQueryable();
+           if(result != null){return result;} else {return null;}
+            
+           
+        }
+   
     }
 }

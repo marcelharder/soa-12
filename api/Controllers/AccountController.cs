@@ -83,7 +83,6 @@ namespace api.Controllers
 
             user = new AppUser
             {
-
                 UserName = registerDto.UserName.ToLower(),
                 Country = registerDto.country,
                 City = registerDto.city,
@@ -168,8 +167,8 @@ namespace api.Controllers
 
             var values = new Dictionary<string, string>
             {
-             {"to",user.Email},
-             {"callback",callback}
+            {"to",user.Email},
+            {"callback",callback}
             };
 
             /*  var comaddress = _com.Value.emailHtmlURL;
@@ -177,7 +176,6 @@ namespace api.Controllers
              var response = await client.PostAsync(comaddress, content);
              var responseString = await response.Content.ReadAsStringAsync();
   */
-
             var comaddress = _com.Value.emailHtmlURL;
             string result = "";
             var jsonString = JsonSerializer.Serialize(values);
@@ -203,20 +201,13 @@ namespace api.Controllers
 
             var decodedToken = WebEncoders.Base64UrlDecode(resetPasswordDto.Token);
             string normalToken = Encoding.UTF8.GetString(decodedToken);
-
-
-
             var resetPassResult = await _manager.ResetPasswordAsync(user, normalToken, resetPasswordDto.Password);
             if (!resetPassResult.Succeeded)
             {
                 var errors = resetPassResult.Errors.Select(e => e.Description);
                 return BadRequest(new { Errors = errors });
             }
-
-
             return Ok();
-
-
         }
 
         [Authorize(Policy = "RequireAdminRole")]
@@ -272,9 +263,5 @@ namespace api.Controllers
             }
             return sb.ToString();
         }
-
-
     }
-
-
 }
