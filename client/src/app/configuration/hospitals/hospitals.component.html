@@ -165,7 +165,7 @@
                             </div>
                             <div class="p-2 flex-fill">
                               <select [(ngModel)]="selectedOnlineValve" name="hvpos1" class="form-control">
-                                <option *ngFor="let an of onlineValves" [value]=an.value>{{ an.description }}
+                                <option *ngFor="let an of onlineValves" [value]=an.ValveTypeId>{{ an.Description }}
                                 </option>
                               </select>
                             </div>

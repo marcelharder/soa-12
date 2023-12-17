@@ -7,7 +7,6 @@ import { dropItem } from 'src/app/_models/dropItem';
 import { Hospital } from 'src/app/_models/Hospital';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
 import { OVIvalve } from 'src/app/_models/OVIvalve';
-import { valveType } from 'src/app/_models/valveType';
 import { AccountService } from 'src/app/_services/account.service';
 import { DropdownService } from 'src/app/_services/dropdown.service';
 import { HospitalService } from 'src/app/_services/hospital.service';
@@ -40,20 +39,7 @@ export class HospitalsComponent implements OnInit {
     image: '',
     countries: ''
   };
-  /*  vt: valveType = {
-     no: 0,
-     valveTypeId: 0,
-     vendor_description: "",
-     vendor_code: "",
-     model_code: "",
-     implant_position: "",
-     uk_code: "",
-     code: "",
-     valve_size: [],
-     image: "",
-     description: "",
-     type: "",
-   }; */
+  
 
   listCities: Array<dropItem> = [];
   listCountries: Array<countryItem> = [];

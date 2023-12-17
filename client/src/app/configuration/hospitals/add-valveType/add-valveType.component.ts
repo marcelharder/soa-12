@@ -42,7 +42,7 @@ export class AddValveTypeComponent implements OnInit {
     })
 
     this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
-
+debugger;
     this.initializeForm;
 
   }
