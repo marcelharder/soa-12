@@ -1,4 +1,4 @@
-<form [formGroup]="addValveTypeForm" id="addValveTypeForm" (ngSubmit)="SaveNewValveType()">
+<form #addValveForm="ngForm" name="addValveForm">
   <div class="card">
     <div class="card-header">
       <h3><span class="badge badge-secondary">Adding a new Valve type </span></h3>
@@ -7,26 +7,40 @@
       <div class="row">
         <div class="col-sm-8">
 
-          <div class="row" >
-            <div class="col-sm-6 mb-1"><h5><span class="badge badge-secondary">Select vendor</span></h5></div>
-            <div class="col-sm-6 mb-1 form-group">
-                <select formControlName='Vendor_description' class="form-control">
-                    <option *ngFor="let item of optionsVendors" [value]=item.value>{{ item.description }}
-                    </option>
-                </select>
-            </div>
-        </div>{{addValveTypeForm.controls.Vendor_description}}
-
-          <div class="row" >
+          <div class="row">
             <div class="col-sm-6 mb-1">
-                <h5><span class="badge badge-secondary">Model Code: </span></h5>
+              <h5><span class="badge badge-secondary">Select vendor</span></h5>
             </div>
-            <div class="col-sm-6 mb-1" >
-                <app-text-input [formControl]='addValveTypeForm.controls["Model_code"]' [label]='"model"'
-                    [type]='"text"' [databaseStatus]="true" [controlNo]="1" (ev)="hideRestPage($event)"> </app-text-input>
+            <div class="col-sm-6 mb-1">
+              <select class="form-control" [(ngModel)]="selectedVendor" name="1">
+                <option *ngFor="let item of optionsVendors" [value]=item.value>{{ item.description }}
+                </option>
+              </select>
             </div>
-        </div>
+          </div>
 
+          <div class="row">
+            <div class="col-sm-6 mb-1">
+              <h5><span class="badge badge-secondary">Model Code: </span></h5>
+            </div>
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="hv.Model_code" class="form-control" name="2" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 mb-1">
+              <h5><span class="badge badge-secondary">Description: </span></h5>
+            </div>
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="hv.Description" class="form-control" name="3" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 mb-1">
+              <h5><span class="badge badge-secondary">Uk_code: </span></h5>
+            </div>
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="hv.uk_code" class="form-control" name="4" />
+            </div>
+          </div>
+        
 
 
 
@@ -35,13 +49,21 @@
         </div>
         <div class="col-sm-4">
           <div class="card">
-            <img class="card-img-top img-thumbnail"
-            src="{{hv.image || '../../../../../assets/images/else-03.jpg' }}" alt="none found" /></div>
+            <div class="row">
+              <div class="col-sm-12">  <img class="card-img-top img-thumbnail" src="{{hv.image || '../../../../../assets/images/else-03.jpg' }}" alt="none found" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">  
+                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+              </div>
+            </div>
+           </div>
         </div>
       </div>
 
-     
-     
+
+
 
 
 
@@ -54,7 +76,7 @@
       <div class="col-sm-6">
         <div class="btn-group" role="group">
           <button class="btn btn-warning" (click)="cancel()"> Cancel </button>
-          <button class="btn btn-success" type=submit form="registerForm"> Save Changes </button>
+          <button class="btn btn-success" type="button" (click)="SaveNewValveType()"> Save Changes </button>
         </div>
       </div>
     </div>

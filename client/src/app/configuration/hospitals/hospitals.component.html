@@ -273,7 +273,7 @@
         </div>
       </div>
       <div *ngIf="!showHospitalImage()">
-        <app-add-valveType [hv]="hv" (sendupdate)="receiveAddValveType($event)"></app-add-valveType>
+        <app-add-valveType [hv]="hv" [hospitalNo]="pd.hospitalNo" (sendupdate)="receiveAddValveType($event)"></app-add-valveType>
       </div>
     </div>
   </div>

@@ -39,7 +39,7 @@ export class HospitalsComponent implements OnInit {
     image: '',
     countries: ''
   };
-  
+
 
   listCities: Array<dropItem> = [];
   listCountries: Array<countryItem> = [];
@@ -82,6 +82,7 @@ export class HospitalsComponent implements OnInit {
     });
     this.route.data.subscribe((data) => {
       this.pd = data.hos;
+      this.hv.hospitalId = data.hos.HospitalNo;
       this.hospitalService.IsThisHospitalUsingOVI(+this.pd.HospitalNo).subscribe((next) => {
         if (next) { this.showOVITab = true } else { this.showOVITab = false }
       })
@@ -140,7 +141,7 @@ export class HospitalsComponent implements OnInit {
   deleteDetails(code: string) {
 
     this.alertify.show("Needs to be implemented");
-    
+
 
 
 
@@ -243,20 +244,22 @@ export class HospitalsComponent implements OnInit {
     // hide the hospital image and show the dataentry form for the new hospitalValve
     this.displayHospitalImage = 0;
 
-    this.alertify.info("Adding new ValveType now");
+    // get a new ValveType with the valveTypeId
+    this.vs.createSpecificHospitalValve().subscribe((next) => {
+      this.hv = next;
+    });
+   
   }
 
   receiveAddValveType(result: number) {
-    
-    if(result == 10)
+
+    if (result == 10)// cancel is sent up
     {
       this.displayHospitalImage = 1;
     }
-    if (result == 1)
-     {
+    if (result == 1) {
       this.displayHospitalImage = 1;
-      this.alertify.info("Valve added ...");
-    //  this.vs.createSpecificHospitalValve(this.hv).subscribe(() => { }, (error) => { })
+      this.vs.updateSpecificHospitalValve(this.hv).subscribe(() => { }, (error) => { })
     }
 
   }

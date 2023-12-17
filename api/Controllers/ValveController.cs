@@ -156,25 +156,27 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpPost("createhospitalValve")]
-        public async Task<IActionResult> GetMHC([FromBody] Valve_Code code)
+        [HttpGet("createhospitalValve")]
+        public async Task<IActionResult> GetMHC()
         {
-            code.hospitalId = await _special.getCurrentHospitalIdAsync();
             var help = "";
             var comaddress = _com.Value.productURL;
             var st = "ValveCode";
             comaddress = comaddress + st;
-            var json = JsonConvert.SerializeObject(code, Formatting.None);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+           
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.PostAsync(comaddress, content))
+                using (var response = await httpClient.GetAsync(comaddress))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
-            return Ok(help);
+            return Ok(help);// this gives a new Valve_Code with ValveTypeId
         }
+
+        
+
+
 
         [HttpGet("vendors")]
         public async Task<IActionResult> getVendors()

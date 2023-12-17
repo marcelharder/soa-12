@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { dropItem } from 'src/app/_models/dropItem';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
 import { ValveService } from 'src/app/_services/valve.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-valveType',
@@ -11,35 +12,23 @@ import { ValveService } from 'src/app/_services/valve.service';
   styleUrls: ['./add-valveType.component.css']
 })
 export class AddValveTypeComponent implements OnInit {
-  addValveTypeForm: FormGroup | undefined;
+  @ViewChild("addValveForm") addValveForm: NgForm;
   optionsVendors: Array<dropItem> = [];
   @Input() hv: hospitalValve;
   @Output() sendupdate = new EventEmitter();
+  selectedVendor = 2;
+  targetUrl = "";
+  baseUrl = environment.apiUrl;
 
 
 
   constructor(
-    private fb: FormBuilder,
     private vs: ValveService,
     private alertify: ToastrService) { }
 
   ngOnInit() {
 
-    this.addValveTypeForm = new FormGroup({
-      hospitalId: new FormControl(),
-      No: new FormControl(),
-      Vendor_description: new FormControl(),
-      Vendor_code: new FormControl(),
-      Valve_size: new FormControl(),
-      Model_code: new FormControl(),
-      Implant_position: new FormControl(),
-      uk_code: new FormControl(),
-      us_code: new FormControl(),
-      image: new FormControl(),
-      Description: new FormControl(),
-      Type: new FormControl(),
-      countries: new FormControl()
-    })
+    
     this.optionsVendors =
       [
         {
@@ -75,32 +64,46 @@ export class AddValveTypeComponent implements OnInit {
           "description": "Edwards"
         }
       ];
+
+    
+   // this.optionsVendors.sort((a, b) => a.value - b.value);
+    this.optionsVendors.sort(function (a, b) {
+      return ('' + a.description).localeCompare(b.description);
+  })
     // need to adjust the endpoint on the inventory container so that it will be anonymous
     // this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
-    this.initializeForm;
+    
 
   }
+
+ 
+
+  updatePhoto(url: string){this.hv.image = url;}
 
   cancel() { this.sendupdate.emit(10); }
-  SaveNewValveType() { this.sendupdate.emit(1); }
 
-  initializeForm() {
-    this.addValveTypeForm = this.fb.group({
-      hospitalId: ['', []],
-      No: ['', []],
-      Vendor_description: ['', []],
-      Vendor_code: ['', []],
-      Valve_size: ['', []],
-      Model_code: ['', []],
-      Implant_position: ['', []],
-      uk_code: ['', []],
-      us_code: ['', []],
-      image: ['', []],
-      Description: ['', []],
-      Type: ['', []],
-      countries: ['', []]
-    });
+   IsLoaded() {
+    if (+this.hv.hospitalId !== 0) {
+      this.targetUrl = this.baseUrl + 'Valve/addValveTypePhoto/' + this.hv.hospitalId;
+      return true;
+    } else { return false; }
+  } 
+
+  SaveNewValveType() {
+    // get vendor description from vendor_code
+    if (this.selectedVendor !== 0) {
+      var hep = this.optionsVendors.find(x => x.value == this.selectedVendor);
+      this.hv.Vendor_description = hep.description;
+      this.hv.Vendor_code = hep.value;
+      this.sendupdate.emit(1);
+    }
+
+
   }
 
-  hideRestPage(h: any) { }
+  
+
+  
+
+  
 }
