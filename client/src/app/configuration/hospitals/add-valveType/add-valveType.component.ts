@@ -27,8 +27,7 @@ export class AddValveTypeComponent implements OnInit {
     private alertify: ToastrService) { }
 
   ngOnInit() {
-
-    
+   
     this.optionsVendors =
       [
         {
@@ -64,12 +63,8 @@ export class AddValveTypeComponent implements OnInit {
           "description": "Edwards"
         }
       ];
-
-    
-   // this.optionsVendors.sort((a, b) => a.value - b.value);
-    this.optionsVendors.sort(function (a, b) {
-      return ('' + a.description).localeCompare(b.description);
-  })
+  
+    this.optionsVendors.sort(function (a, b) { return ('' + a.description).localeCompare(b.description);})
     // need to adjust the endpoint on the inventory container so that it will be anonymous
     // this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
     
@@ -83,8 +78,8 @@ export class AddValveTypeComponent implements OnInit {
   cancel() { this.sendupdate.emit(10); }
 
    IsLoaded() {
-    if (+this.hv.hospitalId !== 0) {
-      this.targetUrl = this.baseUrl + 'Valve/addValveTypePhoto/' + this.hv.hospitalId;
+    if (+this.hv.ValveTypeId !== 0) {
+      this.targetUrl = this.baseUrl + 'Valve/addValveTypePhoto/' + this.hv.ValveTypeId;
       return true;
     } else { return false; }
   } 
@@ -95,6 +90,7 @@ export class AddValveTypeComponent implements OnInit {
       var hep = this.optionsVendors.find(x => x.value == this.selectedVendor);
       this.hv.Vendor_description = hep.description;
       this.hv.Vendor_code = hep.value;
+      this.hv.countries = "NL";
       this.sendupdate.emit(1);
     }
 

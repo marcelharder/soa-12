@@ -103,8 +103,7 @@ findSelectedValves(){
   this.model.Type = this.selectedSoort;
   this.model.Implant_position = this.getImplantValue(this.implant);
   this.model.hospitalId = this.hospitalId;
-  debugger;
-  this.vs.getValvesFromOVI(this.model).subscribe((next)=>{this.optionsAvailableValves = next;})
+   this.vs.getValvesFromOVI(this.model).subscribe((next)=>{this.optionsAvailableValves = next;})
 }
 
 cancel(){this._addValveIndicator = false;}

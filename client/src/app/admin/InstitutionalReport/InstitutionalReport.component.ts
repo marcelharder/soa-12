@@ -49,8 +49,7 @@ export class InstitutionalReportComponent implements OnInit {
   findnewreport(){
     this.hos.getInstitutionalReport(this.hospitalNo, this.selectedProcedure).subscribe((next)=>{
       this.pre = next;
-      debugger;
-      this.activateTextInserts(this.selectedProcedure.toString());
+       this.activateTextInserts(this.selectedProcedure.toString());
     })
   }
   

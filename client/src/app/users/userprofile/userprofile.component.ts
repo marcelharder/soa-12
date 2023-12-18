@@ -112,7 +112,6 @@ export class UserProfileComponent implements OnInit {
        }
 
     loadDrops() {
-        debugger;
         const d = JSON.parse(localStorage.getItem('optionCountries'));
         if (d == null || d.length === 0) {
             this.drops.getAllCountries().subscribe((response) => {

@@ -27,7 +27,7 @@ export class HospitalsComponent implements OnInit {
     ValveTypeId: 0,
     Description: "",
     Implant_position: "Aortic",
-    Type: "",
+    Type: "Biological",
     hospitalId: "0",
     Vendor_code: 0,
     Vendor_description: "",
@@ -82,17 +82,16 @@ export class HospitalsComponent implements OnInit {
     });
     this.route.data.subscribe((data) => {
       this.pd = data.hos;
-      this.hv.hospitalId = data.hos.HospitalNo;
+      this.hv.hospitalId = this.pd.HospitalNo;
+      this.auth.currentUser$.subscribe((next)=>{
+        this.hv.countries = next.country;
+      })
       this.hospitalService.IsThisHospitalUsingOVI(+this.pd.HospitalNo).subscribe((next) => {
         if (next) { this.showOVITab = true } else { this.showOVITab = false }
       })
       //this.getCorrectCities();
     });
     // find out if this hospital uses the online valve inventory, if so then show the ovi tab
-
-
-
-
   }
 
   getCorrectCities() {
@@ -121,7 +120,6 @@ export class HospitalsComponent implements OnInit {
   showHospitalImage() { if (this.displayHospitalImage == 1) { return true; } }
   doneWithOvi() {
     this.router.navigate(['/config']);
-    this.alertify.show("Done with this");
   }
 
   AddValve() {
@@ -136,35 +134,25 @@ export class HospitalsComponent implements OnInit {
     this.onlineValves = [];
     // go out to online valve app and find the valveTypes[]
     this.vs.searchHospitalValveOnline(this.hv.Type, this.hv.Implant_position).subscribe((next) => { this.onlineValves = next; });
-    this.alertify.show("find product now ...");
   }
-  deleteDetails(code: string) {
-
-    this.alertify.show("Needs to be implemented");
-
-
-
-
-    /* this.vs.removeSpecificValveType(+code).subscribe(
-      (next) => {
-        this.alertify.show("Valve deleted ...");
-      },
-      (error) => {
-        this.alertify.error(error);
-      }, () => {
+  deleteDetails(id: number) {
+    // get the correct hospitalValveType
+    this.vs.getSpecificHospitalValve(id.toString()).subscribe((next) => {
+      this.hv = next;
+      // remove the current hospitalId from the list
+      var lis = this.hv.hospitalId.split(',');
+      var index = lis.indexOf(this.pd.HospitalNo.toString());
+      lis.splice(index, 1);
+      this.hv.hospitalId = lis.join(',');
+      // save back to the database
+      this.vs.updateSpecificHospitalValve(this.hv).subscribe(() => { }, (error) => { }, () => {
         this.SearchValve();
-        this.displayList = 1;
-
-      }
-    ); */
+      });
 
 
-
-
-    this.alertify.show("delete now ..." + code);
+    });
   }
   changeToHospitalValve() { // write the hospitalId to the valvetype
-    this.alertify.info("hello");
     this.vs.getSpecificValveType(+this.selectedOnlineValve).subscribe((next) => {
       this.alertify.show("Valve added ...");
     }, (error) => {
@@ -177,8 +165,6 @@ export class HospitalsComponent implements OnInit {
   }
 
   findValveInOVI() {
-    this.alertify.show("Getting the valves in the online valve inventory");
-
     let help: Partial<hospitalValve> = {};
     help.Type = this.searchType;
     help.hospitalId = this.pd.HospitalNo;
@@ -240,15 +226,17 @@ export class HospitalsComponent implements OnInit {
   }
   cancel() { this.router.navigate(["/config"]); }
 
+  cancelDisplayOnlineValves(){this.don = 0;this.displayList = 1;}
+
   AddOnlineValve() {
     // hide the hospital image and show the dataentry form for the new hospitalValve
     this.displayHospitalImage = 0;
+    this.don = 0;
+    this.displayList = 1;
+    // get a new ValveType with the valveTypeId, use only the valvetypeId
+    this.vs.createSpecificHospitalValve().subscribe((next) => { 
+      this.hv.ValveTypeId = next.ValveTypeId; });
 
-    // get a new ValveType with the valveTypeId
-    this.vs.createSpecificHospitalValve().subscribe((next) => {
-      this.hv = next;
-    });
-   
   }
 
   receiveAddValveType(result: number) {
@@ -256,6 +244,8 @@ export class HospitalsComponent implements OnInit {
     if (result == 10)// cancel is sent up
     {
       this.displayHospitalImage = 1;
+      //remove the valveType that was generated earlier
+      this.vs.deleteSpecificHospitalValve(this.hv.ValveTypeId).subscribe(() => { }, (error) => { })
     }
     if (result == 1) {
       this.displayHospitalImage = 1;

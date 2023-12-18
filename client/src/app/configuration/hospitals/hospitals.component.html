@@ -135,16 +135,18 @@
                           <!--list of valves from the server-->
                           <table class="table table-striped">
                             <tr>
+                              <th>Id</th>
                               <th>Code</th>
                               <th>Description</th>
                               <th></th>
                               <th></th>
                             </tr>
                             <tr *ngFor="let hv of hospitalValves">
+                              <td>{{hv.ValveTypeId}}</td>
                               <td>{{hv.Model_code}}</td>
                               <td>{{hv.Description}}</td>
 
-                              <td><a (click)="deleteDetails(hv.Model_code)" style='color:crimson'>Delete</a></td>
+                              <td><a (click)="deleteDetails(hv.ValveTypeId)" style='color:crimson'>Delete</a></td>
                             </tr>
                           </table>
                         </div>
@@ -176,7 +178,10 @@
                       </div>
                       <div class="row" *ngIf="displayOnlineValves()">
                         <div class="ml-3">
-                          <button class="btn btn-info" (click)="AddOnlineValve()">Add a new Valve Type</button>
+                          <div class="btn-group" role="group">
+                            <button class="badge badge-danger" (click)="cancelDisplayOnlineValves()"> Cancel </button>
+                            <button class="badge badge-warning" (click)="AddOnlineValve()"> Add a new Valve Type </button>
+                          </div>
                         </div>
                         <div>
 

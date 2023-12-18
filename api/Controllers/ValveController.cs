@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
 namespace api.Controllers
 {
@@ -116,7 +118,6 @@ namespace api.Controllers
             return Ok(help);
         }
 
-
         #region <!-- manage valves in hospital if OVI is not available -->
 
         [HttpGet("getValveCodeSizes/{type}")]
@@ -156,27 +157,27 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpGet("createhospitalValve")]
+        [HttpGet("createHospitalValve")]
         public async Task<IActionResult> GetMHC()
         {
             var help = "";
             var comaddress = _com.Value.productURL;
             var st = "ValveCode";
             comaddress = comaddress + st;
-           
+            var h = new Valve_Code();
+            h.Type = "0";
+            var json = JsonConvert.SerializeObject(h, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                using (var response = await httpClient.PostAsync(comaddress, content))
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
             return Ok(help);// this gives a new Valve_Code with ValveTypeId
         }
-
-        
-
-
 
         [HttpGet("vendors")]
         public async Task<IActionResult> getVendors()
@@ -189,7 +190,6 @@ namespace api.Controllers
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
-                    
                     help = await response.Content.ReadAsStringAsync();
                 }
             }
@@ -217,7 +217,8 @@ namespace api.Controllers
         [HttpPut("updateHospitalValve")]
         public async Task<IActionResult> GetMHU([FromBody] Valve_Code code)
         {
-            code.hospitalId = await _special.getCurrentHospitalIdAsync();
+            //code.hospitalId = await _special.getCurrentHospitalIdAsync();
+            code.Valve_size = null;
             var help = "";
             var comaddress = _com.Value.productURL;
             var st = "ValveCode";
@@ -254,8 +255,9 @@ namespace api.Controllers
         public async Task<IActionResult> WriteHosId(int code)
         {
             var help = "";
+            var t = code.ToString().makeSureTwoChar();
             var comaddress = _com.Value.productURL;
-            var st = "ValveCode/writeHospitalIdToValveCode/" + code + "/" + await _special.getCurrentHospitalIdAsync();
+            var st = "ValveCode/writeHospitalIdToValveCode/" + t + "/" + await _special.getCurrentHospitalIdAsync();
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -266,21 +268,26 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-        [HttpGet("removeHospitalIdFromValveCode/{code}")]
-        public async Task<IActionResult> RemoveHosId(int code)
+         
+       [HttpPost("addValveTypePhoto/{id}")]
+        public async Task<IActionResult> AddPhotoForValveType(int id, [FromForm] PhotoForCreationDto photoDto)
         {
-            var help = "";
-            var comaddress = _com.Value.productURL;
-            var st = "ValveCode/removeHospitalIdFromValveCode/" + code + "/" + await _special.getCurrentHospitalIdAsync();
+            var content = new MultipartFormDataContent();
+            content.Add(new StreamContent(photoDto.File.OpenReadStream()), photoDto.File.Name, photoDto.File.FileName);
+            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.File.Name, FileName = photoDto.File.FileName };
+
+            var help = new photoResult();
+            var comaddress = _com.Value.hospitalURL;
+            var st = "ValveCode/addValveTypePhoto/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(comaddress))
+                using (var response = await httpClient.PostAsync(comaddress, content))
                 {
-                    help = await response.Content.ReadAsStringAsync();
+                    help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help);
+            return Ok(help.document_url); 
         }
 
         #endregion

@@ -89,147 +89,12 @@ namespace api.Implementations
         }
 
         #endregion
-
-
-
-       /*   #region <!-- These are the valves that show up in the hospital configuration -->
-        public async Task<List<Class_Item>> getProductCodesInHospital(string type, string position)
-        {
-            var productCodes = new List<Class_Item>();
-            var counter = 0;
-
-            var currentUserId = _special.getCurrentUserId();
-            var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id;
-
-           var valvesInThisHospital = getValvesInHospital(currentHospitalId);
-           
-            foreach (Class_Valve_Code el in valvesInThisHospital)
-            {
-                counter++;
-                var cl = new Class_Item();
-                cl.description = el.description;
-                cl.value = counter;
-                productCodes.Add(cl);
-            }
-            return productCodes;
-        }
-        public async Task<List<Valve_Code>> getValvesInHospital(string type, string position)
-        {
-            var productCodes = new List<Valve_Code>();
-
-            var currentUserId = _special.getCurrentUserId();
-            var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id;
-
-
-            if(getValvesInHospital(currentHospitalId) != null){
-                var valves = getValvesInHospital(currentHospitalId);
-                foreach (Class_Valve_Code el in valves)
-            {
-                if (el.type == type && el.position == position)
-                {
-                    productCodes.Add(_special.mapClassValveToDTO(el));
-                }
-            }
-            return productCodes;
-            }
-            else return null;
-           
-
-           
-        }
-        public async Task<Valve_Code> createValveInHospital(Valve_Code tes)
-        {
-            var currentUserId = _special.getCurrentUserId();
-            var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id;
-
-            var valvesInThisHospital = getValvesInHospital(currentHospitalId);
-           
-            var listOfValvesForThisHospital = new List<Class_Valve_Code>();
-            listOfValvesForThisHospital = valvesInThisHospital.ToList();
-
-
-            // check to see if this valve already exists in the valvecodes of this hospital
-            if (listOfValvesForThisHospital.Exists(x => x.valveTypeId == tes.valveTypeId)) { return null; }
-            else
-            {
-                Class_Valve_Code valve = new Class_Valve_Code();
-                valve.code = tes.code;
-                valve.valveTypeId = tes.valveTypeId;
-                valve.position = tes.implant_Position;
-                valve.description = tes.description;
-                valve.soort = tes.soort;
-                valve.type = tes.type;
-
-                listOfValvesForThisHospital.Add(valve);
-                _context.Class_Valve_Code.Add(valve);
-                if (await SaveAll())
-                {
-                    tes.codeId = valve.codeId;
-                    return tes;
-                }
-                else return null;
-            }
-
-        }
-        public async Task<Valve_Code> readValveInHospital(string code)
-        {
-            Valve_Code vd = new Valve_Code();
-            var currentUserId = _special.getCurrentUserId();
-            var currentUser = await _usermanager.Users.FirstOrDefaultAsync(x => x.Id == currentUserId);
-            var currentHospitalId = currentUser.hospital_id;
-           
-            var valvesInThisHospital = getValvesInHospital(currentHospitalId);
-           
-           
-            foreach (Class_Valve_Code el in valvesInThisHospital)
-            {
-                if (el.code == code)
-                {
-                    vd.hospitalId = currentUser.hospital_id.ToString().makeSureTwoChar();
-                    vd.uk_code = el.code;
-                    vd.Type = el.type;
-                    vd.ValveTypeId = el.valveTypeId;
-                    vd.Implant_position = el.position;
-                    vd.Description = el.description;
-                    vd.Valve_size = null;
-                };
-            };
-            return vd;
-        }
-        public Task<Valve_Code> updateValveInHospital(Valve_Code code)
-        {
-            throw new System.NotImplementedException();
-        }
-        public Task<int> deleteValveInHospital(int codeId)
-          {
-             throw new System.NotImplementedException();
-          } 
-        public async Task<string> getValveDescriptionFromModel(string code)
-        {
-            Valve_Code vf = new Valve_Code();
-            vf = await readValveInHospital(code);
-            return vf.description;
-        }
-       #endregion  */
-
-        
-
-
-
-
-
         #region <!-- CRUD for valveRepair-->
-
-
         public async Task<Class_Valve> GetSpecificValveRepair(int id, int procedure_id)
         {
             var selectedValve = await _context.Valves.FirstOrDefaultAsync(x => x.Id == id);
             return selectedValve;
         }
-
         public async Task<Class_Valve> addValveRepair(string position, int procedure_id)
         {
             var result = new Class_Valve();
@@ -261,7 +126,6 @@ namespace api.Implementations
         }
 
         #endregion
-
         #region <!-- CRUD for ValvedConduits -->
         public async Task<List<Class_Valve>> getValvedConduitsFromProcedure(int id)
         {
@@ -311,8 +175,7 @@ namespace api.Implementations
 
 
         }
-
-          public async Task<int> deleteSpecificValve(int id)
+        public async Task<int> deleteSpecificValve(int id)
         {
             var selectedValve = await _context.Valves.FirstOrDefaultAsync(x => x.Id == id);
             if (selectedValve != null)

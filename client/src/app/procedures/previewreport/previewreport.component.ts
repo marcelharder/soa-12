@@ -174,7 +174,6 @@ export class PreviewreportComponent implements OnInit {
       error: () => { },
       complete: () => {
         this.preview.isFinalReportPresentable(this.prev.procedure_id).subscribe((next)=>{
-          debugger;
           switch(next){
             case 1: window.location.href = `${this.baseUrl}FinalReport/${this.prev.procedure_id}`;break;
             case 2: this.alertify.error("pls fill the cabg details before printing the final report");break;
