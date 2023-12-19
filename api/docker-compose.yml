@@ -47,7 +47,7 @@ services:
       - db
   
   product:
-    image: product_app:v1
+    image: product_app:v2
     networks:
       - internal-container-network
     depends_on:
