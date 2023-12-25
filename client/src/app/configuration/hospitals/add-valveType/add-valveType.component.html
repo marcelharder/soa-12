@@ -40,23 +40,20 @@
             <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="hv.uk_code" class="form-control" name="4" />
             </div>
           </div>
-        
-
-
-
-
-
         </div>
         <div class="col-sm-4">
           <div class="card">
             <div class="row">
-              <div class="col-sm-12">  <img class="card-img-top img-thumbnail" src="{{'../../../../../assets/images/else-03.jpg' }}" alt="none found" />
+              <div class="col-sm-12"> 
+                 <img 
+                 class="card-img-top img-thumbnail" 
+                 src="{{'../../../../../assets/images/else-03.jpg' }}" alt="none found" />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-12">  
-                <!-- <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
-              </div> -->
+                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+              </div>
             </div>
            </div>
         </div>
