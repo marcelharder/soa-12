@@ -69,7 +69,6 @@ namespace api.Extensions
 
             services.AddScoped<IStatistics, Statistics>();
             services.AddScoped<IElementaryStatistics, ElementaryStatistics>();
-            services.AddScoped<IAioRepo, AioRepo>();
 
             services.AddScoped<OperatieDrops>();
             services.AddScoped<SpecialMaps>();

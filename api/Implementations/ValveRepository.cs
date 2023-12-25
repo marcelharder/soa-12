@@ -167,14 +167,14 @@ namespace api.Implementations
 
         #endregion
 
-        private IEnumerable<Class_Valve_Code> getValvesInHospital(int hospitalId)
+       /*  private IEnumerable<Class_Valve_Code> getValvesInHospital(int hospitalId)
         {
             // get this from the valveinventory
             var result = _context.Class_Valve_Code.OrderByDescending(u => u.hospitalId).AsQueryable();
             if (result != null) { return result; } else { return null; }
 
 
-        }
+        } */
         public async Task<int> deleteSpecificValve(int id)
         {
             var selectedValve = await _context.Valves.FirstOrDefaultAsync(x => x.Id == id);

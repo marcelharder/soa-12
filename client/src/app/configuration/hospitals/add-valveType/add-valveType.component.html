@@ -50,13 +50,13 @@
         <div class="col-sm-4">
           <div class="card">
             <div class="row">
-              <div class="col-sm-12">  <img class="card-img-top img-thumbnail" src="{{hv.image || '../../../../../assets/images/else-03.jpg' }}" alt="none found" />
+              <div class="col-sm-12">  <img class="card-img-top img-thumbnail" src="{{'../../../../../assets/images/else-03.jpg' }}" alt="none found" />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-12">  
-                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
-              </div>
+                <!-- <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+              </div> -->
             </div>
            </div>
         </div>
