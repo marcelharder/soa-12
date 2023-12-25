@@ -124,18 +124,7 @@ namespace api.Helpers
         }
 
         #endregion
-         #region <!-- aioCourse -->
-        public Class_Course mapToCourse(CourseDetailsDto cr, Class_Course old)
-        {
-            return _map.Map<CourseDetailsDto, Class_Course>(cr, old);
-        }
-
-        public CourseDetailsDto mapToCoursedto(Class_Course p)
-        {
-            return _map.Map<Class_Course, CourseDetailsDto>(p);
-        }
-
-        #endregion
+      
         #region <!-- discharge -->
         public DischargeForReturnDTO mapToDischargeDTO(FullPatientDTO pat, Class_PostOp po)
         {

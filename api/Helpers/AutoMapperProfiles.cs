@@ -72,9 +72,7 @@ namespace api.Helpers
             CreateMap<Class_Epa, EpaDetailsDto>();
             CreateMap<EpaDetailsDto, Class_Epa>().ForMember(dest => dest.EpaId, opt => opt.Ignore());
 
-            CreateMap<Class_Course, CourseDetailsDto>();
-            CreateMap<CourseDetailsDto, Class_Course>().ForMember(dest => dest.CourseId, opt => opt.Ignore());
-
+        
             
         }
     }

@@ -126,22 +126,7 @@ namespace api.Implementations
             return selectedChef;
         }
 
-        public async Task<List<Class_Course>> GetCourses(int id)
-        {
-            var selectedUser = await _userManager.Users
-            .Include(a => a.Courses)
-            .FirstOrDefaultAsync(x => x.Id == id);
-            return selectedUser.Courses.ToList();
-        }
-
-        public async Task<List<Class_Epa>> GetEpaas(int id)
-        {
-             var selectedUser = await _userManager.Users
-            .Include(a => a.Epa)
-            .FirstOrDefaultAsync(x => x.Id == id);
-            return selectedUser.Epa.ToList();
-        }
-
+       
         public async Task<bool> UpdatePayment(DateTime d, int id)
         {
            var help = false;
