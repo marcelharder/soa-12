@@ -278,7 +278,7 @@ namespace api.Controllers
 
             var help = new photoResult();
             var comaddress = _com.Value.hospitalURL;
-            var st = "ValveCode/addValveTypePhoto/" + id;
+            var st = "ValveCode/addPhoto/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
