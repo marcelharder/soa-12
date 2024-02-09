@@ -125,7 +125,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveSize/getSizesForValve/" + type;
+            var st = "ValveSize/" + type;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
