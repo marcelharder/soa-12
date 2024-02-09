@@ -99,15 +99,20 @@ export class PreviewreportComponent implements OnInit {
     this.auth.currentServiceLevel$.pipe(take(1)).subscribe((n) => {
         this.auth.currentUser$.pipe(take(1)).subscribe((u) => {this.currentUserName = u.UserName;});
         this.auth.HospitalName.subscribe((n)=>{this.currentHospitalName = n;});
+       
         this.route.data.subscribe(data => {
+
           this.prev = data.preView;
           this.procedureId = this.prev.procedure_id;
+          
+          this.preview.getReportHeader(this.procedureId).subscribe((next) => { this.reportHeader = next; });
           this.procedureservice.getProcedure(this.procedureId).subscribe((next) => {
+            debugger;
             this.proc = next;
             if(this.proc.refPhys != "99")
-                {this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => {
-                  
-                  this.ref = ne; })}
+                {
+                  this.refPhys.getSpecificRefPhys(+this.proc.refPhys).subscribe((ne) => {this.ref = ne; });
+                }
             
             this.preview.getReportCode(this.proc.fdType).subscribe((nex) => {
               this.reportCode = nex;
@@ -115,7 +120,7 @@ export class PreviewreportComponent implements OnInit {
             });
           });
         });
-        this.preview.getReportHeader(this.procedureId).subscribe((next) => { this.reportHeader = next; });
+       
     });
   }
 
