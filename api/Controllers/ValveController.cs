@@ -105,7 +105,7 @@ namespace api.Controllers
             var currentHospitalId = await _special.getCurrentHospitalIdAsync();
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveCode/getExtraCodesInHospital/" + type + "/" + position + "/" + currentHospitalId;
+            var st = "ValveCode/getValveCodesInHospital/" + type + "/" + position + "/" + currentHospitalId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
