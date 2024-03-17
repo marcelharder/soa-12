@@ -98,13 +98,14 @@ export class AddValveComponent implements OnInit {
       this.valveDescription = this.new_valve_type.Description;
       this.pd.MODEL = this.new_valve_type.uk_code; // needed for EOA measurement
       this.pd.SERIAL_IMP = '';
+      
       this.vs.getValveCodeSizes(this.svtid.toString()).subscribe((nex) => {
+        this.optionSizes = [];
         nex.forEach((item) => {
           this.optionSizes.push({ Size: item.Size, EOA: item.EOA });
-        });
-
-
-            });
+        },(error)=>{
+          this.alertify.error(error)});
+          });
  
     })
   }

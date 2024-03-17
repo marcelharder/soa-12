@@ -105,7 +105,7 @@ namespace api.Controllers
             var currentHospitalId = await _special.getCurrentHospitalIdAsync();
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveCode/getExtraCodesInHospital/" + type + "/" + position + "/" + currentHospitalId;
+            var st = "ValveCode/getValveCodesInHospital/" + type + "/" + position + "/" + currentHospitalId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -125,7 +125,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveSize/getSizesForValve/" + type;
+            var st = "ValveSize/" + type;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -278,7 +278,7 @@ namespace api.Controllers
 
             var help = new photoResult();
             var comaddress = _com.Value.hospitalURL;
-            var st = "ValveCode/addValveTypePhoto/" + id;
+            var st = "ValveCode/addPhoto/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
