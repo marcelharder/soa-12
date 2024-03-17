@@ -60,6 +60,7 @@ export class UserlistComponent implements OnInit {
 
   selectCountry(){
     this.drop.getAvailableHospitals(this.currentCountry).subscribe(response => {
+      
       this.hospitals = response;
       
     }, (error) => { console.log(error); });

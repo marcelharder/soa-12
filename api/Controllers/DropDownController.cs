@@ -51,7 +51,8 @@ namespace api.Controllers
         [HttpGet]
         public async Task<IActionResult> getAHO(string country)
         {
-            _result = await _copd.getAvailableHospitalOptions(country); return Ok(_result);
+            _result = await _copd.getAvailableHospitalOptions(country); 
+            return Ok(_result);
         }
 
         [Route("allHospitals")]

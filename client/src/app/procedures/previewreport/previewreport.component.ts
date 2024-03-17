@@ -107,7 +107,7 @@ export class PreviewreportComponent implements OnInit {
           
           this.preview.getReportHeader(this.procedureId).subscribe((next) => { this.reportHeader = next; });
           this.procedureservice.getProcedure(this.procedureId).subscribe((next) => {
-            debugger;
+            
             this.proc = next;
             if(this.proc.refPhys != "99")
                 {
