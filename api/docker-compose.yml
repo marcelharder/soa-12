@@ -31,7 +31,7 @@ services:
       - internal-container-network
   
   hospital:
-    image: hospital_app:v5
+    image: hospital_app:v17
     networks:
       - internal-container-network
     ports:
@@ -47,7 +47,7 @@ services:
       - db
   
   product:
-    image: product_app:v1
+    image: product_app:v5
     networks:
       - internal-container-network
     depends_on:
@@ -56,7 +56,7 @@ services:
       - 8104:80
       
   reports:
-    image: reports:v25
+    image: reports:v27
     networks:
       - internal-container-network
     volumes:
@@ -65,7 +65,7 @@ services:
       - db
 
   onlinevalve_md:
-    image: inventory_md:v26
+    image: inventory_md:v27
     networks:
       - internal-container-network
     volumes:
