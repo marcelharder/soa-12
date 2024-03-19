@@ -21,8 +21,6 @@ export class UploadphotoComponent implements OnInit,OnDestroy {
   }
   ngOnInit() {
     this.account.currentUser$.subscribe((next) => { this.token = next.Token });
-   /*  let help = JSON.parse(localStorage.getItem('user'));
-    this.token = help.Token; */
     this.initializeUploader();
   }
   
