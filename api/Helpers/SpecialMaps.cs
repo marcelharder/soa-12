@@ -289,22 +289,7 @@ namespace api.Helpers
             }
             else { return "No"; }
         }
-        internal string getImplantFromModelAsync(string MODEL)
-        {
-
-            // var selectedValve = await _context.ValveCodes.FirstOrDefaultAsync(a => a.code == model);
-            // return selectedValve.codeId.ToString();
-
-            var result = "";
-            var contentRoot = _env.ContentRootPath;
-            var filename = Path.Combine(contentRoot, "conf/Valve.xml");
-            XDocument order = XDocument.Load(filename);
-            IEnumerable<XElement> help = from d in order.Descendants("valve_codes")
-                                         where d.Element("UK_Code").Value == MODEL
-                                         select d;
-            foreach (XElement x in help) { result = x.Element("Valve_id").Value; }
-            return result;
-        }
+        
         internal int CalculateTotalTime(DateTime utcNow, int selectedStartHr, int selectedStartMin, int selectedStopHr, int selectedStopMin)
         {
 

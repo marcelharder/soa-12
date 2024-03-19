@@ -8,7 +8,7 @@ export interface Hospital {
     Address: string;
     Country: string;
     Telephone: string;
-    UsesOnlineValveInventory: boolean;
+    
     OpReportDetails1: string;
     OpReportDetails2: string;
     OpReportDetails3: string;

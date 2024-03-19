@@ -114,6 +114,7 @@ export class ListhospitalsComponent implements OnInit {
   }
 
   backFromEdit(ret: any) {
+    debugger;
     this.addFlag = 0;
     this.listFlag = 1;
     this.editFlag = 0;

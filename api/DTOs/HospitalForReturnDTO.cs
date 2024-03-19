@@ -12,8 +12,7 @@ namespace api.DTOs
         public string Country { get; set; }
         public string ImageUrl { get; set; }
         public string City { get; set; }
-        public bool UsesOnlineValveInventory { get; set; }
-
+       
         public string OpReportDetails1 { get; set; }
         public string OpReportDetails2 { get; set; }
         public string OpReportDetails3 { get; set; }

@@ -327,20 +327,7 @@ namespace api.Controllers
         }
 
 
-        [Route("mitralRingType")]
-        [HttpGet]
-        public IActionResult getAhhw1() // get the data from Valve.xml
-        {
-            var result = _copd.getMitralRingType();
-            return Ok(result);
-        }
-        [Route("tricuspidRingType")]
-        [HttpGet]
-        public IActionResult getAhhw2() // get the data from Valve.xml
-        {
-            var result = _copd.getTricuspidRingType();
-            return Ok(result);
-        }
+       
         #endregion
         #region <!--procedure-->
 

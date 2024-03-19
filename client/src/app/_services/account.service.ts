@@ -49,6 +49,7 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
+        
         this.setCurrentUser(user);
        })
     );

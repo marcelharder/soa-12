@@ -119,24 +119,24 @@ namespace api.Controllers
             return Ok(help);
         }
 
-       /*  [HttpGet("hospitalFromInventory/{id}")]// get specific hospital details from inventory
-        public async Task<IActionResult> getHospitalNameFromInventory(int id)
-        {
-            var help = "";
-            var comaddress = _com.Value.hospitalURL;
-            var st = "Hospital/getHospitalById/" + id;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    help = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(help);
-        }
- */
-       
+        /*  [HttpGet("hospitalFromInventory/{id}")]// get specific hospital details from inventory
+         public async Task<IActionResult> getHospitalNameFromInventory(int id)
+         {
+             var help = "";
+             var comaddress = _com.Value.hospitalURL;
+             var st = "Hospital/getHospitalById/" + id;
+             comaddress = comaddress + st;
+             using (var httpClient = new HttpClient())
+             {
+                 using (var response = await httpClient.GetAsync(comaddress))
+                 {
+                     help = await response.Content.ReadAsStringAsync();
+                 }
+             }
+             return Ok(help);
+         }
+  */
+
         [HttpGet("getHospitalNameFromId/{id}")]// get specific hospital details
         public async Task<IActionResult> GetHospitalName(string id)
         {
@@ -224,11 +224,11 @@ namespace api.Controllers
             {
                 using (var response = await httpClient.PostAsync(comaddress, content))
                 {
-                   // var ger = await response.Content.ReadAsStringAsync();
-                    help = await response.Content.ReadFromJsonAsync<photoResult>();
+                    var ger = await response.Content.ReadAsStringAsync();
+                    //help = await response.Content.ReadFromJsonAsync<photoResult>();
+                    return Ok(ger);
                 }
             }
-            return Ok(help.document_url); 
         }
 
         #endregion
@@ -283,7 +283,7 @@ namespace api.Controllers
                 {
                     help = await response.Content.ReadAsStringAsync();
                 }
-           
+
             }
             return Ok(help);
         }

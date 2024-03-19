@@ -40,7 +40,9 @@ export class EdithospitalComponent implements OnInit {
   editInstitutionalReport(){this.showInstitutionalReport = true;}
 
   Cancel() { this.cancelThis.emit(1); }
-  Save(){this.hospitalservice.saveHospital(this.pd).subscribe((next)=>{this.cancelThis.emit(1); })}
+  Save(){
+    
+    this.hospitalservice.saveHospital(this.pd).subscribe((next)=>{this.cancelThis.emit(1); })}
   
    IsLoaded() {
     if (+this.pd.HospitalNo !== 0) {
@@ -49,7 +51,7 @@ export class EdithospitalComponent implements OnInit {
     } else { return false; }
 } 
   updatePhoto(photoUrl: string) {
-     this.pd.ImageUrl = photoUrl;}
+    this.pd.ImageUrl = photoUrl;}
 
   receiveDone(no: number){
     this.cancelThis.emit(1);

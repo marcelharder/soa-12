@@ -44,12 +44,6 @@ namespace api.Data
             _com = com;
             _sp = sp;
 
-            var v = "conf/Valve.xml";
-            var va = Path.Combine(content, v);
-            XElement val = XElement.Load($"{va}");
-            _val = val;
-
-
             _context = context;
 
             Class_Item _result = new Class_Item();
