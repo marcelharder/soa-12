@@ -53,7 +53,7 @@ export class HospitalsComponent implements OnInit {
 
   TitleDetailsForm = "Details";
   currentHospital = "";
-  selectedOnlineValve = "";
+  selectedOnlineValve = 0;
   searchPosition = "";
   searchType = "";
   showOVITab = false;
@@ -132,12 +132,16 @@ export class HospitalsComponent implements OnInit {
 
   SearchHospitalValve() {
     this.onlineValves = [];
-    // go out to online valve app and find the valveTypes[]
-    this.vs.searchHospitalValveOnline(this.hv.Type, this.hv.Implant_position).subscribe((next) => { this.onlineValves = next; });
+    // go find all available valve types for this position
+    this.vs.searchHospitalValveOnline(this.hv.Type, this.hv.Implant_position).subscribe((next) => {
+       this.onlineValves = next;
+       });
   }
   deleteDetails(id: number) {
+    
     // get the correct hospitalValveType
     this.vs.getSpecificHospitalValve(id.toString()).subscribe((next) => {
+     
       this.hv = next;
       // remove the current hospitalId from the list
       var lis = this.hv.hospitalId.split(',');
@@ -148,16 +152,15 @@ export class HospitalsComponent implements OnInit {
       this.vs.updateSpecificHospitalValve(this.hv).subscribe(() => { }, (error) => { }, () => {
         this.SearchValve();
       });
-
-
     });
   }
   changeToHospitalValve() { // write the hospitalId to the valvetype
-    this.vs.getSpecificValveType(+this.selectedOnlineValve).subscribe((next) => {
-      this.alertify.show("Valve added ...");
-    }, (error) => {
+    this.vs.getSpecificValveType(this.selectedOnlineValve).subscribe((next) => {
+      
+      }, (error) => {
       this.alertify.error(error);
     }, () => {
+      
       this.SearchValve();
       this.displayList = 1;
       this.don = 0;

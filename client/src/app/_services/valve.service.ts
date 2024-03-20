@@ -39,6 +39,8 @@ export class ValveService {
 
 
     getHospitalValves(type: string, position: string) { return this.http.get<hospitalValve[]>(this.baseUrl + 'Valve/hospitalValves/' + type + '/' + position); }
+    
+    
     getSpecificHospitalValve(code: string) { return this.http.get<hospitalValve>(this.baseUrl + 'Valve/readHospitalValve/' + code); }
     
     
@@ -56,7 +58,7 @@ export class ValveService {
         return this.http.get<string>(this.baseUrl + 'General/ppm', { observe: 'response', params, responseType: 'text' as 'json' });
     }
     searchHospitalValveOnline(type: string, position: string) {
-        return this.http.get<dropItem[]>(this.baseUrl + 'Valve/models/' + type + "/" + position);
+        return this.http.get<dropItem[]>(this.baseUrl + 'Valve/hospitalValvesNotInHospital/' + type + "/" + position);
     }
     getSpecificValveType(ValveTypeId: number) {
         return this.http.get<valveType>(this.baseUrl + 'Valve/writeHospitalIdToValveCode/' + ValveTypeId)

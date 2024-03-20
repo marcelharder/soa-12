@@ -157,6 +157,25 @@ namespace api.Controllers
             return Ok(help);
         }
 
+        [HttpGet("hospitalValvesNotInHospital/{type}/{position}")]//gives the list of valveCodes to choose from
+        public async Task<IActionResult> GetMH2(string type, string position)
+        {
+            var currentHospitalId = await _special.getCurrentHospitalIdAsync();
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveCode/getValve_CodeAsItemsNotInHospital/" + type + "/" + position + "/" + currentHospitalId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            //var result = await _valve.getValvesInHospital(type, position);
+            return Ok(help);
+        }
+
         [HttpGet("createHospitalValve")]
         public async Task<IActionResult> GetMHC()
         {
@@ -201,16 +220,17 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveCode/" + code;
+            var st = "ValveCode/detailsByValveId/" + code;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
                     help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);
                 }
             }
-            return Ok(help);
+            
 
         }
 
@@ -251,6 +271,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
+       
         [HttpGet("writeHospitalIdToValveCode/{code}")]
         public async Task<IActionResult> WriteHosId(int code)
         {

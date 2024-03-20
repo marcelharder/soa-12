@@ -163,11 +163,11 @@
                           <div class="d-flex">
 
                             <div class="mr-auto p-2">
-                              <h5><span class="badge badge-secondary">These products are online available</span></h5>
+                              <h5><span class="badge badge-secondary">These products are available</span></h5>
                             </div>
                             <div class="p-2 flex-fill">
                               <select [(ngModel)]="selectedOnlineValve" name="hvpos1" class="form-control">
-                                <option *ngFor="let an of onlineValves" [value]=an.ValveTypeId>{{ an.Description }}
+                                <option *ngFor="let an of onlineValves" [value]=an.value>{{ an.description }}
                                 </option>
                               </select>
                             </div>
