@@ -137,7 +137,6 @@ namespace api.Controllers
             return Ok(help);
         }
 
-
         [HttpGet("hospitalValves/{type}/{position}")]//gives the list of ValveCodes
         public async Task<IActionResult> GetMH(string type, string position)
         {
@@ -176,16 +175,14 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpGet("createHospitalValve")]
-        public async Task<IActionResult> GetMHC()
+        [HttpPost("createHospitalValve")]
+        public async Task<IActionResult> GetMHC([FromBody] Valve_Code vc)
         {
             var help = "";
             var comaddress = _com.Value.productURL;
             var st = "ValveCode";
             comaddress = comaddress + st;
-            var h = new Valve_Code();
-            h.Type = "0";
-            var json = JsonConvert.SerializeObject(h, Formatting.None);
+            var json = JsonConvert.SerializeObject(vc, Formatting.None);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             using (var httpClient = new HttpClient())
@@ -193,9 +190,10 @@ namespace api.Controllers
                 using (var response = await httpClient.PostAsync(comaddress, content))
                 {
                     help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);// this gives a new Valve_Code with ValveTypeId
                 }
             }
-            return Ok(help);// this gives a new Valve_Code with ValveTypeId
+            
         }
 
         [HttpGet("vendors")]
@@ -290,7 +288,7 @@ namespace api.Controllers
             return Ok(help);
         }
          
-       [HttpPost("addValveTypePhoto/{id}")]
+        [HttpPost("addValveTypePhoto/{id}")]
         public async Task<IActionResult> AddPhotoForValveType(int id, [FromForm] PhotoForCreationDto photoDto)
         {
             var content = new MultipartFormDataContent();

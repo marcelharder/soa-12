@@ -83,7 +83,7 @@ export class HospitalsComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.pd = data.hos;
       this.hv.hospitalId = this.pd.HospitalNo;
-      this.auth.currentUser$.subscribe((next)=>{
+      this.auth.currentUser$.subscribe((next) => {
         this.hv.countries = next.country;
       })
       this.hospitalService.IsThisHospitalUsingOVI(+this.pd.HospitalNo).subscribe((next) => {
@@ -134,14 +134,14 @@ export class HospitalsComponent implements OnInit {
     this.onlineValves = [];
     // go find all available valve types for this position
     this.vs.searchHospitalValveOnline(this.hv.Type, this.hv.Implant_position).subscribe((next) => {
-       this.onlineValves = next;
-       });
+      this.onlineValves = next;
+    });
   }
   deleteDetails(id: number) {
-    
+
     // get the correct hospitalValveType
     this.vs.getSpecificHospitalValve(id.toString()).subscribe((next) => {
-     
+
       this.hv = next;
       // remove the current hospitalId from the list
       var lis = this.hv.hospitalId.split(',');
@@ -156,11 +156,11 @@ export class HospitalsComponent implements OnInit {
   }
   changeToHospitalValve() { // write the hospitalId to the valvetype
     this.vs.getSpecificValveType(this.selectedOnlineValve).subscribe((next) => {
-      
-      }, (error) => {
+
+    }, (error) => {
       this.alertify.error(error);
     }, () => {
-      
+
       this.SearchValve();
       this.displayList = 1;
       this.don = 0;
@@ -229,33 +229,32 @@ export class HospitalsComponent implements OnInit {
   }
   cancel() { this.router.navigate(["/config"]); }
 
-  cancelDisplayOnlineValves(){this.don = 0;this.displayList = 1;}
+  cancelDisplayOnlineValves() { this.don = 0; this.displayList = 1; }
 
   AddOnlineValve() {
     // hide the hospital image and show the dataentry form for the new hospitalValve
     this.displayHospitalImage = 0;
     this.don = 0;
     this.displayList = 1;
+
     // get a new ValveType with the valveTypeId, use only the valvetypeId
-    this.vs.createSpecificHospitalValve().subscribe((next) => { 
-      this.hv.ValveTypeId = next.ValveTypeId; });
+    this.vs.createSpecificHospitalValve(this.hv).subscribe((next) => {this.hv = next;});
 
   }
 
-  receiveAddValveType(result: number) {
+  cancelThis(result: number) {
+    this.displayHospitalImage = 1;
+    //remove the valveType that was generated earlier
+    this.vs.deleteSpecificHospitalValve(this.hv.ValveTypeId).subscribe(() => { }, (error) => { })
+  }
 
-    if (result == 10)// cancel is sent up
-    {
-      this.displayHospitalImage = 1;
-      //remove the valveType that was generated earlier
-      this.vs.deleteSpecificHospitalValve(this.hv.ValveTypeId).subscribe(() => { }, (error) => { })
-    }
-    if (result == 1) {
-      this.displayHospitalImage = 1;
-      this.vs.updateSpecificHospitalValve(this.hv).subscribe(() => { }, (error) => { })
-    }
+  receiveAddValveType(result: hospitalValve) {
+   
+    this.displayHospitalImage = 1;
+    this.vs.updateSpecificHospitalValve(result).subscribe(() => { }, (error) => { })
 
   }
+
 
   canDeactivate() {
     this.saveHospital();

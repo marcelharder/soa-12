@@ -46,7 +46,9 @@ export class ValveService {
     
     deleteSpecificHospitalValve(codeId: number) { return this.http.delete<string>(this.baseUrl + 'Valve/deleteHospitalValve/' + codeId, { responseType: 'text' as 'json' }); }
     updateSpecificHospitalValve(hv: hospitalValve) { return this.http.put<string>(this.baseUrl + 'Valve/updateHospitalValve', hv, { responseType: 'text' as 'json' }); }
-    createSpecificHospitalValve() { return this.http.get<hospitalValve>(this.baseUrl + 'Valve/createHospitalValve'); }
+    
+    createSpecificHospitalValve(vc: hospitalValve) { 
+        return this.http.post<hospitalValve>(this.baseUrl + 'Valve/createHospitalValve',vc); }
 
 
     getPPM(productCode: string, size: string, weight: string, height: string) {

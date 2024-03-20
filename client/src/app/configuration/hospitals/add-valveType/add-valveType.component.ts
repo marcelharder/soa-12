@@ -3,6 +3,8 @@ import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, NgForm, Val
 import { ToastrService } from 'ngx-toastr';
 import { dropItem } from 'src/app/_models/dropItem';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
+import { AccountService } from 'src/app/_services/account.service';
+import { UserService } from 'src/app/_services/user.service';
 import { ValveService } from 'src/app/_services/valve.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,8 +16,12 @@ import { environment } from 'src/environments/environment';
 export class AddValveTypeComponent implements OnInit {
   @ViewChild("addValveForm") addValveForm: NgForm;
   optionsVendors: Array<dropItem> = [];
+  optionsType: Array<dropItem> = [];
+  optionsPosition: Array<dropItem> = [];
+
   @Input() hv: hospitalValve;
-  @Output() sendupdate = new EventEmitter();
+  @Output() newHospitalValve: EventEmitter<hospitalValve> = new EventEmitter();
+  @Output() ct: EventEmitter<number> = new EventEmitter();
   selectedVendor = 2;
   targetUrl = "";
   baseUrl = environment.apiUrl;
@@ -24,10 +30,22 @@ export class AddValveTypeComponent implements OnInit {
 
   constructor(
     private vs: ValveService,
+    private user: UserService,
+    private auth: AccountService,
     private alertify: ToastrService) { }
 
   ngOnInit() {
-   
+    this.loadDrops();
+
+
+    this.optionsVendors.sort(function (a, b) { return ('' + a.description).localeCompare(b.description); })
+    // need to adjust the endpoint on the inventory container so that it will be anonymous
+    // this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
+
+
+  }
+
+  loadDrops() {
     this.optionsVendors =
       [
         {
@@ -63,26 +81,22 @@ export class AddValveTypeComponent implements OnInit {
           "description": "Edwards"
         }
       ];
-  
-    this.optionsVendors.sort(function (a, b) { return ('' + a.description).localeCompare(b.description);})
-    // need to adjust the endpoint on the inventory container so that it will be anonymous
-    // this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
-    
+
 
   }
 
- 
 
-  updatePhoto(url: string){this.hv.image = url;}
 
-  cancel() { this.sendupdate.emit(10); }
+  updatePhoto(url: string) { this.hv.image = url; }
 
-   IsLoaded() {
+  cancel() { this.ct.emit(1); }
+
+  IsLoaded() {
     if (+this.hv.ValveTypeId !== 0) {
       this.targetUrl = this.baseUrl + 'Valve/addValveTypePhoto/' + this.hv.ValveTypeId;
       return true;
     } else { return false; }
-  } 
+  }
 
   SaveNewValveType() {
     // get vendor description from vendor_code
@@ -90,16 +104,39 @@ export class AddValveTypeComponent implements OnInit {
       var hep = this.optionsVendors.find(x => x.value == this.selectedVendor);
       this.hv.Vendor_description = hep.description;
       this.hv.Vendor_code = hep.value;
-      this.hv.countries = "NL";
-      this.sendupdate.emit(1);
+      this.hv.Implant_position = "Aortic";
+      this.hv.Type = "Biological";
+      this.hv.countries = this.getCountry();
+
+      debugger;
+      this.newHospitalValve.emit(this.hv);
     }
 
 
   }
 
-  
+  getCountry(): string {
+    var ret = "";
+    var userId = 0;
 
-  
+    this.auth.currentUser$.subscribe((next) => { userId = next.UserId; }
+    , ()=> {}
+    , ()=>{
+      this.user.getUser(userId).subscribe((response) => 
+      {     
+        ret = response.country; 
+      }
+      );
+    })
 
-  
+   
+    
+    
+    
+      return ret;
+  }
+
+
+
+
 }
