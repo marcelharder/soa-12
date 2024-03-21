@@ -49,7 +49,7 @@ services:
       - db
   
   product:
-    image: product_app:v5
+    image: product_app:v6
     networks:
       - internal-container-network
     depends_on:

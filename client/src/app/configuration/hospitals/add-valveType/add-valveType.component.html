@@ -23,21 +23,36 @@
             <div class="col-sm-6 mb-1">
               <h5><span class="badge badge-secondary">Model Code: </span></h5>
             </div>
-            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="hv.Model_code" class="form-control" name="2" />
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.Model_code" class="form-control" name="2" />
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6 mb-1">
-              <h5><span class="badge badge-secondary">Description: </span></h5>
+            <div class="col-sm-6 mb-1"><h5><span class="badge badge-secondary">Description: </span></h5></div>
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.Description" class="form-control" name="3" />
             </div>
-            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="hv.Description" class="form-control" name="3" />
+          </div>
+          <div class="row">
+            <div class="col-sm-6 mb-1"><h5><span class="badge badge-secondary">Type: </span></h5></div>
+            <div class="col-sm-6 mb-1"><select [(ngModel)]="new_hv.Type" name="hv23" class="form-control">
+                <option *ngFor="let an of valveTypes" [value]=an.description>{{ an.description }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 mb-1"><h5><span class="badge badge-secondary">Position: </span></h5></div>
+            <div class="col-sm-6 mb-1"><select [(ngModel)]="new_hv.Implant_position" name="pos"
+                class="form-control">
+                <option *ngFor="let an of valvePositions" [value]=an.description>{{ an.description }}
+                </option>
+              </select>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6 mb-1">
               <h5><span class="badge badge-secondary">Uk_code: </span></h5>
             </div>
-            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="hv.uk_code" class="form-control" name="4" />
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.uk_code" class="form-control" name="4" />
             </div>
           </div>
         
@@ -50,7 +65,7 @@
         <div class="col-sm-4">
           <div class="card">
             <div class="row">
-              <div class="col-sm-12">  <img class="card-img-top img-thumbnail" src="{{hv.image || '../../../../../assets/images/else-03.jpg' }}" alt="none found" />
+              <div class="col-sm-12">  <img class="card-img-top img-thumbnail" src="{{new_hv.image || '../../../../../assets/images/else-03.jpg' }}" alt="none found" />
               </div>
             </div>
             <div class="row">

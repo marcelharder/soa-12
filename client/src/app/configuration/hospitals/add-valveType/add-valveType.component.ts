@@ -16,10 +16,10 @@ import { environment } from 'src/environments/environment';
 export class AddValveTypeComponent implements OnInit {
   @ViewChild("addValveForm") addValveForm: NgForm;
   optionsVendors: Array<dropItem> = [];
-  optionsType: Array<dropItem> = [];
-  optionsPosition: Array<dropItem> = [];
+  valveTypes: Array<dropItem> = [];
+  valvePositions: Array<dropItem> = [];
 
-  @Input() hv: hospitalValve;
+  @Input() new_hv: hospitalValve;
   @Output() newHospitalValve: EventEmitter<hospitalValve> = new EventEmitter();
   @Output() ct: EventEmitter<number> = new EventEmitter();
   selectedVendor = 2;
@@ -35,6 +35,7 @@ export class AddValveTypeComponent implements OnInit {
     private alertify: ToastrService) { }
 
   ngOnInit() {
+
     this.loadDrops();
 
 
@@ -82,61 +83,62 @@ export class AddValveTypeComponent implements OnInit {
         }
       ];
 
-
+      this.valveTypes.push({ value: 0, description: "Biological" });
+      this.valveTypes.push({ value: 1, description: "Mechanical" });
+      this.valveTypes.push({ value: 2, description: "Annuloplasty_Ring" });
+      this.valveTypes.push({ value: 3, description: "Valved_Conduit" });
+      this.valveTypes.push({ value: 4, description: "Homograft" });
+  
+      this.valvePositions.push({ value: 0, description: "Aortic" });
+      this.valvePositions.push({ value: 1, description: "Mitral" });
+      this.valvePositions.push({ value: 2, description: "Tricuspid" });  
   }
 
-
-
-  updatePhoto(url: string) { this.hv.image = url; }
+  updatePhoto(url: string) { this.new_hv.image = url; }
 
   cancel() { this.ct.emit(1); }
 
   IsLoaded() {
-    if (+this.hv.ValveTypeId !== 0) {
-      this.targetUrl = this.baseUrl + 'Valve/addValveTypePhoto/' + this.hv.ValveTypeId;
+    if (+this.new_hv.ValveTypeId !== 0) {
+      this.targetUrl = this.baseUrl + 'Valve/addValveTypePhoto/' + this.new_hv.ValveTypeId;
       return true;
     } else { return false; }
   }
 
   SaveNewValveType() {
-    // get vendor description from vendor_code
-    if (this.selectedVendor !== 0) {
-      var hep = this.optionsVendors.find(x => x.value == this.selectedVendor);
-      this.hv.Vendor_description = hep.description;
-      this.hv.Vendor_code = hep.value;
-      this.hv.Implant_position = "Aortic";
-      this.hv.Type = "Biological";
-      this.hv.countries = this.getCountry();
-
-      debugger;
-      this.newHospitalValve.emit(this.hv);
-    }
-
-
-  }
-
-  getCountry(): string {
-    var ret = "";
     var userId = 0;
+    var country = "";
+    this.auth.currentUser$.subscribe((next) => {
+      userId = next.UserId;
+      this.user.getUser(userId).subscribe((response) => {
+        country = response.country;
+        // get vendor description from vendor_code
+        if (this.selectedVendor !== 0) {
+          var hep = this.optionsVendors.find(x => x.value == this.selectedVendor);
+          this.new_hv.Vendor_description = hep.description;
+          this.new_hv.Vendor_code = hep.value;
+          this.new_hv.countries = country;
+           
+          this.newHospitalValve.emit(this.new_hv);
+          
+        }
+      })
 
-    this.auth.currentUser$.subscribe((next) => { userId = next.UserId; }
-    , ()=> {}
-    , ()=>{
-      this.user.getUser(userId).subscribe((response) => 
-      {     
-        ret = response.country; 
-      }
-      );
     })
 
-   
-    
-    
-    
-      return ret;
+
+
+
+
+
+
   }
+
+
 
 
 
 
 }
+
+

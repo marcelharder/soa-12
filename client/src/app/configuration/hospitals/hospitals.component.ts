@@ -39,6 +39,22 @@ export class HospitalsComponent implements OnInit {
     image: '',
     countries: ''
   };
+  new_hv: hospitalValve = {
+    ValveTypeId: 0,
+    Description: "",
+    Implant_position: "Aortic",
+    Type: "Biological",
+    hospitalId: "0",
+    Vendor_code: 0,
+    Vendor_description: "",
+    Valve_size: null,
+    No: 0,
+    Model_code: '',
+    uk_code: '',
+    soort: 1,
+    image: '',
+    countries: ''
+  };
 
 
   listCities: Array<dropItem> = [];
@@ -236,9 +252,24 @@ export class HospitalsComponent implements OnInit {
     this.displayHospitalImage = 0;
     this.don = 0;
     this.displayList = 1;
-
+    this.new_hv = {
+      ValveTypeId: 0,
+      Description: "",
+      Implant_position: "Aortic",
+      Type: "Biological",
+      hospitalId: this.hv.hospitalId,
+      Vendor_code: 0,
+      Vendor_description: "",
+      Valve_size: null,
+      No: 0,
+      Model_code: '',
+      uk_code: '',
+      soort: 1,
+      image: '',
+      countries: ''
+    };
     // get a new ValveType with the valveTypeId, use only the valvetypeId
-    this.vs.createSpecificHospitalValve(this.hv).subscribe((next) => {this.hv = next;});
+    this.vs.createSpecificHospitalValve(this.new_hv).subscribe((next) => {this.new_hv = next;});
 
   }
 
@@ -249,7 +280,6 @@ export class HospitalsComponent implements OnInit {
   }
 
   receiveAddValveType(result: hospitalValve) {
-   
     this.displayHospitalImage = 1;
     this.vs.updateSpecificHospitalValve(result).subscribe(() => { }, (error) => { })
 

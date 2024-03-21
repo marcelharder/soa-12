@@ -231,6 +231,22 @@ namespace api.Controllers
             
 
         }
+         [HttpGet("readHospitalValveByModelCode/{code}")]
+        public async Task<IActionResult> GetMHRC(string code)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveCode/detailsByModelCode/" + code;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);
+                }
+            }
+        }
 
         [HttpPut("updateHospitalValve")]
         public async Task<IActionResult> GetMHU([FromBody] Valve_Code code)
@@ -296,7 +312,7 @@ namespace api.Controllers
             content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data") { Name = photoDto.File.Name, FileName = photoDto.File.FileName };
 
             var help = new photoResult();
-            var comaddress = _com.Value.hospitalURL;
+            var comaddress = _com.Value.productURL;
             var st = "ValveCode/addPhoto/" + id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
@@ -306,7 +322,7 @@ namespace api.Controllers
                     help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help.document_url); 
+            return Ok(help); 
         }
 
         #endregion

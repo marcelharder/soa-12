@@ -53,6 +53,7 @@ export class UploadphotoComponent implements OnInit,OnDestroy {
       
       this.uploader.onSuccessItem = (item, response, status, headers) => {
         if (response) {
+          debugger;
            parseResponse(response);
         }
       };

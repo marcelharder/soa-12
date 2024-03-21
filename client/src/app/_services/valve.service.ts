@@ -42,6 +42,7 @@ export class ValveService {
     
     
     getSpecificHospitalValve(code: string) { return this.http.get<hospitalValve>(this.baseUrl + 'Valve/readHospitalValve/' + code); }
+    getSpecificHospitalValveByModelCode(code: string) { return this.http.get<hospitalValve>(this.baseUrl + 'Valve/readHospitalValveByModelCode/' + code); }
     
     
     deleteSpecificHospitalValve(codeId: number) { return this.http.delete<string>(this.baseUrl + 'Valve/deleteHospitalValve/' + codeId, { responseType: 'text' as 'json' }); }
