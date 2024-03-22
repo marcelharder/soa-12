@@ -180,7 +180,8 @@
                         <div class="ml-3">
                           <div class="btn-group" role="group">
                             <button class="badge badge-danger" (click)="cancelDisplayOnlineValves()"> Cancel </button>
-                            <button class="badge badge-warning" (click)="AddOnlineValve()"> Add a new Valve Type </button>
+                            <button class="badge badge-warning" (click)="AddOnlineValve()"> Add a new Valve Type
+                            </button>
                           </div>
                         </div>
                         <div>
@@ -264,25 +265,28 @@
           </div>
         </div>
       </div>
-
-
-
     </div>
-    <div class="col-sm-6">
-      <div *ngIf="showHospitalImage()">
-        <div class="card mt-5">
+
+    <div class="col-sm-6" *ngIf="showHospitalImage()">
+
+      <div class="card mt-5">
+        <div class="card-body">
           <img class="card-img-top img-thumbnail" src="{{ pd.ImageUrl }}" alt="test" width="250" height="350" />
         </div>
-        <div class="footer mt-2">
-          <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
-        </div>
       </div>
-      <div *ngIf="!showHospitalImage()">
-        <app-add-valveType 
-        [new_hv]="new_hv" 
-        [hospitalNo]="pd.hospitalNo" 
-        (ct)="cancelThis($event)"
-        (newHospitalValve)="receiveAddValveType($event)"></app-add-valveType>
+      <div class="footer mt-2">
+        <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
+          (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+      </div>
+
+    </div>
+    <div class="col-sm-6" *ngIf="!showHospitalImage()">
+
+      <div class="mt-5">
+        
+          <app-add-valveType [new_hv]="new_hv" [hospitalNo]="pd.hospitalNo" (ct)="cancelThis($event)"
+            (newHospitalValve)="receiveAddValveType($event)"></app-add-valveType>
+        
       </div>
     </div>
   </div>

@@ -1,12 +1,9 @@
-<form #addValveForm="ngForm" name="addValveForm">
-  <div class="card">
-    <div class="card-header">
-      <h3><span class="badge badge-secondary">Adding a new Valve type </span></h3>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-sm-8">
+<div class="card" [@cardFlip]="data.state">
 
+  <div class="face back">
+    <div class="row">
+      <div class="col-sm-8">
+        <form #addValveForm="ngForm" name="addValveForm">
           <div class="row">
             <div class="col-sm-6 mb-1">
               <h5><span class="badge badge-secondary">Select vendor</span></h5>
@@ -23,16 +20,22 @@
             <div class="col-sm-6 mb-1">
               <h5><span class="badge badge-secondary">Model Code: </span></h5>
             </div>
-            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.Model_code" class="form-control" name="2" />
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.Model_code" class="form-control"
+                name="2" />
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6 mb-1"><h5><span class="badge badge-secondary">Description: </span></h5></div>
-            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.Description" class="form-control" name="3" />
+            <div class="col-sm-6 mb-1">
+              <h5><span class="badge badge-secondary">Description: </span></h5>
+            </div>
+            <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.Description" class="form-control"
+                name="3" />
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6 mb-1"><h5><span class="badge badge-secondary">Type: </span></h5></div>
+            <div class="col-sm-6 mb-1">
+              <h5><span class="badge badge-secondary">Type: </span></h5>
+            </div>
             <div class="col-sm-6 mb-1"><select [(ngModel)]="new_hv.Type" name="hv23" class="form-control">
                 <option *ngFor="let an of valveTypes" [value]=an.description>{{ an.description }}
                 </option>
@@ -40,9 +43,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6 mb-1"><h5><span class="badge badge-secondary">Position: </span></h5></div>
-            <div class="col-sm-6 mb-1"><select [(ngModel)]="new_hv.Implant_position" name="pos"
-                class="form-control">
+            <div class="col-sm-6 mb-1">
+              <h5><span class="badge badge-secondary">Position: </span></h5>
+            </div>
+            <div class="col-sm-6 mb-1"><select [(ngModel)]="new_hv.Implant_position" name="pos" class="form-control">
                 <option *ngFor="let an of valvePositions" [value]=an.description>{{ an.description }}
                 </option>
               </select>
@@ -55,45 +59,96 @@
             <div class="col-sm-6 mb-1"><input type="text" [(ngModel)]="new_hv.uk_code" class="form-control" name="4" />
             </div>
           </div>
-        
-
-
-
-
-
-        </div>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="row">
-              <div class="col-sm-12">  <img class="card-img-top img-thumbnail" src="{{new_hv.image || '../../../../../assets/images/else-03.jpg' }}" alt="none found" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">  
-                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
-              </div>
-            </div>
-           </div>
-        </div>
+        </form>
       </div>
 
-
-
-
-
-
-
-
-
-
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="row">
+            <div class="col-sm-12"> <img class="card-img-top img-thumbnail"
+                src="{{new_hv.image || '../../../../../assets/images/else-03.jpg' }}" alt="none found" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
+                (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card-footer">
-      <div class="col-sm-6">
+    <div class="row">
+      <div class="col-sm-12">
         <div class="btn-group" role="group">
           <button class="btn btn-warning" (click)="cancel()"> Cancel </button>
-          <button class="btn btn-success" type="button" (click)="SaveNewValveType()"> Save Changes </button>
+          <button class="btn btn-success" type="button" (click)="SaveNewValveType()"> Sizes </button>
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
   </div>
-</form>
+  <div class="face front">
+    <div class="row mt-5">
+      <div class="col-sm-12">
+        <h3><span class="badge badge-secondary">Adding sizes for {{new_hv.Description}} </span></h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+          <h5><span class="badge badge-info">Sizes</span></h5>
+      </div>
+      <div class="col-sm-9">
+        <table class="table table-striped" >
+          <tr>
+            <th>Size</th>
+            <th><span class="badge badge-warning">EOA (effective orfice area)</span></th>
+            <th><button class="btn btn-warning btn-sm" (click)="addSize()" *ngIf="!displayAdd()">Add size</button></th>
+            <th><button class="btn btn-warning btn-sm" (click)="saveSize()" *ngIf="displayAdd()">Save</button></th>
+          </tr>
+          <tr *ngIf="listOfSizes.length === 0">
+            <td>No sizes yet ....</td>
+          </tr>
+          <tr *ngFor="let pro of listOfSizes">
+            <td>{{pro.size}}</td>
+            <td>{{pro.eoa}}</td>
+            <td><button class="btn btn-warning btn-sm" (click)="deleteSize(pro.sizeId)">Delete</button></td>
+            <td></td>
+           </tr>
+          <tr *ngIf="displayAdd()">
+            <td><input [(ngModel)]="newsize" name="size" class="form-control"></td>
+            <td><input [(ngModel)]="neweoa" name="eoa" class="form-control" ></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+         </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="btn-group" role="group">
+          <button class="btn btn-warning" (click)="flip()"> Back </button>
+          <button class="btn btn-success" type="button" (click)="saveBacktoToDB()"> Save Changes </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

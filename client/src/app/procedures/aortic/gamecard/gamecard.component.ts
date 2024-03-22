@@ -102,6 +102,7 @@ export class GamecardComponent implements OnInit {
       })
     this.cardClicked();
   }
+  
   CancelConduitDetails(){
     // remove this conduit in the database
     this.vs.deleteValve(this.pd.Id).subscribe((next)=>{this.alertify.show(next)})

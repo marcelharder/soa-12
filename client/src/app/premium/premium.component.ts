@@ -1,14 +1,11 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { dropItem } from '../_models/dropItem';
-import { EmailModel } from '../_models/EmailModel';
 import { SubscriptionExtensionModel } from '../_models/SubscriptionExtensionModel';
 import { AccountService } from '../_services/account.service';
-import { RefPhysService } from '../_services/refPhys.service';
 import { UserService } from '../_services/user.service';
 
 @Component({

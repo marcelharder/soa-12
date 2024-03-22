@@ -1,4 +1,6 @@
 export interface valveSize {
-    Size: number;
-    EOA: number;
+    sizeId: number;
+    size: number;
+    eoa: number;
+    ppm: string;
 }

@@ -1,8 +1,11 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CardData } from 'src/app/_models/CardData';
 import { dropItem } from 'src/app/_models/dropItem';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
+import { valveSize } from 'src/app/_models/valveSize';
 import { AccountService } from 'src/app/_services/account.service';
 import { UserService } from 'src/app/_services/user.service';
 import { ValveService } from 'src/app/_services/valve.service';
@@ -11,7 +14,15 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-add-valveType',
   templateUrl: './add-valveType.component.html',
-  styleUrls: ['./add-valveType.component.css']
+  styleUrls: ['./add-valveType.component.css'],
+  animations: [
+    trigger('cardFlip', [
+      state('default', style({ transform: 'none' })),
+      state('flipped', style({ transform: 'rotateY(180deg)' })),
+      transition('default => flipped', [animate('400ms')]),
+      transition('flipped => default', [animate('200ms')])
+    ])
+  ]
 })
 export class AddValveTypeComponent implements OnInit {
   @ViewChild("addValveForm") addValveForm: NgForm;
@@ -25,6 +36,9 @@ export class AddValveTypeComponent implements OnInit {
   selectedVendor = 2;
   targetUrl = "";
   baseUrl = environment.apiUrl;
+  showAdd = 0; newsize = 0; neweoa = 0.0;
+  valvesize: valveSize = {sizeId:0, size:0, eoa: 0.0, ppm: '0'};
+  listOfSizes:Array<valveSize> = [];
 
 
 
@@ -45,6 +59,18 @@ export class AddValveTypeComponent implements OnInit {
 
 
   }
+  data: CardData = {
+    imageId: "",
+    state: "default"
+  };
+  cardClicked() {
+    if (this.data.state === "default") {
+      this.data.state = "flipped";
+    } else {
+      this.data.state = "default";
+    }
+  }
+  displayAdd(){if(this.showAdd === 1){return true;}}
 
   loadDrops() {
     this.optionsVendors =
@@ -94,6 +120,8 @@ export class AddValveTypeComponent implements OnInit {
       this.valvePositions.push({ value: 2, description: "Tricuspid" });  
   }
 
+  flip(){this.cardClicked()}
+
   updatePhoto(url: string) { this.new_hv.image = url; }
 
   cancel() { this.ct.emit(1); }
@@ -106,6 +134,7 @@ export class AddValveTypeComponent implements OnInit {
   }
 
   SaveNewValveType() {
+
     var userId = 0;
     var country = "";
     this.auth.currentUser$.subscribe((next) => {
@@ -118,27 +147,72 @@ export class AddValveTypeComponent implements OnInit {
           this.new_hv.Vendor_description = hep.description;
           this.new_hv.Vendor_code = hep.value;
           this.new_hv.countries = country;
-           
-          this.newHospitalValve.emit(this.new_hv);
-          
+          this.cardClicked();
         }
       })
 
     })
+  }
+
+  saveBacktoToDB()
+  {
+    if(this.everythingOk()){this.newHospitalValve.emit(this.new_hv);}
+  }
+
+  addSize(){this.showAdd = 1;}
+  
+  saveSize(){
+
+    if(this.neweoa !== 0 ){
+
+    // add to the local list
+    this.listOfSizes.push({
+      sizeId: 0,
+      size: this.newsize,
+      eoa: this.neweoa,
+      ppm: ''
+    });
+    this.listOfSizes.sort(function(a,b){return a.size - b.size});
+  }else {this.alertify.error("The effective orfice area is required, because we want to establish PPM");}
+
+  }
+
+  deleteSize(id:number){
+     // remove from the local list
+   
+  }
+
+  everythingOk():boolean{ // checks if all the fields are properly filled
+    var help = true;
+
+    if(this.listOfSizes.length === 0)
+    {
+      help = false;
+      this.alertify.error("A valve has usually at least one size ...");
+    }
+
+    if(this.new_hv.Model_code === undefined)
+    {
+      help = false;
+      this.alertify.error("Pls enter the model code ...");
+    }
+
+    if(this.new_hv.Description === undefined)
+    {
+      help = false;
+      this.alertify.error("Pls enter the valve description ...");
+    }
 
 
 
-
-
-
-
+    return help;
   }
 
 
 
 
-
-
 }
+
+
 
 
