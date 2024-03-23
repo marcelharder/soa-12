@@ -202,13 +202,14 @@ export class AddValveTypeComponent implements OnInit {
 
       // add to the local list
       this.listOfSizes.push({
-        sizeId: 0,
-        size: this.newsize,
-        eoa: this.neweoa,
-        ppm: '',
+        VTValveTypeId: this.new_hv.ValveTypeId,
+        Size: this.newsize,
+        EOA: this.neweoa,
+        VT: 0,
+        ValveTypeId:0
       });
       this.listOfSizes.sort(function (a, b) {
-        return a.size - b.size;
+        return a.Size - b.Size;
       });
     } else {
       this.alertify.error(
