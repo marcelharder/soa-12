@@ -60,7 +60,7 @@ export class AddValveTypeComponent implements OnInit {
   showAdd = 0;
   newsize = 0;
   neweoa = 0.0;
-  valvesize: valveSize = { sizeId: 0, size: 0, eoa: 0.0, ppm: '0' };
+  valvesize: valveSize = { Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0, VT: 0 };
   listOfSizes: Array<valveSize> = [];
 
   constructor(
@@ -200,20 +200,18 @@ export class AddValveTypeComponent implements OnInit {
     if (this.neweoa !== 0) {
       this.showAdd = 0;
 
+      this.valvesize.VTValveTypeId = this.new_hv.ValveTypeId;
+      this.valvesize.Size = this.newsize;
+      this.valvesize.EOA = this.neweoa;
+
       // add to the local list
-      this.listOfSizes.push({
-        VTValveTypeId: this.new_hv.ValveTypeId,
-        Size: this.newsize,
-        EOA: this.neweoa,
-        VT: 0,
-        ValveTypeId:0
-      });
-      this.listOfSizes.sort(function (a, b) {
-        return a.Size - b.Size;
-      });
+      this.listOfSizes.push(this.valvesize);
+      this.listOfSizes.sort(function (a, b) {return a.Size - b.Size;});
+      // upload to the database
+      this.vs.addValveSize(this.valvesize).subscribe((next)=>{})
     } else {
       this.alertify.error(
-        'The effective orfice area is required, because we want to establish PPM'
+        'The effective orfice area is required, because we want to establish possible Patient Prosthesis Mismatch'
       );
     }
   }

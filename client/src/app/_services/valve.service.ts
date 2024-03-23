@@ -38,6 +38,15 @@ export class ValveService {
     deleteValve(id: number) { return this.http.delete<string>(this.baseUrl + 'Valve/' + id, { responseType: 'text' as 'json' }); }
 
 
+    //#region <!-- valve sizes -->
+
+    addValveSize(v: valveSize){return this.http.post<string>(this.baseUrl + 'Valve/addHospitalValveSize', v, { responseType: 'text' as 'json' });}
+    updateValveSize(v: valveSize){return this.http.put<string>(this.baseUrl + 'Valve/updateHospitalValveSize', v, { responseType: 'text' as 'json' });}
+    deleteValveSize(id: number) { return this.http.delete<string>(this.baseUrl + 'Valve/deleteHospitalValveSize/' + id, { responseType: 'text' as 'json' }); }
+    getValveCodeSizes(model: string) {return this.http.get<valveSize[]>(this.baseUrl + 'Valve/getValveCodeSizes/' + model) }
+  
+    //#endregion
+
     getHospitalValves(type: string, position: string) { return this.http.get<hospitalValve[]>(this.baseUrl + 'Valve/hospitalValves/' + type + '/' + position); }
     
     
@@ -69,10 +78,7 @@ export class ValveService {
     removeSpecificValveType(ValveTypeId: number) {
         return this.http.get<valveType>(this.baseUrl + 'Valve/removeHospitalIdFromValveCode/' + ValveTypeId)
     }
-    getValveCodeSizes(model: string) {
-        return this.http.get<valveSize[]>(this.baseUrl + 'Valve/getValveCodeSizes/' + model)
-    }
-
+  
     getValveDescription(model: string) {
         return this.http.get<string>(this.baseUrl + 'General/valveDescriptionFromModel/' + model, { responseType: 'text' as 'json' });
     }
