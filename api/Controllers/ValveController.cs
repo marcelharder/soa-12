@@ -120,22 +120,6 @@ namespace api.Controllers
 
         #region <!-- manage valves in hospital if OVI is not available -->
 
-        [HttpGet("getValveCodeSizes/{type}")]
-        public async Task<IActionResult> getCodeSizes(int type)
-        {
-            var help = "";
-            var comaddress = _com.Value.productURL;
-            var st = "ValveSize/" + type;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    help = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(help);
-        }
 
         [HttpGet("hospitalValves/{type}/{position}")]//gives the list of ValveCodes
         public async Task<IActionResult> GetMH(string type, string position)
@@ -193,8 +177,11 @@ namespace api.Controllers
                     return Ok(help);// this gives a new Valve_Code with ValveTypeId
                 }
             }
-            
+
         }
+
+
+
 
         [HttpGet("vendors")]
         public async Task<IActionResult> getVendors()
@@ -228,10 +215,10 @@ namespace api.Controllers
                     return Ok(help);
                 }
             }
-            
+
 
         }
-         [HttpGet("readHospitalValveByModelCode/{code}")]
+        [HttpGet("readHospitalValveByModelCode/{code}")]
         public async Task<IActionResult> GetMHRC(string code)
         {
             var help = "";
@@ -285,7 +272,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-       
+
         [HttpGet("writeHospitalIdToValveCode/{code}")]
         public async Task<IActionResult> WriteHosId(int code)
         {
@@ -303,7 +290,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-         
+
         [HttpPost("addValveTypePhoto/{id}")]
         public async Task<IActionResult> AddPhotoForValveType(int id, [FromForm] PhotoForCreationDto photoDto)
         {
@@ -322,9 +309,93 @@ namespace api.Controllers
                     help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help); 
+            return Ok(help);
         }
 
+        #endregion
+
+
+        #region <!- hospitalValve Sizes-->
+
+
+        [HttpDelete("deleteHospitalValveSize/{id}")]
+        public async Task<IActionResult> GetDeleteSize(int id)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveSize";
+            comaddress = comaddress + st;
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);// returns 1 if successfully removed
+                }
+            }
+
+        }
+
+        [HttpPost("addHospitalValveSize")]
+        public async Task<IActionResult> GetMHCSize([FromBody] ValveSizeDto vc)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveSize";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(vc, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);// this gives a new Valve_Code with ValveTypeId
+                }
+            }
+
+        }
+
+        [HttpPut("updateHospitalValveSize")]
+        public async Task<IActionResult> GetUpdateSize([FromBody] ValveSizeDto vc)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveSize";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(vc, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);// this gives a changed Valve_Code with ValveTypeId
+                }
+            }
+
+        }
+
+        [HttpGet("getValveCodeSizes/{type}")]
+        public async Task<IActionResult> getCodeSizes(int type)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveSize/" + type;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+       
         #endregion
 
         #region <!-- get valves from the OVI -->

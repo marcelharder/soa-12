@@ -1,6 +1,27 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import {
+  AbstractControl,
+  Form,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CardData } from 'src/app/_models/CardData';
 import { dropItem } from 'src/app/_models/dropItem';
@@ -20,12 +41,12 @@ import { environment } from 'src/environments/environment';
       state('default', style({ transform: 'none' })),
       state('flipped', style({ transform: 'rotateY(180deg)' })),
       transition('default => flipped', [animate('400ms')]),
-      transition('flipped => default', [animate('200ms')])
-    ])
-  ]
+      transition('flipped => default', [animate('200ms')]),
+    ]),
+  ],
 })
 export class AddValveTypeComponent implements OnInit {
-  @ViewChild("addValveForm") addValveForm: NgForm;
+  @ViewChild('addValveForm') addValveForm: NgForm;
   optionsVendors: Array<dropItem> = [];
   valveTypes: Array<dropItem> = [];
   valvePositions: Array<dropItem> = [];
@@ -34,185 +55,191 @@ export class AddValveTypeComponent implements OnInit {
   @Output() newHospitalValve: EventEmitter<hospitalValve> = new EventEmitter();
   @Output() ct: EventEmitter<number> = new EventEmitter();
   selectedVendor = 2;
-  targetUrl = "";
+  targetUrl = '';
   baseUrl = environment.apiUrl;
-  showAdd = 0; newsize = 0; neweoa = 0.0;
-  valvesize: valveSize = {sizeId:0, size:0, eoa: 0.0, ppm: '0'};
-  listOfSizes:Array<valveSize> = [];
-
-
+  showAdd = 0;
+  newsize = 0;
+  neweoa = 0.0;
+  valvesize: valveSize = { sizeId: 0, size: 0, eoa: 0.0, ppm: '0' };
+  listOfSizes: Array<valveSize> = [];
 
   constructor(
     private vs: ValveService,
     private user: UserService,
     private auth: AccountService,
-    private alertify: ToastrService) { }
+    private alertify: ToastrService
+  ) {}
 
   ngOnInit() {
-
     this.loadDrops();
 
-
-    this.optionsVendors.sort(function (a, b) { return ('' + a.description).localeCompare(b.description); })
+    this.optionsVendors.sort(function (a, b) {
+      return ('' + a.description).localeCompare(b.description);
+    });
     // need to adjust the endpoint on the inventory container so that it will be anonymous
     // this.vs.getVendors().subscribe((next) => { this.optionsVendors = next; });
-
-
   }
   data: CardData = {
-    imageId: "",
-    state: "default"
+    imageId: '',
+    state: 'default',
   };
   cardClicked() {
-    if (this.data.state === "default") {
-      this.data.state = "flipped";
+    if (this.data.state === 'default') {
+      this.data.state = 'flipped';
     } else {
-      this.data.state = "default";
+      this.data.state = 'default';
     }
   }
-  displayAdd(){if(this.showAdd === 1){return true;}}
-
-  loadDrops() {
-    this.optionsVendors =
-      [
-        {
-          "value": 9,
-          "description": "CryoLife"
-        },
-        {
-          "value": 7,
-          "description": "Atrium"
-        },
-        {
-          "value": 3,
-          "description": "LivaNova"
-        },
-        {
-          "value": 8,
-          "description": "Gore"
-        },
-        {
-          "value": 2,
-          "description": "Abbott"
-        },
-        {
-          "value": 6,
-          "description": "KFSRC"
-        },
-        {
-          "value": 5,
-          "description": "Medtronic"
-        },
-        {
-          "value": 4,
-          "description": "Edwards"
-        }
-      ];
-
-      this.valveTypes.push({ value: 0, description: "Biological" });
-      this.valveTypes.push({ value: 1, description: "Mechanical" });
-      this.valveTypes.push({ value: 2, description: "Annuloplasty_Ring" });
-      this.valveTypes.push({ value: 3, description: "Valved_Conduit" });
-      this.valveTypes.push({ value: 4, description: "Homograft" });
-  
-      this.valvePositions.push({ value: 0, description: "Aortic" });
-      this.valvePositions.push({ value: 1, description: "Mitral" });
-      this.valvePositions.push({ value: 2, description: "Tricuspid" });  
+  displayAdd() {
+    if (this.showAdd === 1) {
+      return true;
+    }
   }
 
-  flip(){this.cardClicked()}
+  loadDrops() {
+    this.optionsVendors = [
+      {
+        value: 9,
+        description: 'CryoLife',
+      },
+      {
+        value: 7,
+        description: 'Atrium',
+      },
+      {
+        value: 3,
+        description: 'LivaNova',
+      },
+      {
+        value: 8,
+        description: 'Gore',
+      },
+      {
+        value: 2,
+        description: 'Abbott',
+      },
+      {
+        value: 6,
+        description: 'KFSRC',
+      },
+      {
+        value: 5,
+        description: 'Medtronic',
+      },
+      {
+        value: 4,
+        description: 'Edwards',
+      },
+    ];
 
-  updatePhoto(url: string) { this.new_hv.image = url; }
+    this.valveTypes.push({ value: 0, description: 'Biological' });
+    this.valveTypes.push({ value: 1, description: 'Mechanical' });
+    this.valveTypes.push({ value: 2, description: 'Annuloplasty_Ring' });
+    this.valveTypes.push({ value: 3, description: 'Valved_Conduit' });
+    this.valveTypes.push({ value: 4, description: 'Homograft' });
 
-  cancel() { this.ct.emit(1); }
+    this.valvePositions.push({ value: 0, description: 'Aortic' });
+    this.valvePositions.push({ value: 1, description: 'Mitral' });
+    this.valvePositions.push({ value: 2, description: 'Tricuspid' });
+  }
+
+  flip() {
+    this.cardClicked();
+  }
+
+  updatePhoto(url: string) {
+    this.new_hv.image = url;
+  }
+
+  cancel() {
+    this.ct.emit(1);
+  }
 
   IsLoaded() {
     if (+this.new_hv.ValveTypeId !== 0) {
-      this.targetUrl = this.baseUrl + 'Valve/addValveTypePhoto/' + this.new_hv.ValveTypeId;
+      this.targetUrl =
+        this.baseUrl + 'Valve/addValveTypePhoto/' + this.new_hv.ValveTypeId;
       return true;
-    } else { return false; }
+    } else {
+      return false;
+    }
   }
 
   SaveNewValveType() {
-
     var userId = 0;
-    var country = "";
+    var country = '';
     this.auth.currentUser$.subscribe((next) => {
       userId = next.UserId;
       this.user.getUser(userId).subscribe((response) => {
         country = response.country;
         // get vendor description from vendor_code
         if (this.selectedVendor !== 0) {
-          var hep = this.optionsVendors.find(x => x.value == this.selectedVendor);
+          var hep = this.optionsVendors.find(
+            (x) => x.value == this.selectedVendor
+          );
           this.new_hv.Vendor_description = hep.description;
           this.new_hv.Vendor_code = hep.value;
           this.new_hv.countries = country;
           this.cardClicked();
         }
-      })
-
-    })
-  }
-
-  saveBacktoToDB()
-  {
-    if(this.everythingOk()){this.newHospitalValve.emit(this.new_hv);}
-  }
-
-  addSize(){this.showAdd = 1;}
-  
-  saveSize(){
-
-    if(this.neweoa !== 0 ){
-
-    // add to the local list
-    this.listOfSizes.push({
-      sizeId: 0,
-      size: this.newsize,
-      eoa: this.neweoa,
-      ppm: ''
+      });
     });
-    this.listOfSizes.sort(function(a,b){return a.size - b.size});
-  }else {this.alertify.error("The effective orfice area is required, because we want to establish PPM");}
-
   }
 
-  deleteSize(id:number){
-     // remove from the local list
-   
+  saveBacktoToDB() {
+    if (this.everythingOk()) {
+      this.newHospitalValve.emit(this.new_hv);
+    }
   }
 
-  everythingOk():boolean{ // checks if all the fields are properly filled
+  addSize() {
+    this.showAdd = 1;
+  }
+
+  saveSize() {
+    if (this.neweoa !== 0) {
+      this.showAdd = 0;
+
+      // add to the local list
+      this.listOfSizes.push({
+        sizeId: 0,
+        size: this.newsize,
+        eoa: this.neweoa,
+        ppm: '',
+      });
+      this.listOfSizes.sort(function (a, b) {
+        return a.size - b.size;
+      });
+    } else {
+      this.alertify.error(
+        'The effective orfice area is required, because we want to establish PPM'
+      );
+    }
+  }
+
+  deleteSize(id: number) {
+    // remove from the local list
+  }
+
+  everythingOk(): boolean {
+    // checks if all the fields are properly filled
     var help = true;
 
-    if(this.listOfSizes.length === 0)
-    {
+    if (this.listOfSizes.length === 0) {
       help = false;
-      this.alertify.error("A valve has usually at least one size ...");
+      this.alertify.error('A valve has usually at least one size ...');
     }
 
-    if(this.new_hv.Model_code === undefined)
-    {
+    if (this.new_hv.Model_code === undefined) {
       help = false;
-      this.alertify.error("Pls enter the model code ...");
+      this.alertify.error('Pls enter the model code ...');
     }
 
-    if(this.new_hv.Description === undefined)
-    {
+    if (this.new_hv.Description === undefined) {
       help = false;
-      this.alertify.error("Pls enter the valve description ...");
+      this.alertify.error('Pls enter the valve description ...');
     }
-
-
 
     return help;
   }
-
-
-
-
 }
-
-
-
-
