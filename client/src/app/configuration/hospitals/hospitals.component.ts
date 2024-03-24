@@ -153,6 +153,9 @@ export class HospitalsComponent implements OnInit {
       this.onlineValves = next;
     });
   }
+
+  getValveDetails(id: number){}
+
   deleteDetails(id: number) {
 
     // get the correct hospitalValveType
@@ -165,7 +168,7 @@ export class HospitalsComponent implements OnInit {
       lis.splice(index, 1);
       this.hv.hospitalId = lis.join(',');
       // save back to the database
-      this.vs.updateSpecificHospitalValve(this.hv).subscribe(() => { }, (error) => { }, () => {
+      this.vs.deleteSpecificHospitalValve(this.hv.ValveTypeId).subscribe(() => { }, (error) => { }, () => {
         this.SearchValve();
       });
     });

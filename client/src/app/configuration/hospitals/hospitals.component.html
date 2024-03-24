@@ -145,7 +145,7 @@
                               <td>{{hv.ValveTypeId}}</td>
                               <td>{{hv.Model_code}}</td>
                               <td>{{hv.Description}}</td>
-
+                              <td><a (click)="getValveDetails(hv.ValveTypeId)" style='color:rgb(60, 220, 20)'>Details</a></td>
                               <td><a (click)="deleteDetails(hv.ValveTypeId)" style='color:crimson'>Delete</a></td>
                             </tr>
                           </table>
