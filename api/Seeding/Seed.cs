@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using api.Data;
@@ -65,7 +64,6 @@ namespace api.Seeding
             }
             await context.SaveChangesAsync();
         }
-       
         public static async Task SeedPatients(DataContext context)
         {
             if (await context.Patients.AnyAsync()) return;
@@ -87,20 +85,7 @@ namespace api.Seeding
             await context.SaveChangesAsync();
 
         }
-       /*   public static async Task SeedValvesInHospital(DataContext context)
-        {
-            if(await context.ValveCodes.AnyAsync()) return;
-
-            var userData = await System.IO.File.ReadAllTextAsync("data/seed/valvesInHospital.json");
-            var emp = JsonSerializer.Deserialize<List<Class_Valve_Code>>(userData);
-            foreach (var item in emp)
-            {
-               context.ValveCodes.Add(item);
-            }
-            await context.SaveChangesAsync();
-        }  */
-
-         public static async Task SeedRefPhys(DataContext context)
+        public static async Task SeedRefPhys(DataContext context)
           {
               if (await context.RefPhys.AnyAsync()) return;
 
@@ -109,6 +94,7 @@ namespace api.Seeding
               foreach (var item in emp) { context.RefPhys.Add(item); }
               await context.SaveChangesAsync();
           }
+     
         /*  public static async Task SeedEpaas(UserManager<AppUser> manager)
           {
               var listOfEpas = new List<Class_Epa>();

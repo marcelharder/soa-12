@@ -323,7 +323,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveSize";
+            var st = "ValveSize/" + id;
             comaddress = comaddress + st;
 
             using (var httpClient = new HttpClient())
@@ -363,7 +363,7 @@ namespace api.Controllers
         {
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveSize";
+            var st = "ValveSize/" + vc.SizeId;
             comaddress = comaddress + st;
             var json = JsonConvert.SerializeObject(vc, Formatting.None);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -379,12 +379,12 @@ namespace api.Controllers
 
         }
 
-        [HttpGet("getValveCodeSizes/{type}")]
-        public async Task<IActionResult> getCodeSizes(int type)
+        [HttpGet("getHospitalValveSize/{ValveTypeId}")]
+        public async Task<IActionResult> getCodeSizes(int ValveTypeId)
         {
             var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveSize/" + type;
+            var st = "ValveSize/" + ValveTypeId;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
@@ -395,7 +395,28 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-       
+
+        [HttpGet("getSizesForValve/{ValveTypeId}")]
+        public async Task<IActionResult> getValveCodeSizes(int ValveTypeId)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveSize/getSizesForValve/" + ValveTypeId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+
+
+
+
         #endregion
 
         #region <!-- get valves from the OVI -->

@@ -102,7 +102,7 @@ export class AddValveComponent implements OnInit {
       this.vs.getValveCodeSizes(this.svtid.toString()).subscribe((nex) => {
         this.optionSizes = [];
         nex.forEach((item) => {
-          this.optionSizes.push({ Size: item.Size, EOA: item.EOA,VTValveTypeId: 0, VT:0, ValveTypeId:0 });
+          this.optionSizes.push({ SizeId:0, Size: item.Size, EOA: item.EOA,VTValveTypeId: 0,ValveTypeId:0 });
         },(error)=>{
           this.alertify.error(error)});
           });

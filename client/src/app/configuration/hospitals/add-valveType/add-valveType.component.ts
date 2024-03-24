@@ -60,7 +60,7 @@ export class AddValveTypeComponent implements OnInit {
   showAdd = 0;
   newsize = 0;
   neweoa = 0.0;
-  valvesize: valveSize = { Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0, VT: 0 };
+  valvesize: valveSize = { SizeId: 0,Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0};
   listOfSizes: Array<valveSize> = [];
 
   constructor(
