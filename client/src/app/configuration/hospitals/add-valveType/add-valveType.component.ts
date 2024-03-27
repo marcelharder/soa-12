@@ -14,13 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  AbstractControl,
-  Form,
-  FormBuilder,
-  FormControl,
-  FormGroup,
   NgForm,
-  Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CardData } from 'src/app/_models/CardData';
@@ -220,8 +214,8 @@ export class AddValveTypeComponent implements OnInit {
     // remove forn the database and if that succseeds
     this.vs.deleteValveSize(id).subscribe(()=>{
     // remove from the local list
-    
-    
+    this.listOfSizes = this.listOfSizes.filter(obj => {return this.valvesize.SizeId !== id});
+   
     })
     
   }

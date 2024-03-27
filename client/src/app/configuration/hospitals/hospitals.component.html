@@ -282,12 +282,17 @@
     </div>
     <div class="col-sm-6" *ngIf="!showHospitalImage()">
 
-      <div class="mt-5">
-        
-          <app-add-valveType [new_hv]="new_hv" [hospitalNo]="pd.hospitalNo" (ct)="cancelThis($event)"
-            (newHospitalValve)="receiveAddValveType($event)"></app-add-valveType>
-        
+      <div class="mt-5" *ngIf="!showEditValveCodePage()">
+          <app-add-valveType [new_hv]="new_hv" [hospitalNo]="pd.hospitalNo" (ct)="cancelThis($event)" (newHospitalValve)="receiveAddValveType($event)"></app-add-valveType>
       </div>
+
+      <div class="mt-5" *ngIf="showEditValveCodePage()">
+          <app-edit-valveType [hv]="pd" (result)="receiveEditHospitalValve($event)"></app-edit-valveType>
+      </div>
+
+
+
+
     </div>
   </div>
 </form>
