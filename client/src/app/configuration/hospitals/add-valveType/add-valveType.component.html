@@ -117,9 +117,9 @@
             <td>No sizes yet ....</td>
           </tr>
           <tr *ngFor="let pro of listOfSizes">
-            <td>{{pro.size}}</td>
-            <td>{{pro.eoa}}</td>
-            <td><button class="btn btn-warning btn-sm" (click)="deleteSize(pro.sizeId)">Delete</button></td>
+            <td>{{pro.Size}}</td>
+            <td>{{pro.EOA}}</td>
+            <td><button class="btn btn-warning btn-sm" (click)="deleteSize(pro.SizeId)">Delete</button></td>
             <td></td>
            </tr>
           <tr *ngIf="displayAdd()">

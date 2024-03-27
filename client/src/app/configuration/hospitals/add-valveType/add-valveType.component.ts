@@ -217,7 +217,13 @@ export class AddValveTypeComponent implements OnInit {
   }
 
   deleteSize(id: number) {
+    // remove forn the database and if that succseeds
+    this.vs.deleteValveSize(id).subscribe(()=>{
     // remove from the local list
+    
+    
+    })
+    
   }
 
   everythingOk(): boolean {
