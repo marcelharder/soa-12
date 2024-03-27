@@ -1,6 +1,110 @@
 <div class="card">
   <div class="card-body">
-    edit-valveType works!
+    <div class="row">
+
+      <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">Edit valve details</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <h5><span class="badge badge-info">Description</span></h5>
+            </div>
+            <div class="col-sm-9">
+              <h5><span class="badge badge-default">{{valve.Description}}</span></h5>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-sm-3">
+              <h5><span class="badge badge-info">Product code</span></h5>
+            </div>
+            <div class="col-sm-3">
+              <h5><span class="badge badge-default">{{valve.Model_code}}</span></h5>
+            </div>
+            <div class="col-sm-3">
+              <h5><span class="badge badge-info">Vendor</span></h5>
+            </div>
+            <div class="col-sm-3">
+              <h5><span class="badge badge-default">{{valve.Vendor_description}}</span></h5>
+            </div>
+          </div>
+              
+          
+          <div class="row">
+            <div class="col-sm-3">
+              <h5><span class="badge badge-info">Size</span></h5>
+            </div>
+            <div class="col-sm-3">
+      
+      
+      
+             
+              <div>
+                <div class="row" *ngIf="!displayChangeSize()">
+                  <div class="col-sm-6"><span><input class="form-control" [(ngModel)]="valve.size" name="1" readonly></span>
+                  </div>
+                  <div class="col-sm-6"><button class="btn btn-warning btn-sm" (click)="changeSize()">Change</button>
+                  </div>
+                </div>
+                <table class="table table-striped" *ngIf="displayChangeSize()">
+      
+                  <th>Size</th>
+                  <th>EOA</th>
+                  <th></th>
+      
+                  <tr *ngFor="let pro of valveSizes" style="background-color: blanchedalmond;">
+                    <td>{{pro.Size}}</td>
+                    <td>{{pro.EOA}}</td>
+                    <td><button class="btn btn-warning btn-sm" (click)="selectThisValve(pro.Size)">select</button></td>
+                  </tr>
+      
+                </table>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <h5><span class="badge badge-info">Implant position</span></h5>
+            </div>
+            <!--  <div class="col-sm-3">
+            <h5><span class="badge badge-default">{{valve.implant_position}}</span></h5>
+          </div> -->
+            <div class="col-sm-3">
+              <select [(ngModel)]="valve.Implant_position" name="implantedPosition" class="form-control">
+                <option *ngFor="let item of PositionList" [value]="item.value">{{item.name}}</option>
+      
+              </select>
+            </div>
+      
+      
+      
+      
+          </div>
+         
+          <div class="row mt-2">
+            <div class="row">
+              <div class="col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6"><button type="button" class="btn btn-warning" (click)="Cancel()">Cancel</button>
+                  </div>
+                  <div class="col-sm-6"><button type="button" class="btn btn-success" (click)="Save()">Save</button></div>
+                </div>
+              </div>
+              <div class="col-sm-3"></div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+      </div>
+      
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header">Image</div>
+          <div class="card-body"><img src="{{valve.image}}" alt="the valve image" height="200px" width="200px" /></div>
+        </div>
+      </div>
+      
+      </div>
   </div>
   <div class="card-footer">
     <div class="row">
