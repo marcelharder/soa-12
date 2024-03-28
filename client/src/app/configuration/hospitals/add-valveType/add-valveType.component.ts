@@ -54,7 +54,7 @@ export class AddValveTypeComponent implements OnInit {
   showAdd = 0;
   newsize = 0;
   neweoa = 0.0;
-  valvesize: valveSize = { SizeId: 0,Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0};
+  valvesize: valveSize = { SizeId: 0, Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0 };
   listOfSizes: Array<valveSize> = [];
 
   constructor(
@@ -62,7 +62,7 @@ export class AddValveTypeComponent implements OnInit {
     private user: UserService,
     private auth: AccountService,
     private alertify: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadDrops();
@@ -197,27 +197,33 @@ export class AddValveTypeComponent implements OnInit {
       this.valvesize.VTValveTypeId = this.new_hv.ValveTypeId;
       this.valvesize.Size = this.newsize;
       this.valvesize.EOA = this.neweoa;
-
-      // add to the local list
-      this.listOfSizes.push(this.valvesize);
-      this.listOfSizes.sort(function (a, b) {return a.Size - b.Size;});
-      // upload to the database
-      this.vs.addValveSize(this.valvesize).subscribe((next)=>{})
-    } else {
-      this.alertify.error(
-        'The effective orfice area is required, because we want to establish possible Patient Prosthesis Mismatch'
-      );
+      if (this.neweoa === 0) {
+        this.alertify.error(
+          'The effective orfice area is required, because we want to establish possible Patient Prosthesis Mismatch'
+        );
+      } else {
+        // upload to the database
+        this.vs.addValveSize(this.valvesize).subscribe((next) => {
+          // add to the local list
+          
+          this.listOfSizes.unshift(JSON.parse(next));
+          this.listOfSizes.sort(function (a, b) { return a.Size - b.Size; });
+        })
+      } 
     }
+
+
+
   }
 
   deleteSize(id: number) {
     // remove forn the database and if that succseeds
-    this.vs.deleteValveSize(id).subscribe(()=>{
-    // remove from the local list
-    this.listOfSizes = this.listOfSizes.filter(obj => {return this.valvesize.SizeId !== id});
-   
+    this.vs.deleteValveSize(id).subscribe(() => {
+      // remove from the local list
+      this.listOfSizes = this.listOfSizes.filter(obj => { return this.valvesize.SizeId !== id });
+
     })
-    
+
   }
 
   everythingOk(): boolean {

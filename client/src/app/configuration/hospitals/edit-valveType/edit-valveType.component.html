@@ -1,103 +1,101 @@
-<div class="card"><form #valveForm="ngForm" (ngSubmit)="saveBacktoToDB()" >
+<div class="card">
+  <form #valveForm="ngForm" >
 
-  <div class="card-body">
-    <div class="row">
+    <div class="card-body">
+      <div class="row">
 
-      <div class="col-sm-8">
-      <div class="card">
-        <div class="card-header">Edit valve details</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-3">
-              <h5><span class="badge badge-info">Description</span></h5>
-            </div>
-            <div class="col-sm-9">
-              <h5><span class="badge badge-default">{{valve.Description}}</span></h5>
+        <div class="col-sm-8">
+          <div class="card">
+            <div class="card-header">Edit valve details</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5><span class="badge badge-info">Description</span></h5>
+                </div>
+                <div class="col-sm-9">
+                  <h5><span class="badge badge-default">{{valve.Description}}</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5><span class="badge badge-info">Implant position</span></h5>
+                </div>
+                <div class="col-sm-9">
+                  <h5><span class="badge badge-default">{{valve.Implant_position}}</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5><span class="badge badge-info">Product_code</span></h5>
+                </div>
+                <div class="col-sm-9">
+                  <h5><span class="badge badge-default">{{valve.Model_code}}</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5><span class="badge badge-info">Vendor</span></h5>
+                </div>
+                <div class="col-sm-9">
+                  <h5><span class="badge badge-default">{{valve.Vendor_description}}</span></h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h5><span class="badge badge-info">Size</span></h5>
+                </div>
+                <div class="col-sm-9">
+                  <table class="table table-striped">
+
+                    <th>Size</th>
+                    <th>EOA</th>
+                    <th><button class="btn btn-danger btn-sm" (click)="addSize()">Add size</button></th>
+                   
+                    <tr *ngFor="let pro of listOfSizes" style="background-color: blanchedalmond;">
+                      <td>{{pro.Size}}</td>
+                      <td>{{pro.EOA}}</td>
+                      <td><button class="btn btn-warning btn-sm" (click)="deleteSize(pro.SizeId)">Delete</button></td>
+                    </tr>
+                    <tr *ngIf="displayAdd()">
+                      <td><input [(ngModel)]="newsize" name="size" class="form-control"></td>
+                      <td><input [(ngModel)]="neweoa" name="eoa" class="form-control" ></td>
+                      <td></td>
+                      <td><button class="btn btn-warning btn-sm" (click)="saveSize()" *ngIf="displayAdd()">Save</button></td>
+                    </tr>
+                   
+
+                  </table>
+
+                </div>
+
+
+
+              </div>
+
+
+
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h5><span class="badge badge-info">Implant position</span></h5>
-            </div>
-            <div class="col-sm-9">
-              <h5><span class="badge badge-default">{{valve.Implant_position}}</span></h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h5><span class="badge badge-info">Product_code</span></h5>
-            </div>
-            <div class="col-sm-9">
-              <h5><span class="badge badge-default">{{valve.Model_code}}</span></h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-3">
-              <h5><span class="badge badge-info">Vendor</span></h5>
-            </div>
-            <div class="col-sm-9">
-              <h5><span class="badge badge-default">{{valve.Vendor_description}}</span></h5>
-            </div>
-          </div>
-          
-          
-              
-          
-          <div class="row">
-            <div class="col-sm-3">
-              <h5><span class="badge badge-info">Size</span></h5>
-            </div>
-            <div class="col-sm-9">
-                          
-               
-                <table class="table table-striped">
-      
-                  <th>Size</th>
-                  <th>EOA</th>
-                  <th></th>
-      
-                  <tr *ngFor="let pro of listOfSizes" style="background-color: blanchedalmond;">
-                    <td>{{pro.Size}}</td>
-                    <td>{{pro.EOA}}</td>
-                    <td><button class="btn btn-warning btn-sm" (click)="selectThisValve(pro.Size)">select</button></td>
-                  </tr>
-      
-                </table>
-              
-            </div>
-             
-      
-      
-          </div>
-         
-         
-      
         </div>
-      </div>
-      </div>
-      
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-header">Image</div>
-          <div class="card-body"><img src="{{valve.image}}" alt="the valve image" height="200px" width="200px" /></div>
+
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-header">Image</div>
+            <div class="card-body"><img src="{{valve.image}}" alt="the valve image" height="200px" width="200px" />
+            </div>
+          </div>
         </div>
+
       </div>
-      
-      </div>
-  </div>
-  <div class="card-footer">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="btn-group" role="group">
-          <button class="btn btn-warning" (click)="back()"> Back </button>
-          <button class="btn btn-success" type="button" (click)="saveBacktoToDB()"> Save Changes </button>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="btn-group" role="group">
+            <button class="btn btn-warning" (click)="back()"> Back </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
 </div>
-
-
-
-

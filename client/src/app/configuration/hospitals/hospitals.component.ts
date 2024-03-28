@@ -120,11 +120,15 @@ export class HospitalsComponent implements OnInit {
   }
 
   SearchValve() {
+
     this.addbutton = 1;
     this.vs
       .getHospitalValves(this.hv.Type, this.hv.Implant_position)
       .subscribe((next) => {
         this.hospitalValves = next;
+        this.displayHospitalImage = 1;
+        this.don = 1;
+        this.displayEditHospitalValve = 0;
       });
     this.alertify.show("Searching");
   }
@@ -140,10 +144,14 @@ export class HospitalsComponent implements OnInit {
   doneWithOvi() { this.router.navigate(['/config']);}
 
   AddValve() {
+    
     this.displayList = 0;
     this.updatebutton = 0;
     this.savebutton = 1;
     this.don = 1;
+    this.displayEditHospitalValve = 0;
+    this.displayHospitalImage = 1;
+    
     this.SearchHospitalValve();
   }
 
@@ -152,6 +160,7 @@ export class HospitalsComponent implements OnInit {
     // go find all available valve types for this position
     this.vs.searchHospitalValveOnline(this.hv.Type, this.hv.Implant_position).subscribe((next) => {
       this.onlineValves = next;
+     
     });
   }
 

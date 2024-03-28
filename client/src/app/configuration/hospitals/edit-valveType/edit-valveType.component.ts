@@ -16,7 +16,7 @@ export class EditValveTypeComponent implements OnInit {
 
   @Output() result: EventEmitter<number> = new EventEmitter();
   @Input() valve: hospitalValve;
- 
+
   PositionList = [
     { value: "Aortic", name: "Aortic" },
     { value: "Mitral", name: "Mitral" },
@@ -24,73 +24,62 @@ export class EditValveTypeComponent implements OnInit {
     { value: "Other", name: "Other" }]
   ch = 0;
   selectedPosition: any;
-  valvesize: valveSize = { SizeId: 0,Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0};
+  valvesize: valveSize = { SizeId: 0, Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0 };
   listOfSizes: Array<valveSize> = [];
+  addSizeRow = 0;
+  neweoa = 0;
+  newsize = 0;
 
   constructor(
     private vs: ValveService,
     private alertify: ToastrService,
     private router: Router,) { }
 
-  ngOnInit() {
-
-    this.listOfSizes = this.getSizes(this.valve.ValveTypeId);
-
-  }
+  ngOnInit() {this.listOfSizes = this.getSizes(this.valve.ValveTypeId);}
 
   back() { this.result.emit(1); }
 
   getPatchType() { if (this.valve.Type === "Pericardial Patch") { return true }; }
 
-  saveBacktoToDB() {
-    this.result.emit(1);
-    if (this.canIGo()) {
-      this.vs.updateSpecificHospitalValve(this.valve).subscribe(() => { }, (error) => { })
-    }
+  addSize() { this.addSizeRow = 1; }
+
+  deleteSize(sizeId: number){
+    this.vs.deleteValveSize(sizeId).subscribe(res => {
+      this.listOfSizes = this.listOfSizes.filter(x => x.SizeId !== sizeId);
+      this.listOfSizes.sort(function (a, b) { return a.Size - b.Size; });
+    }, error => { this.alertify.error(error); });
   }
 
-  changeSize() { }
+  saveSize() {
+    this.valvesize.EOA = this.neweoa;
+    this.valvesize.Size = this.newsize;
+    this.valvesize.VTValveTypeId = this.valve.ValveTypeId;
+    this.vs.addValveSize(this.valvesize).subscribe(res => {
+      //save this to the listofsizes
+      this.listOfSizes.push(this.valvesize);
+      this.listOfSizes.sort(function (a, b) { return a.Size - b.Size; });
+    }, error => { this.alertify.error(error); }, () => { this.addSizeRow = 0; });
+  }
 
+  selectThisValve(id: number) {
+    // get the valvetype forn the listofSizes
+    this.ch = 1;
+  }
 
   getSizes(mc: number): Array<valveSize> {
-      this.vs.getValveCodeSizes(mc).subscribe(res => {
+    this.vs.getValveCodeSizes(mc).subscribe(res => {
       this.listOfSizes = res;
+      // sort this on valveSize
+      this.listOfSizes.sort(function (a, b) { return a.Size - b.Size; });
     })
     return this.listOfSizes;
   }
-
   displayChangeSize() { if (this.ch === 1) { return true; } }
-  Cancel() { }
-
-
-  canIGo(): boolean {
-    let help = false;
-    if (this.valve.Valve_size === null || this.valve.Valve_size === "") { this.alertify.error('Please enter valve size ...'); } else { help = true; }
-
-
-    /*  const currentDate = new Date();
-     if (moment(currentDate).isAfter(this.valve.expiry_date)) {
-         this.alertify.error('This valve is already expired ...');
-         help = false;
-     } */
-
-    if (!this.getPatchType()) {
-
-      if (this.valve.Valve_size === null || this.valve.Valve_size === "") {
-        this.alertify.error('Please enter valve size ...');
-        help = false;
-      }
-    } else {
-      if (this.valve.Patch_size === null || this.valve.Patch_size === "") {
-        this.alertify.error('Please enter patch size ...');
-        help = false;
-      }
-    }
+  displayAdd() { if (this.addSizeRow === 1) { return true; } }
 
 
 
-    return help;
-  }
+ 
 
 
 }
