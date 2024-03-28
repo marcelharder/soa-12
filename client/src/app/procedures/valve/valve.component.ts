@@ -34,6 +34,7 @@ export class ValveComponent implements OnInit {
     Vendor_description: '',
     Vendor_code: 0,
     Valve_size: undefined,
+    Patch_size: undefined,
     Model_code: '',
     uk_code: '',
     soort: 1,

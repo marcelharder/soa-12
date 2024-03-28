@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 import { Valve } from '../_models/Valve';
 import { dropItem } from '../_models/dropItem';
 import { hospitalValve } from '../_models/hospitalValve';
-import { valveType } from '../_models/valveType';
 import { valveSize } from '../_models/valveSize';
 import { modelOVI } from '../_models/modelOVI';
 import { OVIvalve } from '../_models/OVIvalve';
@@ -43,7 +42,7 @@ export class ValveService {
     addValveSize(v: valveSize){return this.http.post<string>(this.baseUrl + 'Valve/addHospitalValveSize', v, { responseType: 'text' as 'json' });}
     updateValveSize(v: valveSize){return this.http.put<string>(this.baseUrl + 'Valve/updateHospitalValveSize', v, { responseType: 'text' as 'json' });}
     deleteValveSize(id: number) { return this.http.delete<string>(this.baseUrl + 'Valve/deleteHospitalValveSize/' + id, { responseType: 'text' as 'json' }); }
-    getValveCodeSizes(model: string) {return this.http.get<valveSize[]>(this.baseUrl + 'Valve/getValveCodeSizes/' + model) }
+    getValveCodeSizes(id: number) {return this.http.get<valveSize[]>(this.baseUrl + 'Valve/getSizesForValve/' + id) }
   
     //#endregion
 
@@ -73,10 +72,10 @@ export class ValveService {
         return this.http.get<dropItem[]>(this.baseUrl + 'Valve/hospitalValvesNotInHospital/' + type + "/" + position);
     }
     getSpecificValveType(ValveTypeId: number) {
-        return this.http.get<valveType>(this.baseUrl + 'Valve/writeHospitalIdToValveCode/' + ValveTypeId)
+        return this.http.get<hospitalValve>(this.baseUrl + 'Valve/writeHospitalIdToValveCode/' + ValveTypeId)
     }
     removeSpecificValveType(ValveTypeId: number) {
-        return this.http.get<valveType>(this.baseUrl + 'Valve/removeHospitalIdFromValveCode/' + ValveTypeId)
+        return this.http.get<hospitalValve>(this.baseUrl + 'Valve/removeHospitalIdFromValveCode/' + ValveTypeId)
     }
   
     getValveDescription(model: string) {

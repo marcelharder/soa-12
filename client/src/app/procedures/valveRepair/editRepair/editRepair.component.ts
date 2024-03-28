@@ -20,7 +20,7 @@ import { ValveService } from 'src/app/_services/valve.service';
 export class EditRepairComponent implements OnInit {
   @Input() procedureValve: Valve;
   @Output() sendNewProcedureValveUp = new EventEmitter<Valve>();
-  
+
 
   optionsAvailableMitralRingsFromOVI: Array<OVIvalve> = [];
   optionsAvailableTricuspidRingsFromOVI: Array<OVIvalve> = [];
@@ -50,16 +50,16 @@ export class EditRepairComponent implements OnInit {
     });
     this.loadDrops();
     this.getRingSizes();
-    if (this.procedureValve.RING_USED === 'true'){
+    if (this.procedureValve.RING_USED === 'true') {
       // show the ring entry area, done by showExistingRing()
 
       //this.getThisOne(this.procedureValve.Id);
       this.ringChanged();
-    
-    
-    
+
+
+
     }
-    
+
 
   }
 
@@ -88,28 +88,40 @@ export class EditRepairComponent implements OnInit {
   }
 
   getRingSizes() {
-    if (this.procedureValve.MODEL !== null) {
-      this.valveService.getValveCodeSizes(this.procedureValve.MODEL).subscribe(
-        (next) => {
-          this.optionMitralRingSizes = next;
-        },
-        (error) => { this.alertify.error(error) })
-    }
+    // get the correct hospitalvalve from the model
+    this.valveService.getSpecificHospitalValveByModelCode(this.procedureValve.MODEL).subscribe(
+      (next) => {
+
+        if (this.procedureValve.MODEL !== null) {
+          this.valveService.getValveCodeSizes(next.ValveTypeId).subscribe(
+            (next) => {
+              this.optionMitralRingSizes = next;
+            },
+            (error) => { this.alertify.error(error) })
+        }
+      }
+    )
+
+
   }
 
-  
+
 
   ringChanged() {
     if (this.displayMVP()) {
       let help: Partial<hospitalValve> = {};
-      if (this.displayOVIStatus()) {this.getListOfProducts(true, 1, help);
-      } else {this.getListOfProducts(false, 1, help);
+      if (this.displayOVIStatus()) {
+        this.getListOfProducts(true, 1, help);
+      } else {
+        this.getListOfProducts(false, 1, help);
       }
     }
     if (this.displayTVP()) {
       let help: Partial<hospitalValve> = {};
-      if (this.displayOVIStatus()) {this.getListOfProducts(true, 2, help);
-      } else {this.getListOfProducts(false, 2, help);
+      if (this.displayOVIStatus()) {
+        this.getListOfProducts(true, 2, help);
+      } else {
+        this.getListOfProducts(false, 2, help);
       }
     }
 
@@ -117,7 +129,7 @@ export class EditRepairComponent implements OnInit {
   }
 
   cancelEditRepair() { }
-  saveRepair(){// save stuff if there is no ring
+  saveRepair() {// save stuff if there is no ring
     this.sendNewProcedureValveUp.emit(this.procedureValve);
   }
 
@@ -135,10 +147,12 @@ export class EditRepairComponent implements OnInit {
     this.sendNewProcedureValveUp.emit(this.procedureValve);
 
   }
-  receiveCompletedValve(x: Valve){ x.RING_USED = 'true';
-  if (this.procedureValve.Implant_Position === "mvp"){x.Implant_Position = "Mitral";}
-  if (this.procedureValve.Implant_Position === "tvp"){x.Implant_Position = "Tricuspid";}
-  this.sendNewProcedureValveUp.emit(x);}
+  receiveCompletedValve(x: Valve) {
+    x.RING_USED = 'true';
+    if (this.procedureValve.Implant_Position === "mvp") { x.Implant_Position = "Mitral"; }
+    if (this.procedureValve.Implant_Position === "tvp") { x.Implant_Position = "Tricuspid"; }
+    this.sendNewProcedureValveUp.emit(x);
+  }
 
   showExistingRing() { if (this.procedureValve.RING_USED === "true") { return true } }
   displayOVIStatus() { return this.oviHospital; }
@@ -156,9 +170,9 @@ export class EditRepairComponent implements OnInit {
     return proc
   }
 
-  private getListOfProducts(ovi: boolean, location: number, help: Partial<hospitalValve>){
-     if(ovi){ // look in the online registry
-      if(location === 1){ // mitral position
+  private getListOfProducts(ovi: boolean, location: number, help: Partial<hospitalValve>) {
+    if (ovi) { // look in the online registry
+      if (location === 1) { // mitral position
         help.hospitalId = this.currentHospitalNo.toString();
         help.Type = "4";
         help.Implant_position = "2";
@@ -175,9 +189,9 @@ export class EditRepairComponent implements OnInit {
           this.optionsAvailableTricuspidRingsFromOVI = next;
         })
       }
-      
-     } else { // look in the current hospital
-      if(location === 1){ // mitral position
+
+    } else { // look in the current hospital
+      if (location === 1) { // mitral position
         this.alertify.info("Getting rings your hospital");
         help.Type = "Annuloplasty_Ring"
         help.Implant_position = "Mitral";
@@ -192,7 +206,7 @@ export class EditRepairComponent implements OnInit {
           (next) => { this.optionsAvailableTricuspidRings = next; },
           (error) => { this.alertify.warning(error) });
       }
-     }
+    }
   }
 
 }

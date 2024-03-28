@@ -20,6 +20,23 @@ export class ValveTypeFromHospitalComponent implements OnInit {
   showDetails = false;
   optionRingSizes:Array<any> = [];
   imageUrl = "";
+  hv: hospitalValve = {
+    ValveTypeId: 0,
+    Description: "",
+    Implant_position: "Aortic",
+    Type: "Biological",
+    hospitalId: "0",
+    Vendor_code: 0,
+    Vendor_description: "",
+    Valve_size: null,
+    Patch_size: null,
+    No: 0,
+    Model_code: '',
+    uk_code: '',
+    soort: 1,
+    image: '',
+    countries: ''
+  }
   
   constructor(private alertify: ToastrService, private valveService: ValveService) { }
 
@@ -42,17 +59,18 @@ export class ValveTypeFromHospitalComponent implements OnInit {
     // get the details from this type of valve
     this.valveService.getSpecificValveType(vt).subscribe(
       (next) => {
+        this.hv = next;
         this.procedureValve.MODEL = next.uk_code;
-        this.procedureValve.valveDescription = next.description;
+        this.procedureValve.valveDescription = next.Description;
         this.imageUrl = next.image;
-        this.optionRingSizes = next.valve_size;
+        this.optionRingSizes = next.Valve_size;
        })
       this.alertify.warning("no:" + vt);
       this.showDetails = true;
   
   }
 
-  getRingSizes(){this.valveService.getValveCodeSizes(this.procedureValve.MODEL).subscribe((next)=>{this.optionRingSizes = next;}) }
+  getRingSizes(){this.valveService.getValveCodeSizes(this.hv.ValveTypeId).subscribe((next)=>{this.optionRingSizes = next;}) }
   saveRepair(){ this.sendValveUp.emit(this.procedureValve);}
   cancelEditRepair(){}
 

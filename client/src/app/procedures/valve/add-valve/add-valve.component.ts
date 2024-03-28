@@ -5,7 +5,6 @@ import { take } from 'rxjs/operators';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
 import { Valve } from 'src/app/_models/Valve';
 import { valveSize } from 'src/app/_models/valveSize';
-import { valveType } from 'src/app/_models/valveType';
 import { AccountService } from 'src/app/_services/account.service';
 import { HospitalService } from 'src/app/_services/hospital.service';
 import { PatientService } from 'src/app/_services/patient.service';
@@ -59,6 +58,7 @@ export class AddValveComponent implements OnInit {
     Vendor_description: '',
     Vendor_code: 0,
     Valve_size: undefined,
+    Patch_size: undefined,
     Model_code: '',
     Implant_position: '',
     uk_code: '',
@@ -99,7 +99,7 @@ export class AddValveComponent implements OnInit {
       this.pd.MODEL = this.new_valve_type.uk_code; // needed for EOA measurement
       this.pd.SERIAL_IMP = '';
       
-      this.vs.getValveCodeSizes(this.svtid.toString()).subscribe((nex) => {
+      this.vs.getValveCodeSizes(next.ValveTypeId).subscribe((nex) => {
         this.optionSizes = [];
         nex.forEach((item) => {
           this.optionSizes.push({ SizeId:0, Size: item.Size, EOA: item.EOA,VTValveTypeId: 0,ValveTypeId:0 });

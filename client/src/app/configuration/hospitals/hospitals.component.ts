@@ -32,6 +32,7 @@ export class HospitalsComponent implements OnInit {
     Vendor_code: 0,
     Vendor_description: "",
     Valve_size: null,
+    Patch_size: null,
     No: 0,
     Model_code: '',
     uk_code: '',
@@ -48,6 +49,7 @@ export class HospitalsComponent implements OnInit {
     Vendor_code: 0,
     Vendor_description: "",
     Valve_size: null,
+    Patch_size: null,
     No: 0,
     Model_code: '',
     uk_code: '',
@@ -134,9 +136,8 @@ export class HospitalsComponent implements OnInit {
   showSaveButton() { if (this.savebutton == 1) { return true; } }
   showHospitalImage() { if (this.displayHospitalImage == 1) { return true; } }
   showEditValveCodePage(){if(this.displayEditHospitalValve == 1) {return true;}}
-  doneWithOvi() {
-    this.router.navigate(['/config']);
-  }
+
+  doneWithOvi() { this.router.navigate(['/config']);}
 
   AddValve() {
     this.displayList = 0;
@@ -155,9 +156,16 @@ export class HospitalsComponent implements OnInit {
   }
 
   getValveDetails(id: number){
-    this.displayHospitalImage = 0;
-    this.don = 0;
-    this.displayEditHospitalValve = 1;
+  
+    //get the valvecode with this id
+    this.vs.getSpecificHospitalValve(id.toString()).subscribe((next) => {
+      this.hv = next;
+      this.displayHospitalImage = 0;
+      this.don = 0;
+      this.displayEditHospitalValve = 1;
+    }, (error) => {this.alertify.error(error);}, () => {
+      
+    })
 
   }
 

@@ -6,7 +6,6 @@ import { dropItem } from 'src/app/_models/dropItem';
 import { hospitalValve } from 'src/app/_models/hospitalValve';
 import { Valve } from 'src/app/_models/Valve';
 import { valveSize } from 'src/app/_models/valveSize';
-import { valveType } from 'src/app/_models/valveType';
 import { AccountService } from 'src/app/_services/account.service';
 import { PatientService } from 'src/app/_services/patient.service';
 import { ProcedureService } from 'src/app/_services/procedure.service';
@@ -48,6 +47,7 @@ export class ValvedetailsComponent implements OnInit {
     Vendor_description: '',
     Vendor_code: 0,
     Valve_size: undefined,
+    Patch_size: undefined,
     Model_code: '',
     Implant_position: '',
     uk_code: '',
