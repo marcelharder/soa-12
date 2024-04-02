@@ -379,7 +379,7 @@ namespace api.Controllers
 
         }
 
-        [HttpGet("getHospitalValveSize/{ValveTypeId}")]
+        [HttpGet("getHospitalValveSizes/{ValveTypeId}")]
         public async Task<IActionResult> getCodeSizes(int ValveTypeId)
         {
             var help = "";

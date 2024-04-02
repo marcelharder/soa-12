@@ -14,13 +14,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  AbstractControl,
-  Form,
-  FormBuilder,
-  FormControl,
-  FormGroup,
   NgForm,
-  Validators,
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CardData } from 'src/app/_models/CardData';
@@ -200,6 +194,9 @@ export class AddValveTypeComponent implements OnInit {
         'The effective orfice area is required, because we want to establish possible Patient Prosthesis Mismatch'
       );
     }
+
+
+
   }
 
   deleteSize(id: number) {

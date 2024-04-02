@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 import { Valve } from '../_models/Valve';
 import { dropItem } from '../_models/dropItem';
 import { hospitalValve } from '../_models/hospitalValve';
-import { valveType } from '../_models/valveType';
 import { valveSize } from '../_models/valveSize';
 import { modelOVI } from '../_models/modelOVI';
 import { OVIvalve } from '../_models/OVIvalve';
@@ -73,10 +72,10 @@ export class ValveService {
         return this.http.get<dropItem[]>(this.baseUrl + 'Valve/hospitalValvesNotInHospital/' + type + "/" + position);
     }
     getSpecificValveType(ValveTypeId: number) {
-        return this.http.get<valveType>(this.baseUrl + 'Valve/writeHospitalIdToValveCode/' + ValveTypeId)
+        return this.http.get<hospitalValve>(this.baseUrl + 'Valve/writeHospitalIdToValveCode/' + ValveTypeId)
     }
     removeSpecificValveType(ValveTypeId: number) {
-        return this.http.get<valveType>(this.baseUrl + 'Valve/removeHospitalIdFromValveCode/' + ValveTypeId)
+        return this.http.get<hospitalValve>(this.baseUrl + 'Valve/removeHospitalIdFromValveCode/' + ValveTypeId)
     }
   
     getValveDescription(model: string) {
