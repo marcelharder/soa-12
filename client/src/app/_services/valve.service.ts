@@ -43,7 +43,7 @@ export class ValveService {
     addValveSize(v: valveSize){return this.http.post<string>(this.baseUrl + 'Valve/addHospitalValveSize', v, { responseType: 'text' as 'json' });}
     updateValveSize(v: valveSize){return this.http.put<string>(this.baseUrl + 'Valve/updateHospitalValveSize', v, { responseType: 'text' as 'json' });}
     deleteValveSize(id: number) { return this.http.delete<string>(this.baseUrl + 'Valve/deleteHospitalValveSize/' + id, { responseType: 'text' as 'json' }); }
-    getValveCodeSizes(model: string) {return this.http.get<valveSize[]>(this.baseUrl + 'Valve/getValveCodeSizes/' + model) }
+    getValveCodeSizes(model: string) {return this.http.get<valveSize[]>(this.baseUrl + 'Valve/getSizesForValve/' + model) }
   
     //#endregion
 

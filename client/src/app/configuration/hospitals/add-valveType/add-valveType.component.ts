@@ -60,7 +60,7 @@ export class AddValveTypeComponent implements OnInit {
   showAdd = 0;
   newsize = 0;
   neweoa = 0.0;
-  valvesize: valveSize = { SizeId: 0,Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0};
+  valvesize: valveSize = { SizeId: 0, Size: 0, VTValveTypeId: 0, EOA: 0.0, ValveTypeId: 0 };
   listOfSizes: Array<valveSize> = [];
 
   constructor(
@@ -68,7 +68,7 @@ export class AddValveTypeComponent implements OnInit {
     private user: UserService,
     private auth: AccountService,
     private alertify: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loadDrops();
@@ -90,11 +90,13 @@ export class AddValveTypeComponent implements OnInit {
       this.data.state = 'default';
     }
   }
-  displayAdd() {
-    if (this.showAdd === 1) {
-      return true;
-    }
-  }
+  displayAdd() { if (this.showAdd === 1) { return true; } }
+  flip() { this.cardClicked(); }
+  cancel() { this.ct.emit(1); }
+  updatePhoto(url: string) { this.new_hv.image = url; }
+  addSize() { this.showAdd = 1; }
+
+
 
   loadDrops() {
     this.optionsVendors = [
@@ -143,18 +145,6 @@ export class AddValveTypeComponent implements OnInit {
     this.valvePositions.push({ value: 2, description: 'Tricuspid' });
   }
 
-  flip() {
-    this.cardClicked();
-  }
-
-  updatePhoto(url: string) {
-    this.new_hv.image = url;
-  }
-
-  cancel() {
-    this.ct.emit(1);
-  }
-
   IsLoaded() {
     if (+this.new_hv.ValveTypeId !== 0) {
       this.targetUrl =
@@ -192,10 +182,6 @@ export class AddValveTypeComponent implements OnInit {
     }
   }
 
-  addSize() {
-    this.showAdd = 1;
-  }
-
   saveSize() {
     if (this.neweoa !== 0) {
       this.showAdd = 0;
@@ -206,9 +192,9 @@ export class AddValveTypeComponent implements OnInit {
 
       // add to the local list
       this.listOfSizes.push(this.valvesize);
-      this.listOfSizes.sort(function (a, b) {return a.Size - b.Size;});
+      this.listOfSizes.sort(function (a, b) { return a.Size - b.Size; });
       // upload to the database
-      this.vs.addValveSize(this.valvesize).subscribe((next)=>{})
+      this.vs.addValveSize(this.valvesize).subscribe((next) => { })
     } else {
       this.alertify.error(
         'The effective orfice area is required, because we want to establish possible Patient Prosthesis Mismatch'
@@ -217,13 +203,11 @@ export class AddValveTypeComponent implements OnInit {
   }
 
   deleteSize(id: number) {
-    // remove forn the database and if that succseeds
-    this.vs.deleteValveSize(id).subscribe(()=>{
-    // remove from the local list
-    
-    
+    // remove from the database and if that succseeds
+    this.vs.deleteValveSize(id).subscribe(() => {
+      // remove from the local list
+      this.listOfSizes.filter(x => x.Size !== id);
     })
-    
   }
 
   everythingOk(): boolean {

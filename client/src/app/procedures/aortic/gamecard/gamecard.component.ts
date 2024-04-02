@@ -90,10 +90,7 @@ export class GamecardComponent implements OnInit {
   }
 
   saveConduitDetails() {
-
-
     this.pd.TYPE = this.hv.Type;
-    
     this.vs.saveValvedConduit(this.pd).subscribe((next) => {
       this.tell.emit(this.pd);
       },
