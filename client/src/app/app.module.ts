@@ -171,6 +171,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TrainingService } from './_services/training.service';
 import { AddValveTypeComponent } from './configuration/hospitals/add-valveType/add-valveType.component';
 import { EditValveTypeComponent } from './configuration/hospitals/edit-valveType/edit-valveType.component';
+import { PublicationsComponent } from './training/publications/publications.component';
+import { PresentationsComponent } from './training/presentations/presentations.component';
 
 @NgModule({
   declarations: [					
@@ -268,7 +270,9 @@ import { EditValveTypeComponent } from './configuration/hospitals/edit-valveType
     CoursesComponent,
     PdfviewerComponent,
     AddValveTypeComponent,
-    EditValveTypeComponent
+    EditValveTypeComponent,
+    PublicationsComponent,
+    PresentationsComponent
    ],
   imports: [
     FileUploadModule,
