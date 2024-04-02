@@ -95,9 +95,9 @@
                 <input class="form-control" type="text" name="kas" [(ngModel)]="user.knownAs" />
                 <strong><span class="badge badge-default">Location details</span></strong>
                 <div class="form-inline">
-                  <label for="city">City</label>
+                  <label for="city" name="city01" >City</label>
                   <input class="form-control ml-2 mr-2" type="text" name="city" [(ngModel)]="user.city" />
-                  <label for="country">Country</label>
+                  <label for="country" name="city02">Country</label>
                   <select [(ngModel)]="user.country" name="q12" (change)="changeCountry()"
                     class="form-control ml-2 mr-2">
                     <option *ngFor="let item of optionCountries" [value]=item.IsoCode>{{ item.Description }}</option>

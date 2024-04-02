@@ -18,6 +18,10 @@ export class ExistingconduitComponent implements OnInit  {
   constructor(private alertify: ToastrService, private vs: ValveService) { }
 
   ngOnInit() {
+    // get the valvedescription from the model
+    this.vs.getSpecificHospitalValveByProductCode(this.pd.MODEL).subscribe((next)=>{
+      this.pd.valveDescription = next.Description;
+    })
    
   }
 

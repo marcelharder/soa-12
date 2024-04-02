@@ -234,6 +234,22 @@ namespace api.Controllers
                 }
             }
         }
+         [HttpGet("readHospitalValveByProductCode/{code}")]
+        public async Task<IActionResult> GetMHPC(string code)
+        {
+            var help = "";
+            var comaddress = _com.Value.productURL;
+            var st = "ValveCode/detailsByProductCode/" + code;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                    return Ok(help);
+                }
+            }
+        }
 
         [HttpPut("updateHospitalValve")]
         public async Task<IActionResult> GetMHU([FromBody] Valve_Code code)
