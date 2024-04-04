@@ -23,7 +23,7 @@ namespace api.Controllers
     public class TrainingController : BaseApiController
     {
         private IOptions<ComSettings> _com;
-         private IUserRepository _rep;
+        private IUserRepository _rep;
         public TrainingController(IOptions<ComSettings> com, IUserRepository rep)
         {
             _com = com;
@@ -47,7 +47,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-      
+
         [HttpGet("getListEpaas/{userId}")]
         public async Task<IActionResult> getEpaList(int userId)
         {
@@ -65,7 +65,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-      
+
         [HttpGet("getEpaDetails/{id}")]
         public async Task<IActionResult> getEpaDetails(int Id)
         {
@@ -82,7 +82,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-     
+
         [HttpPut("updateEpa")]
         public async Task<IActionResult> Update([FromBody] EpaDetailsDto ep)
         {
@@ -102,7 +102,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-      
+
         [HttpGet("deleteEpa/{id}")]
         public async Task<IActionResult> deleteEpaDetails(int Id)
         {
@@ -155,7 +155,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-       
+
         [HttpPost("createCourse/{userId}")]
         public async Task<IActionResult> createCourse(int userId)
         {
@@ -172,7 +172,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-   
+
         [HttpPut("updateCourse")]
         public async Task<IActionResult> updateSpecCourse(int docId, [FromBody] CourseDetailsDto up)
         {
@@ -193,9 +193,10 @@ namespace api.Controllers
         }
 
         [HttpDelete("deleteCourse/{CourseId}")]
-        public async Task<IActionResult> deleteItem(int CourseId){
+        public async Task<IActionResult> deleteItem(int CourseId)
+        {
 
-             var help = "";
+            var help = "";
             var comaddress = _com.Value.trainingURL;
             var st = "Course/dapper/delete_course/" + CourseId;
             comaddress = comaddress + st;
@@ -208,13 +209,13 @@ namespace api.Controllers
             }
             return Ok(help);
 
-            
+
         }
-        
-      
+
+
 
         #endregion
-      
+
         #region <!--documents-->
         [HttpGet("getListDocuments/{userId}")]
         public async Task<IActionResult> getDocumentList(int userId)
@@ -285,7 +286,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-       
+
         [HttpGet("listDocument/{userId}")]
         public async Task<IActionResult> listDocument(int userId)
         {
@@ -303,8 +304,8 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpPost("uploadPdf/{documentId}")] 
-        public async Task<IActionResult> uploadPdf(int documentId, [FromForm]PhotoForCreationDto photoDto)
+        [HttpPost("uploadPdf/{documentId}")]
+        public async Task<IActionResult> uploadPdf(int documentId, [FromForm] PhotoForCreationDto photoDto)
         {
             var content = new MultipartFormDataContent();
             content.Add(new StreamContent(photoDto.File.OpenReadStream()), photoDto.File.Name, photoDto.File.FileName);
@@ -318,16 +319,17 @@ namespace api.Controllers
             {
                 using (var response = await httpClient.PostAsync(comaddress, content))
                 {
-                   // var ger = await response.Content.ReadAsStringAsync();
+                    // var ger = await response.Content.ReadAsStringAsync();
                     help = await response.Content.ReadFromJsonAsync<photoResult>();
                 }
             }
-            return Ok(help.document_url); 
+            return Ok(help.document_url);
         }
-        
-        
+
+
         [HttpDelete("deleteDocument/{docId}")]
-        public async Task<IActionResult> deleteDocument(int docId){
+        public async Task<IActionResult> deleteDocument(int docId)
+        {
 
             var help = "";
             var comaddress = _com.Value.trainingURL;
@@ -342,13 +344,12 @@ namespace api.Controllers
             }
             return Ok(help);
 
-            
+
         }
-        
-        
-        
+
+
+
         #endregion
-     
 
         #region <!--procedures-->
 
@@ -371,7 +372,7 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-      
+
         [HttpGet("getProcedureDetails/{id}")]
         public async Task<IActionResult> getProcedureDetails(int Id)
         {
@@ -388,13 +389,205 @@ namespace api.Controllers
             }
             return Ok(help);
         }
-     
+
 
         #endregion
+
+        #region <!-- presentations -->
+
+        [HttpGet("getListPresentations/{userId}")]
+        public async Task<IActionResult> getPresentationList(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Presentations/dapper/presentations/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpGet("getSpecificPresentation/{Id}")]
+        public async Task<IActionResult> getSpecP(int Id)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Presentations/dapper/specificPresentation/" + Id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpPost("createPresentation/{userId}")]
+        public async Task<IActionResult> createPre(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Presentations/dapper/create_presentation/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync(comaddress, null))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpDelete("deletePresentation/{Id}")]
+        public async Task<IActionResult> deletePre(int Id)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Presentations/dapper/delete_presentation/" + Id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpPut("updatePresentation")]
+        public async Task<IActionResult> updateSpecPre(int docId, [FromBody] PresentationDetailsDto up)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Presentations/dapper/update_presentation";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(up, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        #endregion
+
+        #region <!-- publications -->
+
+        [HttpGet("getListPublications/{userId}")]
+        public async Task<IActionResult> Publi(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Publications/dapper/Publications/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpGet("getSpecificPublication/{Id}")]
+        public async Task<IActionResult> test01(int Id)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Publications/dapper/specificPublication/" + Id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpPost("createPublication/{userId}")]
+        public async Task<IActionResult> createPu(int userId)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Publications/dapper/create_Publication/" + userId;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync(comaddress, null))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpDelete("deletePublication/{Id}")]
+        public async Task<IActionResult> deletePu(int Id)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Publications/dapper/delete_Publication/" + Id;
+            comaddress = comaddress + st;
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync(comaddress))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+        [HttpPut("updatePublication")]
+        public async Task<IActionResult> updateSpecPu(int docId, [FromBody] PublicationDetailsDto up)
+        {
+            var help = "";
+            var comaddress = _com.Value.trainingURL;
+            var st = "Publications/dapper/update_Publication";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(up, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PutAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
+
+        #endregion
+
+
+
     }
-    class photoResult{
-        public string document_url { get; set; }
-        public string image { get; set; }
-        public string publicId { get; set; }
-    }
+
+
+
+
+
+}
+class photoResult
+{
+    public string document_url { get; set; }
+    public string image { get; set; }
+    public string publicId { get; set; }
 }
