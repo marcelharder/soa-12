@@ -15,8 +15,9 @@ export class TrainingComponent implements OnInit {
   doc = 1;
   courses = 0;
   cme = 0;
+  pre = 0;
+  pub = 0;
   currentUserId = 0;
-  currentCountry = "";
   currentUser: User = {
     UserId: 0,
     Id: 0,
@@ -49,23 +50,28 @@ export class TrainingComponent implements OnInit {
       
       this.currentUserId = u.UserId;
       this.us.getUser(this.currentUserId).subscribe((next)=>{
-       this.currentCountry = next.country;
+       this.currentUser = next;
+
       })
     }
       
       );
   }
 
-  showEpaButton(){if(this.currentCountry === "NL")return true; else return false;}
+  showEpaButton(){if(this.currentUser.country === "NL" && !this.currentUser.ltk)return true; else return false;}
 
-  showDocuments(){this.epa = 0;this.cme = 0; this.courses = 0;this.doc = 1;}
-  showCourses()  {this.epa = 0;this.cme = 0; this.courses = 1;this.doc = 0;}
-  showEpa()      {this.epa = 1;this.cme = 0; this.courses = 0;this.doc = 0;}
-  showCME()      {this.epa = 0;this.cme = 1; this.courses = 0;this.doc = 0;}
+  showDocuments(){this.epa = 0;this.cme = 0; this.courses = 0;this.doc = 1;this.pre = 0;this.pub = 0;}
+  showCourses()  {this.epa = 0;this.cme = 0; this.courses = 1;this.doc = 0;this.pre = 0;this.pub = 0;}
+  showEpa()      {this.epa = 1;this.cme = 0; this.courses = 0;this.doc = 0;this.pre = 0;this.pub = 0;}
+  showCME()      {this.epa = 0;this.cme = 1; this.courses = 0;this.doc = 0;this.pre = 0;this.pub = 0;}
+  showPresentations() {this.epa = 0;this.cme = 0; this.courses = 0;this.doc = 0;this.pre = 1;this.pub = 0;}
+  showPublications()  {this.epa = 0;this.cme = 0; this.courses = 0;this.doc = 0;this.pre = 0;this.pub = 1;}
 
   showEpaPanel(){if(this.epa === 1){return true;} else {return false;};}
   showDocPanel(){if(this.doc === 1){return true;} else {return false;}}
-  showCoursesPanel(){if(this.courses === 1){return true;} else {return false;}}
   showCMEPanel(){if(this.cme === 1){return true;} else {return false;}}
+  showCoursesPanel(){if(this.courses === 1){return true;} else {return false;}}
+  showPresentationsPanel(){if(this.pre === 1){return true;} else {return false;}}
+  showPublicationsPanel(){if(this.pub === 1){return true;} else {return false;};}
 
 }

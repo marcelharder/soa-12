@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Course } from '../_models/Course';
+import { Course } from '../_models/CME/Course';
 import { CourseService } from '../_services/course.service';
 import { ToastrService } from 'ngx-toastr';
 

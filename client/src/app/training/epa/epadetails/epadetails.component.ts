@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Epa_model } from 'src/app/_models/Epa_model';
+import { Epa_model } from 'src/app/_models/CME/Epa_model';
 
 @Component({
   selector: 'app-epadetails',

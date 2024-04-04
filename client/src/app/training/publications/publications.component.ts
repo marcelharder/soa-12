@@ -6,10 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./publications.component.css']
 })
 export class PublicationsComponent implements OnInit {
-@Input() UserId: number;
+@Input() userId: number;
+details = 0;
   constructor() { }
 
   ngOnInit() {
   }
-
+  showDetailsPanel(){if(this.details == 1){return true;}else{return false;}}
 }
