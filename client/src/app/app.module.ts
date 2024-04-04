@@ -173,6 +173,8 @@ import { AddValveTypeComponent } from './configuration/hospitals/add-valveType/a
 import { EditValveTypeComponent } from './configuration/hospitals/edit-valveType/edit-valveType.component';
 import { PublicationsComponent } from './training/publications/publications.component';
 import { PresentationsComponent } from './training/presentations/presentations.component';
+import { PresentationService } from './_services/presentation.service';
+import { PublicationService } from './_services/publication.service';
 
 @NgModule({
   declarations: [					
@@ -311,6 +313,8 @@ import { PresentationsComponent } from './training/presentations/presentations.c
    JwtHelperService, 
    DocumentService,
    TrainingService,
+   PresentationService,
+   PublicationService,
   //  resolvers
    ProcedureListResolver,
    ProcedureDetailsResolver,
