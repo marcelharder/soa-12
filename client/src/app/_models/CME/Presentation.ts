@@ -1,8 +1,8 @@
 export interface Presentation {
-    PresentationId:number,
-    Title: string,
-    Media: string,
-    Venue: string,
-    DatePresented: Date
+    presentationId:number,
+    title: string,
+    media: string,
+    venue: string,
+    datePresented: Date
 
 }
