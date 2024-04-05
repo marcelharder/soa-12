@@ -18,7 +18,7 @@ export class PresentationService {
 
   createPresentation(userId: number): Observable<Presentation> { return this.http.post<Presentation>(this.baseUrl + 'Training/createPresentation/' + userId,null);  }
 
-  updatePresentation(up: Presentation): Observable<string> { return this.http.put<string>(this.baseUrl + 'Training/updatePresentation',up);  }
+  updatePresentation(up: Presentation): Observable<string> { return this.http.put<string>(this.baseUrl + 'Training/updatePresentation',up, { responseType: 'text' as 'json'});  }
 
   deletePresentation(sel: number): Observable<string> { return this.http.delete<string>(this.baseUrl + 'Training/deletePresentation/' + sel);  }
 

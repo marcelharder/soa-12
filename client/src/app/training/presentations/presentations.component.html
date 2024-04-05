@@ -17,6 +17,7 @@
       <tr>
         <th>Title</th>
         <th>Venue</th>
+        <th>Media</th>
         <th>Date presented</th>
         <th></th>
       </tr>
@@ -25,10 +26,11 @@
       <tr *ngFor="let item of listOfPresentations">
         <td>{{item.title}}</td>
         <td>{{item.venue}}</td>
+        <td>{{item.media}}</td>
         <td>{{item.datePresented}}</td>
         <td>
-          <button class="btn btn-info btn-sm" (click)="showDetails(item.PresentationId)">details</button>
-          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.PresentationId)">delete</button>
+          <button class="btn btn-info btn-sm" (click)="showDetails(item.presentationId)">details</button>
+          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.presentationId)">delete</button>
         </td>
       </tr>
 
@@ -71,6 +73,19 @@
             </div>
           </div>
         </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Media:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["Media"]' class="form-control">
+
+
+
+            </div>
+          </div>
+        </div>
 
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
@@ -94,9 +109,10 @@
 
     <div class="row">
       <div class="col-sm-6">
-
-        <button type="button" class="btn btn-warning btn-sm" (click)="Cancel()">Cancel</button>
-        <button type="submit" class="btn btn-success btn-sm">Submit</button>
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn btn-warning" (click)="Cancel()">Cancel</button>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
       </div>
       <div class="col-sm-6"></div>
 

@@ -18,7 +18,7 @@ getSpecificPrublication(publicationId: number): Observable<Publication> {return 
 
 createPublication(userId: number): Observable<Publication> {return this.http.post<Publication>(this.baseUrl + 'Training/createPublication/' + userId,null);}
 
-updatePublication(up: Publication): Observable<string> {return this.http.put<string>(this.baseUrl + 'Training/updatePublication',up);}
+updatePublication(up: Publication): Observable<string> {return this.http.put<string>(this.baseUrl + 'Training/updatePublication',up, { responseType: 'text' as 'json'});}
 
 deletePublication(sel: number): Observable<string> {return this.http.delete<string>(this.baseUrl + 'Training/deletePublication/' + sel);}
 

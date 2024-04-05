@@ -23,12 +23,8 @@ export class PresentationsComponent implements OnInit {
   constructor(private pre: PresentationService, private fb: FormBuilder,) { }
 
   ngOnInit() {
-    this.pre.getListOfPresentations(this.userId).subscribe((next)=>{
-      debugger;
-      this.listOfPresentations = next;
-    });
+    this.pre.getListOfPresentations(this.userId).subscribe((next)=>{this.listOfPresentations = next;});
     this.initializeForm();
-
   }
 
   showDetails(id:number){
@@ -54,11 +50,23 @@ export class PresentationsComponent implements OnInit {
 
   showDetailsPanel(){if(this.details == 1){return true;}else{return false;}}
 
+  Cancel(){this.details = 0;}
+ 
+  updatePresentation(){
+    this.pre.updatePresentation(this.detailsForm.value).subscribe((next)=>{
+      this.pre.getListOfPresentations(this.userId).subscribe((next)=>{this.listOfPresentations = next;}); 
+      this.currentPresentation = this.listOfPresentations.find(x => x.presentationId == this.currentPresentation.presentationId);
+      this.details = 0;
+
+
+    })
+  }
+
   addPresentation(){
-    debugger;
     this.pre.createPresentation(this.userId).subscribe((next)=>{
       this.currentPresentation = next;
       this.details = 1;
+      
     })
   }
 
