@@ -30,7 +30,7 @@ export class PresentationsComponent implements OnInit {
 
   showDetails(id:number){
    this.details = 1;
-   this.currentPresentation =  this.listOfPresentations.find(x => x.presentationId == id);
+   this.currentPresentation =  this.listOfPresentations.find(x => x.presentationId === id);
 
    this.detailsForm.controls.PresentationId.setValue(this.currentPresentation.presentationId);
    this.detailsForm.controls.Title.setValue(this.currentPresentation.title); 
@@ -65,11 +65,22 @@ export class PresentationsComponent implements OnInit {
 
   addPresentation(){
     this.pre.createPresentation(this.userId).subscribe((next)=>{
-      debugger;
       this.currentPresentation = next;
+      this.detailsForm.controls.PresentationId.setValue(this.currentPresentation.presentationId);
+      this.detailsForm.controls.Title.setValue(this.currentPresentation.title); 
+      this.detailsForm.controls.Venue.setValue(this.currentPresentation.venue); 
+      this.detailsForm.controls.DatePresented.setValue(this.currentPresentation.datePresented); 
+      this.detailsForm.controls.Media.setValue(this.currentPresentation.media);
       this.details = 1;
-      
-    })
+      this.alertify.info("Presentation added");
+    
+    });
+
+
+
+
+  
+
   }
 
   deleteCurrentPresentation(id: number){

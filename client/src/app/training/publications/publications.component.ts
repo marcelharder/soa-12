@@ -68,14 +68,48 @@ export class PublicationsComponent implements OnInit {
  
     this.detailsForm.controls.PublicationId.setValue(this.currentPublication.PublicationId);
   }
-  deleteCurrentPublication(id: number){}
+  deleteCurrentPublication(id: number){
+    this.pre.deletePublication(id).subscribe((next)=>{
+      this.pre.getListOfPrublications(this.userId).subscribe((next)=>{this.listOfPublications = next;}); 
+      this.currentPublication = this.listOfPublications.find(x => x.PublicationId == this.currentPublication.PublicationId);
+      this.alertify.info("Presentation removed");
+    })
+
+  }
   
   addPublication() {
+
+    this.pre.createPublication(this.userId).subscribe((next)=>{
+      this.currentPublication = next;
+
+      this.detailsForm.controls.PublicationId.setValue(this.currentPublication.PublicationId);
+      this.detailsForm.controls.Title.setValue(this.currentPublication.Title); 
+      this.detailsForm.controls.Author.setValue(this.currentPublication.Author); 
+      this.detailsForm.controls.Issue.setValue(this.currentPublication.Issue); 
+      this.detailsForm.controls.PlaceOfPublication.setValue(this.currentPublication.PlaceOfPublication); 
+      this.detailsForm.controls.Publisher.setValue(this.currentPublication.Publisher); 
+      this.detailsForm.controls.Editor.setValue(this.currentPublication.Editor); 
+      this.detailsForm.controls.DateOfPublication.setValue(this.currentPublication.DateOfPublication); 
+      this.detailsForm.controls.URL.setValue(this.currentPublication.URL); 
+      this.detailsForm.controls.DOI.setValue(this.currentPublication.DOI); 
+     
+
     this.alertify.info('Adding publication');
     this.details = 1;
+    });
   }
 
-  updatePublication() {
-    this.alertify.info('Updating publication');
+ 
+  updatePublication(){
+    this.pre.updatePublication(this.detailsForm.value).subscribe((next)=>{
+      this.pre.getListOfPrublications(this.userId).subscribe((next)=>{this.listOfPublications = next;}); 
+      this.currentPublication = this.listOfPublications.find(x => x.PublicationId == this.currentPublication.PublicationId);
+   
+
+      this.details = 0;
+      this.alertify.info('Updating publication');
+
+
+    })
   }
 }
