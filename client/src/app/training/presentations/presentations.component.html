@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-6">
       <h4 *ngIf="!showDetailsPanel()"><span class="badge badge-secondary">List of presentations</span></h4>
-      <h4 *ngIf="showDetailsPanel()"><span class="badge badge-secondary">details</span></h4>
+      <h4 *ngIf="showDetailsPanel()"><span class="badge badge-secondary">Presentation details</span></h4>
     </div>
     <div class="col-sm-6">
       <button *ngIf="!showDetailsPanel()" class="btn btn-secondary btn-sm" style="float: right;"
@@ -30,7 +30,7 @@
         <td>{{item.datePresented}}</td>
         <td>
           <button class="btn btn-info btn-sm" (click)="showDetails(item.presentationId)">details</button>
-          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.presentationId)">delete</button>
+          <button class="btn btn-warning btn-sm" (click)="deleteCurrentPresentation(item.presentationId)">delete</button>
         </td>
       </tr>
 

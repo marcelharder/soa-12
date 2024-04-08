@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Presentation } from 'src/app/_models/CME/Presentation';
 import { PresentationService } from 'src/app/_services/presentation.service';
 
@@ -20,7 +21,7 @@ export class PresentationsComponent implements OnInit {
     venue: '',
     datePresented: undefined
   };
-  constructor(private pre: PresentationService, private fb: FormBuilder,) { }
+  constructor(private pre: PresentationService, private fb: FormBuilder,private alertify: ToastrService) { }
 
   ngOnInit() {
     this.pre.getListOfPresentations(this.userId).subscribe((next)=>{this.listOfPresentations = next;});
@@ -64,9 +65,18 @@ export class PresentationsComponent implements OnInit {
 
   addPresentation(){
     this.pre.createPresentation(this.userId).subscribe((next)=>{
+      debugger;
       this.currentPresentation = next;
       this.details = 1;
       
+    })
+  }
+
+  deleteCurrentPresentation(id: number){
+    this.pre.deletePresentation(id).subscribe((next)=>{
+      this.pre.getListOfPresentations(this.userId).subscribe((next)=>{this.listOfPresentations = next;}); 
+      this.currentPresentation = this.listOfPresentations.find(x => x.presentationId == this.currentPresentation.presentationId);
+      this.alertify.info("Presentation removed");
     })
   }
 

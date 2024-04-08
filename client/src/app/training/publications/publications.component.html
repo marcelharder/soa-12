@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-sm-6">
       <h4 *ngIf="!showDetailsPanel()"><span class="badge badge-secondary">List of publications</span></h4>
-      <h4 *ngIf="showDetailsPanel()"><span class="badge badge-secondary">details</span></h4>
+      <h4 *ngIf="showDetailsPanel()"><span class="badge badge-secondary">Publication details</span></h4>
     </div>
     <div class="col-sm-6">
       <button *ngIf="!showDetailsPanel()" class="btn btn-secondary btn-sm" style="float: right;"
-        (click)="addPresentation()">Add Publication</button>
+        (click)="addPublication()">Add Publication</button>
     </div>
   </div>
 </div>
@@ -16,88 +16,145 @@
     <thead>
       <tr>
         <th>Id</th>
-        <th>description</th>
-
+        <th>Authors</th>
+        <th>Title</th>
+        <th>DOI</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of listOfPresentations">
-        <td>{{item.documentId}}</td>
-        <td>{{item.description}}</td>
+      <tr *ngFor="let item of listOfPublications">
+        <td>{{item.PublicationId}}</td>
+        <td>{{item.Author}}</td>
+        <td>{{item.Title}}</td>
+        <td>{{item.DOI}}</td>
         <td>
-          <button class="btn btn-info btn-sm" (click)="showDetails(item.documentId)">details</button>
-          <button class="btn btn-warning btn-sm" (click)="deleteModel(item.documentId)">delete</button>
+          <button class="btn btn-info btn-sm" (click)="showPublicationDetails(item.PublicationId)">details</button>
+          <button class="btn btn-warning btn-sm" (click)="deleteCurrentPublication(item.PublicationId)">delete</button>
         </td>
       </tr>
-
-
     </tbody>
   </table>
-  <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updatePresentation()" *ngIf="showDetailsPanel()">
+  <form [formGroup]="detailsForm" id="detailsForm" (ngSubmit)="updatePublication()" *ngIf="showDetailsPanel()">
 
     <div class="row">
       <div class="col-sm-6">
-
         <div class="row">
           <div class="col-sm-6">
             <h5><span class="badge badge-secondary">Id:</span></h5>
           </div>
           <div class="col-sm-6">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["documentId"]' class="form-control" readonly>
+              <input [formControl]='detailsForm.controls["PublicationId"]' class="form-control" readonly>
             </div>
           </div>
         </div>
-
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
-            <h5><span class="badge badge-secondary">Description:</span></h5>
+            <h5><span class="badge badge-secondary">Author:</span></h5>
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["description"]' class="form-control">
+              <input [formControl]='detailsForm.controls["Author"]' class="form-control">
             </div>
           </div>
         </div>
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
-            <h5><span class="badge badge-secondary">Type:</span></h5>
+            <h5><span class="badge badge-secondary">Title:</span></h5>
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
-              <input [formControl]='detailsForm.controls["type"]' class="form-control">
+              <input [formControl]='detailsForm.controls["Title"]' class="form-control">
             </div>
           </div>
         </div>
-
         <div class="row mt-2">
           <div class="col-sm-6 mb-1">
-            <h5><span class="badge badge-secondary">Date Added:</span></h5>
+            <h5><span class="badge badge-secondary">Volume:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["Volume"]' class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Issue:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["Issue"]' class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Place of publication:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["PlaceOfPublication"]' class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Publisher:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["Publisher"]' class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Editor:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["Editor"]' class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">Date Published:</span></h5>
           </div>
           <div class="col-sm-6 mb-1">
             <div [formGroup]="detailsForm">
               <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
-                [formControl]='detailsForm.controls["dateAdded"]' [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
+                [formControl]='detailsForm.controls["dateOfPublication"]' [bsConfig]="{ dateInputFormat: 'YYYY/MM/DD' }"
                 name="datum1" />
             </div>
           </div>
         </div>
-
-        <div class="row mt-1">
+        <div class="row mt-2">
           <div class="col-sm-6 mb-1">
-            <h5><span class="badge badge-secondary">Finished:</span></h5>
+            <h5><span class="badge badge-secondary">URL:</span></h5>
           </div>
           <div class="col-sm-6 mb-1">
-            <ui-switch formControlName='finished'></ui-switch>
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["URL"]' class="form-control">
+            </div>
           </div>
         </div>
-
-
+        <div class="row mt-2">
+          <div class="col-sm-6 mb-1">
+            <h5><span class="badge badge-secondary">DOI:</span></h5>
+          </div>
+          <div class="col-sm-6 mb-1">
+            <div [formGroup]="detailsForm">
+              <input [formControl]='detailsForm.controls["DOI"]' class="form-control">
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-sm-6">
         <div class="card">
-          <img src="../../assets/images/helios_450.jpg" alt="test" width="375" height="500" />
+          <img src="../../../assets/images/else-11.jpeg" alt="test" width="375" height="500" />
         </div>
       </div>
     </div>
