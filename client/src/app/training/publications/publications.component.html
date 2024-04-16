@@ -24,13 +24,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of listOfPublications">
-        <td>{{item.PublicationId}}</td>
-        <td>{{item.Author}}</td>
-        <td>{{item.Title}}</td>
-        <td>{{item.DOI}}</td>
+        <td>{{item.publicationId}}</td>
+        <td>{{item.author}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.doi}}</td>
         <td>
-          <button class="btn btn-info btn-sm" (click)="showPublicationDetails(item.PublicationId)">details</button>
-          <button class="btn btn-warning btn-sm" (click)="deleteCurrentPublication(item.PublicationId)">delete</button>
+          <button class="btn btn-info btn-sm" (click)="showPublicationDetails(item.publicationId)">details</button>
+          <button class="btn btn-warning btn-sm" (click)="deleteCurrentPublication(item.publicationId)">delete</button>
         </td>
       </tr>
     </tbody>

@@ -15,18 +15,18 @@ export class PublicationsComponent implements OnInit {
   detailsForm: FormGroup | undefined;
   listOfPublications: Array<Publication> = [];
   currentPublication: Publication = {
-    PublicationId: 0,
+    publicationId: 0,
     userId: 0,
-    Author: '',
-    Title: '',
-    Volume: '',
-    Issue: '',
-    PlaceOfPublication: '',
-    Publisher: '',
-    Editor: '',
-    DateOfPublication: undefined,
-    URL: '',
-    DOI: '',
+    author: '',
+    title: '',
+    volume: '',
+    issue: '',
+    placeOfPublication: '',
+    publisher: '',
+    editor: '',
+    dateOfPublication: undefined,
+    url: '',
+    doi: '',
   };
 
   constructor(
@@ -41,6 +41,8 @@ export class PublicationsComponent implements OnInit {
     });
     this.initializeForm();
   }
+
+  Cancel(){this.details = 0;}
 
   initializeForm() {
     this.detailsForm = this.fb.group({
@@ -64,14 +66,26 @@ export class PublicationsComponent implements OnInit {
 
   showPublicationDetails(id: number){
     this.details = 1;
-    this.currentPublication =  this.listOfPublications.find(x => x.PublicationId == id);
+    this.currentPublication =  this.listOfPublications.find(x => x.publicationId == id);
+
+    this.detailsForm.controls.PublicationId.setValue(this.currentPublication.publicationId);
+    this.detailsForm.controls.Title.setValue(this.currentPublication.title); 
+    this.detailsForm.controls.Author.setValue(this.currentPublication.author); 
+    this.detailsForm.controls.Issue.setValue(this.currentPublication.issue); 
+    this.detailsForm.controls.PlaceOfPublication.setValue(this.currentPublication.placeOfPublication); 
+    this.detailsForm.controls.Publisher.setValue(this.currentPublication.publisher); 
+    this.detailsForm.controls.Editor.setValue(this.currentPublication.editor); 
+    this.detailsForm.controls.DateOfPublication.setValue(this.currentPublication.dateOfPublication); 
+    this.detailsForm.controls.URL.setValue(this.currentPublication.url); 
+    this.detailsForm.controls.DOI.setValue(this.currentPublication.doi); 
+
  
-    this.detailsForm.controls.PublicationId.setValue(this.currentPublication.PublicationId);
+    this.detailsForm.controls.PublicationId.setValue(this.currentPublication.publicationId);
   }
   deleteCurrentPublication(id: number){
     this.pre.deletePublication(id).subscribe((next)=>{
       this.pre.getListOfPrublications(this.userId).subscribe((next)=>{this.listOfPublications = next;}); 
-      this.currentPublication = this.listOfPublications.find(x => x.PublicationId == this.currentPublication.PublicationId);
+      this.currentPublication = this.listOfPublications.find(x => x.publicationId == this.currentPublication.publicationId);
       this.alertify.info("Presentation removed");
     })
 
@@ -82,16 +96,16 @@ export class PublicationsComponent implements OnInit {
     this.pre.createPublication(this.userId).subscribe((next)=>{
       this.currentPublication = next;
 
-      this.detailsForm.controls.PublicationId.setValue(this.currentPublication.PublicationId);
-      this.detailsForm.controls.Title.setValue(this.currentPublication.Title); 
-      this.detailsForm.controls.Author.setValue(this.currentPublication.Author); 
-      this.detailsForm.controls.Issue.setValue(this.currentPublication.Issue); 
-      this.detailsForm.controls.PlaceOfPublication.setValue(this.currentPublication.PlaceOfPublication); 
-      this.detailsForm.controls.Publisher.setValue(this.currentPublication.Publisher); 
-      this.detailsForm.controls.Editor.setValue(this.currentPublication.Editor); 
-      this.detailsForm.controls.DateOfPublication.setValue(this.currentPublication.DateOfPublication); 
-      this.detailsForm.controls.URL.setValue(this.currentPublication.URL); 
-      this.detailsForm.controls.DOI.setValue(this.currentPublication.DOI); 
+      this.detailsForm.controls.PublicationId.setValue(this.currentPublication.publicationId);
+      this.detailsForm.controls.Title.setValue(this.currentPublication.title); 
+      this.detailsForm.controls.Author.setValue(this.currentPublication.author); 
+      this.detailsForm.controls.Issue.setValue(this.currentPublication.issue); 
+      this.detailsForm.controls.PlaceOfPublication.setValue(this.currentPublication.placeOfPublication); 
+      this.detailsForm.controls.Publisher.setValue(this.currentPublication.publisher); 
+      this.detailsForm.controls.Editor.setValue(this.currentPublication.editor); 
+      this.detailsForm.controls.DateOfPublication.setValue(this.currentPublication.dateOfPublication); 
+      this.detailsForm.controls.URL.setValue(this.currentPublication.url); 
+      this.detailsForm.controls.DOI.setValue(this.currentPublication.doi); 
      
 
     this.alertify.info('Adding publication');
@@ -103,7 +117,11 @@ export class PublicationsComponent implements OnInit {
   updatePublication(){
     this.pre.updatePublication(this.detailsForm.value).subscribe((next)=>{
       this.pre.getListOfPrublications(this.userId).subscribe((next)=>{this.listOfPublications = next;}); 
-      this.currentPublication = this.listOfPublications.find(x => x.PublicationId == this.currentPublication.PublicationId);
+      this.currentPublication = this.listOfPublications.find(x => x.publicationId == this.currentPublication.publicationId);
+
+
+
+
    
 
       this.details = 0;
