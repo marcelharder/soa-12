@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Document_model } from '../_models/Document_model';
+import { Document_model } from '../_models/CME/Document_model';
 
 @Injectable({
   providedIn: 'root'

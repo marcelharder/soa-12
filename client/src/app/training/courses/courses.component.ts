@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Course } from 'src/app/_models/Course';
+import { Course } from 'src/app/_models/CME/Course';
 import { AccountService } from 'src/app/_services/account.service';
 import { CourseService } from 'src/app/_services/course.service';
 

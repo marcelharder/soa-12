@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Epa_model } from 'src/app/_models/Epa_model';
+import { Epa_model } from 'src/app/_models/CME/Epa_model';
 import { AccountService } from 'src/app/_services/account.service';
 import { EpaService } from 'src/app/_services/epa.service';
 

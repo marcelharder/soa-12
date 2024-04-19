@@ -151,7 +151,9 @@ export class UserlistComponent implements OnInit {
     
     })
    }
-  Cancel() { this.router.navigate(['users']) }
+  
+  
+  
   changePWDUser(id: number){this.router.navigate(['hardresetpassword/'+ id]);}
 }
 

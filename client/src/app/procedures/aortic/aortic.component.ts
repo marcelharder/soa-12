@@ -166,15 +166,12 @@ export class AorticComponent implements OnInit {
       this.aorticForm.reset(this.pd);
   }
 
-  record_added(v: Valve) {// the game card added a record
+  record_added(v: any) {// the game card added a record
     debugger;
-    this.vs.saveValvedConduit(v).subscribe((next) => {
-        this.Cf = 1; // show the newly added valve
-    },
-    (error) => { this.alertify.error(error); },
-    () => { this.alertify.show("Conduit uploaded ...");
-    }) 
- }
+      this.procedureValve = v;
+      
+      this.Cf = 1; // show the newly added valve
+  }
 
   canDeactivate() {
       this.saveAortic();

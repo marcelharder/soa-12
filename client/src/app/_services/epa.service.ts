@@ -2,8 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Course } from '../_models/Course';
-import { Epa_model } from '../_models/Epa_model';
+import { Course } from '../_models/CME/Course';
+import { Epa_model } from '../_models/CME/Epa_model';
 import { dropItem } from '../_models/dropItem';
 
 @Injectable({

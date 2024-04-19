@@ -1,4 +1,4 @@
-import { Course } from './Course';
+import { Course } from './CME/Course';
 import { Invoice } from './Invoice';
 
 

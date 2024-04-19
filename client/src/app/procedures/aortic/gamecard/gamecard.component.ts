@@ -27,11 +27,11 @@ export class GamecardComponent implements OnInit {
   @Input() OAC: Array<hospitalValve>;
   @Input() currentHospital: string;
   @Output() tell = new EventEmitter<Valve>();
- 
+
   conduitDescription = '';
   optionConduitSizes: Array<valveSize> = [];
   currentProcedureId = 0;
-  currentHospitalName="";
+  currentHospitalName = "";
   hv: hospitalValve = {
     Implant_position: "Aortic",
     ValveTypeId: 0,
@@ -50,9 +50,9 @@ export class GamecardComponent implements OnInit {
     countries: ''
   };
   pd: Valve = {
-    Id: 0, Hospitalno:0,Implant_Position: '', IMPLANT: '', EXPLANT: '', SIZE: '', TYPE: '', SIZE_EXP: '',
+    Id: 0, Hospitalno: 0, Implant_Position: '', IMPLANT: '', EXPLANT: '', SIZE: '', TYPE: '', SIZE_EXP: '',
     TYPE_EXP: 0, ProcedureType: 0, ProcedureAetiology: 0, MODEL: '', MODEL_EXP: '', SERIAL_IMP: '',
-    SERIAL_EXP: '', RING_USED: '', valveDescription:'',REPAIR_TYPE: '', Memo: '', Combined: 0, procedure_id: 0
+    SERIAL_EXP: '', RING_USED: '', valveDescription: '', REPAIR_TYPE: '', Memo: '', Combined: 0, procedure_id: 0
   };
 
   constructor(
@@ -62,7 +62,7 @@ export class GamecardComponent implements OnInit {
     private aorticService: AorticSurgeryService) { }
 
   ngOnInit() {
-    this.auth.currentProcedure$.pipe(take(1)).subscribe((u) => {this.currentProcedureId = u;});
+    this.auth.currentProcedure$.pipe(take(1)).subscribe((u) => { this.currentProcedureId = u; });
     this.auth.currentHospitalName.subscribe(next => this.currentHospitalName = next);
 
   }
@@ -73,6 +73,8 @@ export class GamecardComponent implements OnInit {
   };
 
   getThisConduit(x: any) {
+    
+    
     // add a new record
     this.vs.addValvedConduitInProcedure(this.currentProcedureId).subscribe((next) => {
       this.pd = next;
@@ -83,36 +85,34 @@ export class GamecardComponent implements OnInit {
     //So the conduitType is chosen, now add a hospitalValve from the conduit type
     const index = this.OAC.findIndex(a => a.ValveTypeId === x);
     this.hv = this.OAC[index];
-    
+    this.conduitDescription = this.hv.Description;
+
     // show card to enter details mn serial no and save this ring
     this.pd.SERIAL_IMP = '';
     this.pd.TYPE = this.hv.Type;
-    this.vs.getValveCodeSizes(x).subscribe((next) => { this.optionConduitSizes = next; });
-
+    this.vs.getValveCodeSizes(x).subscribe((next) => {
+      this.optionConduitSizes = next;
+      this.optionConduitSizes.sort(function (a, b) { return a.Size - b.Size; });
+    });
     this.cardClicked();
   }
 
   saveConduitDetails() {
-    // save the details
-    this.pd.TYPE = this.hv.Type;
-    this.pd.MODEL = this.hv.Model_code;
-   
-   this.tell.emit(this.pd);
-   this.cardClicked();
-
-    
-   /*  this.vs.saveValvedConduit(this.pd).subscribe((next) => {
+    this.pd.MODEL = this.hv.uk_code;
+    this.pd.valveDescription = this.conduitDescription;
+    this.vs.saveValvedConduit(this.pd).subscribe((next) => {
       this.tell.emit(this.pd);
-      },
+    },
       (error) => { this.alertify.error(error); },
-      () => { this.alertify.show("Conduit uploaded ...");
-      }) */
-   
+      () => {
+        this.alertify.show("Conduit uploaded ...");
+      })
+    this.cardClicked();
   }
-  
-  CancelConduitDetails(){
+
+  CancelConduitDetails() {
     // remove this conduit in the database
-    this.vs.deleteValve(this.pd.Id).subscribe((next)=>{this.alertify.show(next)})
+    this.vs.deleteValve(this.pd.Id).subscribe((next) => { this.alertify.show(next) })
     this.pd.SERIAL_IMP = "";
     this.pd.SIZE = "";
     this.cardClicked();

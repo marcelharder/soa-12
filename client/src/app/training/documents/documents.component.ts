@@ -2,9 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Document_model } from 'src/app/_models/Document_model';
+import { Document_model } from 'src/app/_models/CME/Document_model';
 import { DocumentService } from 'src/app/_services/document.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-documents',
@@ -86,7 +85,7 @@ constructor(private ds: DocumentService,
 
  
   
-    uploadPhoto(){
+  uploadPhoto(){
     this.alertify.info("uploading photo");
    
   
