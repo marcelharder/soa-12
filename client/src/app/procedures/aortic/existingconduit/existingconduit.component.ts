@@ -17,6 +17,7 @@ export class ExistingconduitComponent implements OnInit  {
   constructor(private alertify: ToastrService, private vs: ValveService) { }
 
   ngOnInit() {
+    debugger;
     this.vs.getValveTypeDescription(this.pd.MODEL).subscribe((next)=>{
       this.valveDescription = next;
     });

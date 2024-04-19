@@ -40,7 +40,7 @@ services:
       - db
   
   training:
-    image: training:v16
+    image: training:v18
     networks:
       - internal-container-network
     ports:
@@ -58,7 +58,7 @@ services:
       - 8104:80
       
   reports:
-    image: reports:v27
+    image: reports:v28
     networks:
       - internal-container-network
     ports:
