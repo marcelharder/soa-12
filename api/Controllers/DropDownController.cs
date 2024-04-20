@@ -69,7 +69,7 @@ namespace api.Controllers
                 {
                     var test = await response.Content.ReadAsStringAsync();
                    // help = JsonSerializer.Deserialize<List<Class_Item>>(test);
-                    return Ok(help);
+                    return Ok(test);
                 }
             }
         }

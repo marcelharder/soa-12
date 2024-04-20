@@ -1161,7 +1161,7 @@ namespace api.Data
                     using (var response = await httpClient.GetAsync(comaddress))
                     {
                         var test = await response.Content.ReadAsStringAsync();
-                        //cl = JsonSerializer.Deserialize<List<Class_Item>>(test);
+                        cl = JsonSerializer.Deserialize<List<Class_Item>>(test);
                     }
                 }
                 return cl;
