@@ -78,6 +78,8 @@ export class GamecardComponent implements OnInit {
     // add a new record
     this.vs.addValvedConduitInProcedure(this.currentProcedureId).subscribe((next) => {
       this.pd = next;
+      // get the conduitsizes from the valveType
+      this.vs.getValveCodeSizes(x).subscribe((next) => { this.optionConduitSizes = next; });
     })
 
     //So the conduitType is chosen, now add a hospitalValve from the conduit type
