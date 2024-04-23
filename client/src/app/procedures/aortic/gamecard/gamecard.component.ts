@@ -98,6 +98,8 @@ export class GamecardComponent implements OnInit {
   }
 
   saveConduitDetails() {
+    if(this.pd.SIZE === null){this.pd.SIZE = this.optionConduitSizes[0].Size.toString()}
+    
     this.pd.MODEL = this.hv.uk_code;
     this.pd.valveDescription = this.conduitDescription;
     this.vs.saveValvedConduit(this.pd).subscribe((next) => {
@@ -108,6 +110,7 @@ export class GamecardComponent implements OnInit {
         this.alertify.show("Conduit uploaded ...");
       })
     this.cardClicked();
+   
   }
 
   CancelConduitDetails() {
