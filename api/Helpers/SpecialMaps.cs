@@ -65,12 +65,7 @@ namespace api.Helpers
         #endregion
         #region <!-- suggestion -->
       
-        public EpaDetailsDto mapToEpaDetailsDto(Class_Epa help)
-        {
-            var h = new EpaDetailsDto();
-            h = _map.Map<Class_Epa,EpaDetailsDto>(help);
-            return h;
-        }
+       
         #endregion
         #region <!-- user -->
         public UserForReturnDto mapToUserForReturn(AppUser help)
@@ -112,31 +107,7 @@ namespace api.Helpers
         }
 
         #endregion
-         #region <!-- eps -->
-        public Class_Epa mapToEpa(EpaDetailsDto cr, Class_Epa old)
-        {
-            return _map.Map<EpaDetailsDto, Class_Epa>(cr, old);
-        }
-
-        public EpaDetailsDto mapToepadto(Class_Epa p)
-        {
-            return _map.Map<Class_Epa, EpaDetailsDto>(p);
-        }
-
-        #endregion
-         #region <!-- aioCourse -->
-        public Class_Course mapToCourse(CourseDetailsDto cr, Class_Course old)
-        {
-            return _map.Map<CourseDetailsDto, Class_Course>(cr, old);
-        }
-
-        public CourseDetailsDto mapToCoursedto(Class_Course p)
-        {
-            return _map.Map<Class_Course, CourseDetailsDto>(p);
-        }
-
-        #endregion
-        #region <!-- discharge -->
+       #region <!-- discharge -->
         public DischargeForReturnDTO mapToDischargeDTO(FullPatientDTO pat, Class_PostOp po)
         {
             var help = new DischargeForReturnDTO();

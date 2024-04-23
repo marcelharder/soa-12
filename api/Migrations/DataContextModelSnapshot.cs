@@ -768,52 +768,6 @@ namespace api.Migrations
                     b.ToTable("CPBS");
                 });
 
-            modelBuilder.Entity("api.Entities.Class_Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("active")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("courseDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("description")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("diploma")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("endDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("level")
-                        .HasColumnType("int");
-
-                    b.Property<string>("location")
-                        .HasColumnType("longtext");
-
-                    b.Property<float>("price")
-                        .HasColumnType("float");
-
-                    b.Property<string>("title")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("userId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("Courses");
-                });
-
             modelBuilder.Entity("api.Entities.Class_Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -847,73 +801,6 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("api.Entities.Class_Epa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("EpaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("category")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("created")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("date_finished")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("date_started")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("finished")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("grade")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("image")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("name")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("option_1")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("option_2")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("option_3")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("option_4")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("option_5")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("option_6")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("option_7")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("userId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("Epaas");
                 });
 
             modelBuilder.Entity("api.Entities.Class_LTX", b =>
@@ -1772,24 +1659,6 @@ namespace api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("api.Entities.Class_Course", b =>
-                {
-                    b.HasOne("api.Entities.AppUser", "user")
-                        .WithMany("Courses")
-                        .HasForeignKey("userId");
-
-                    b.Navigation("user");
-                });
-
-            modelBuilder.Entity("api.Entities.Class_Epa", b =>
-                {
-                    b.HasOne("api.Entities.AppUser", "user")
-                        .WithMany("Epa")
-                        .HasForeignKey("userId");
-
-                    b.Navigation("user");
-                });
-
             modelBuilder.Entity("api.Entities.Class_Procedure", b =>
                 {
                     b.HasOne("api.Entities.Class_Patient", "Class_Patient")
@@ -1817,10 +1686,6 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Entities.AppUser", b =>
                 {
-                    b.Navigation("Courses");
-
-                    b.Navigation("Epa");
-
                     b.Navigation("UserRoles");
                 });
 
