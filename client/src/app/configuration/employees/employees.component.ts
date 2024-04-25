@@ -21,8 +21,8 @@ export class EmployeesComponent implements OnInit {
     // list of professions
     surgeon = 'surgery';
     assistant = 'surgery';
-    anaesthesiaTech = 'anaesthesieTech';
-    anaesthesia = 'anaesthesie';
+    anaesthesiaTech = 'anaesthesiaTech';
+    anaesthesia = 'anaesthesia';
     nurse = 'nurse';
     perfusie = 'perfusion';
 
@@ -106,9 +106,9 @@ export class EmployeesComponent implements OnInit {
 
         this.drops.getEmployees(ch, 'surgery', 'true', 'Yes').subscribe((next) => { this.sl = next }); // surgeons
         this.drops.getEmployees(ch, 'surgery', 'true', 'No').subscribe((next) => { this.al = next }); // assistant
-        this.drops.getEmployees(ch, 'anaesthesie', 'true', 'No').subscribe((next) => { this.hl = next }); // an
+        this.drops.getEmployees(ch, 'anaesthesia', 'true', 'No').subscribe((next) => { this.hl = next }); // an
         this.drops.getEmployees(ch, 'nurse', 'true', 'No').subscribe((next) => { this.cl = next }); // nurse
-        this.drops.getEmployees(ch, 'anaesthesieTech', 'true', 'No').subscribe((next) => { this.tl = next }); // tech
+        this.drops.getEmployees(ch, 'anaesthesiaTech', 'true', 'No').subscribe((next) => { this.tl = next }); // tech
         this.drops.getEmployees(ch, 'perfusion', 'true', 'No').subscribe((next) => { this.pl = next }); // perf
 
     }
