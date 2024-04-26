@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documentation.component.css']
 })
 export class DocumentationComponent implements OnInit {
+  currentdate = new Date();
   isFirstOpen = true;
   oneAtATime = true;
   constructor() { }
@@ -14,9 +15,7 @@ export class DocumentationComponent implements OnInit {
   ngOnInit() {
    
   }
-
-  linkToCSD(){ window.location.href = "https://csd-website.azurewebsites.net";}
-
+  linkToCSD(){ window.location.href = "http://surgical-outcomes.nl";}
   linkToIntroduction(){
     window.open("https://docs.google.com/document/d/15xb1ceMfCEqKYpYXL-0vomYm_gAtWhiy3bY-MWzB-0U/edit?usp=sharing", "_blank")
   }

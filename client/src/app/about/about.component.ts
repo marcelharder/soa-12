@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
+  currentdate = new Date();
   contact = 0;
   version = 1;
   credits = 0;
@@ -40,7 +41,7 @@ export class AboutComponent implements OnInit {
   showContact(){if(this.contact === 1){return true;}}
   showVersion(){if(this.version === 1){return true;}}
 
-  linkToCSD(){ window.location.href = "https://csd-website.azurewebsites.net";}
+  linkToCSD(){ window.location.href = "http://surgical-outcomes.nl";}
   linkToCredit01(){window.location.href = "https://docs.google.com/document/d/1vLW1bOdBKDYKP-GqfAAlo43xttomhjTniMjOSxUI01c/edit?usp=sharing";}
   linkToCredit02(){window.location.href = "https://docs.google.com/document/d/1a8WQtk5av7YUR9P8oQKNR74S0lrzAaf-V9q5Kic10f8/edit?usp=sharing";}
 
