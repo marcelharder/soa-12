@@ -31,7 +31,12 @@ export class ResetPasswordComponent implements OnInit {
   
     ngOnInit(): void {
       this.resetPasswordForm = new FormGroup({
-        password: new FormControl('', [Validators.required,Validators.minLength(6), this.requiresOneDigit(), this.hasUpperCase()]),
+        password: new FormControl('', 
+          [Validators.required,
+          Validators.minLength(6), 
+          Validators.maxLength(20),
+          this.requiresOneDigit(),
+          this.hasUpperCase()]),
         confirmPassword: new FormControl('',[Validators.required, this.matchValues('password')])
     });
     this.resetPasswordForm.controls.password.valueChanges.subscribe(() => { this.resetPasswordForm.controls.confirmPassword.updateValueAndValidity(); })

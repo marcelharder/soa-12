@@ -11,7 +11,7 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input() databaseStatus: boolean;
   @Input() controlNo: number;
   @Input() label: string;
-  @Input() type = 'text';
+  @Input() type: string;
   @Output() ev = new EventEmitter<number>();
 
   constructor(@Self() public ngControl: NgControl, private alertify: ToastrService) {
