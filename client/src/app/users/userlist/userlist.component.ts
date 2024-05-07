@@ -50,11 +50,9 @@ export class UserlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.currentUser$.pipe(take(1)).subscribe((u) => { this.currentUserId = u.UserId; });
-    this.drop.getAllCountries().subscribe((next)=>{
-      this.countries = next;
-    });
+    this.drop.getAllCountries().subscribe((next)=>{ this.countries = next; });
     this.loadDrops();
-    this.selectUserPerHospital("01"); //  get the users from Nederland Catharina ZH because thats the first hospital
+    this.selectUserPerHospital("01"); //  get the users from Nederland Catharina ZH because that's the first hospital to show up
     //this.getUsers();
   }
   loadDrops() {}
