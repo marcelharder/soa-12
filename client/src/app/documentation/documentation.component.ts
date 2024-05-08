@@ -32,6 +32,10 @@ export class DocumentationComponent implements OnInit {
     window.open("https://docs.google.com/document/d/16SP_tfH3onP3PKxXHrV7Z-9yQ9emN1FWExO5RmiTjaY/edit?usp=sharing", "_blank")
   }
 
+  linkToCME(){
+    window.open("https://docs.google.com/document/d/1PFa2R-Cf9cNGJ98ATIqPJQyh9-_VTwIr7Md7YhpmVZU/edit?usp=sharing", "_blank")
+  }
+
 
 }
 

@@ -26,7 +26,6 @@ export class TutorialsComponent implements OnInit {
 
   linkToStatistics(){window.open("https://docs.google.com/document/d/1dHpsTpBH9RNKliCNt7kXsccqMeBKDbZNZoVrK2ghpM0/edit?usp=sharing", "_blank")}
   
-  linkToCME(){window.open("https://docs.google.com/document/d/1dHpsTpBH9RNKliCNt7kXsccqMeBKDbZNZoVrK2ghpM0/edit?usp=sharing", "_blank")}
-
+  linkToCME(){window.open("https://docs.google.com/presentation/d/1fwgoY7pXewG_2vIAu3Rk4pxddS6pICeu1yz2HwbxHfg/edit?usp=sharing","blank")}
 
 }
