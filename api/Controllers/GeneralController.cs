@@ -232,8 +232,8 @@ namespace api.Controllers
             {
 
                 var result = "";
-                var comaddress = _com.Value.valveURL;
-                var st = "ppm?" + "productCode=" + vp.productCode + '&' + "size=" + vp.size + '&' + "weight=" + vp.weight + '&' + "height=" + vp.height;
+                var comaddress = _com.Value.productURL;
+                var st = "getPPM?" + "productCode=" + vp.productCode + '&' + "size=" + vp.size + '&' + "weight=" + vp.weight + '&' + "height=" + vp.height;
                 comaddress = comaddress + st;
 
                 using (var httpClient = new HttpClient())
