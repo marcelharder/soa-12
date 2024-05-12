@@ -228,12 +228,11 @@ namespace api.Controllers
         [Route("ppm")]
         public async Task<IActionResult> getPPM([FromQuery] ValveParams vp)
         {
-            if (vp.productCode != null || vp.size != null)
+            if (vp.typeId != null || vp.size != null)
             {
-
                 var result = "";
                 var comaddress = _com.Value.productURL;
-                var st = "getPPM?" + "productCode=" + vp.productCode + '&' + "size=" + vp.size + '&' + "weight=" + vp.weight + '&' + "height=" + vp.height;
+                var st = "getPPM?" + "ValveTypeId=" + vp.typeId + '&' + "size=" + vp.size + '&' + "height=" + vp.height + '&' + "weight=" + vp.weight;
                 comaddress = comaddress + st;
 
                 using (var httpClient = new HttpClient())
@@ -245,70 +244,10 @@ namespace api.Controllers
                 }
                 return Ok(result);
             }
-
             return BadRequest("productCode or valve size are null");
-
-
         }
 
-      /*   [HttpGet]
-        [AllowAnonymous]
-        [Route("productByValveTypeId/{id}")]
-        public async Task<IActionResult> getVVID(int id)
-        {
-            var result = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "productByValveTypeId/" + id;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(result);
-        }
 
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("getValveCodeSizes/{model}")]
-        public async Task<IActionResult> getCSI(string model)
-        {
-            var result = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "getValveCodeSizes/" + model;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(result);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("valveDescriptionFromModel/{model}")]
-        public async Task<IActionResult> getCS(string model)
-        {
-            var result = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "getValveDescriptionFromModel/" + model;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(result);
-        }
-
- */
         [HttpGet]
         [AllowAnonymous]
         [Route("markValve/{serial}/{status}/{procedureId}")]

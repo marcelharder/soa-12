@@ -60,9 +60,9 @@ export class ValveService {
         return this.http.post<hospitalValve>(this.baseUrl + 'Valve/createHospitalValve',vc); }
 
 
-    getPPM(productCode: string, size: string, weight: string, height: string) {
+    getPPM(typeId: number, size: string, weight: string, height: string) {
         let params = new HttpParams();
-        params = params.append('productCode', productCode);
+        params = params.append('typeId', typeId);
         params = params.append('size', size);
         params = params.append('weight', weight);
         params = params.append('height', height);
