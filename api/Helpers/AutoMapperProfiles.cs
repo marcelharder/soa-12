@@ -35,8 +35,7 @@ namespace api.Helpers
             CreateMap<AppUser, UserForReturnDto>();
             CreateMap<UserForUpdateDto, AppUser>();
            
-           CreateMap<Class_Valve_Code, Valve_Code>();
-
+          
             
             CreateMap<Class_Employee, EmployeeForReturnDTO>();
             CreateMap<EmployeeForUpdateDTO, Class_Employee>().ForMember(dest => dest.Id, opt => opt.Ignore());

@@ -95,29 +95,5 @@ namespace api.Seeding
               await context.SaveChangesAsync();
           }
      
-        /*  public static async Task SeedEpaas(UserManager<AppUser> manager)
-          {
-              var listOfEpas = new List<Class_Epa>();
-              var user = await manager.Users.Include(x => x.Epa).FirstOrDefaultAsync(x => x.Id == 2);
-              listOfEpas = user.Epa.ToList();
-              if (listOfEpas.Count != 0) return;
-
-              var userData = await System.IO.File.ReadAllTextAsync("Seeding/epaSeedData.json");
-              var emp = JsonSerializer.Deserialize<List<Class_Epa>>(userData);
-              foreach (var item in emp) { user.Epa.Add(item); }
-              await manager.UpdateAsync(user);
-          }
-         public static async Task SeedCourses(UserManager<AppUser> manager)
-          {
-              var listOfCourses = new List<Class_Course>();
-              var user = await manager.Users.Include(x => x.Courses).FirstOrDefaultAsync(x => x.Id == 2);
-              listOfCourses = user.Courses.ToList();
-              if (listOfCourses.Count != 0) return;
-
-              var userData = await System.IO.File.ReadAllTextAsync("Seeding/courseSeedData.json");
-              var emp = JsonSerializer.Deserialize<List<Class_Course>>(userData);
-              foreach (var item in emp) { user.Courses.Add(item); }
-              await manager.UpdateAsync(user);
-          } */
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using api.DTOs;
 using api.Helpers;
 using api.Interfaces;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query;
@@ -48,7 +49,11 @@ namespace api.Controllers
         [Route("loadReportCode/{id}")]
         public async Task<IActionResult> GetRCAsync(int id)
         {// get the correct report code for this procedure type, used in preview reports
-            return Ok(_sp.getReportCode(id));
+            var help = "";
+            await Task.Run(()=>{
+                help = _sp.getReportCode(id);
+            });
+            return Ok(help);
         }
 
         [HttpGet]
@@ -220,20 +225,19 @@ namespace api.Controllers
         }
         #endregion
         #region <!-- valve stuff -->
-
-        
+       
 
         [HttpGet]
         [AllowAnonymous]
         [Route("ppm")]
         public async Task<IActionResult> getPPM([FromQuery] ValveParams vp)
         {
-            if (vp.productCode != null || vp.size != null)
+            if (vp.valveTypeId != 0 || vp.size != 0)
             {
 
                 var result = "";
-                var comaddress = _com.Value.valveURL;
-                var st = "ppm?" + "productCode=" + vp.productCode + '&' + "size=" + vp.size + '&' + "weight=" + vp.weight + '&' + "height=" + vp.height;
+                var comaddress = _com.Value.productURL;
+                var st = "ValveSize/getPPM?" + "ValveTypeId=" + vp.valveTypeId + '&' + "size=" + vp.size + '&' + "weight=" + vp.weight + '&' + "height=" + vp.height;
                 comaddress = comaddress + st;
 
                 using (var httpClient = new HttpClient())
@@ -246,7 +250,7 @@ namespace api.Controllers
                 return Ok(result);
             }
 
-            return BadRequest("productCode or valve size are null");
+            return BadRequest("valveTypeId or valve size are null");
 
 
         }

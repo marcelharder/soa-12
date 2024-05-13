@@ -202,8 +202,7 @@ namespace api.Helpers
         #region <!-- valve -->
         public ValveForReturnDTO mapToValveForReturn(Class_Valve cp) { return _map.Map<Class_Valve, ValveForReturnDTO>(cp); }
 
-        public Valve_Code mapClassValveToDTO(Class_Valve_Code cv) { return _map.Map<Class_Valve_Code, Valve_Code>(cv); }
-
+     
         public Class_Valve mapToClassValve(ValveForReturnDTO valveForReturn, Class_Valve cv)
         {
 

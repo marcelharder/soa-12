@@ -235,23 +235,6 @@ namespace api.Controllers
 
         #region <!--Country -->
 
-        [HttpPost("addCountryNow")]
-        public async Task<IActionResult> AddCountryNow(CountryDto model)
-        {
-            var help = "Not implemented anymore ...";
-            /* var comaddress = _com.Value.hospitalURL;
-            var st = "Hospital/getHospitalById/";
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    help = await response.Content.ReadAsStringAsync();
-                }
-            } */
-            return Ok(help);
-        }
-
         [HttpGet("hospitalByUser/{id}")]
         public async Task<IActionResult> getCurrentHospitalForUser(int id) // the id here id the hospitalNo
         {
