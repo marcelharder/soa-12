@@ -79,7 +79,7 @@ export class ValvesinoviComponent implements OnInit  {
 getThisOne(v: OVIvalve){
   this._addValveIndicator = true;
 
-  this.givePPM_Advice(v.product_code, v.size.toString());
+  this.givePPM_Advice(v.valveId, v.size.toString());
 
   
   this.valveImageUrl = v.image;
@@ -125,7 +125,7 @@ getImplantValue(implant: string): number {
 showAddedValve(){return this._addValveIndicator;}
 
 
-givePPM_Advice(productCode: string, size: string) {
+givePPM_Advice(valveTypeId: number, size: string) {
   if (this.implant === 'Aortic') { // give only advice about aortic valves
     let procedureId = 0;
     let patientId = 0;
@@ -140,7 +140,7 @@ givePPM_Advice(productCode: string, size: string) {
       this.patient.getPatientFromId(patient_id).subscribe((next) => {
         let weight = next.weight;
         let height = next.height;
-        this.vs.getPPM(productCode, size, weight.toString(), height.toString()).subscribe((next) => {
+        this.vs.getPPM(valveTypeId, size, weight.toString(), height.toString()).subscribe((next) => {
           
           if (next.body === 'no') { 
             this.noPPM = true; this.moderatePPM = false; this.severePPM = false;

@@ -167,7 +167,8 @@ export class AddValveComponent implements OnInit {
         this.patient.getPatientFromId(patientId).subscribe((next) => {
           height = next.height;
           weight = next.weight;
-          this.vs.getPPM(this.pd.MODEL, this.valveSize, weight.toString(), height.toString()).subscribe((next) => {
+          debugger;
+          this.vs.getPPM(this.svtid, this.valveSize, weight.toString(), height.toString()).subscribe((next) => {
             this.adviceText = "You can expect " + next.body + " PPM";
             if (next.body === 'no') { this.noPPM = true; this.moderatePPM = false; this.severePPM = false; }
             if (next.body === 'moderate') { this.noPPM = false; this.moderatePPM = true; this.severePPM = false; }
@@ -177,7 +178,7 @@ export class AddValveComponent implements OnInit {
       })
 
 
-      this.alertify.show("Finding EOAi of valve " + this.pd.MODEL + "  with size " + this.valveSize);
+      this.alertify.show("Finding EOAi of valve " + this.svtid + "  with size " + this.valveSize);
       this.ppmAdvice = 1;
 
     }

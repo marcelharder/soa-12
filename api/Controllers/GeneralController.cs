@@ -25,7 +25,7 @@ namespace api.Controllers
         SpecialMaps _sp;
         private readonly IOptions<ComSettings> _com;
 
-      
+
         private ICABGRepository _cabg;
         public GeneralController(IUserRepository user,
             SpecialMaps sp,
@@ -50,7 +50,8 @@ namespace api.Controllers
         public async Task<IActionResult> GetRCAsync(int id)
         {// get the correct report code for this procedure type, used in preview reports
             var help = "";
-            await Task.Run(()=>{
+            await Task.Run(() =>
+            {
                 help = _sp.getReportCode(id);
             });
             return Ok(help);
@@ -169,7 +170,7 @@ namespace api.Controllers
                     return "n/a";
             }
         }
-        
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -225,7 +226,6 @@ namespace api.Controllers
         }
         #endregion
         #region <!-- valve stuff -->
-       
 
         [HttpGet]
         [AllowAnonymous]
@@ -249,70 +249,10 @@ namespace api.Controllers
                 }
                 return Ok(result);
             }
-
             return BadRequest("valveTypeId or valve size are null");
-
-
         }
 
-      /*   [HttpGet]
-        [AllowAnonymous]
-        [Route("productByValveTypeId/{id}")]
-        public async Task<IActionResult> getVVID(int id)
-        {
-            var result = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "productByValveTypeId/" + id;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(result);
-        }
 
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("getValveCodeSizes/{model}")]
-        public async Task<IActionResult> getCSI(string model)
-        {
-            var result = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "getValveCodeSizes/" + model;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(result);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("valveDescriptionFromModel/{model}")]
-        public async Task<IActionResult> getCS(string model)
-        {
-            var result = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "getValveDescriptionFromModel/" + model;
-            comaddress = comaddress + st;
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(comaddress))
-                {
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return Ok(result);
-        }
-
- */
         [HttpGet]
         [AllowAnonymous]
         [Route("markValve/{serial}/{status}/{procedureId}")]
@@ -331,10 +271,6 @@ namespace api.Controllers
             }
             return Ok(result);
         }
-
-
-
-
         #endregion
 
         private class ModelOpReport
@@ -349,6 +285,6 @@ namespace api.Controllers
             public string Hospital { get; set; }
         }
 
-       
+
     }
 }
