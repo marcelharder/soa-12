@@ -78,6 +78,8 @@ export class GamecardComponent implements OnInit {
     // add a new record
     this.vs.addValvedConduitInProcedure(this.currentProcedureId).subscribe((next) => {
       this.pd = next;
+      // get the conduitsizes from the valveType
+      this.vs.getValveCodeSizes(x).subscribe((next) => { this.optionConduitSizes = next; });
     })
 
     //So the conduitType is chosen, now add a hospitalValve from the conduit type
@@ -96,6 +98,8 @@ export class GamecardComponent implements OnInit {
   }
 
   saveConduitDetails() {
+    if(this.pd.SIZE === null){this.pd.SIZE = this.optionConduitSizes[0].Size.toString()}
+    
     this.pd.MODEL = this.hv.uk_code;
     this.pd.valveDescription = this.conduitDescription;
     this.vs.saveValvedConduit(this.pd).subscribe((next) => {
@@ -106,6 +110,7 @@ export class GamecardComponent implements OnInit {
         this.alertify.show("Conduit uploaded ...");
       })
     this.cardClicked();
+   
   }
 
   CancelConduitDetails() {
