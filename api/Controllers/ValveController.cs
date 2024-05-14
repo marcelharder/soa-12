@@ -52,8 +52,8 @@ namespace api.Controllers
             var result = _special.mapToValveForReturn(p);
 
             var help = "";
-            var comaddress = _com.Value.valveURL;
-            var st = "getValveDescriptionFromModel/" + result.MODEL;
+            var comaddress = _com.Value.productURL;
+            var st = "ValveCode/getValveDescriptionFromModel/" + result.MODEL;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
