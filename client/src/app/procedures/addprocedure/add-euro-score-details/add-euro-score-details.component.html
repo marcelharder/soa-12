@@ -36,7 +36,7 @@
               <div class="col-sm-6">
                 <h4><span class="badge badge-secondary">Select referring cardiologist</span></h4>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6"  *ngIf="refphysicians.length !== 0">
                 <select [(ngModel)]="selectedRef" name="item01" class="form-control">
                   <option *ngFor="let p of refphysicians" [value]=p.value>{{ p.description }}</option>
                 </select>

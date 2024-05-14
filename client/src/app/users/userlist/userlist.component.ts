@@ -50,11 +50,10 @@ export class UserlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.currentUser$.pipe(take(1)).subscribe((u) => { this.currentUserId = u.UserId; });
-    this.drop.getAllCountries().subscribe((next)=>{
-      this.countries = next;
-    });
+    this.drop.getAllCountries().subscribe((next)=>{ this.countries = next; });
     this.loadDrops();
-    this.getUsers();
+    this.selectUserPerHospital("01"); //  get the users from Nederland Catharina ZH because that's the first hospital to show up
+    //this.getUsers();
   }
   loadDrops() {}
 
@@ -92,8 +91,12 @@ export class UserlistComponent implements OnInit {
   showHospitalDrop() { if (this.value === 'User management') { return true } }
   getPosition(ltk: boolean) { if (ltk) { return "Surgeon" } else { return "Resident" } }
 
-  selectUserPerHospital() {
-   this.users = this.allUsers.filter(a => a.hospital_id == this.currentHospital);
+  selectUserPerHospital(id: string) {
+
+   //var currentHospitalNo = this.currentHospital.toString();
+   this.userService.getUsersByHospital(id, 1, 10).subscribe((next)=>{this.users = next.result})
+
+  // this.users = this.allUsers.filter(a => a.hospital_id == this.currentHospital);
    
    var help = this.hospitals.filter(a => a.value == this.currentHospital);
    this.currentHospitalName = help[0].description;

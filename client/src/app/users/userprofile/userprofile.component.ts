@@ -77,7 +77,7 @@ export class UserProfileComponent implements OnInit {
     initializeChangePwdForm(){
         this.changePasswordForm = this.fb.group({
             currentPassword: ['', [Validators.required]],
-            password: ['', [Validators.required,Validators.minLength(4),Validators.maxLength(8),this.requiresOneDigit(),this.hasUpperCase()]],
+            password: ['', [Validators.required,Validators.minLength(4),Validators.maxLength(20),this.requiresOneDigit(),this.hasUpperCase()]],
             confirmPassword: ['', [Validators.required, this.matchValues('password')]],
           });
           this.changePasswordForm.controls.password.valueChanges.subscribe(() => {

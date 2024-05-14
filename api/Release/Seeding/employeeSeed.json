@@ -4,7 +4,7 @@
     "password": "password",
     "selected_hospital_id": "1",
     "name": "Graham",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/71.jpg"
@@ -14,7 +14,7 @@
     "password": "password",
     "selected_hospital_id": "1",
     "name": "Guthrie",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/24.jpg"
@@ -24,7 +24,7 @@
     "password": "password",
     "selected_hospital_id":"1",
     "name": "Battle",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/20.jpg"
@@ -34,7 +34,7 @@
     "password": "password",
     "selected_hospital_id": "1",
     "name": "Sawyer",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/18.jpg"
@@ -44,7 +44,7 @@
     "password": "password",
     "selected_hospital_id": "1",
     "name": "Padilla",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/17.jpg"
@@ -144,7 +144,7 @@
     "password": "password",
     "selected_hospital_id": "1",
     "name": "Jeroen",
-    "profession": "anaesthesieTech",
+    "profession": "anaesthesiaTech",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/25.jpg"
@@ -154,7 +154,7 @@
     "password": "password",
     "selected_hospital_id": "1",
     "name": "Imelda Collo",
-    "profession": "anaesthesieTech",
+    "profession": "anaesthesiaTech",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/women/10.jpg"
@@ -234,7 +234,7 @@
     "password": "password",
     "selected_hospital_id": "48",
     "name": "Joop",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/37.jpg"
@@ -244,7 +244,7 @@
     "password": "password",
     "selected_hospital_id": "48",
     "name": "Janneke",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/women/37.jpg"
@@ -254,7 +254,7 @@
     "password": "password",
     "selected_hospital_id": "48",
     "name": "Hugo",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/17.jpg"
@@ -264,7 +264,7 @@
     "password": "password",
     "selected_hospital_id": "48",
     "name": "Karel",
-    "profession": "anaesthesie",
+    "profession": "anaesthesia",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/57.jpg"
@@ -344,7 +344,7 @@
     "password": "password",
     "selected_hospital_id": "5",
     "name": "Francine",
-    "profession": "anaesthesieTech",
+    "profession": "anaesthesiaTech",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/women/20.jpg"
@@ -354,7 +354,7 @@
     "password": "password",
     "selected_hospital_id": "5",
     "name": "Arnold",
-    "profession": "anaesthesieTech",
+    "profession": "anaesthesiaTech",
     "liscense_to_kill": "No",
     "active": true,
     "image": "https://randomuser.me/api/portraits/men/20.jpg"

@@ -80,7 +80,7 @@ export class DetailsmainComponent implements OnInit {
             this.Assistants = response;
           });
         this.drops
-          .getEmployees(hospitalId, 'anaesthesie', 'true', 'No')
+          .getEmployees(hospitalId, 'anaesthesia', 'true', 'No')
           .subscribe((response) => {
             this.Anaesthesists = response;
           });
@@ -110,7 +110,7 @@ export class DetailsmainComponent implements OnInit {
             this.Assistants = response;
           });
         this.drops
-          .getEmployees(hospitalId, 'anaesthesie', 'false', 'No')
+          .getEmployees(hospitalId, 'anaesthesia', 'false', 'No')
           .subscribe((response) => {
             this.Anaesthesists = response;
           });

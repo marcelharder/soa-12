@@ -24,7 +24,7 @@
                                 name="selectHospital" 
                                 class="form-control"
                                 id="sh" 
-                                (change)="selectUserPerHospital()">
+                                (change)="selectUserPerHospital(currentHospital)">
                                 <option *ngFor="let item of hospitals" [value]=item.value>{{ item.description }}</option>
                                 </select>
                             

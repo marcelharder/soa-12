@@ -47,7 +47,7 @@ export class AddUserComponent implements OnInit {
       ltk: [false, [Validators.required]],
       password: ['', [Validators.required,
       Validators.minLength(4),
-      Validators.maxLength(8),
+      Validators.maxLength(20),
       this.requiresOneDigit(),
       this.hasUpperCase()]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]],

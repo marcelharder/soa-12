@@ -234,7 +234,6 @@ namespace api.Controllers
         {
             if (vp.valveTypeId != 0 || vp.size != 0)
             {
-
                 var result = "";
                 var comaddress = _com.Value.productURL;
                 var st = "ValveSize/getPPM?" + "ValveTypeId=" + vp.valveTypeId + '&' + "size=" + vp.size + '&' + "weight=" + vp.weight + '&' + "height=" + vp.height;

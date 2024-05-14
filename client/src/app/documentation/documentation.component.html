@@ -16,8 +16,8 @@
           <accordion-group heading="Features">
             Over the years we implemented a host of new features and improvements ... <a (click)="linkToFeatures()" style="color:green">read more</a>
           </accordion-group>
-          <accordion-group heading="Deployment">
-            The application is designed as an Angular 12 Single Page Application with  ... <a (click)="linkToDeployment()" style="color:green">read more</a>
+          <accordion-group heading="CME">
+            The latest feature that we implemented is a CME module ... <a (click)="linkToCME()" style="color:green">read more</a>
           </accordion-group>
         </accordion>
       </div>
@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="card-footer">
-    <p>&copy; 2022 - CardiacSoftwareDevelopers(<a (click)="linkToCSD()" style="color:blue">CSD</a>)</p>
+    <p>&copy; {{currentdate | date: "y"}} - CardiacSoftwareDevelopers(<a (click)="linkToCSD()" style="color:blue">CSD</a>)</p>
 </div>
 </div>
 
