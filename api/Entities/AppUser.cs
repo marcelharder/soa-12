@@ -27,8 +27,7 @@ namespace api.Entities
         public string Country { get; set; }
         public bool active { get; set; }
         public bool ltk { get; set; }
-        public ICollection<Class_Epa> Epa {get; set;}
-        public ICollection<Class_Course> Courses {get; set;}
+      
         public ICollection<AppUserRole> UserRoles { get; set; }
     }
 
