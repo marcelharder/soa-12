@@ -51,18 +51,19 @@ namespace api.Controllers
 
             var result = _special.mapToValveForReturn(p);
 
-            var help = "";
             var comaddress = _com.Value.productURL;
-            var st = "ValveCode/getValveDescriptionFromModel/" + result.MODEL;
+            var st = "ValveCode/detailsByProductCode/" + result.MODEL;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
-                    help = await response.Content.ReadAsStringAsync();
+                   // help = await response.Content.ReadAsStringAsync();
+                    var test = await response.Content.ReadFromJsonAsync<Valve_Code>();
+                    result.valveDescription = test.Description;
                 }
             }
-            result.valveDescription = help;
+            
             return Ok(result);
         }
         //create
