@@ -99,6 +99,8 @@ namespace api.Controllers
            // var reportcode = Convert.ToInt32(await getReportCode(procedure.fdType));
             var reportcode = Convert.ToInt32(_sp.getReportCode(procedure.fdType));
 
+            if(reportcode == 6){result = 6;}
+
 
             if (reportcode == 1 || reportcode == 2) // these are the cabg procedures
             {

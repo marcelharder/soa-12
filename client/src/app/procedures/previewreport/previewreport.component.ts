@@ -184,6 +184,8 @@ export class PreviewreportComponent implements OnInit {
             case 2: this.alertify.error("pls fill the cabg details before printing the final report");break;
             case 3: window.location.href = `${this.baseUrl}FinalReport/${this.prev.procedure_id}`;break;
             case 4: this.alertify.error("pls fill the valve details before printing the final report");break;
+            case 6: window.location.href = `${this.baseUrl}FinalReport/${this.prev.procedure_id}`;break;
+         
           }
         })
       }
