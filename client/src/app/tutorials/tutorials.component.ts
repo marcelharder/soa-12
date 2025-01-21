@@ -11,8 +11,7 @@ export class TutorialsComponent implements OnInit {
   oneAtATime = true;
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
   linkToCSD(){ window.location.href = "http://surgical-outcomes.nl";}
 
