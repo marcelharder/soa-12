@@ -1,0 +1,18 @@
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace api.Controllers
+{
+    
+
+    public class TutorialController : BaseApiController
+    {
+
+        [HttpGet("getCME")]
+        public async Task<IActionResult> GetCME()
+        {
+            return Ok("https://docs.google.com/presentation/d/1fwgoY7pXewG_2vIAu3Rk4pxddS6pICeu1yz2HwbxHfg/edit?usp=sharing");
+        }
+    }
+}
