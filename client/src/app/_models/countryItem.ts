@@ -1,5 +1,5 @@
 export interface countryItem {
-    Id: string;
+    Id: number;
     Description: string;
     IsoCode: string;
     TelCode: string;

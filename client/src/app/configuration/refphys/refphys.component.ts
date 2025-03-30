@@ -43,7 +43,7 @@ export class RefphysComponent implements OnInit {
     postcode: '',
     city: '',
     state: '',
-    country: '31', // the default setting for now
+    country: 'NL', // the default setting for now
     tel: '',
     fax: '',
     email: '',
