@@ -31,8 +31,12 @@ export class EdithospitalComponent implements OnInit {
 
   manageUsers(){
     this.account.setCurrentHospitalId(+this.pd.HospitalNo);//post the currenthospitalId to the accountservice
-     // go to the employee edit page
     this.router.navigate(['/editEmployee']);
+  }
+  manageRefPhys(){
+    this.account.setCurrentHospitalId(+this.pd.HospitalNo);//post the currenthospitalId to the accountservice
+    this.router.navigate(['/editRefPhys']);
+
   }
 
   displayIR(){if(this.showInstitutionalReport){return true;}}

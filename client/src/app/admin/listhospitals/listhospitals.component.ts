@@ -23,7 +23,7 @@ export class ListhospitalsComponent implements OnInit {
   editFlag = 0;
   addFlag = 0;
   listFlag = 1;
-  model: countryItem = {  Id: "", Description: "Choose",TelCode:"", IsoCode:"",Cities:"" };
+  model: countryItem = {  Id: 0, Description: "Choose",TelCode:"", IsoCode:"",Cities:"" };
 
   constructor(
     private modalService: BsModalService,
@@ -59,7 +59,7 @@ export class ListhospitalsComponent implements OnInit {
       this.drops.getAllCountries().subscribe((response) => {
         debugger;
         this.optionCountries = response;
-        this.optionCountries.unshift({ Id: "", Description: "Choose",TelCode:"",IsoCode:"", Cities:"" });
+        this.optionCountries.unshift({ Id: 0, Description: "Choose",TelCode:"",IsoCode:"", Cities:"" });
         localStorage.setItem('optionCountries', JSON.stringify(response));
       });
     } else {

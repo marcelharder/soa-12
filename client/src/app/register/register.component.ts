@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
     if (d == null || d.length === 0) {
       this.drops.getAllCountries().subscribe((response) => {
         this.optionCountries = response;
-        this.optionCountries.unshift({ Id: "", Description: "Choose",TelCode:"", IsoCode:"",Cities:"" });
+        this.optionCountries.unshift({ Id: 0, Description: "Choose",TelCode:"", IsoCode:"",Cities:"" });
         localStorage.setItem('optionCountries', JSON.stringify(response));
       });
     } else {

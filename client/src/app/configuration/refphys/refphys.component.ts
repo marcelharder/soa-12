@@ -68,12 +68,29 @@ export class RefphysComponent implements OnInit {
       .getUser(this.currentUserId)
       .subscribe((next) => {
         this.currentUser = next;
-        this.refService
+        if(this.currentUser.hospital_id !== 0){
+          this.refService
           .getRefPhys(this.currentUser.hospital_id)
           .subscribe((nex) => {
             this.refphysicians = nex;
             this.selectedRef = this.refphysicians[0].value;
           });
+        }
+        else {
+          var hospitalId;
+          this.auth.currentHospitalId$.subscribe((next)=>{
+            hospitalId = next;
+            this.refService
+            .getRefPhys(hospitalId)
+            .subscribe((nex) => {
+              this.refphysicians = nex;
+              this.selectedRef = this.refphysicians[0].value;
+            });
+
+          })
+          
+        }
+        
       });
   }
   loadDrops() {
