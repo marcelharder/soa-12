@@ -217,7 +217,6 @@ namespace api.Controllers
         public async Task<IActionResult> AddPhotoForUser(int id, [FromForm] PhotoForCreationDto photoDto)
         {
             var user = await _rep.GetUser(id);
-
             var file = photoDto.File;
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
@@ -232,14 +231,11 @@ namespace api.Controllers
                     uploadResult = _cloudinary.Upload(uploadParams);
                 }
                 user.PhotoUrl = uploadResult?.SecureUrl?.AbsoluteUri;
-
-
                 if (await _rep.SaveAll())
                 {
                     UserForReturnDto ufr = _mapper.mapToUserForReturn(user);
                     return CreatedAtRoute("GetUser", new { id = user.Id }, ufr);
                 }
-
             }
             return BadRequest("Could not add the photo ...");
         }

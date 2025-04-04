@@ -195,7 +195,17 @@
         <div class="col-sm-6">
           <div class="card">
             <div class="card-header">
-              <h3><span class="badge badge-default">Procedure</span></h3>
+              <div class="row">
+                <div class="col-sm-6"><h3><span class="badge badge-default">Procedure</span></h3></div>
+                <div class="col-sm-6" *ngIf="!photo_present()">
+                  <button style="float:right" class="btn btn-secondary">Add Photos</button></div>
+                
+                  <div class="col-sm-6"  *ngIf="photo_present()">
+                  <button style="float:right" 
+                  class="btn btn-secondary"
+                  (click)="ShowProcedurePhotos()">Show Photos</button></div>
+              </div>
+              
             </div>
             <div class="card-body">
               <div class="row">
@@ -263,6 +273,7 @@
                   <input type="text" name="comments_3" [(ngModel)]="proc.comment3" class="form-control" />
                 </div>
               </div>
+              
             </div>
           </div>
         </div>

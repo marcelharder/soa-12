@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { dropItem } from 'src/app/_models/dropItem';
@@ -46,7 +46,8 @@ export class DetailsmainComponent implements OnInit {
     private route: ActivatedRoute,
     public auth: AccountService,
     private alertify: ToastrService,
-    private drops: DropdownService
+    private drops: DropdownService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -269,8 +270,6 @@ export class DetailsmainComponent implements OnInit {
 
   saveProcDetails() {
     // check that the assistant is entered
-
-
     this.procedureService
       .saveProcedureDetails(this.currentUserId, this.proc)
       .subscribe((next) => {
@@ -299,5 +298,28 @@ export class DetailsmainComponent implements OnInit {
     this.userService.getLtk(this.proc.selectedSurgeon).subscribe((next)=>{
       if(next){this.ltk = 0;} else {this.ltk = 1;}
     })
+  }
+
+  photo_present():Boolean{
+    var help = false;
+    // find out if there are photos to show for this procedureId
+      this.procedureService.getProcedurePhotos(this.proc.procedureId).subscribe(
+      (next)=>{
+        if(next.length > 0){help = true}
+         else {this.alertify.info("Add a photo now?")}},
+      (error)=>{this.alertify.error(error);}
+    );  
+    return help;
+  }
+  ShowProcedurePhotos(){
+    // go to the picture show area in a different window
+ /*   var url = "http://fotos.fotoboek-harder.nl";
+   (window as any).open(url,"_blank");
+ */
+  
+
+
+
+
   }
 }

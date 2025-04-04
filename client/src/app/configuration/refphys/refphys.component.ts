@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 })
 export class RefphysComponent implements OnInit {
   currentUserId = 0;
+  hospitalId = 0;
   refphysicians: Array<dropItem> = [];
   states: Array<dropItem> = [];
   countries: Array<countryItem> = [];
@@ -77,11 +78,10 @@ export class RefphysComponent implements OnInit {
           });
         }
         else {
-          var hospitalId;
           this.auth.currentHospitalId$.subscribe((next)=>{
-            hospitalId = next;
+            this.hospitalId = next;
             this.refService
-            .getRefPhys(hospitalId)
+            .getRefPhys(this.hospitalId)
             .subscribe((nex) => {
               this.refphysicians = nex;
               this.selectedRef = this.refphysicians[0].value;
@@ -180,11 +180,23 @@ export class RefphysComponent implements OnInit {
     this.edit = '0';
   }
   SaveRefPhys() {
+    if(this.hospitalId !== 0){
+      // this happens when the admin adds a refPhys
+      this.pd.hospital_id = this.hospitalId;
+      this.refService.updateRefPhys(this.pd).subscribe((next) => {
+        this.alertify.success('saved');
+        this.edit = '0';
+      }, error => this.alertify.error(error));
+    }
+    else {
     this.refService.updateRefPhys(this.pd).subscribe((next) => {
       this.alertify.success('saved');
       this.edit = '0';
     }, error => this.alertify.error(error));
   }
+}
+
+
   showState() {
     if (this.pd.country === '1') {
       return true;

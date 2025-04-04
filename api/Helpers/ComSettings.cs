@@ -12,6 +12,7 @@ namespace api.Helpers
         public string reportURL { get; set; }
         public string hospitalURL { get; set; }
         public string productURL { get; set; }
+        public string pfsoaURL { get; set; }
         public string registeredPhone {get; set;}
 
     }
