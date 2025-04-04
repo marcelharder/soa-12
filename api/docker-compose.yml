@@ -78,6 +78,16 @@ services:
       - 8045:80
     depends_on:
       - db
+  procedurePictures:
+    image: pfsoa_app:v1
+    networks:
+      - internal-container-network
+    volumes:
+      - sqldata:/root/.aspnet/DataProtection-Keys
+    ports:
+      - 8115:80
+    depends_on:
+      - db
 
   tracPersonal:
     image: sql_app:v109
