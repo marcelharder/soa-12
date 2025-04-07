@@ -1,7 +1,46 @@
-<div class="mt-5">
-<p>
-  procedureId =  {{param1}}
-  soort = {{param2}}
+<div class="container mt-5">
+<div class="row" *ngIf="showAdd()">
+  <div class="col-sm-6">
+    <div class="card">
+    <div class="card-header">Adding a image to this procedure</div>
+    <div class="card-body">
+      
+      <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
+      (getMemberPhotoChange)="updatePhoto($event)"></app-uploadphoto></div>
+    <div class="card-footer">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-danger"(click)="cancel()">cancel</button>
+        <button type="button" class="btn btn-success"(click)="addProcedure()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-sm-6">
+    <img  src="../../assets/images/else-05.jpeg" alt="test" width="375" height="500" />
+  </div>
+</div>
+<div class="row" *ngIf="!showAdd()">
+  <div class="col-sm-6">
+     <div class="card">
+    <div class="card-header"></div>
+    <div class="card-body">List</div>
+    <div class="card-footer">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-danger"(click)="cancel()">cancel</button>
+        <button type="button" class="btn btn-success"(click)="addProcedure()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-sm-6">
+    <img  src="../../assets/images/else-12.jpeg" alt="test" width="375" height="500" />
+  </div>
+</div>
+
+
+
+
   
-</p>
+ 
+
 </div>

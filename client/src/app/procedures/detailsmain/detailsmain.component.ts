@@ -21,7 +21,7 @@ export class DetailsmainComponent implements OnInit {
   ltk = 0;
   currentUserId = 0;
   currentUserName = '';
-  photosConnected = false;
+  photosConnected = '0';
 
   proc: ProcedureDetails;
 
@@ -49,39 +49,31 @@ export class DetailsmainComponent implements OnInit {
     private alertify: ToastrService,
     private drops: DropdownService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.auth.currentUser$.pipe(take(1)).subscribe((u) => {this.currentUserId = u.UserId;})
-    this.auth.currentUser$.pipe(take(1)).subscribe((u) => {this.currentUserName = u.UserName;})
+    this.auth.currentUser$.pipe(take(1)).subscribe((u) => { this.currentUserId = u.UserId; })
+    this.auth.currentUser$.pipe(take(1)).subscribe((u) => { this.currentUserName = u.UserName; })
     this.route.data.subscribe((data) => {
-       this.proc = data.procedureDetails;
-       this.loadEmployeeDrops(this.proc.hospital.toString());
-      },
+      this.proc = data.procedureDetails;
+      this.loadEmployeeDrops(this.proc.hospital.toString());
+    },
       (error) => {
         this.alertify.error(error);
       }
     );
     this.loadDrops();
-    this.userService.getLtk(this.proc.selectedSurgeon).subscribe((next)=>{if(next){this.ltk = 0;} else {this.ltk = 1;}})
-    if(this.FindPhotos(this.proc.procedureId)){this.photosConnected = true};
+    this.userService.getLtk(this.proc.selectedSurgeon).subscribe((next) => { if (next) { this.ltk = 0; } else { this.ltk = 1; } })
+    this.FindPhotos(this.proc.procedureId);
   }
 
-  FindPhotos(procedure_id: number):Boolean{
-    var help = "";
-    debugger;
-    var result = false;
+  FindPhotos(procedure_id: number): void {
     // find out if there are photos to show for this procedureId
-      this.procedureService.getPhotosAvailable(procedure_id)
-      .pipe(take(1))
-      .subscribe(
-      (next)=>{
-        help = next;
-        if(help == "true"){result =  true;} else {result = false;}
-      },
-      (error)=>{this.alertify.error(error);}
-    ); 
-    return result; 
+    this.procedureService.getPhotosAvailable(procedure_id).subscribe(
+      (next) => { if (next) { this.photosConnected = '1'; } else { this.photosConnected = '0'; } },
+      (error) => { this.alertify.error(error); }
+    );
+
   }
   loadEmployeeDrops(hospitalId: string) {
     // find out if this is the first time this procedure is added, if so then so only the active employees
@@ -114,7 +106,7 @@ export class DetailsmainComponent implements OnInit {
             this.Perfusionists = response;
           });
 
-      //  const v = this.Surgeons.find((x) => x.description === this.currentUserName);
+        //  const v = this.Surgeons.find((x) => x.description === this.currentUserName);
 
       } // this is a historic record so all the employees in the database should be available
       else {
@@ -301,19 +293,20 @@ export class DetailsmainComponent implements OnInit {
     this.alertify.show('saving procedure details');
     return true;
   }
-  surgeonHasNoLTK(){
-    if(this.ltk === 1){return true;}
-    
+  surgeonHasNoLTK() {
+    if (this.ltk === 1) { return true; }
+
   }
-  photo_present(){return this.photosConnected;}
-  findLtk(){
+  photo_present() { if (this.photosConnected == '1') return true; }
+
+  findLtk() {
     // find out if this surgeon has a ltk, if not show responsible surgeon
-    this.userService.getLtk(this.proc.selectedSurgeon).subscribe((next)=>{
-      if(next){this.ltk = 0;} else {this.ltk = 1;}
+    this.userService.getLtk(this.proc.selectedSurgeon).subscribe((next) => {
+      if (next) { this.ltk = 0; } else { this.ltk = 1; }
     })
   }
 
-  
-  ShowProcedurePhotos(){this.router.navigateByUrl('/procedurePictures/'+ this.proc.procedureId + '/' + 1); }
-  ShowAddPhotoPage(){this.router.navigateByUrl('/procedurePictures/'+ this.proc.procedureId + '/' + 2);}
+
+  ShowProcedurePhotos() { this.router.navigateByUrl('/procedurePictures/' + this.proc.procedureId + '/' + 1); }
+  ShowAddPhotoPage() { this.router.navigateByUrl('/procedurePictures/' + this.proc.procedureId + '/' + 2); }
 }

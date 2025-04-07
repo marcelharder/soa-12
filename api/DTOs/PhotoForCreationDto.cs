@@ -5,6 +5,7 @@ namespace api.DTOs
 {
     public class PhotoForCreationDto
     {
+       public int procedureId {get; set;}
        public string Url { get; set; } 
        public IFormFile File { get; set; }
        public string Description { get; set; }

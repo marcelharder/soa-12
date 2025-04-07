@@ -175,6 +175,7 @@ import { PublicationsComponent } from './training/publications/publications.comp
 import { PresentationsComponent } from './training/presentations/presentations.component';
 import { PresentationService } from './_services/presentation.service';
 import { PublicationService } from './_services/publication.service';
+import { ProcedurePicturesComponent } from './procedures/procedurePictures/procedurePictures.component';
 
 @NgModule({
   declarations: [					
@@ -274,7 +275,8 @@ import { PublicationService } from './_services/publication.service';
     AddValveTypeComponent,
     EditValveTypeComponent,
     PublicationsComponent,
-    PresentationsComponent
+    PresentationsComponent,
+    ProcedurePicturesComponent
    ],
   imports: [
     FileUploadModule,

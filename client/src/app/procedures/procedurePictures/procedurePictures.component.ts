@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs/operators';
+import { ProcedurePhoto } from 'src/app/_models/ProcedurePhoto';
 import { ProcedureService } from 'src/app/_services/procedure.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-procedurePictures',
@@ -9,23 +12,71 @@ import { ProcedureService } from 'src/app/_services/procedure.service';
   styleUrls: ['./procedurePictures.component.css']
 })
 export class ProcedurePicturesComponent implements OnInit {
-  param1 = 0;
-  param2 = 0;
+  id = 0;
+  soort = '0';
+  targetUrl = '';
+  baseUrl = environment.apiUrl;
+  Photo: ProcedurePhoto = {
+    procedureId: 0,
+    Description: '0',
+    Url: '',
+    PublicId: '',
+    DateAdded: undefined
+  }
+  pictures: Array<ProcedurePhoto> = [];
+
 
   constructor(
     private proc: ProcedureService,
     private route: ActivatedRoute,
     private alertify: ToastrService,
-    
+    private router: Router
+
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.param1 = +params['id'];
-      this.param2 = +params['soort'];
+    this.route.params.pipe(take(1)).subscribe(params => {
+      this.id = +params['id'];
+      this.soort = params['soort'];
     })
-    
-   
+    this.loadPictures(this.id);
   }
 
+  showAdd() {
+    if (this.soort === '2') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  IsLoaded() {
+    if (this.id !== 0) {
+      this.targetUrl = this.baseUrl + 'procedure/addProcedurePhoto/' + this.id;
+      return true;
+    } else { return false; }
+  }
+
+  loadPictures(id: number) {
+    if (id != 1) { }
+    else {
+      this.alertify.info("Loading pictures");
+    }
+  }
+
+  updatePhoto(photoUrl: string) {
+    this.Photo.procedureId = this.id;
+    this.Photo.Url = photoUrl;
+    this.Photo.Description = "";
+    this.Photo.DateAdded = new Date;
+    this.Photo.PublicId = '0';
+    this.pictures.push(this.Photo);
+    this.soort = "1";
+  }
+
+  cancel() { this.router.navigateByUrl('/procedures'); }
+
 }
+
+
+

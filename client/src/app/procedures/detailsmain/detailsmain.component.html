@@ -203,12 +203,15 @@
                   <button style="float:right" 
                   class="btn btn-secondary"
                   (click)="ShowAddPhotoPage()"
-                  >Add Photos</button></div>
+                  >Add Photos</button>
+                </div>
                 
-                  <div class="col-sm-6"  *ngIf="photo_present()">
+                  <div class="col-sm-6" *ngIf="photo_present()">
                   <button style="float:right" 
                   class="btn btn-secondary"
-                  (click)="ShowProcedurePhotos()">Show Photos</button></div>
+                  (click)="ShowProcedurePhotos()"
+                  >Show Photos</button>
+                </div>
               </div>
               
             </div>

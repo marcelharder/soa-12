@@ -211,10 +211,11 @@ namespace api.Controllers
             return Ok(h);
         }
 
-        [HttpPost("addProcedurePhoto")]
-        public async Task<IActionResult> AddPhotoForUser([FromForm] PhotoForCreationDto photoDto)
+        [HttpPost("addProcedurePhoto/{'id'}")]
+        public async Task<IActionResult> AddPhotoForUser(int id,[FromForm] PhotoForCreationDto photoDto)
         {
             var file = photoDto.File;
+            photoDto.procedureId = id;
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
             {
@@ -228,22 +229,23 @@ namespace api.Controllers
                     uploadResult = _cloudinary.Upload(uploadParams);
                     photoDto.Url = uploadResult?.SecureUrl?.AbsoluteUri;
                     photoDto.PublicId = uploadResult.PublicId;
+                   
                 }
                 // update to pfSoa
                 var help = "";
                 var comaddress = _com.Value.pfsoaURL;
-                var st = "photos/addPhotoDto";
+                var st = "addPhoto";
                 comaddress = comaddress + st;
                 var json = JsonConvert.SerializeObject(photoDto, Formatting.None);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 using (var httpClient = new HttpClient())
                 {
-                    using (var response = await httpClient.PutAsync(comaddress, content))
+                    using (var response = await httpClient.PostAsync(comaddress, content))
                     {
                         help = await response.Content.ReadAsStringAsync();
                     }
                 }
-                return Ok();
+                return Ok("Photo uploaded ...");
             }
             return BadRequest("Could not add the photo ...");
         }
