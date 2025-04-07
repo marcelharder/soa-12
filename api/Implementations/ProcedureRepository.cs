@@ -117,7 +117,6 @@ namespace api.Implementations
         {
             return await _context.SaveChangesAsync() > 0;
         }
-
         private async Task<int> checkAndDeleteCollateralTables(int id)
         {
             while (await _context.AorticSurgeries.AnyAsync(u => u.procedure_id == id))
@@ -170,7 +169,6 @@ namespace api.Implementations
            
             return result;
         }
-       
         public async Task<ButtonPerProcedureSoortDTO> getButtonsAndActions(int soort)
         {
 

@@ -74,6 +74,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ValveRepairComponent } from './procedures/valveRepair/valveRepair.component';
 import { HardresetPwdComponent } from './users/hardresetPwd/hardresetPwd.component';
 import { TrainingComponent } from './training/training/training.component';
+import { ProcedurePicturesComponent } from './procedures/procedurePictures/procedurePictures.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -110,6 +111,8 @@ const routes: Routes = [
     { path: 'editRefPhys', component: RefphysComponent },
     { path: 'not-found', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },
+    { path: 'procedurePictures/:id/:soort', component:ProcedurePicturesComponent},
+  
   
   ]
   },
@@ -131,7 +134,9 @@ const routes: Routes = [
       {path: 'postop/:id', outlet: 'details', component: PostopComponent,resolve: { postop: PostResolver },canDeactivate: [changesPOSTOPDetails]},
       {path: 'mininv/:id', outlet: 'details', component: MininvComponent,resolve: { min: MinInvResolver },canDeactivate: [changesMinInv]},
       {path: 'discharge/:id', outlet: 'details',component: DischargeComponent,resolve: { dis: dischargeDetailsResolver }, canDeactivate: [changesDischarge] },
-      {path: 'previewReport/:id', outlet: 'details', component: PreviewreportComponent,resolve: { preView: PreviewReportResolver },canDeactivate: [changesPreViewReport]},
+      {path: 'previewReport/:id/soort', outlet: 'details', component: PreviewreportComponent,resolve: { preView: PreviewReportResolver },canDeactivate: [changesPreViewReport]},
+     
+    
     ]
   },
  

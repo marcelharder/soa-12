@@ -21,6 +21,7 @@ export class DetailsmainComponent implements OnInit {
   ltk = 0;
   currentUserId = 0;
   currentUserName = '';
+  photosConnected = false;
 
   proc: ProcedureDetails;
 
@@ -63,8 +64,25 @@ export class DetailsmainComponent implements OnInit {
     );
     this.loadDrops();
     this.userService.getLtk(this.proc.selectedSurgeon).subscribe((next)=>{if(next){this.ltk = 0;} else {this.ltk = 1;}})
+    if(this.FindPhotos(this.proc.procedureId)){this.photosConnected = true};
   }
 
+  FindPhotos(procedure_id: number):Boolean{
+    var help = "";
+    debugger;
+    var result = false;
+    // find out if there are photos to show for this procedureId
+      this.procedureService.getPhotosAvailable(procedure_id)
+      .pipe(take(1))
+      .subscribe(
+      (next)=>{
+        help = next;
+        if(help == "true"){result =  true;} else {result = false;}
+      },
+      (error)=>{this.alertify.error(error);}
+    ); 
+    return result; 
+  }
   loadEmployeeDrops(hospitalId: string) {
     // find out if this is the first time this procedure is added, if so then so only the active employees
     this.drops.isProcedureComplete(this.proc.patientId).subscribe((next) => {
@@ -267,7 +285,6 @@ export class DetailsmainComponent implements OnInit {
       this.proc.selectedStopHr = localDate.getHours();
     });
   }
-
   saveProcDetails() {
     // check that the assistant is entered
     this.procedureService
@@ -279,20 +296,16 @@ export class DetailsmainComponent implements OnInit {
         }
       });
   }
-
   canDeactivate() {
     this.saveProcDetails();
     this.alertify.show('saving procedure details');
     return true;
   }
-
   surgeonHasNoLTK(){
     if(this.ltk === 1){return true;}
     
   }
-
-
-
+  photo_present(){return this.photosConnected;}
   findLtk(){
     // find out if this surgeon has a ltk, if not show responsible surgeon
     this.userService.getLtk(this.proc.selectedSurgeon).subscribe((next)=>{
@@ -300,26 +313,7 @@ export class DetailsmainComponent implements OnInit {
     })
   }
 
-  photo_present():Boolean{
-    var help = false;
-    // find out if there are photos to show for this procedureId
-      this.procedureService.getProcedurePhotos(this.proc.procedureId).subscribe(
-      (next)=>{
-        if(next.length > 0){help = true}
-         else {this.alertify.info("Add a photo now?")}},
-      (error)=>{this.alertify.error(error);}
-    );  
-    return help;
-  }
-  ShowProcedurePhotos(){
-    // go to the picture show area in a different window
- /*   var url = "http://fotos.fotoboek-harder.nl";
-   (window as any).open(url,"_blank");
- */
   
-
-
-
-
-  }
+  ShowProcedurePhotos(){this.router.navigateByUrl('/procedurePictures/'+ this.proc.procedureId + '/' + 1); }
+  ShowAddPhotoPage(){this.router.navigateByUrl('/procedurePictures/'+ this.proc.procedureId + '/' + 2);}
 }

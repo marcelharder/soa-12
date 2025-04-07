@@ -197,7 +197,7 @@ namespace api.Controllers
         public async Task<IActionResult> AreThereProcedurePhotos(int id)
         {
             // ask the PFSOA
-            var help = "";
+            var h = "";
             var comaddress = _com.Value.pfsoaURL;
             var st = "photosAvailable/" + id;
             comaddress = comaddress + st;
@@ -205,11 +205,10 @@ namespace api.Controllers
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
-                    help = await response.Content.ReadAsStringAsync();
+                     h = await response.Content.ReadAsStringAsync();
                 }
             }
-            return Ok(help);
-
+            return Ok(h);
         }
 
         [HttpPost("addProcedurePhoto")]

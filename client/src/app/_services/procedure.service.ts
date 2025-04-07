@@ -103,5 +103,6 @@ export class ProcedureService {
         this.baseUrl + 'procedure/refPhysEmailHash/' + id,{ responseType: 'text' as 'json' }); }
 
     getProcedurePhotos(id: number){return this.http.get<string[]>(this.baseUrl + 'procedure/photos/' + id)}
+    getPhotosAvailable(id: number){return this.http.get<string>(this.baseUrl + 'procedure/photosAvailable/' + id)}
 
 }
