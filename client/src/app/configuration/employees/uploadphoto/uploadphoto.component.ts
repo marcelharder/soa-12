@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
+import { ProcedurePhoto } from 'src/app/_models/ProcedurePhoto';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AccountService } from 'src/app/_services/account.service';
 export class UploadphotoComponent implements OnInit,OnDestroy {
   @Input() targetUrl: string;
   @Output() getMemberPhotoChange = new EventEmitter<string>();
+  @Output() getProcedurePhoto = new EventEmitter<ProcedurePhoto>();
   token = '';
   uploader: FileUploader;
 
@@ -45,15 +47,20 @@ export class UploadphotoComponent implements OnInit,OnDestroy {
 
       const parseResponse = (response) => {
         const res = JSON.parse(response);
-        const image = res.image || res.PhotoUrl || res.Image || res.ImageUrl;
+        const image = res.image || res.PhotoUrl || res.Image || res.ImageUrl || res.Url;
         if (image) {
           this.getMemberPhotoChange.emit(image);
         }
+        if(res){
+          this.getProcedurePhoto.emit(res);
+        }
+
+
+
       };
       
       this.uploader.onSuccessItem = (item, response, status, headers) => {
         if (response) {
-          debugger;
            parseResponse(response);
         }
       };

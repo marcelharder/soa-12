@@ -18,7 +18,7 @@ export class ProcedurePicturesComponent implements OnInit {
   baseUrl = environment.apiUrl;
   Photo: ProcedurePhoto = {
     procedureId: 0,
-    Description: '0',
+    Description: '',
     Url: '',
     PublicId: '',
     DateAdded: undefined
@@ -64,17 +64,27 @@ export class ProcedurePicturesComponent implements OnInit {
     }
   }
 
-  updatePhoto(photoUrl: string) {
-    this.Photo.procedureId = this.id;
-    this.Photo.Url = photoUrl;
-    this.Photo.Description = "";
-    this.Photo.DateAdded = new Date;
-    this.Photo.PublicId = '0';
-    this.pictures.push(this.Photo);
-    this.soort = "1";
+  updateProcedurePhoto(t: ProcedurePhoto) {
+    this.Photo.Url = t.Url;
+    this.Photo.DateAdded = t.DateAdded;
+    this.Photo.PublicId = t.PublicId;
   }
 
   cancel() { this.router.navigateByUrl('/procedures'); }
+
+  saveProcedurePhoto(){
+   this.Photo.procedureId = this.id;
+   // save this to the database in PsSOA
+    this.proc.saveToPfSoa(this.Photo).subscribe(
+      (next)=>{
+        this.alertify.info(next);
+        this.pictures.push(this.Photo);
+        this.soort = "1";
+      
+      },
+      (error)=>{this.alertify.error(error)}
+    )
+  }
 
 }
 

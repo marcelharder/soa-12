@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ProcedureDetails } from '../_models/procedureDetails';
 import { CandA } from '../_models/CandA';
 import { environment } from '../../environments/environment';
+import { ProcedurePhoto } from '../_models/ProcedurePhoto';
 
 @Injectable({ providedIn: 'root' })
 export class ProcedureService {
@@ -103,6 +104,10 @@ export class ProcedureService {
         this.baseUrl + 'procedure/refPhysEmailHash/' + id,{ responseType: 'text' as 'json' }); }
 
     getProcedurePhotos(id: number){return this.http.get<string[]>(this.baseUrl + 'procedure/photos/' + id)}
+  
     getPhotosAvailable(id: number){return this.http.get<string>(this.baseUrl + 'procedure/photosAvailable/' + id)}
+
+    saveToPfSoa(x: ProcedurePhoto){return this.http.post<string>(this.baseUrl + 'procedure/addPhotoToPfSoa', x);
+    }
 
 }

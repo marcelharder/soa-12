@@ -205,14 +205,14 @@ namespace api.Controllers
             {
                 using (var response = await httpClient.GetAsync(comaddress))
                 {
-                     h = await response.Content.ReadAsStringAsync();
+                    h = await response.Content.ReadAsStringAsync();
                 }
             }
             return Ok(h);
         }
 
         [HttpPost("addProcedurePhoto/{'id'}")]
-        public async Task<IActionResult> AddPhotoForUser(int id,[FromForm] PhotoForCreationDto photoDto)
+        public async Task<IActionResult> AddPhotoForUser(int id, [FromForm] PhotoForCreationDto photoDto)
         {
             var file = photoDto.File;
             photoDto.procedureId = id;
@@ -229,26 +229,31 @@ namespace api.Controllers
                     uploadResult = _cloudinary.Upload(uploadParams);
                     photoDto.Url = uploadResult?.SecureUrl?.AbsoluteUri;
                     photoDto.PublicId = uploadResult.PublicId;
-                   
                 }
-                // update to pfSoa
-                var help = "";
-                var comaddress = _com.Value.pfsoaURL;
-                var st = "addPhoto";
-                comaddress = comaddress + st;
-                var json = JsonConvert.SerializeObject(photoDto, Formatting.None);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                using (var httpClient = new HttpClient())
-                {
-                    using (var response = await httpClient.PostAsync(comaddress, content))
-                    {
-                        help = await response.Content.ReadAsStringAsync();
-                    }
-                }
-                return Ok("Photo uploaded ...");
+                return Ok(photoDto);
             }
             return BadRequest("Could not add the photo ...");
         }
+
+        [HttpPost("addPhotoToPfSoa")]
+        public async Task<IActionResult> AddPhotoForUserToPFSoa(PhotoForCreationDto photoDto)
+        {
+            var help = "";
+            var comaddress = _com.Value.pfsoaURL;
+            var st = "addPhoto";
+            comaddress = comaddress + st;
+            var json = JsonConvert.SerializeObject(photoDto, Formatting.None);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.PostAsync(comaddress, content))
+                {
+                    help = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return Ok(help);
+        }
+
 
         [HttpGet("getAllPhotos/{id}")]
         public async Task<IActionResult> GetProcedurePhotos(int id)
