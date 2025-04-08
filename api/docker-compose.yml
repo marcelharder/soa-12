@@ -79,7 +79,7 @@ services:
     depends_on:
       - db
   procedurePictures:
-    image: pfsoa_app:v1
+    image: pfsoa_app:v2
     networks:
       - internal-container-network
     volumes:
