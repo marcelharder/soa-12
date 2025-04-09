@@ -18,10 +18,10 @@ export class ProcedurePicturesComponent implements OnInit {
   baseUrl = environment.apiUrl;
   Photo: ProcedurePhoto = {
     procedureId: 0,
-    Description: '',
-    Url: '',
-    PublicId: '',
-    DateAdded: undefined
+    description: '',
+    url: '',
+    publicId: '',
+    dateAdded: undefined
   }
   pictures: Array<ProcedurePhoto> = [];
 
@@ -39,7 +39,8 @@ export class ProcedurePicturesComponent implements OnInit {
       this.id = +params['id'];
       this.soort = params['soort'];
     })
-    this.loadPictures(this.id);
+    if(this.soort == '1'){this.loadPictures(this.id);}
+    
   }
 
   showAdd() {
@@ -58,16 +59,20 @@ export class ProcedurePicturesComponent implements OnInit {
   }
 
   loadPictures(id: number) {
-    if (id != 1) { }
-    else {
-      this.alertify.info("Loading pictures");
-    }
+    this.proc.getPhotosAvailable(id).subscribe((next)=>{
+      if(next){
+        this.proc.getProcedurePhotos(id).subscribe((next)=>{
+          this.pictures = next;
+        })
+      }
+      else{this.alertify.info("no pictures found ...");}
+    })
   }
 
   updateProcedurePhoto(t: ProcedurePhoto) {
-    this.Photo.Url = t.Url;
-    this.Photo.DateAdded = t.DateAdded;
-    this.Photo.PublicId = t.PublicId;
+    this.Photo.url = t.url;
+    this.Photo.dateAdded = t.dateAdded;
+    this.Photo.publicId = t.publicId;
   }
 
   cancel() { this.router.navigateByUrl('/procedures'); }
@@ -80,7 +85,6 @@ export class ProcedurePicturesComponent implements OnInit {
         this.alertify.info(next);
         this.pictures.push(this.Photo);
         this.soort = "1";
-      
       },
       (error)=>{this.alertify.error(error)}
     )

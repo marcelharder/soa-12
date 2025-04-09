@@ -176,6 +176,7 @@ import { PresentationsComponent } from './training/presentations/presentations.c
 import { PresentationService } from './_services/presentation.service';
 import { PublicationService } from './_services/publication.service';
 import { ProcedurePicturesComponent } from './procedures/procedurePictures/procedurePictures.component';
+import { ProcedureImageDetailsComponent } from './procedures/procedureImageDetails/procedureImageDetails.component';
 
 @NgModule({
   declarations: [					
@@ -276,7 +277,8 @@ import { ProcedurePicturesComponent } from './procedures/procedurePictures/proce
     EditValveTypeComponent,
     PublicationsComponent,
     PresentationsComponent,
-    ProcedurePicturesComponent
+    ProcedurePicturesComponent,
+    ProcedureImageDetailsComponent
    ],
   imports: [
     FileUploadModule,

@@ -254,7 +254,6 @@ namespace api.Controllers
             return Ok(help);
         }
 
-
         [HttpGet("getAllPhotos/{id}")]
         public async Task<IActionResult> GetProcedurePhotos(int id)
         {

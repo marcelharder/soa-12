@@ -100,14 +100,17 @@ export class ProcedureService {
 
     deleteProcedure(id: number) { return this.http.delete<number>(this.baseUrl + 'procedure/' + id); }
 
-    getRefPhysEmailHash(id: number){ return this.http.get<string>(
-        this.baseUrl + 'procedure/refPhysEmailHash/' + id,{ responseType: 'text' as 'json' }); }
+    getRefPhysEmailHash(id: number){ return this.http.get<string>(this.baseUrl + 'procedure/refPhysEmailHash/' + id,{ responseType: 'text' as 'json' }); }
 
-    getProcedurePhotos(id: number){return this.http.get<string[]>(this.baseUrl + 'procedure/photos/' + id)}
+    getProcedurePhotos(id: number){return this.http.get<ProcedurePhoto[]>(this.baseUrl + 'procedure/getAllPhotos/' + id)}
   
     getPhotosAvailable(id: number){return this.http.get<string>(this.baseUrl + 'procedure/photosAvailable/' + id)}
 
     saveToPfSoa(x: ProcedurePhoto){return this.http.post<string>(this.baseUrl + 'procedure/addPhotoToPfSoa', x);
+   
+   
+   
+   
     }
 
 }
