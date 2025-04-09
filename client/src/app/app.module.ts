@@ -175,8 +175,9 @@ import { PublicationsComponent } from './training/publications/publications.comp
 import { PresentationsComponent } from './training/presentations/presentations.component';
 import { PresentationService } from './_services/presentation.service';
 import { PublicationService } from './_services/publication.service';
-import { ProcedurePicturesComponent } from './procedures/procedurePictures/procedurePictures.component';
-import { ProcedureImageDetailsComponent } from './procedures/procedureImageDetails/procedureImageDetails.component';
+import { ProcedurePicturesComponent } from './procedures/procedureImage/procedurePictures/procedurePictures.component';
+import { ProcedureImageDetailsComponent } from './procedures/procedureImage/procedureImageDetails/procedureImageDetails.component';
+import { FullProcedureImageComponent } from './procedures/procedureImage/fullProcedureImage/fullProcedureImage.component';
 
 @NgModule({
   declarations: [					
@@ -278,7 +279,8 @@ import { ProcedureImageDetailsComponent } from './procedures/procedureImageDetai
     PublicationsComponent,
     PresentationsComponent,
     ProcedurePicturesComponent,
-    ProcedureImageDetailsComponent
+    ProcedureImageDetailsComponent,
+    FullProcedureImageComponent
    ],
   imports: [
     FileUploadModule,

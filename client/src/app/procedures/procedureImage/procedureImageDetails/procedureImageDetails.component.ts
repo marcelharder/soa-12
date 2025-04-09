@@ -49,6 +49,7 @@ export class ProcedureImageDetailsComponent implements OnInit {
   }
 
   getImageFull(sid: number){
+    this.router.navigateByUrl('/fullProcedureImage/' + sid);
     this.alertify.error("test");
   }
 }

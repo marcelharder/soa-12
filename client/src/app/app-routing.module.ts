@@ -74,7 +74,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ValveRepairComponent } from './procedures/valveRepair/valveRepair.component';
 import { HardresetPwdComponent } from './users/hardresetPwd/hardresetPwd.component';
 import { TrainingComponent } from './training/training/training.component';
-import { ProcedurePicturesComponent } from './procedures/procedurePictures/procedurePictures.component';
+import { ProcedurePicturesComponent } from './procedures/procedureImage/procedurePictures/procedurePictures.component';
+import { FullProcedureImageComponent } from './procedures/procedureImage/fullProcedureImage/fullProcedureImage.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -112,6 +113,7 @@ const routes: Routes = [
     { path: 'not-found', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },
     { path: 'procedurePictures/:id/:soort', component:ProcedurePicturesComponent},
+    { path: 'fullProcedureImage/:id', component:FullProcedureImageComponent},
   
   
   ]
