@@ -1,8 +1,8 @@
 export interface ProcedurePhoto {
-    procedureId: number;
-    description: string;
-    url: string;
-    publicId: string;
-    dateAdded: Date;
+    ProcedureId: number;
+    Description: string;
+    Url: string;
+    PublicId: string;
+    DateAdded: Date;
   
 }

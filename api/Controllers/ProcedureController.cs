@@ -215,7 +215,7 @@ namespace api.Controllers
         public async Task<IActionResult> AddPhotoForUser(int id, [FromForm] PhotoForCreationDto photoDto)
         {
             var file = photoDto.File;
-            photoDto.procedureId = id;
+            photoDto.ProcedureId = id;
             var uploadResult = new ImageUploadResult();
             if (file.Length > 0)
             {

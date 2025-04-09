@@ -17,7 +17,7 @@
             </div>
             <div class="row">
               <div class="col-sm-12 mt-2">
-                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl"
+                <app-uploadphoto *ngIf="IsLoaded()" [targetUrl]="targetUrl" 
                   (getProcedurePhoto)="updateProcedurePhoto($event)"></app-uploadphoto>
               </div>
             </div>
@@ -42,14 +42,16 @@
         <div class="card-body">
           <div class="row">
             <div *ngFor="let t of pictures" class="col-sm-4">
-             <app-procedureImageDetails [selectedProcedure]="t"></app-procedureImageDetails>
+             <app-procedureImageDetails 
+             [selectedProcedure]="t" 
+             [ProcedurePhotos]="pictures"></app-procedureImageDetails>
             </div>
           </div>
         </div>
         <div class="card-footer">
           <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-danger" (click)="cancel()">cancel</button>
-            <button type="button" class="btn btn-success" (click)="addProcedure()">Add</button>
+            <button type="button" class="btn btn-success" (click)="addProcedure()">Add Another Picture</button>
           </div>
         </div>
       </div>

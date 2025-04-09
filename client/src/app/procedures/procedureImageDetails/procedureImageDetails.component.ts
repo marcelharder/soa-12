@@ -9,13 +9,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./procedureImageDetails.component.css']
 })
 export class ProcedureImageDetailsComponent implements OnInit {
- 
+  @Input() ProcedurePhotos: Array<ProcedurePhoto> = [];
   @Input() selectedProcedure: ProcedurePhoto = {
-    procedureId: 0,
-    description: '',
-    url: '',
-    publicId: '',
-    dateAdded: undefined
+    ProcedureId: 0,
+    Description: '',
+    Url: '',
+    PublicId: '',
+    DateAdded: undefined
   };
 
  
@@ -23,6 +23,12 @@ export class ProcedureImageDetailsComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  getImageUrlFromArray(f: string){
+    // select the correctItem
+    var selected = this.ProcedurePhotos.filter(x => x.PublicId == f);
+    return selected[0].Url;
   }
 
   /* goDetails(id: number) {

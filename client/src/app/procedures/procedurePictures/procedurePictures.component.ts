@@ -17,11 +17,11 @@ export class ProcedurePicturesComponent implements OnInit {
   targetUrl = '';
   baseUrl = environment.apiUrl;
   Photo: ProcedurePhoto = {
-    procedureId: 0,
-    description: '',
-    url: '',
-    publicId: '',
-    dateAdded: undefined
+    ProcedureId: 0,
+    Description: '',
+    Url: '',
+    PublicId: '',
+    DateAdded: undefined
   }
   pictures: Array<ProcedurePhoto> = [];
 
@@ -70,25 +70,29 @@ export class ProcedurePicturesComponent implements OnInit {
   }
 
   updateProcedurePhoto(t: ProcedurePhoto) {
-    this.Photo.url = t.url;
-    this.Photo.dateAdded = t.dateAdded;
-    this.Photo.publicId = t.publicId;
+    this.Photo.Url = t.Url;
+    this.Photo.DateAdded = t.DateAdded;
+    this.Photo.PublicId = t.PublicId;
   }
 
   cancel() { this.router.navigateByUrl('/procedures'); }
 
   saveProcedurePhoto(){
-   this.Photo.procedureId = this.id;
+   this.Photo.ProcedureId = this.id;
    // save this to the database in PsSOA
     this.proc.saveToPfSoa(this.Photo).subscribe(
       (next)=>{
-        this.alertify.info(next);
+        if(next == '1'){this.alertify.info('Photo added to procedure');}
         this.pictures.push(this.Photo);
         this.soort = "1";
       },
       (error)=>{this.alertify.error(error)}
     )
+    this.proc.getProcedurePhotos(this.id).subscribe((next)=>{
+      this.pictures = next;
+    })
   }
+  addProcedure(){this.soort = "2";}
 
 }
 

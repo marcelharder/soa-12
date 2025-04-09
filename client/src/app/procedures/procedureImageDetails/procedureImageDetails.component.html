@@ -1,13 +1,13 @@
 <div class="card">
   <div class="card-header">
     <div class="row">
-      <div class="col-sm-8"><h6>{{ selectedProcedure.description }}</h6></div>
+      <div class="col-sm-8"><h6>{{ selectedProcedure.Description }}</h6></div>
       <div class="col-sm-4"></div>
   </div>
   <div class="card-body">
 
     <img
-      [src]="selectedProcedure.url"
+      [src]="getImageUrlFromArray(selectedProcedure.PublicId)"
       alt="image slide"
       style="display: block; width: 100%; height: 200px"
     />
