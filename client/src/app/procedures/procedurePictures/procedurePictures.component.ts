@@ -21,7 +21,8 @@ export class ProcedurePicturesComponent implements OnInit {
     Description: '',
     Url: '',
     PublicId: '',
-    DateAdded: undefined
+    DateAdded: undefined,
+    Id: 0
   }
   pictures: Array<ProcedurePhoto> = [];
 
@@ -93,6 +94,8 @@ export class ProcedurePicturesComponent implements OnInit {
     })
   }
   addProcedure(){this.soort = "2";}
+
+ 
 
 }
 

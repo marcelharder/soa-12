@@ -272,12 +272,12 @@ namespace api.Controllers
             return Ok(help);
         }
 
-        [HttpDelete("deletePhoto/{publicId}")]
-        public async Task<IActionResult> deletePhoto(int publicId)
+        [HttpDelete("deletePhoto/{Id}")]
+        public async Task<IActionResult> deletePhoto(int Id)
         {
             var help = "";
             var comaddress = _com.Value.pfsoaURL;
-            var st = "deletePhoto/" + publicId;
+            var st = "deletePhoto/" + Id;
             comaddress = comaddress + st;
             using (var httpClient = new HttpClient())
             {

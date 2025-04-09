@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProcedurePhoto } from 'src/app/_models/ProcedurePhoto';
+import { ProcedureService } from 'src/app/_services/procedure.service';
+import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,27 +17,38 @@ export class ProcedureImageDetailsComponent implements OnInit {
     Description: '',
     Url: '',
     PublicId: '',
-    DateAdded: undefined
+    DateAdded: undefined,
+    Id: 0
   };
+  
 
- 
 
-  constructor(private router: Router) { }
+
+  constructor(
+    private router: Router,
+    private proc: ProcedureService,
+    private alertify: ToastrService) { }
 
   ngOnInit() {
   }
 
-  getImageUrlFromArray(f: string){
+  getImageUrlFromArray(f: number) {
     // select the correctItem
-    var selected = this.ProcedurePhotos.filter(x => x.PublicId == f);
+    var selected = this.ProcedurePhotos.filter(x => x.Id == f);
     return selected[0].Url;
   }
 
-  /* goDetails(id: number) {
-     this.router.navigate(['/diaList/'+id]);
+  deleteImage() {
+    this.proc.deleteProcedurePhoto(this.selectedProcedure.Id).subscribe((next) => {
+      if (next == 1) {
+        this.router.navigateByUrl('/procedures');
       }
-  getImageFromServer(id: string) { // get it from the pictures Array
-     return this.baseUrl + 'Images/getImageFile/' + id; 
-     } */
+    },
+      (error) => { this.alertify.error(error); }
+    )
+  }
 
+  getImageFull(sid: number){
+    this.alertify.error("test");
+  }
 }
