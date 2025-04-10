@@ -43,7 +43,8 @@
           <div class="row">
             <div *ngFor="let t of pictures" class="col-sm-4">
              <app-procedureImageDetails 
-             [selectedProcedure]="t" 
+             [selectedProcedure]="t"
+             (deleteItem)="receiveFromDetails($event)" 
               ></app-procedureImageDetails>
             </div>
           </div>

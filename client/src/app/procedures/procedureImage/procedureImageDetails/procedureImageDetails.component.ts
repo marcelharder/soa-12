@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProcedurePhoto } from 'src/app/_models/ProcedurePhoto';
 import { ProcedureService } from 'src/app/_services/procedure.service';
@@ -11,7 +11,7 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./procedureImageDetails.component.css']
 })
 export class ProcedureImageDetailsComponent implements OnInit {
- 
+  @Output() deleteItem = new EventEmitter<number>();
   @Input() selectedProcedure: ProcedurePhoto = {
     ProcedureId: 0,
     Description: '',
@@ -40,15 +40,10 @@ export class ProcedureImageDetailsComponent implements OnInit {
   }
 
   deleteImage() {
-    this.proc.deleteProcedurePhoto(this.selectedProcedure.Id).subscribe((next) => {
-      if (next == 1) {
-        this.router.navigateByUrl('/procedures');
-      }
-    },
-      (error) => { this.alertify.error(error); }
-    )
+   this.deleteItem.emit(this.selectedProcedure.Id);
+   
   }
-
+   
   getImageFull(publicId: string){
     this.router.navigateByUrl('/fullProcedureImage/' + publicId);
   }
