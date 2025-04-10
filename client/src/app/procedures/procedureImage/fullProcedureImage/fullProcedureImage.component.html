@@ -1,13 +1,25 @@
-
-
 <div class="container mt-5">
- 
-
-<img 
-style="width: 100%;height: 100%;background-size: 100% 100%;background-position: top center;"
-[src]="getFullImage()"
-alt="image slide"
- >
-
-
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <h4>{{description}}</h4>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1  height:80%">
+      <button class="btn btn-primary" (click)="leftButtonClicked()" *ngIf="showTheLeftButton()">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+    </div>
+    <div class="col-sm-10  height:80%">
+      <img style="width: 100%;height: 100%;background-size: 100% 100%;background-position: top center;"
+        [src]="getFullImage()" alt="image slide">
+    </div>
+    <div class="col-sm-1  height:80%">
+      <button class="btn btn-primary" (click)="rightButtonClicked()" *ngIf="showTheRightButton()">
+        <i class="fa fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
 </div>

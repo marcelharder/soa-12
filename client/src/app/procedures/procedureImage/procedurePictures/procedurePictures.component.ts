@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { ProcedurePhoto } from 'src/app/_models/ProcedurePhoto';
+import { AccountService } from 'src/app/_services/account.service';
 import { ProcedureService } from 'src/app/_services/procedure.service';
 import { environment } from 'src/environments/environment';
 
@@ -28,6 +29,7 @@ export class ProcedurePicturesComponent implements OnInit {
 
 
   constructor(
+    private auth: AccountService,
     private proc: ProcedureService,
     private route: ActivatedRoute,
     private alertify: ToastrService,
@@ -64,6 +66,7 @@ export class ProcedurePicturesComponent implements OnInit {
       if(next){
         this.proc.getProcedurePhotos(id).subscribe((next)=>{
           this.pictures = next;
+          this.auth.setCurrentPictures(this.pictures);
         })
       }
       else{this.alertify.info("no pictures found ...");}
@@ -93,7 +96,10 @@ export class ProcedurePicturesComponent implements OnInit {
       this.pictures = next;
     })
   }
+
   addProcedure(){this.soort = "2";}
+
+  
 
  
 

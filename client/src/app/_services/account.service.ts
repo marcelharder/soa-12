@@ -13,6 +13,7 @@ import { stringify } from 'querystring';
 import { ForgotPassword } from '../_models/ForgotPassword';
 import { resetPasswordDto } from '../_models/resetPasswordDto';
 import { changePassword } from '../_models/changePassword';
+import { ProcedurePhoto } from '../_models/ProcedurePhoto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,17 @@ export class AccountService {
   private currentHospitalId = new ReplaySubject<number>(1);
   private newRegisteredUserSource = new ReplaySubject<User>(1);
   private serviceLevel = new ReplaySubject<number>(1);
+  
 
   currentUser$ = this.currentUserSource.asObservable();
   newlyRegisteredUser$ = this.newRegisteredUserSource.asObservable();
   currentServiceLevel$ = this.serviceLevel.asObservable();
   currentProcedure$ = this.currentProcedureSource.asObservable();
   currentHospitalId$ = this.currentHospitalId.asObservable();
+
+
+  picturesSource = new BehaviorSubject<ProcedurePhoto[]>([]);
+  currentPictures = this.picturesSource.asObservable();
 
 
   soortProcedure = new BehaviorSubject<string>('0');
@@ -41,6 +47,8 @@ export class AccountService {
 
   dst = new BehaviorSubject<string>('0');
   currentDst = this.dst.asObservable();
+
+
 
 
   constructor(private http: HttpClient, private presence: PresenceService) { }
@@ -85,6 +93,8 @@ export class AccountService {
 
   setCurrentProcedure(procedureId: number) { this.currentProcedureSource.next(procedureId); }
   setCurrentHospitalId(hospitalId: number) { this.currentHospitalId.next(hospitalId); }
+  
+  setCurrentPictures(p: ProcedurePhoto[])  { this.picturesSource.next(p);}
   changeSoortOperatie(sh: string) { this.soortProcedure.next(sh); }
   changeCurrentHospital(sh: string) { this.HospitalName.next(sh); }
   changeDst(sh: string) { this.dst.next(sh); }

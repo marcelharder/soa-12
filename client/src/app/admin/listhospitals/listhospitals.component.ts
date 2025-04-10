@@ -57,7 +57,6 @@ export class ListhospitalsComponent implements OnInit {
     const d = JSON.parse(localStorage.getItem('optionCountries'));
     if (d == null || d.length === 0) {
       this.drops.getAllCountries().subscribe((response) => {
-        debugger;
         this.optionCountries = response;
         this.optionCountries.unshift({ Id: 0, Description: "Choose",TelCode:"",IsoCode:"", Cities:"" });
         localStorage.setItem('optionCountries', JSON.stringify(response));

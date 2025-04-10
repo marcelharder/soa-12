@@ -132,7 +132,6 @@ export class UserlistComponent implements OnInit {
   newUser.country = this.currentCountry;
   newUser.hospital_id = this.currentHospital;
   if(this.currentCountry !== "" && this.currentHospital !== 0){
-    debugger
     this.userService.addUser(newUser).subscribe((next) => {
       this.alertify.success("New user added ...");},(error)=> {this.alertify.error(error)});
   }

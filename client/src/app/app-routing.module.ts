@@ -113,7 +113,7 @@ const routes: Routes = [
     { path: 'not-found', component: NotFoundComponent },
     { path: 'server-error', component: ServerErrorComponent },
     { path: 'procedurePictures/:id/:soort', component:ProcedurePicturesComponent},
-    { path: 'fullProcedureImage/:id', component:FullProcedureImageComponent},
+    { path: 'fullProcedureImage/:publicId', component:FullProcedureImageComponent},
   
   
   ]

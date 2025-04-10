@@ -167,7 +167,6 @@ export class AorticComponent implements OnInit {
   }
 
   record_added(v: any) {// the game card added a record
-    debugger;
       this.procedureValve = v;
       
       this.Cf = 1; // show the newly added valve

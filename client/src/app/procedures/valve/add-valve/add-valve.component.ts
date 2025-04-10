@@ -167,7 +167,6 @@ export class AddValveComponent implements OnInit {
         this.patient.getPatientFromId(patientId).subscribe((next) => {
           height = next.height;
           weight = next.weight;
-          debugger;
           this.vs.getPPM(this.svtid, this.valveSize, weight.toString(), height.toString()).subscribe((next) => {
             this.adviceText = "You can expect " + next.body + " PPM";
             if (next.body === 'no') { this.noPPM = true; this.moderatePPM = false; this.severePPM = false; }
