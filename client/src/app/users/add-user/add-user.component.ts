@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/_models/User';
 import { loginModel } from 'src/app/_models/loginModel';
-import { AccountService } from 'src/app/_services/account.service';
-import { HospitalService } from 'src/app/_services/hospital.service';
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
@@ -29,10 +27,7 @@ export class AddUserComponent implements OnInit {
     private alertify: ToastrService) { }
 
   ngOnInit(): void {
-
-
     this.initializeForm();
-
   }
 
   initializeForm() {
