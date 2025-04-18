@@ -76,6 +76,8 @@ import { HardresetPwdComponent } from './users/hardresetPwd/hardresetPwd.compone
 import { TrainingComponent } from './training/training/training.component';
 import { ProcedurePicturesComponent } from './procedures/procedureImage/procedurePictures/procedurePictures.component';
 import { FullProcedureImageComponent } from './procedures/procedureImage/fullProcedureImage/fullProcedureImage.component';
+import { ModeratorProcedureListResolver } from './_resolvers/ModeratorProcedureList.resolver';
+import { ModProcedureComponent } from './procedures/mod-procedure-component/mod-procedure-component.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -102,6 +104,7 @@ const routes: Routes = [
     { path: 'profile', component: UserProfileComponent, resolve: { user: ProfileResolver } },
     { path: 'statistics', component: StatisticsComponent },
     { path: 'procedures', component: ProcedureMainComponent, resolve: { procedure: ProcedureListResolver } },
+    { path: 'modProcedures/:id', component: ModProcedureComponent, resolve: { procedure: ModeratorProcedureListResolver } },
     { path: 'addProcedure', component: AddprocedureComponent},
     { path: 'about', component: AboutComponent },
     { path: 'config', component: ConfigurationComponent },

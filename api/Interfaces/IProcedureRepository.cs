@@ -13,6 +13,7 @@ namespace api.Interfaces
         Task<PagedList<Class_Procedure>> GetProcedures(ProcedureParams procParams);
         Task<PagedList<Class_Procedure>> GetAioProcedures(ProcedureParams procParams);
         Task<PagedList<Class_Procedure>> GetAssistedProcedures(ProcedureParams procParams);
+        Task<PagedList<Class_Procedure>> GetModeratorProcedures(ProcedureParams procParams);
         Task<Class_Procedure> GetProcedure(int id);
         Task<int> addProcedure(Class_Procedure p);
         Task<int> updateProcedure(Class_Procedure p);

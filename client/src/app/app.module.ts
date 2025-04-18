@@ -178,6 +178,8 @@ import { PublicationService } from './_services/publication.service';
 import { ProcedurePicturesComponent } from './procedures/procedureImage/procedurePictures/procedurePictures.component';
 import { ProcedureImageDetailsComponent } from './procedures/procedureImage/procedureImageDetails/procedureImageDetails.component';
 import { FullProcedureImageComponent } from './procedures/procedureImage/fullProcedureImage/fullProcedureImage.component';
+import { ModeratorProcedureListResolver } from './_resolvers/ModeratorProcedureList.resolver';
+import { ModProcedureComponent } from './procedures/mod-procedure-component/mod-procedure-component.component';
 
 @NgModule({
   declarations: [					
@@ -280,7 +282,8 @@ import { FullProcedureImageComponent } from './procedures/procedureImage/fullPro
     PresentationsComponent,
     ProcedurePicturesComponent,
     ProcedureImageDetailsComponent,
-    FullProcedureImageComponent
+    FullProcedureImageComponent,
+    ModProcedureComponent
    ],
   imports: [
     FileUploadModule,
@@ -323,6 +326,7 @@ import { FullProcedureImageComponent } from './procedures/procedureImage/fullPro
    PublicationService,
   //  resolvers
    ProcedureListResolver,
+   ModeratorProcedureListResolver,
    ProcedureDetailsResolver,
    EuroScoreDetailsResolver,
    CPBDetailsResolver,

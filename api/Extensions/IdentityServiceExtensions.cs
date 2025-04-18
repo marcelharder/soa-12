@@ -70,6 +70,7 @@ namespace api.Extensions
             {
                 opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
                 opt.AddPolicy("RequireChefRole", policy => policy.RequireRole("Chef"));
+                opt.AddPolicy("RequireModeratorRole", policy => policy.RequireRole("Moderator"));
             });
             return services;
         }

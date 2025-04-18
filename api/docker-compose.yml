@@ -89,19 +89,19 @@ services:
     depends_on:
       - db
 
-  tracPersonal:
-    image: sql_app:v114
-    ports:
-      - 8086:80
-    networks:
-      - internal-container-network
-    volumes:
-      - sqldata:/root/.aspnet/DataProtection-Keys
-      - pdf-data:/App/assets/pdf
-    depends_on:
-     - db
-     - comservice
-     - onlinevalve_md
+#  tracPersonal:
+#    image: sql_app:v114
+#    ports:
+#      - 8086:80
+#    networks:
+#      - internal-container-network
+#    volumes:
+#      - sqldata:/root/.aspnet/DataProtection-Keys
+#      - pdf-data:/App/assets/pdf
+#    depends_on:
+#     - db
+#     - comservice
+#     - onlinevalve_md
 
 volumes:
   mariadb-data:

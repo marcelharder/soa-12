@@ -33,15 +33,18 @@ namespace api.Controllers
         private IPatientRepository _pat;
         private SpecialMaps _special;
         private IOptions<ComSettings> _com;
+        private IUserRepository _user;
 
         public ProcedureController(IProcedureRepository rep,
             IOptions<CloudinarySettings> cloudinaryConfig,
             UserManager<AppUser> manager,
              SpecialMaps special,
              IOptions<ComSettings> com,
-            IPatientRepository pat)
+            IPatientRepository pat,
+            IUserRepository user)
         {
             _rep = rep;
+            _user = user;
             _manager = manager;
             _pat = pat;
             _special = special;
@@ -84,6 +87,37 @@ namespace api.Controllers
             Response.AddPagination(values.Currentpage, values.PageSize, values.TotalCount, values.TotalPages);
             return Ok(l);
         }
+
+
+        [Authorize(Policy = "RequireModeratorRole")]
+        [HttpGet("moderatorProcedures")]
+        public async Task<IActionResult> GetModProcedures([FromQuery] ProcedureParams p)
+        {
+            if (p.selectedHospital != 0)
+            {
+                var values = await _rep.GetModeratorProcedures(p);
+                var l = new List<ProcedureListDTO>();
+                foreach (Class_Procedure us in values)
+                {
+                    ProcedureListDTO help = await _special.mapToProcedureListDTOAsync(us, 0);
+                    
+                    // get the surgeon name from number
+                    AppUser surgeon = await _user.GetUser(us.SelectedSurgeon);
+                    help.Surgeon = surgeon.KnownAs;
+                   
+                     // get the assistant name from number
+                    AppUser assistant = await _user.GetUser(us.SelectedAssistant);
+                    help.Assistant = assistant.KnownAs;
+                   
+                    l.Add(help);
+                }
+                Response.AddPagination(values.Currentpage, values.PageSize, values.TotalCount, values.TotalPages);
+                return Ok(l);
+            }
+            else {return BadRequest("Could not get all procedures for this hospital ...");}
+        }
+
+
 
         [HttpGet("assistedProcedures")]
         public async Task<IActionResult> GetAssisted([FromQuery] ProcedureParams p)

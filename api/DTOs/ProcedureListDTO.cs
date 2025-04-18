@@ -7,6 +7,8 @@ namespace api.DTOs
         public virtual int procedureId { get; set; }
         public virtual DateTime dateOfSurgery { get; set; }
         public virtual String description { get; set; }
+        public virtual String Surgeon { get; set; }
+        public virtual String Assistant { get; set; }
         public virtual String completed { get; set; }
         public virtual int patientId { get; set; }
         public int fd_Type { get; set; }

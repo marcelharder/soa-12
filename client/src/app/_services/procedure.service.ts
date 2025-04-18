@@ -81,6 +81,29 @@ export class ProcedureService {
             );
 
     }
+    
+    getModeratedProcedures(id: number, page?, itemsPerPage?): Observable<PaginatedResult<Procedure[]>> {
+        const paginatedResult: PaginatedResult<Procedure[]> = new PaginatedResult<Procedure[]>();
+        let params = new HttpParams();
+
+        if (page != null && itemsPerPage != null) {
+            params = params.append('pageNumber', page);
+            params = params.append('selectedHospital', id);
+            params = params.append('pageSize', itemsPerPage);
+        }
+
+        return this.http.get<Procedure[]>(this.baseUrl + 'procedure/moderatorProcedures', { observe: 'response', params })
+            .pipe(
+                map(response => {
+                    paginatedResult.result = response.body;
+                    if (response.headers.get('Pagination') != null) {
+                        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+                    }
+                    return paginatedResult;
+                })
+            );
+
+    }
 
 
 

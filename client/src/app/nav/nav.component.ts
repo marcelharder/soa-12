@@ -13,10 +13,11 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model: loginModel = { username: '', password: '' , KnownAs: ''};
+  model: loginModel = { username: '', password: '', KnownAs: '' };
   currentRole = '';
   currentUserId = 0;
   currentRoles: Array<string> = [];
+  currentHospital = 0;
 
   constructor(
     public accountService: AccountService,
@@ -27,23 +28,24 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
 
-   /*  if (this.model.username == '') {
-      this.accountService.currentUser$.pipe(take(1)).subscribe((u) => {
-        this.model.username = u.UserName;
-      })
-    } */
-    
+    /*  if (this.model.username == '') {
+       this.accountService.currentUser$.pipe(take(1)).subscribe((u) => {
+         this.model.username = u.UserName;
+       })
+     } */
+    this.accountService.currentHospitalId$.pipe(take(1)).subscribe((u) => {
+      debugger;
+      this.currentHospital = u;
+    })
+
   }
-
-
-
   RegisterNewClient() { this.router.navigate(['/register']); }
 
   login() {
     // check if the username is a valid email
     localStorage.removeItem("user");// make sure there is no residual user in browser localstorage
     localStorage.setItem("user-email", this.model.username);//save the email in localstorage in case we need to reset the password
-   
+
     this.accountService.isThisEmailInDatabase(this.model.username).subscribe(
       (next) => {
         if (next === 1) {
@@ -51,22 +53,32 @@ export class NavComponent implements OnInit {
             this.accountService.currentUser$.pipe(take(1)).subscribe((u) => {
               this.currentUserId = u.UserId;
               this.model.username = u.UserName;
-              
               this.currentRoles = u.roles;
             })
-            // push the hospitalname to the behavior subject, if the loggedin person is not admin, want hospital_id of the admin  = 0
-            if (!this.currentRoles.includes('Admin')) {
-
+            // check if a moderator is loggedin
+            if (this.currentRoles.includes('Moderator')) {
               this.userService.getUser(this.currentUserId).subscribe((next) => {
-                this.model.KnownAs = next.knownAs;
+                this.model.KnownAs = next.knownAs; // writes the welcome message
                 this.hospitalService.getSpecificHospital(next.hospital_id).subscribe((d) => {
                   this.accountService.changeCurrentHospital(d.HospitalName); // save the name of this hospital
                 });
-              })
-
+                this.router.navigate(['/modProcedures/'+ next.hospital_id]);
+              });
             }
-            else {this.model.KnownAs = "Admin";}
-            this.router.navigate(['/procedures']);
+            else {
+              // push the hospitalname to the behavior subject, if the loggedin person is not admin, want hospital_id of the admin  = 0
+              if (!this.currentRoles.includes('Admin')) {
+
+                this.userService.getUser(this.currentUserId).subscribe((next) => {
+                  this.model.KnownAs = next.knownAs;
+                  this.hospitalService.getSpecificHospital(next.hospital_id).subscribe((d) => {
+                    this.accountService.changeCurrentHospital(d.HospitalName); // save the name of this hospital
+                  });
+                })
+              }
+              else { this.model.KnownAs = "Admin"; }
+              this.router.navigate(['/procedures']);
+            }
           }
           )
         } else {

@@ -75,8 +75,6 @@ namespace api.Implementations
             //apply the filters here
             procedures = procedures.Where(s => s.hospital == procParams.selectedHospital);
             procedures = procedures.Where(s => s.SelectedSurgeon == procParams.selectedSurgeon);
-            // procedures = procedures.Where(s => s.PatientId == procParams.selectedPatient); 
-
             return await PagedList<Class_Procedure>.CreateAsync(procedures, procParams.PageNumber, procParams.PageSize);
         }
         public async Task<PagedList<Class_Procedure>> GetAioProcedures(ProcedureParams procParams)
@@ -87,21 +85,27 @@ namespace api.Implementations
             //apply the filters here
             procedures = procedures.Where(s => s.hospital == procParams.selectedHospital);
             procedures = procedures.Where(s => s.SelectedAssistant == procParams.aioId);
-            
             return await PagedList<Class_Procedure>.CreateAsync(procedures, procParams.PageNumber, procParams.PageSize);
   
         }
-         public async Task<PagedList<Class_Procedure>> GetAssistedProcedures(ProcedureParams procParams)
+        public async Task<PagedList<Class_Procedure>> GetAssistedProcedures(ProcedureParams procParams)
         {
             var procedures = _context.Procedures.OrderByDescending(u => u.ProcedureId).AsQueryable();
             //apply the filters here
             procedures = procedures.Where(s => s.hospital == procParams.selectedHospital);
             procedures = procedures.Where(s => s.SelectedAssistant == procParams.selectedSurgeon);
-
-            // procedures = procedures.Where(s => s.PatientId == procParams.selectedPatient); 
-
             return await PagedList<Class_Procedure>.CreateAsync(procedures, procParams.PageNumber, procParams.PageSize);
         }
+        public async Task<PagedList<Class_Procedure>> GetModeratorProcedures(ProcedureParams procParams)
+        {
+            var procedures = _context.Procedures.OrderByDescending(u => u.ProcedureId).AsQueryable();
+            //apply the filters here
+            procedures = procedures.Where(s => s.hospital == procParams.selectedHospital);
+            return await PagedList<Class_Procedure>.CreateAsync(procedures, procParams.PageNumber, procParams.PageSize);
+        }
+       
+       
+       
         public async Task<int> addProcedure(Class_Procedure cp)
         {
             cp.Description = await getProdedureDescription(cp.fdType);
@@ -252,7 +256,7 @@ namespace api.Implementations
             return result;
         }
 
-
+       
     }
 
     public class Salt

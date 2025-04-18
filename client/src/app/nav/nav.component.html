@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 
   <a class="navbar-brand" href="#">Surgical Outcomes Application</a>
+
+
   <ul class="navbar-nav mr-auto" *ngIf="accountService.currentUser$ |async">
     <li class="nav-item">
       <a class="nav-link" routerLink='/procedures' *appHasRole='["Surgery"]'>Procedures</a>
