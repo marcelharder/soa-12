@@ -2,8 +2,8 @@ export interface Procedure {
     procedureId: number;
     dateOfSurgery: Date;
     description: string;
-    surgeon: string;
-    assistant: string;
+    Surgeon: string;
+    Assistant: string;
     fdType: number;
     completed: string;
 
