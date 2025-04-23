@@ -8,6 +8,9 @@
       <a class="nav-link" routerLink='/procedures' *appHasRole='["Surgery"]'>Procedures</a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" routerLink='/modProcedures/{{currentHospital}}' *appHasRole='["Moderator"]'>Procedures</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" routerLink='/onlineUsers' *appHasRole='["Admin"]'>Online Users</a>
     </li>
     <li class="nav-item">

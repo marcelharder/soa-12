@@ -22,7 +22,6 @@ export class ModProcedureComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      debugger;
       this.procedures = data.procedure.result;
       this.pagination = data.procedure.pagination;
     });
@@ -47,6 +46,10 @@ export class ModProcedureComponent implements OnInit {
         console.log('here is my error' + error);
       }
     );
+  }
+  testNav(pro: Procedure) {
+    this.auth.setCurrentProcedure(pro.procedureId);
+    this.router.navigate(['/procedureDetails']);
   }
 
 

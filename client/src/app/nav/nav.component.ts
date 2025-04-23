@@ -59,6 +59,7 @@ export class NavComponent implements OnInit {
             if (this.currentRoles.includes('Moderator')) {
               this.userService.getUser(this.currentUserId).subscribe((next) => {
                 this.model.KnownAs = next.knownAs; // writes the welcome message
+                this.currentHospital = next.hospital_id;
                 this.hospitalService.getSpecificHospital(next.hospital_id).subscribe((d) => {
                   this.accountService.changeCurrentHospital(d.HospitalName); // save the name of this hospital
                 });
@@ -96,6 +97,8 @@ export class NavComponent implements OnInit {
     this.accountService.logout();
     this.router.navigate([''])
   }
+
+ 
 
 
 
