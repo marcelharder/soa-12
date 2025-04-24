@@ -139,7 +139,7 @@ const routes: Routes = [
       {path: 'postop/:id', outlet: 'details', component: PostopComponent,resolve: { postop: PostResolver },canDeactivate: [changesPOSTOPDetails]},
       {path: 'mininv/:id', outlet: 'details', component: MininvComponent,resolve: { min: MinInvResolver },canDeactivate: [changesMinInv]},
       {path: 'discharge/:id', outlet: 'details',component: DischargeComponent,resolve: { dis: dischargeDetailsResolver }, canDeactivate: [changesDischarge] },
-      {path: 'previewReport/:id/soort', outlet: 'details', component: PreviewreportComponent,resolve: { preView: PreviewReportResolver },canDeactivate: [changesPreViewReport]},
+      {path: 'previewReport/:id', outlet: 'details', component: PreviewreportComponent,resolve: { preView: PreviewReportResolver },canDeactivate: [changesPreViewReport]},
      
     
     ]
