@@ -12,7 +12,7 @@ namespace api.Interfaces
     public interface IUserRepository
     {
         Task<List<AppUser>> GetUsers();
-        Task<PagedList<AppUser>> GetUsersByHospital(UserParams userParams);
+        List<AppUser> GetUsersByHospital(UserParams userParams);
         Task<PagedList<AppUser>> GetAiosByHospital(UserParams userParams);
         Task<PagedList<AppUser>> GetSurgeonsByHospital(UserParams userParams);
         Task<AppUser> GetChefsByHospital(int center_id);

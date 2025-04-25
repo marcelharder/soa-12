@@ -82,13 +82,13 @@ namespace api.Controllers
         [HttpGet("getUsersByHospital")]
         public async Task<IActionResult> GetByHospital([FromQuery] UserParams userParams)
         {
-            var values = await _rep.GetUsersByHospital(userParams);
+            var values = _rep.GetUsersByHospital(userParams);
             var l = new List<UserForReturnDto>();
             foreach (AppUser us in values)
             {
                 l.Add(_mapper.mapToUserForReturn(us));
             }
-            Response.AddPagination(values.Currentpage, values.PageSize, values.TotalCount, values.TotalPages);
+            //Response.AddPagination(values.Currentpage, values.PageSize, values.TotalCount, values.TotalPages);
             return Ok(l);
         }
         [HttpGet("getAiosByHospital")]
