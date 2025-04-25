@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using api.Data;
 using api.DTOs;
@@ -86,16 +87,21 @@ namespace api.Implementations
             var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             // get the hospital id from the logged in user
             var loggedinUser = await GetUser(Convert.ToInt32(userId));
+            //var moderatorRole = loggedinUser.UserRoles.Select(x => x.Role.Name = "Moderator");
+           
+            
             var centerId = loggedinUser.hospital_id;
             var users = _userManager.Users.OrderByDescending(u => u.UserName).AsQueryable();
             users = users.Where(x => x.hospital_id == centerId);
             users = users.Where(x => x.active == true);
             users = users.Where(x => x.ltk == false);
+            users = users.Where( o => !o.UserRoles.Any(r => r.Role.Name == "Moderator"));
                  
 
             return await PagedList<AppUser>.CreateAsync(users, userParams.PageNumber, userParams.PageSize);
       
         }
+       
 
         public async Task<bool> GetUserLtk(int id)
         {

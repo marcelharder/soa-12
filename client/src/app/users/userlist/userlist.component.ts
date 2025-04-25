@@ -132,7 +132,7 @@ export class UserlistComponent implements OnInit {
   deleteUser(id: number) {
     this.userService.deleteUser(id).subscribe((next)=>{
       this.alertify.show("User removed ..");
-      this.users.filter(x => x.Id != id);
+      this.users = this.users.filter(x => x.Id != id);
     
     })
    }
